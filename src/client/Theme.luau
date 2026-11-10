@@ -58,7 +58,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	local border = Theme.stroke(item, if secondary then Theme.Muted else Theme.Purple, if secondary then 0.7 else 0.2)
 	item.MouseEnter:Connect(function() TweenService:Create(border, TweenInfo.new(0.12), { Transparency = 0 }):Play() end)
 	item.MouseLeave:Connect(function() TweenService:Create(border, TweenInfo.new(0.12), { Transparency = if secondary then 0.7 else 0.2 }):Play() end)
-	if callback then item.Activated:Connect(callback) end
+	if callback then item.Activated:Connect(function() if Theme.onClick then Theme.onClick() end; callback() end) end
 	return item
 end
 

@@ -28,7 +28,8 @@ function Geometry.ring(parent: Instance, name: string, frame: CFrame, radius: nu
 	for index = 1, count do
 		local angle = (index - 1) * math.pi * 2 / count
 		local transform = frame * CFrame.Angles(0, angle, 0) * CFrame.new(0, 0, -radius)
-		Geometry.part(model, "Arc", Vector3.new(radius * 2 * math.sin(math.pi / count) * 0.87, 0.14, 0.24), transform, color, Enum.Material.Neon)
+		local arc = Geometry.part(model, "Arc", Vector3.new(radius * 2 * math.sin(math.pi / count) * 0.87, 0.14, 0.24), transform, color, Enum.Material.Neon)
+		arc:SetAttribute("QualityTier", 2)
 	end
 	if orbit then model:SetAttribute("OrbitSpeed", orbit) end
 	return model

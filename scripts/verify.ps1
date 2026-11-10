@@ -73,6 +73,12 @@ try {
     & (Join-Path $projectRoot 'tests\Preservation.Tests.ps1')
     $passed.Add('Phase 1 gameplay source preservation and Git wrapper')
 } catch { $failed.Add('Gameplay preservation: ' + $_.Exception.Message) }
+if (Test-Path -LiteralPath (Join-Path $projectRoot 'tests\Interface.Tests.ps1')) {
+    try {
+        & (Join-Path $projectRoot 'tests\Interface.Tests.ps1')
+        $passed.Add('Interface callbacks, navigation and presentation wiring')
+    } catch { $failed.Add('Interface wiring: ' + $_.Exception.Message) }
+}
 $primaryDocs = @(Get-ChildItem -LiteralPath $projectRoot -Filter '*.md' -File | Select-Object -ExpandProperty Name | Sort-Object)
 Check-Mayhem (($primaryDocs -join ',') -eq 'ARCHITECTURE.md,CHANGELOG.md,DEVELOPMENT.md,README.md,SETUP.md') 'Exactly five primary documentation files'
 $lock = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'tools.lock.json') | ConvertFrom-Json

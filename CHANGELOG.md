@@ -2,6 +2,8 @@
 
 ## 2026-11-11: Visual milestone, environment pass
 
+The menu/HUD pass adds deployment and live matchmaking screens, mode briefing, operative selection, weapon finish previews, session inventory, complimentary Style Lab claims, daily session-cache claiming, camera/graphics/audio settings, insertion/countdown screens and victory/defeat/draw results. Five hub consoles open their matching pages. Navigation uses short fades, a scrollable small-screen layout and gamepad selection. HUD vitals tween, reload/ability clocks use server snapshots, and inactive ultimate/chaos systems are labeled honestly. Client lighting, optional orbit animation and sparse built-in particles respond to graphics settings. Audio has functional SoundGroup volume routing but ships without licensed audio IDs or audible tracks. Studio visual and input acceptance is still pending.
+
 Session cosmetics now have a separate rate-limited Presentation remote and allowlisted server rules. Two starter finishes, two complimentary Style Lab claims, a daily Prism session trial and three cosmetic signal-plate profiles do not change combat stats. Rewards and selections are held in memory for this server session, without DataStore persistence, Robux or paid items. The original four gameplay remotes and gameplay modules are preserved. Test cases cover unknown IDs, locked items, duplicate claims and daily reset boundaries; Luau execution is pending tool access.
 
 - Captured the original project in local Git and a source ZIP under ignored `build/backups/`. The active Git metadata is `.version-control/` because the sandbox denies writes in `.git/`. Origin is configured; no remote push was attempted.

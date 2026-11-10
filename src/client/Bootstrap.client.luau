@@ -5,6 +5,7 @@ local RunService = game:GetService("RunService")
 local ContextActionService = game:GetService("ContextActionService")
 local UserInputService = game:GetService("UserInputService")
 local GuiService = game:GetService("GuiService")
+local ProximityPromptService = game:GetService("ProximityPromptService")
 local mayhem = ReplicatedStorage:WaitForChild("Mayhem")
 local shared = mayhem:WaitForChild("Shared")
 local Config = require(shared:WaitForChild("Config"))
@@ -12,14 +13,22 @@ local Protocol = require(shared:WaitForChild("Protocol"))
 local Hud = require(script.Parent.Hud)
 local CameraController = require(script.Parent.CameraController)
 local Effects = require(script.Parent.Effects)
+local Theme = require(script.Parent.Theme)
+local AudioController = require(script.Parent.AudioController)
+local WorldPresentation = require(script.Parent.WorldPresentation)
 local remotes = mayhem:WaitForChild("Remotes")
 local action = remotes:WaitForChild(Protocol.Remote.Action) :: RemoteEvent
 local stateRemote = remotes:WaitForChild(Protocol.Remote.State) :: RemoteEvent
 local effectRemote = remotes:WaitForChild(Protocol.Remote.Effect) :: RemoteEvent
 local feedRemote = remotes:WaitForChild(Protocol.Remote.Feed) :: RemoteEvent
-local preferences = { firstPerson = false, fov = 80, reducedEffects = false }
+local presentationRemote = mayhem:WaitForChild("Presentation") :: RemoteEvent
+local preferences = { firstPerson = false, fov = 80, reducedEffects = false, reducedMotion = false, graphics = "Auto", music = 0.35, sound = 0.7, skin = "Pulse" }
+local style: any = { skin = "Pulse", operative = "Vanguard", owned = { Pulse = true, Glacier = true }, dailyClaimed = false, nextDaily = 0, revision = 0, ready = false }
 local camera = CameraController.new(preferences)
 local effects = Effects.new(preferences)
+local audio = AudioController.new(preferences)
+local worldPresentation = WorldPresentation.new(preferences)
+Theme.onClick = function() audio:play("UI") end
 local firing = false
 local shotAt = -math.huge
 local coreMenuOpen = false
@@ -52,6 +61,13 @@ hud = Hud.new({
 	fov = function() preferences.fov = if preferences.fov >= 90 then 70 else preferences.fov + 10 end,
 	effects = function() preferences.reducedEffects = not preferences.reducedEffects end,
 	fire = function(held: boolean) firing = held and canAct() end,
+	select = function(kind: string, id: string) style.notice = "Requesting style..."; presentationRemote:FireServer("Select", { kind = kind, id = id }) end,
+	claim = function(id: string) style.notice = "Requesting session style..."; presentationRemote:FireServer("Claim", id) end,
+	daily = function() style.notice = "Requesting session trial..."; presentationRemote:FireServer("Daily") end,
+	graphics = function() preferences.graphics = if preferences.graphics == "Auto" then "High" elseif preferences.graphics == "High" then "Low" else "Auto" end,
+	music = function() preferences.music = if preferences.music >= 1 then 0 else math.min(1, preferences.music + 0.25) end,
+	sound = function() preferences.sound = if preferences.sound >= 1 then 0 else math.min(1, preferences.sound + 0.25) end,
+	motion = function() preferences.reducedMotion = not preferences.reducedMotion end,
 })
 
 local function bind(name: string, callback: () -> (), ...: Enum.KeyCode)
@@ -81,13 +97,29 @@ UserInputService.WindowFocusReleased:Connect(function() firing = false end)
 Players.LocalPlayer.CharacterRemoving:Connect(function() firing = false; camera:setActive(false) end)
 
 stateRemote.OnClientEvent:Connect(function(nextState: any)
-	if nextState.phase == "Countdown" and state.phase ~= "Countdown" and nextState.inMatch then
-		hud.menuOpen = false
-		hud.settingsOpen = false
+	if nextState.phase ~= state.phase then
+		if nextState.inMatch and (nextState.phase == "Loading" or nextState.phase == "Countdown" or nextState.phase == "Results") then hud:closeMenus() end
+		if nextState.phase == "Active" and nextState.alive then hud:announce("SIGNAL LIVE", "Last contender standing wins. Insertion shield is active.") end
+		if nextState.phase == "Results" and nextState.result then audio:play(if nextState.result.winnerId == Players.LocalPlayer.UserId then "Victory" else "Defeat") end
+	end
+	if state.alive and state.roundId == nextState.roundId then
+		local shieldLoss = math.max(0, state.combat.shield - nextState.combat.shield)
+		local hullLoss = math.max(0, state.combat.health - nextState.combat.health)
+		if shieldLoss + hullLoss > 0 then hud:damage(shieldLoss + hullLoss, hullLoss == 0) end
 	end
 	if nextState.roundId ~= state.roundId or not nextState.alive then firing = false end
 	state = nextState
 	receivedAt = os.clock()
+end)
+presentationRemote.OnClientEvent:Connect(function(snapshot: any)
+	style = snapshot
+	style.ready = true
+	preferences.skin = style.skin
+end)
+ProximityPromptService.PromptTriggered:Connect(function(prompt: ProximityPrompt)
+	local screen = prompt:GetAttribute("MayhemScreen")
+	local world = workspace:FindFirstChild("MayhemWorld")
+	if type(screen) == "string" and world and prompt:IsDescendantOf(world) then hud:openPage(screen) end
 end)
 feedRemote.OnClientEvent:Connect(function(data: any) hud:addFeed(data) end)
 effectRemote.OnClientEvent:Connect(function(kind: string, data: any)
@@ -95,6 +127,7 @@ effectRemote.OnClientEvent:Connect(function(kind: string, data: any)
 		hud:hit(data.lethal)
 	else
 		effects:play(kind, data)
+		if kind == "Shot" then audio:play("Shot") elseif kind == "Slash" then audio:play("Slash") elseif kind == "Pulse" then audio:play("Repulse") end
 		if kind == "Slash" and data.userId == Players.LocalPlayer.UserId then camera.swingUntil = os.clock() + 0.2 end
 	end
 end)
@@ -120,8 +153,11 @@ RunService.Heartbeat:Connect(function(dt: number)
 	end
 	if accumulated >= 0.1 then
 		accumulated = 0
-		hud:render(state, now - receivedAt, preferences)
+		hud:render(state, now - receivedAt, preferences, style)
+		worldPresentation:step()
+		audio:update(hud:blocked(), state.phase)
 	end
 end)
-hud:render(state, 0, preferences)
+hud:render(state, 0, preferences, style)
 action:FireServer(Protocol.Action.Ready)
+presentationRemote:FireServer("Request")

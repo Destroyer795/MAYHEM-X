@@ -2,6 +2,7 @@
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local Workspace = game:GetService("Workspace")
+local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visuals)
 local CameraController = {}
 CameraController.__index = CameraController
 
@@ -44,12 +45,13 @@ function CameraController.makeViewmodel(self: any, slot: number)
 	if self.viewmodel then self.viewmodel:Destroy() end
 	local model = Instance.new("Model")
 	model.Name = "MayhemViewmodel"
+	local accent = Color3.fromRGB(table.unpack((Visuals.skin(self.preferences.skin or "Pulse") or Visuals.Skins[1]).color))
 	local function piece(name: string, size: Vector3, position: Vector3, neon: boolean)
 		local item = Instance.new("Part")
 		item.Name = name
 		item.Size = size
 		item.CFrame = CFrame.new(position)
-		item.Color = if neon then Color3.fromRGB(72, 225, 230) else Color3.fromRGB(33, 43, 59)
+		item.Color = if neon then accent else Color3.fromRGB(33, 43, 59)
 		item.Material = if neon then Enum.Material.Neon else Enum.Material.Metal
 		item.Anchored = true
 		item.CanCollide = false
@@ -68,6 +70,7 @@ function CameraController.makeViewmodel(self: any, slot: number)
 	model.WorldPivot = CFrame.identity
 	self.viewmodel = model
 	self.slot = slot
+	self.skin = self.preferences.skin
 end
 
 function CameraController.setActive(self: any, active: boolean)
@@ -133,7 +136,7 @@ function CameraController.step(self: any, dt: number, slot: number)
 	root.CFrame = CFrame.new(root.Position) * CFrame.Angles(0, self.yaw, 0)
 	if not UserInputService.TouchEnabled then UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter end
 	UserInputService.MouseIconEnabled = false
-	if self.slot ~= slot or not self.viewmodel then self:makeViewmodel(slot) end
+	if self.slot ~= slot or self.skin ~= self.preferences.skin or not self.viewmodel then self:makeViewmodel(slot) end
 	self.viewmodel.Parent = if firstPerson then camera else nil
 	if firstPerson then
 		local swing = math.max(0, (self.swingUntil or 0) - os.clock())
