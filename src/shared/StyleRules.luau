@@ -9,8 +9,10 @@ function StyleRules.apply(record: any, catalog: any, command: any, payload: any,
 	if command == "Select" then
 		if type(payload) ~= "table" or type(payload.id) ~= "string" or #payload.id > 24 then return false, "Invalid style selection." end
 		if payload.kind == "skin" and catalog.skin(payload.id) and record.owned[payload.id] then
+			if record.skin == payload.id then return true, "This finish is already equipped." end
 			record.skin = payload.id
 		elseif payload.kind == "operative" and catalog.operative(payload.id) then
+			if record.operative == payload.id then return true, "This profile is already equipped." end
 			record.operative = payload.id
 		else return false, "Claim this style before equipping it." end
 		record.revision += 1

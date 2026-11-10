@@ -18,6 +18,7 @@
         "$className": "Folder",
         "Shared": { "$path": "src/shared" },
         "Presentation": { "$className": "RemoteEvent" },
+        "ClientChecks": { "$path": "tests/ClientTests.luau" },
         "Remotes": {
           "$className": "Folder",
           "Action": { "$className": "RemoteEvent" },

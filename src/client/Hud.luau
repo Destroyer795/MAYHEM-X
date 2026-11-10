@@ -173,6 +173,12 @@ end
 function Hud.render(self: any, state: any, elapsed: number, preferences: any, style: any)
 	self.lastState = state
 	local size = self.root.AbsoluteSize
+	local camera = workspace.CurrentCamera
+	if camera then
+		local center = camera.ViewportSize / 2 - self.root.AbsolutePosition
+		self.crosshair.Position = UDim2.fromOffset(center.X - 15, center.Y - 15)
+		self.hitMarker.Position = UDim2.fromOffset(center.X - 22, center.Y - 22)
+	end
 	local compact = size.X < 760
 	local overlay = self:blocked()
 	local active = state.phase == "Active" and state.alive

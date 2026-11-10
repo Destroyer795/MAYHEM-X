@@ -13,6 +13,9 @@ return function(Rules: any, Visuals: any): number
 	expect(record.revision == revision)
 	accepted = Rules.apply(record, Visuals, "Select", { kind = "skin", id = "Orchid" }, 1)
 	expect(accepted and record.skin == "Orchid")
+	revision = record.revision
+	Rules.apply(record, Visuals, "Select", { kind = "skin", id = "Orchid" }, 1)
+	expect(record.revision == revision)
 	accepted = Rules.apply(record, Visuals, "Select", { kind = "operative", id = "Spectre" }, 1)
 	expect(accepted and record.operative == "Spectre")
 	for _, payload in { "Prism", "Pulse", "not-an-item", {}, 100 } do

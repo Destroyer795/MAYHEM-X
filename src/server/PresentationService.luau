@@ -80,8 +80,9 @@ function Presentation.start()
 		record.tokens, record.requestAt = tokens, now
 		if not allowed or type(command) ~= "string" or #command > 12 then return end
 		if command == "Request" then send(player, nil); return end
+		local previousRevision = record.revision
 		local accepted, notice = StyleRules.apply(record, Visuals, command, payload, math.floor(os.time() / 86400))
-		if accepted then apply(player) end
+		if accepted and record.revision ~= previousRevision then apply(player) end
 		send(player, notice)
 	end)
 	Players.PlayerAdded:Connect(add)
