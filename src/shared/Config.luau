@@ -1,0 +1,37 @@
+--!strict
+return table.freeze({
+	Match = table.freeze({
+		Capacity = 16,
+		MinimumPlayers = 2,
+		Intermission = 15,
+		LoadingTimeout = 18,
+		Countdown = 5,
+		Duration = 240,
+		ResultsDuration = 8,
+		SpawnProtection = 2,
+		KillCreditWindow = 8,
+	}),
+	Character = table.freeze({
+		Health = 100,
+		Shield = 40,
+		WalkSpeed = 22,
+		JumpPower = 50,
+		ShieldDelay = 8,
+		ShieldPerSecond = 5,
+	}),
+	Rifle = table.freeze({
+		Name = "VECTOR-18",
+		Damage = 19,
+		Interval = 0.18,
+		Range = 300,
+		Magazine = 18,
+		Reserve = 108,
+		ReloadTime = 1.8,
+	}),
+	Blade = table.freeze({ Name = "RIFT BLADE", Damage = 34, Interval = 0.65, Range = 8, MinimumDot = 0.25 }),
+	Ability = table.freeze({ Name = "REPULSE", Damage = 24, Radius = 14, ShieldRestore = 12, Cooldown = 12 }),
+	Security = table.freeze({ RequestsPerSecond = 24, RequestBurst = 32, MoveSpeedAllowance = 28, MoveBurst = 10 }),
+	Arena = table.freeze({ Bound = 145, FloorLimit = -30, Ceiling = 85, SpawnHeight = 26 }),
+	NetworkInterval = 0.5,
+	SimulationInterval = 0.1,
+})
