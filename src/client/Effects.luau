@@ -3,6 +3,7 @@ local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
 local Visuals = require(ReplicatedStorage.Mayhem.Shared.Visuals)
 local Config = require(ReplicatedStorage.Mayhem.Shared.Config)
 local Effects = {}
@@ -61,8 +62,9 @@ function Effects.new(preferences: any)
 end
 
 function Effects.reduced(self: any): boolean
+	local camera = workspace.CurrentCamera
 	return self.preferences.reducedEffects or self.preferences.graphics == "Low"
-		or (self.preferences.graphics == "Auto" and game:GetService("UserInputService").TouchEnabled)
+		or (self.preferences.graphics == "Auto" and (UserInputService.TouchEnabled or (camera ~= nil and camera.ViewportSize.X < 760)))
 end
 
 function Effects.root(self: any, name: string, position: Vector3, lifetime: number): Part?

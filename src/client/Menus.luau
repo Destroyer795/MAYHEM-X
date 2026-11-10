@@ -103,7 +103,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	self.bladeTab = Theme.button(inventory, "Blade", "RIFT BLADE", UDim2.new(0.26, 0, 0, 50), UDim2.new(0.24, 0, 0, 34), function() self.weapon = 2 end, true)
 	self.skinButtons = {}
 	for index, entry in Visuals.Skins do
-		local item = Theme.button(inventory, entry.id, entry.name, UDim2.fromOffset(0, 96 + (index - 1) * 38), UDim2.new(0.5, -8, 0, 30), function() self.draftSkin = entry.id end, true)
+		local item = Theme.button(inventory, entry.id, entry.name, UDim2.fromOffset(0, 96 + (index - 1) * 46), UDim2.new(0.5, -8, 0, 44), function() self.draftSkin = entry.id end, true)
 		self.skinButtons[entry.id] = item
 	end
 	self.weaponPreview = Preview.new(inventory)
@@ -236,7 +236,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.equipOperative.Active = style.ready
 	for id, item in self.skinButtons do
 		item.Text = (if style.owned[id] then "" else "LOCKED / ") .. Visuals.skin(id).name
-		item.TextSize = if compact then 10 else 12
+		item.TextSize = 12
 		item.BackgroundColor3 = if id == self.draftSkin then Theme.Purple else Theme.Panel
 	end
 	self.equipSkin.Text = if not style.owned[self.draftSkin] then "UNLOCK STYLE" elseif style.skin == self.draftSkin then "EQUIPPED" else "EQUIP FINISH"

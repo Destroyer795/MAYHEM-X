@@ -51,6 +51,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	item.BorderSizePixel = 0
 	item.Text = content
 	item.TextSize = 13
+	item.TextWrapped = true
 	item.Font = Enum.Font.GothamBold
 	item.AutoButtonColor = false
 	item.Selectable = true

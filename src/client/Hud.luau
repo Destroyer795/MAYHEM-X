@@ -212,8 +212,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.weaponName.Text = if rifle then "VECTOR-18 / AUTO" else "RIFT / MELEE"
 	self.ammo.Text = if reloading then "LOAD" elseif rifle then tostring(state.combat.ammo) else "RIFT"
 	self.reserve.Text = if reloading then string.format("%.1fs", state.combat.reloadRemaining - elapsed) elseif rifle then "/ " .. state.combat.reserve else "BLADE"
-	self.slotHint.Text = if self.touch then "SWAP / VECTOR + RIFT" else "1 VECTOR / 2 RIFT / R RELOAD"
-	self.slotHint.TextSize = if compact then 8 else 10
+	self.slotHint.Text = if self.touch then "SWAP / VECTOR + RIFT" elseif compact then "1 VECTOR / 2 RIFT" else "1 VECTOR / 2 RIFT / R RELOAD"
 	local cooldown = math.max(0, state.combat.abilityRemaining - elapsed)
 	self.ability.Visible = active and not overlay and not self.touch
 	self.ability.Text = if cooldown > 0 then string.format("Q / REPULSE / %.1fs", cooldown) else "Q / REPULSE READY"
@@ -241,7 +240,8 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	if state.result and self.resultRound ~= state.roundId then
 		self.resultRound = state.roundId
 		local win = state.result.winnerId == Players.LocalPlayer.UserId
-		self.resultTitle.Text = if win then "SIGNAL SECURED" elseif not state.result.winnerId then "ROUND DRAW" elseif state.inMatch then "SIGNAL LOST" else "MATCH COMPLETE"
+		local canceled = state.result.reason:find("canceled", 1, true) ~= nil
+		self.resultTitle.Text = if canceled then "SIGNAL ABORTED" elseif win then "SIGNAL SECURED" elseif not state.result.winnerId then "ROUND DRAW" elseif state.inMatch then "SIGNAL LOST" else "MATCH COMPLETE"
 		self.resultTitle.TextColor3 = if win then Theme.Cyan elseif state.result.winnerId then Theme.Magenta else Theme.White
 		self.resultTitle.TextSize = if compact then 28 else 40
 		self.resultWinner.Text = if win then "VICTORY / " .. state.result.winner else "FINAL SIGNAL / " .. state.result.winner

@@ -14,9 +14,9 @@ Visuals.Skins = table.freeze({
 	{ id = "Prism", name = "PRISM / WHITE", color = { 220, 229, 255 }, source = "daily", description = "Daily cache trial, available for this server session." },
 })
 Visuals.Operatives = table.freeze({
-	{ id = "Vanguard", name = "VANGUARD", description = "Angular plating and a full visor. Cosmetic only.", shoulders = 1.15 },
-	{ id = "Spectre", name = "SPECTRE", description = "A narrow silhouette and split visor. Cosmetic only.", shoulders = 0.85 },
-	{ id = "Relay", name = "RELAY", description = "Circuit panels and a communications collar. Cosmetic only.", shoulders = 1 },
+	{ id = "Vanguard", name = "VANGUARD", description = "Wide signal plates with an amethyst default finish. Cosmetic only.", shoulders = 1.15 },
+	{ id = "Spectre", name = "SPECTRE", description = "Narrow signal plates and a compact profile. Cosmetic only.", shoulders = 0.85 },
+	{ id = "Relay", name = "RELAY", description = "Balanced circuit plates. Cosmetic only.", shoulders = 1 },
 })
 Visuals.Capabilities = table.freeze({ Ultimates = false, ChaosEvents = false, Destruction = false })
 Visuals.Budgets = table.freeze({ WorldParts = 720, EffectRoots = 36, EffectDistance = 360, AnimationDistance = 220, AnimatedRings = 3 })
