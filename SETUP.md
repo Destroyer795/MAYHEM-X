@@ -10,6 +10,8 @@ Direct outbound shell downloads failed in this session. Studio's existing deskto
 
 ## Pinned tools
 
+Git history for the visual milestone lives in `.version-control/`, because this sandbox allows project files but denies subsequent writes to `.git/config` and `.git/index`. The initialized `.git/` directory is left untouched. Run Git through `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\git.ps1 status` (replace `status` with another Git command). The wrapper selects `.version-control/` and this worktree explicitly. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. No push is authorized. Metadata and backups stay local and are ignored. There are no global Git or ownership changes. Keep `.version-control/` when moving this folder to preserve history; a normal clone from a local Git bundle is another migration option.
+
 | Dependency | Purpose | Version | Local location | Storage and form |
 | --- | --- | --- | --- | --- |
 | Rojo CLI | Required development sync, native project build and sourcemap validation | 7.7.1 | `.tools/rojo-7.7.1/rojo.exe` | Portable, official ZIP about 4.36 MB; extracted size measured by setup |
