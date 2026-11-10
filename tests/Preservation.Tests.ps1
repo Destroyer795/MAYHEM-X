@@ -7,7 +7,7 @@ $paths = @('src/server/MatchService.luau','src/server/CombatService.luau','src/s
 foreach ($relative in $paths) {
     $original = & git "--git-dir=$metadata" "--work-tree=$projectRoot" rev-parse "${baseline}:$relative"
     if ($LASTEXITCODE -ne 0) { throw 'The inspected Phase 1 baseline is required for preservation checks' }
-    $current = & git "--git-dir=$metadata" "--work-tree=$projectRoot" hash-object -- (Join-Path $projectRoot $relative)
+    $current = & git "--git-dir=$metadata" "--work-tree=$projectRoot" hash-object --no-filters -- (Join-Path $projectRoot $relative)
     if ($LASTEXITCODE -ne 0 -or $current -ne $original) { throw "Gameplay preservation failed: $relative differs from the baseline" }
 }
 $originalCamera = (& git "--git-dir=$metadata" "--work-tree=$projectRoot" show "${baseline}:src/client/CameraController.luau") -join "`n"

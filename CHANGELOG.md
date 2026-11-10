@@ -1,56 +1,53 @@
 # Changelog
 
-## 2026-11-11: Visual milestone, environment pass
-
-Integration review fixed reticle placement against the camera viewport rather than the inset GUI center, prevented duplicate style selections from rebuilding cosmetics, and added an explicit client-side Studio reference/visual-safety check module. The unchanged camera aiming function is now checked against the baseline alongside seven complete gameplay files. Studio execution is still pending.
-
-Combat visuals now use short-lived Beams for accepted tracers, local muzzle flashes, built-in sparkle impact bursts, a Tween-driven sword Trail, Repulse wave segments, occluded insertion/shield Highlights, HUD damage feedback and replicated character-death effects. Heavy waves are limited to four at once, with 36 effect roots on full graphics or 12 on reduced graphics, distance culling and Debris cleanup. Mutation, ultimate and destruction renderers are available for future presentation calls only; no corresponding gameplay or remote commands were enabled.
-
-The menu/HUD pass adds deployment and live matchmaking screens, mode briefing, operative selection, weapon finish previews, session inventory, complimentary Style Lab claims, daily session-cache claiming, camera/graphics/audio settings, insertion/countdown screens and victory/defeat/draw results. Five hub consoles open their matching pages. Navigation uses short fades, a scrollable small-screen layout and gamepad selection. HUD vitals tween, reload/ability clocks use server snapshots, and inactive ultimate/chaos systems are labeled honestly. Client lighting, optional orbit animation and sparse built-in particles respond to graphics settings. Audio has functional SoundGroup volume routing but ships without licensed audio IDs or audible tracks. Studio visual and input acceptance is still pending.
-
-Session cosmetics now have a separate rate-limited Presentation remote and allowlisted server rules. Two starter finishes, two complimentary Style Lab claims, a daily Prism session trial and three cosmetic signal-plate profiles do not change combat stats. Rewards and selections are held in memory for this server session, without DataStore persistence, Robux or paid items. The original four gameplay remotes and gameplay modules are preserved. Test cases cover unknown IDs, locked items, duplicate claims and daily reset boundaries; Luau execution is pending tool access.
-
-- Captured the original project in local Git and a source ZIP under ignored `build/backups/`. The active Git metadata is `.version-control/` because the sandbox denies writes in `.git/`. Origin is configured; no remote push was attempted.
-- Added purple/cyan/magenta art tokens, shared procedural display geometry, an orbital lobby canopy, five interactive-terminal anchors, an operative display, district machinery, insertion rings, reactor housings and bridge details.
-- Added restrained bloom, a cool color grade and atmospheric haze. Arena details are non-colliding and excluded from raycasts; the original arena source and gameplay modules remain byte-for-byte identical to baseline.
-- Added a separate `-OutputName MAYHEM-X-Visual.rbxlx` build option to keep the open Phase 1 place intact. Fixed Git argument forwarding for `remote -v`.
-- Added executable preservation checks and catalog/Studio visual-budget checks. Native Luau, Rojo and Studio runtime verification remain unavailable in this sandbox. Terminals will be wired to the upcoming menu pass before this visual milestone is complete.
-
-## 2026-11-11: Phase 1 source and offline build
+## 2026-11-11: Visual implementation, Studio acceptance pending
 
 ### Implemented
 
-- Original procedural floating arena: reactor tower with an open stair exit, four combat districts, eight bridges, cover, sixteen insertion pads, lower secret vault, observation lobby, four future drop markers and isolated future duel deck.
-- Manual character loading with serialized requests, per-player spawn serials, loading timeout, late-load guards, death/character-removal cleanup and disconnect handling.
-- Opt-in FIFO queue, 16-player round roster, two-player minimum, intermission cancellation, countdown, spawn protection, four-minute rounds, last-survivor wins, no-survivor draws, timeout draws, results and automatic requeue preference.
-- Server raycast rifle, finite magazine/reserve, reload and switch cooldown, server melee arc/distance/visibility, Repulse radius/visibility/cooldown, health, shield absorption and regeneration.
-- Request rate limiting, finite aim-vector checks, server-derived hit origins, movement/bounds plausibility checks, single elimination credit and session Kills/Wins.
-- Original menu, lobby card, HUD, health/shield bars, ammunition, ability cooldown, elimination feed, results, settings, custom first/third-person aim, procedural weapon/viewmodel visuals, mouse/touch/controller gameplay bindings and reduced VFX.
-- Rojo mapping, version/checksum lock, relocatable Windows scripts, dependency-free offline place packaging, source/hash manifests, structural checks and executable Luau/Studio test cases.
+- Navy, purple, cyan and magenta art direction; orbital lobby canopy, large branding, operative display and five 3D menu consoles.
+- District-specific machinery, reactor housings, spawn beacons, bridge conduits, restrained bloom, atmospheric haze, local orbit animation and sparse built-in particles.
+- Deployment, live matchmaking, mode briefing, operative and weapon previews, inventory, complimentary Style Lab, daily session cache, settings, insertion/countdown and victory/defeat/draw screens.
+- Responsive HUD gauges, reload and Repulse clocks, weapon slots, eliminations, alive count, timer, hit/damage feedback and readable inactive ultimate/chaos status. Small-screen menu content scrolls, collection targets are 44 pixels high and gamepad navigation has explicit focus.
+- Separate, rate-limited session cosmetics: three signal-plate profiles, two starter finishes, two free shop claims and a daily Prism trial. Selections/claims are server-validated and do not change stats. They are not saved after leaving.
+- Bounded Beam tracers, muzzle flashes, sparkle impacts, sword Trails, Repulse segments, occluded shield Highlights and elimination effects. Mutation/ultimate/destruction renderers have no live gameplay triggers.
+- Functional Music/Ambience/Effects/UI SoundGroups and playback routes. No licensed sound IDs are configured, so the build is silent.
+- Auto/High/Low graphics, reduced effects/motion and camera/FOV/audio controls. World decoration has a 720-part runtime cap, VFX have 36 full-quality or 12 reduced roots, waves have per-kind caps and cleanup uses Debris. These caps are not measured performance results.
 
-### Verification status
+### Preservation and Git
 
-Initial environment inspection and official release/documentation lookup were performed. Tool download attempts failed because shell network access is blocked. Studio's existing shortcut was located, but access to its target executable was denied; native computer/browser automation was also unavailable. No Studio multiplayer tests, full Roblox type checks, Luau CLI tests or Rojo-native builds have run in this session.
+The initial project was inspected, backed up to `build/backups/phase1-source-baseline.zip` with 33 entries and recorded in commit `9172422`. Seven complete gameplay files remain byte-for-byte unchanged: MatchService, CombatService, ArenaService, Config, Rules, Protocol and the original RulesCases. The camera aiming function is also unchanged. Art runs after the original arena generator, without moving combat geometry. Cosmetic parts and arena decorations are excluded from combat raycasts.
 
-Offline packaging and structural verification results are recorded in `build/manifest.json` and `build/verification.json`. Read those reports for the latest executed check counts. Skipped checks remain explicit. The place's sources are not a claim of runtime acceptance.
+Local history uses `.version-control/`, because the sandbox allowed initialization but denied subsequent `.git/` writes. Use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. No remote history could be fetched, and nothing was pushed. No existing commits were amended or replaced. The final file inventory and all hashes/messages are in `build/git-report.json`; `build/MAYHEM-X-visual.bundle` provides offline history migration.
 
-Executed commands (each script was invoked with `powershell.exe -NoProfile -ExecutionPolicy Bypass -File`):
+| Commit | Milestone | Executed verification |
+| --- | --- | --- |
+| `9172422` | Inspected Phase 1 baseline | 179 structural checks, ten loader assertions |
+| `ce64018` | Local Git wrapper and artifact isolation | 181 structural checks |
+| `2806dae` | Lobby/arena art and lighting | 206 checks, gameplay preservation |
+| `39f641b` | Session cosmetics and 3D preview components | 237 checks, gameplay preservation |
+| `7bf98bc` | Connected menus, HUD, graphics and audio routing | 262 checks, 34 interface checks |
+| `12f2d52` | Combat VFX and shield feedback | 262 checks, 37 interface checks |
+| `58b4565` | Reticle alignment, idempotency and client test module | 267 checks, preserved camera aim |
+| `578eaf0` | Small-screen controls and automatic effect quality | 267 checks, preservation and wiring |
 
-- `scripts/build.ps1 -Offline`: succeeded, packaging 14 mapped Luau sources in an openable place XML format. Import in Studio remains unverified.
-- `scripts/verify.ps1`: 179 structural checks passed, zero failed, three tool/runtime categories skipped. This includes an executed project-model test group with ten assertions.
-- `scripts/setup.ps1 -RojoOnly`: failed to reach GitHub; nothing installed.
-- `scripts/build.ps1`: correctly refused the native build because local Rojo is missing.
-- `scripts/verify.ps1 -RequireTools`: the same structural checks passed, but the required-tools gate failed because the portable tools are missing. Its report is preserved as `build/verification-required-tools.json`.
+The final documentation/acceptance commit follows these milestones and is included in the generated Git report. Each code milestone was reviewed with a Git diff and available checks before committing. Runtime verification was explicitly pending in the commits.
 
-Review fixes included the spiral stair exit's overhead clearance, viewmodel pivot placement, non-finite movement handling, initial client module waits, gamepad menu selection and touch attack release. These changes have source/structure checks only, pending Studio verification.
+### Executed checks and limits
 
-### Known limitations and remaining work
+Commands use `powershell.exe -NoProfile -ExecutionPolicy Bypass -File`:
 
-- Phase 1 is implemented in source but has not passed the mandatory Studio gameplay gate. There are no confirmed runtime test results. Camera feel, touch/controller UI, tower/vault traversal, character load timing, collisions and latency behavior need acceptance testing.
-- Movement validation is baseline checking for client-owned physics. Sustained flight and sophisticated cheating are not fully prevented. There is no rewind/lag compensation. Production security and 16-player performance are unverified.
-- Match duration ends in a draw when multiple contenders survive; there is no Phase 2 shrinking zone or showdown transition yet. The separate duel deck and weapon spawn markers have no active gameplay flow.
-- Melee currently has one strike, without combos or finishers. Grenades, additional weapons, alternate powers, ultimate abilities, chaos events, evolution, power stealing, destructibles and collapsing structures are deferred.
-- Only The Collapse is playable. Inventory, cosmetics, currency, quests, persistent progression, DataStore saves, persistent leaderboards, advanced matchmaking and audio are not implemented. No fake inventory, currency or ultimate UI is presented. Settings and leaderboard values last only for the current client/server session.
-- Project files remain in the supplied writable workspace; creating `C:\MAYHEM-X` is outside this sandbox. No project tool dependencies were installed. The portable setup script is ready for a network-enabled local session.
+- `scripts/build.ps1 -Offline -OutputName MAYHEM-X-Visual.rbxlx`: succeeded, packaging 27 mapped Luau sources. The original `MAYHEM-X.rbxlx` was preserved.
+- `scripts/verify.ps1`: 267 checks passed, zero failed, three categories skipped. Executed subgroups include ten project-loader assertions, source/aim preservation, Git wrapper validation and 37 interface/wiring checks. XML source round-tripping, checksums, module paths, remotes, PowerShell syntax and the character policy passed.
+- Native build and `scripts/verify.ps1 -RequireTools`: blocked/failing because portable Rojo and Luau are unavailable. The required-tools report is saved separately under build/. No tool dependencies were installed.
+- Git origin inspection through `ls-remote`: network connection failed. Local origin configuration and commit history were checked successfully.
+- Server/client Studio test modules are included, but neither ran here. The computer/browser automation host is unavailable, and the existing Studio executable returned access denied. Luau compilation, pure Luau test execution and Rojo-native validation were not performed.
 
-Next: open the generated place in existing Studio, complete Script Analysis and the two-client checklist in DEVELOPMENT.md, fix observed issues, then broaden to eight local clients and an authorized 16-player session. Do not start Phase 2 until the playable prototype is verified.
+Known runtime bugs remain unknown until Studio testing. Actual lighting, traversal, avatar load timing, menu layout, mobile/controller input, multiplayer HUD synchronization, cosmetic replication, VFX cleanup and frame-time/network budgets require the acceptance checklist in DEVELOPMENT.md. Design caps and static checks do not verify runtime performance.
+
+The project remains in the supplied workspace because `C:\MAYHEM-X` is outside the writable sandbox. A normal checkout can be cloned from the bundle when the destination is available; see SETUP.md.
+
+## 2026-11-11: Original Phase 1 baseline
+
+Implemented the procedural Collapse map, lobby and FIFO queue, 16-slot roster, two-player minimum, round state machine, serialized character loading, countdown/protection, server rifle/melee/Repulse, health/shields, finite ammunition/reloading, kills, results and disconnect cleanup. Offline packaging and structural checks passed. Studio gameplay was not verified from this environment.
+
+Reality events, evolution, stolen powers, ultimates, destructibles, collapsing structures, shrinking zones, weapon drops, final-duel transitions, grenades, combos/finishers, extra maps, persistent progression/cosmetics, currency, quests and DataStore saving remain unimplemented. The inactive duel deck/drop markers are map preparation. No Phase 2 gameplay was enabled during the visual milestone. Complete Studio visual and multiplayer acceptance before proceeding.

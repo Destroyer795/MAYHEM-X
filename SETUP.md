@@ -4,7 +4,7 @@
 
 Everything created for this project is under the project root. The requested `C:\MAYHEM-X` destination is outside this session's writable sandbox. Work was performed in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`. To use the requested path, close project tools and copy the entire folder to `C:\MAYHEM-X` yourself, inspecting any existing destination first. Scripts use their own location, not a hard-coded drive path. Rebuild after moving to refresh generated manifests.
 
-Windows PowerShell is the only requirement for offline packaging and structural checks. No Python, Node.js, Rust, npm packages or virtual environment is required or installed. Existing Git and Node.js were detected; neither is a project dependency. No administrator privileges or persistent PATH changes are used. Commands below use execution policy for that PowerShell process only.
+Existing Windows PowerShell and Git support offline packaging, checks and mandatory local version control. No Python, Node.js, Rust, npm packages or virtual environment is required or installed. Existing Node.js is unused. No administrator privileges or persistent PATH changes are used. Commands below use execution policy for that PowerShell process only.
 
 Direct outbound shell downloads failed in this session. Studio's existing desktop shortcut points to `C:\Users\PRANAV KISHAN\AppData\Local\Roblox\Versions\version-63eb6055af4e4688\RobloxStudioBeta.exe`, but inspecting that executable returned access denied. The computer/browser automation host was unavailable. Studio is an external existing application and was not reinstalled.
 
@@ -14,6 +14,7 @@ Git history for the visual milestone lives in `.version-control/`, because this 
 
 | Dependency | Purpose | Version | Local location | Storage and form |
 | --- | --- | --- | --- | --- |
+| Git | Mandatory local history and preservation checks | 2.50.0.windows.1, existing | `C:/Program Files/Git/cmd/git.exe` | External existing application, unchanged; project metadata in `.version-control/` |
 | Rojo CLI | Required development sync, native project build and sourcemap validation | 7.7.1 | `.tools/rojo-7.7.1/rojo.exe` | Portable, official ZIP about 4.36 MB; extracted size measured by setup |
 | Luau CLI suite | Compile all source, run rule tests, analyze engine-independent modules | 0.743 | `.tools/luau-0.743/` | Portable, official ZIP about 3.06 MB; extracted size measured by setup |
 | Rojo Studio plugin | Optional live sync inside Studio | Match CLI 7.7.1 | Studio's user plugin location, outside this project | External Studio installation, official `Rojo.rbxm` about 564 KB |
@@ -23,7 +24,7 @@ Release sources: [Rojo 7.7.1](https://github.com/rojo-rbx/rojo/releases/tag/v7.7
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1 -OutputName MAYHEM-X-Visual.rbxlx
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1 -RequireTools
 ```
 
@@ -33,7 +34,16 @@ Run tools locally with `& '.\.tools\rojo-7.7.1\rojo.exe' --version`, `& '.\.tool
 
 ## Studio connection
 
-Opening a built `.rbxlx` needs no plugin. For live sync, manually install the matching Rojo plugin from the official release or Roblox plugin marketplace, using the [Rojo installation instructions](https://rojo.space/docs/v7/getting-started/installation/). This plugin is not contained entirely in the project. Start `scripts/serve.ps1`, open an unpublished place in Studio, connect the plugin to localhost port 34872, review its changes, then sync. Avoid syncing into unrelated places. Never publish during this milestone.
+Opening `build/MAYHEM-X-Visual.rbxlx` needs no plugin. For live sync, manually install the matching Rojo plugin from the official release or Roblox plugin marketplace, using the [Rojo installation instructions](https://rojo.space/docs/v7/getting-started/installation/). This plugin is not contained entirely in the project. Start `scripts/serve.ps1`, open an unpublished place in Studio, connect the plugin to localhost port 34872, review its changes, then sync. Stop simulation before syncing source changes. Avoid syncing into unrelated places. Never publish during this milestone.
+
+The history bundle at handoff can be cloned without network access into a new directory. Inspect the destination before cloning. A normal clone lets standard Git tools use their usual metadata path:
+
+```powershell
+git clone .\build\MAYHEM-X-visual.bundle C:\MAYHEM-X
+git -C C:\MAYHEM-X remote set-url origin https://github.com/Destroyer795/MAYHEM-X.git
+```
+
+These relocation commands were not run here. No existing destination or protected `.git/` directory was replaced. The bundle contains source/history, not ignored tools, backups or builds; rebuild after cloning. Do not push until remote history has been inspected and pushing is separately authorized.
 
 The match manager limits a round to 16 participants even if a server contains additional queued players. When configuring an experience for later release, set its place/server capacity to 16 in Studio or Creator Dashboard. That external setting is not changed by Rojo here. API Services and DataStore access are unnecessary for Phase 1.
 
@@ -44,3 +54,5 @@ To update a portable tool, choose an official release, inspect its asset/checksu
 To remove a dependency, stop its process and delete only its named version folder and archive inside this project's `.tools/`. Remove the optional plugin through Studio's plugin manager separately. No global uninstaller is involved.
 
 `build/` contains generated places, manifests, sourcemaps and verification reports. It is safe to regenerate; inspect the folder before deleting it. `.tools/*.partial` are incomplete downloads and may be deleted after a failed setup. ZIPs can be removed after a successful setup to save space; installed executables and their receipts remain sufficient. Deleting the project removes all project-local dependencies. Do not delete Roblox's installation, unrelated folders, source or lockfiles as cleanup.
+
+`build/backups/phase1-source-baseline.zip` and `phase1-hashes.json` preserve the inspected starting files. Keep them until accepting the visual build. Do not delete live Studio lock files. Keep `.version-control/` or a verified Git bundle before cleaning project metadata. No project audio assets ship; adding audio requires verifying ownership/permission, setting routes in Visuals and updating the audio permission check.
