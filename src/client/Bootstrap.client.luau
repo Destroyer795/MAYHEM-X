@@ -100,12 +100,24 @@ stateRemote.OnClientEvent:Connect(function(nextState: any)
 	if nextState.phase ~= state.phase then
 		if nextState.inMatch and (nextState.phase == "Loading" or nextState.phase == "Countdown" or nextState.phase == "Results") then hud:closeMenus() end
 		if nextState.phase == "Active" and nextState.alive then hud:announce("SIGNAL LIVE", "Last contender standing wins. Insertion shield is active.") end
+		if nextState.phase == "Active" then
+			for _, contender in Players:GetPlayers() do
+				local character = contender.Character
+				local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
+				if root and math.abs(root.Position.X) < Config.Arena.Bound and math.abs(root.Position.Z) < Config.Arena.Bound then effects:play("Protection", { character = character, duration = Config.Match.SpawnProtection }) end
+			end
+		end
 		if nextState.phase == "Results" and nextState.result then audio:play(if nextState.result.winnerId == Players.LocalPlayer.UserId then "Victory" else "Defeat") end
 	end
 	if state.alive and state.roundId == nextState.roundId then
 		local shieldLoss = math.max(0, state.combat.shield - nextState.combat.shield)
 		local hullLoss = math.max(0, state.combat.health - nextState.combat.health)
 		if shieldLoss + hullLoss > 0 then hud:damage(shieldLoss + hullLoss, hullLoss == 0) end
+		if state.combat.shield > 0 and nextState.combat.shield <= 0 then
+			local character = Players.LocalPlayer.Character
+			local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
+			if root then effects:play("ShieldBreak", { character = character, at = root.Position }) end
+		end
 	end
 	if nextState.roundId ~= state.roundId or not nextState.alive then firing = false end
 	state = nextState
@@ -125,6 +137,8 @@ feedRemote.OnClientEvent:Connect(function(data: any) hud:addFeed(data) end)
 effectRemote.OnClientEvent:Connect(function(kind: string, data: any)
 	if kind == "Hit" then
 		hud:hit(data.lethal)
+		if data.lethal then audio:play("Eliminate") end
+		if state.combat.slot == 2 and workspace.CurrentCamera then effects:play("MeleeHit", { at = workspace.CurrentCamera.CFrame.Position + workspace.CurrentCamera.CFrame.LookVector * 5 }) end
 	else
 		effects:play(kind, data)
 		if kind == "Shot" then audio:play("Shot") elseif kind == "Slash" then audio:play("Slash") elseif kind == "Pulse" then audio:play("Repulse") end

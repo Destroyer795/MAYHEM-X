@@ -5,6 +5,7 @@ $bootstrap = [IO.File]::ReadAllText((Join-Path $clientRoot 'Bootstrap.client.lua
 $menus = [IO.File]::ReadAllText((Join-Path $clientRoot 'Menus.luau'))
 $hud = [IO.File]::ReadAllText((Join-Path $clientRoot 'Hud.luau'))
 $scene = [IO.File]::ReadAllText((Join-Path $projectRoot 'src\server\SceneService.luau'))
+$effects = [IO.File]::ReadAllText((Join-Path $clientRoot 'Effects.luau'))
 $checks = 0
 foreach ($name in @([regex]::Matches($menus + $hud, '\bcallbacks\.(\w+)') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)) {
     $inline = $bootstrap -match "(?m)^\s+$name\s*=\s*function"
@@ -29,4 +30,8 @@ foreach ($name in @([regex]::Matches($bootstrap, '\bhud:(\w+)\(') | ForEach-Obje
 $config = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'default.project.json') | ConvertFrom-Json
 if ($config.tree.ReplicatedStorage.Mayhem.Presentation.'$className' -ne 'RemoteEvent') { throw 'Presentation remote is missing' }
 $checks++
+foreach ($name in @([regex]::Matches($bootstrap, 'effects:play\("(\w+)"') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)) {
+    if ($effects -notmatch ('kind == "' + $name + '"')) { throw "Missing visual effect handler: $name" }
+    $checks++
+}
 Write-Output "PASS: $checks interface callback, navigation and presentation wiring checks"
