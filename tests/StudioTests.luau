@@ -12,6 +12,9 @@ function Tests.run(): number
 	local checks = require(script.RulesCases)(Rules, Config)
 	local Visuals = require(shared.Visuals)
 	checks += require(script.VisualCases)(Visuals)
+	checks += require(script.StyleCases)(require(shared.StyleRules), Visuals)
+	assert(ReplicatedStorage.Mayhem.Presentation:IsA("RemoteEvent"), "Presentation remote is missing")
+	checks += 1
 	for _, name in Protocol.Remote do
 		local remote = ReplicatedStorage.Mayhem.Remotes:FindFirstChild(name)
 		assert(remote and remote:IsA("RemoteEvent"), "Missing RemoteEvent: " .. name)

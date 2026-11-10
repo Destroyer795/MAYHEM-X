@@ -17,6 +17,7 @@
       "Mayhem": {
         "$className": "Folder",
         "Shared": { "$path": "src/shared" },
+        "Presentation": { "$className": "RemoteEvent" },
         "Remotes": {
           "$className": "Folder",
           "Action": { "$className": "RemoteEvent" },
@@ -32,7 +33,8 @@
       "MayhemTests": {
         "$path": "tests/StudioTests.luau",
         "RulesCases": { "$path": "tests/RulesCases.luau" },
-        "VisualCases": { "$path": "tests/VisualCases.luau" }
+        "VisualCases": { "$path": "tests/VisualCases.luau" },
+        "StyleCases": { "$path": "tests/StyleCases.luau" }
       }
     },
     "StarterPlayer": {

@@ -36,7 +36,7 @@ function Equipment.equip(character: Model, slot: number)
 		return item
 	end
 	local dark = Color3.fromRGB(33, 43, 59)
-	local cyan = Color3.fromRGB(72, 225, 230)
+	local cyan = character:GetAttribute("MayhemAccent") or Color3.fromRGB(149, 95, 255)
 	if slot == 1 then
 		piece("Receiver", Vector3.new(0.65, 0.6, 2.6), CFrame.new(0, -0.25, -0.8), dark, Enum.Material.Metal)
 		piece("Barrel", Vector3.new(0.22, 0.22, 1.1), CFrame.new(0, -0.2, -2.3), cyan, Enum.Material.Neon)

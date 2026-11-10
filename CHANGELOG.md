@@ -2,6 +2,8 @@
 
 ## 2026-11-11: Visual milestone, environment pass
 
+Session cosmetics now have a separate rate-limited Presentation remote and allowlisted server rules. Two starter finishes, two complimentary Style Lab claims, a daily Prism session trial and three cosmetic signal-plate profiles do not change combat stats. Rewards and selections are held in memory for this server session, without DataStore persistence, Robux or paid items. The original four gameplay remotes and gameplay modules are preserved. Test cases cover unknown IDs, locked items, duplicate claims and daily reset boundaries; Luau execution is pending tool access.
+
 - Captured the original project in local Git and a source ZIP under ignored `build/backups/`. The active Git metadata is `.version-control/` because the sandbox denies writes in `.git/`. Origin is configured; no remote push was attempted.
 - Added purple/cyan/magenta art tokens, shared procedural display geometry, an orbital lobby canopy, five interactive-terminal anchors, an operative display, district machinery, insertion rings, reactor housings and bridge details.
 - Added restrained bloom, a cool color grade and atmospheric haze. Arena details are non-colliding and excluded from raycasts; the original arena source and gameplay modules remain byte-for-byte identical to baseline.
