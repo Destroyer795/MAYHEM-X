@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-11: Visual milestone, environment pass
+
+- Captured the original project in local Git and a source ZIP under ignored `build/backups/`. The active Git metadata is `.version-control/` because the sandbox denies writes in `.git/`. Origin is configured; no remote push was attempted.
+- Added purple/cyan/magenta art tokens, shared procedural display geometry, an orbital lobby canopy, five interactive-terminal anchors, an operative display, district machinery, insertion rings, reactor housings and bridge details.
+- Added restrained bloom, a cool color grade and atmospheric haze. Arena details are non-colliding and excluded from raycasts; the original arena source and gameplay modules remain byte-for-byte identical to baseline.
+- Added a separate `-OutputName MAYHEM-X-Visual.rbxlx` build option to keep the open Phase 1 place intact. Fixed Git argument forwarding for `remote -v`.
+- Added executable preservation checks and catalog/Studio visual-budget checks. Native Luau, Rojo and Studio runtime verification remain unavailable in this sandbox. Terminals will be wired to the upcoming menu pass before this visual milestone is complete.
+
 ## 2026-11-11: Phase 1 source and offline build
 
 ### Implemented

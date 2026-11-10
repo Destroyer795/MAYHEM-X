@@ -31,7 +31,8 @@
       "MayhemServer": { "$path": "src/server" },
       "MayhemTests": {
         "$path": "tests/StudioTests.luau",
-        "RulesCases": { "$path": "tests/RulesCases.luau" }
+        "RulesCases": { "$path": "tests/RulesCases.luau" },
+        "VisualCases": { "$path": "tests/VisualCases.luau" }
       }
     },
     "StarterPlayer": {

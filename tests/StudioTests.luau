@@ -10,6 +10,8 @@ function Tests.run(): number
 	local Rules = require(shared.Rules)
 	local Protocol = require(shared.Protocol)
 	local checks = require(script.RulesCases)(Rules, Config)
+	local Visuals = require(shared.Visuals)
+	checks += require(script.VisualCases)(Visuals)
 	for _, name in Protocol.Remote do
 		local remote = ReplicatedStorage.Mayhem.Remotes:FindFirstChild(name)
 		assert(remote and remote:IsA("RemoteEvent"), "Missing RemoteEvent: " .. name)
@@ -19,6 +21,15 @@ function Tests.run(): number
 	assert(world, "Arena bootstrap did not finish")
 	local arena = world:FindFirstChild("TheCollapse")
 	assert(arena and arena:FindFirstChild("SecretVaultFloor") and world:FindFirstChild("FinalDuelDeck"), "Arena geometry is incomplete")
+	checks += 1
+	local detailCount = 0
+	for _, item in world:GetDescendants() do
+		if item:IsA("BasePart") then
+			detailCount += 1
+			if item:GetAttribute("MayhemDetail") then assert(not item.CanCollide and not item.CanTouch and not item.CanQuery, "Decor cannot affect combat geometry"); checks += 1 end
+		end
+	end
+	assert(detailCount <= Visuals.Budgets.WorldParts and world:FindFirstChild("ArtDirection"), "Visual world is missing or over budget")
 	checks += 1
 	local pads = 0
 	for _, item in (arena :: Instance):GetDescendants() do

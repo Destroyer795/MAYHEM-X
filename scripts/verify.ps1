@@ -69,6 +69,10 @@ try {
     & (Join-Path $projectRoot 'tests\ProjectModel.Tests.ps1')
     $passed.Add('Executable project model tests')
 } catch { $failed.Add('Executable project model tests: ' + $_.Exception.Message) }
+try {
+    & (Join-Path $projectRoot 'tests\Preservation.Tests.ps1')
+    $passed.Add('Phase 1 gameplay source preservation and Git wrapper')
+} catch { $failed.Add('Gameplay preservation: ' + $_.Exception.Message) }
 $primaryDocs = @(Get-ChildItem -LiteralPath $projectRoot -Filter '*.md' -File | Select-Object -ExpandProperty Name | Sort-Object)
 Check-Mayhem (($primaryDocs -join ',') -eq 'ARCHITECTURE.md,CHANGELOG.md,DEVELOPMENT.md,README.md,SETUP.md') 'Exactly five primary documentation files'
 $lock = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'tools.lock.json') | ConvertFrom-Json
@@ -76,7 +80,10 @@ foreach ($name in @('rojo','luau')) {
     Check-Mayhem ($lock.$name.sha256 -match '^[a-f0-9]{64}$') "Pinned download checksum: $name"
     Check-Mayhem ($lock.$name.url.StartsWith('https://github.com/')) "Official download host: $name"
 }
-$place = Join-Path $projectRoot 'build\MAYHEM-X.rbxlx'
+$manifestPath = Join-Path $projectRoot 'build\manifest.json'
+$manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
+if ($manifest.place -notmatch '^[A-Za-z0-9_-]+\.rbxlx$') { throw 'Invalid place filename in build manifest' }
+$place = Join-Path (Join-Path $projectRoot 'build') $manifest.place
 if (Test-Path -LiteralPath $place) {
     $xml = [xml][IO.File]::ReadAllText($place)
     Check-Mayhem ($xml.roblox.version -eq '4') 'Place XML version'
@@ -96,8 +103,6 @@ if (Test-Path -LiteralPath $place) {
             Check-Mayhem ($null -ne $sourceNode -and $sourceNode.InnerText -ceq [IO.File]::ReadAllText($entry.Source)) "Embedded source matches file: $($entry.Name)"
         }
     }
-    $manifestPath = Join-Path $projectRoot 'build\manifest.json'
-    $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
     Check-Mayhem ($manifest.placeSha256 -eq (Get-FileHash -LiteralPath $place -Algorithm SHA256).Hash.ToLowerInvariant()) 'Build manifest place checksum'
     foreach ($source in $manifest.sources) {
         Check-Mayhem ($source.sha256 -eq (Get-FileHash -LiteralPath (Join-Path $projectRoot $source.path) -Algorithm SHA256).Hash.ToLowerInvariant()) "Build manifest source checksum: $($source.path)"

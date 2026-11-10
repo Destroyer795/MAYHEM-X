@@ -5,10 +5,12 @@ local RunService = game:GetService("RunService")
 local Config = require(ReplicatedStorage.Mayhem.Shared.Config)
 local Protocol = require(ReplicatedStorage.Mayhem.Shared.Protocol)
 local Arena = require(script.Parent.ArenaService)
+local Scene = require(script.Parent.SceneService)
 local MatchService = require(script.Parent.MatchService)
 
 Players.CharacterAutoLoads = false
 Arena.build()
+Scene.decorate()
 local remotes = ReplicatedStorage.Mayhem.Remotes
 local matches = MatchService.new(remotes)
 local actionRemote = remotes:WaitForChild(Protocol.Remote.Action) :: RemoteEvent

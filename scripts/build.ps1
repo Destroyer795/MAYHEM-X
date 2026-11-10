@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([switch]$Offline)
+param([switch]$Offline, [ValidatePattern('^[A-Za-z0-9_-]+\.rbxlx$')][string]$OutputName = 'MAYHEM-X.rbxlx')
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -7,7 +7,7 @@ $projectRoot = Split-Path -Parent $PSScriptRoot
 $model = Get-MayhemProjectModel -ProjectRoot $projectRoot
 $outputDirectory = Join-Path $projectRoot 'build'
 New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null
-$place = Join-Path $outputDirectory 'MAYHEM-X.rbxlx'
+$place = Join-Path $outputDirectory $OutputName
 $lock = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'tools.lock.json') | ConvertFrom-Json
 $rojo = Join-Path $projectRoot ".tools\rojo-$($lock.rojo.version)\rojo.exe"
 $builder = 'offline-xml'
@@ -69,7 +69,7 @@ $sources = @($model.Entries | Where-Object Source | ForEach-Object {
     [ordered]@{ instance=$_.LogicalPath; path=$_.Source.Substring($projectRoot.Length + 1).Replace('\','/'); sha256=(Get-FileHash -LiteralPath $_.Source -Algorithm SHA256).Hash.ToLowerInvariant() }
 })
 [ordered]@{
-    builder=$builder; generatedUtc=[DateTime]::UtcNow.ToString('o'); place='MAYHEM-X.rbxlx';
+    builder=$builder; generatedUtc=[DateTime]::UtcNow.ToString('o'); place=$OutputName;
     placeSha256=(Get-FileHash -LiteralPath $place -Algorithm SHA256).Hash.ToLowerInvariant();
     instanceCount=$model.Entries.Count; sourceCount=$sources.Count; sources=$sources;
     studioRuntimeVerified=$false
