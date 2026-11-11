@@ -141,15 +141,16 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $projectRoot 'assets/map
             Start-Item 'Folder' $group; $writer.WriteEndElement()
             foreach ($part in $parts | Where-Object group -eq $group) {
                 Start-Item 'Part' $part.name
-                Vector 'Size' $part.size
+                Vector 'size' $part.size
                 Frame 'CFrame' $part.p $part.yaw (Property $part 'pitch' 0)
                 Scalar 'bool' 'Anchored' 'true'; Scalar 'bool' 'CanTouch' 'false'
                 $solid=$group -notin @('Decor','Hazards')
                 Scalar 'bool' 'CanCollide' ($solid.ToString().ToLowerInvariant()); Scalar 'bool' 'CanQuery' ($solid.ToString().ToLowerInvariant())
                 Scalar 'bool' 'CastShadow' (($solid -and $part.size[1] -gt 3).ToString().ToLowerInvariant())
                 Scalar 'token' 'Material' $materials[$part.material]; Scalar 'token' 'TopSurface' 0; Scalar 'token' 'BottomSurface' 0
+                Scalar 'token' 'shape' 1; Scalar 'token' 'formFactorRaw' 3
                 Scalar 'float' 'Transparency' (N $part.transparency)
-                $writer.WriteStartElement('Color3'); $writer.WriteAttributeString('name','Color'); for($i=0;$i -lt 3;$i++) { $writer.WriteElementString(@('R','G','B')[$i],(N ($part.color[$i]/255))) }; $writer.WriteEndElement()
+                Scalar 'Color3uint8' 'Color3uint8' ([long]$part.color[0]*65536+[long]$part.color[1]*256+[long]$part.color[2])
                 $writer.WriteEndElement()
                 if ($part.motion) { Start-Item 'Vector3Value' 'Travel'; Vector 'Value' $part.motion.travel; $writer.WriteEndElement(); $writer.WriteEndElement(); Value-Item 'NumberValue' 'Period' 'double' $part.motion.period }
                 $writer.WriteEndElement()

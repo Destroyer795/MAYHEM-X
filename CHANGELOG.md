@@ -2,6 +2,8 @@
 
 ## 2026-11-11: Premium worlds and audio, in development
 
+Checked the offline map writer against Rojo's reflection patches and XML color encoder. Templates now emit canonical `size`, packed `Color3uint8`, `shape` and `formFactorRaw` properties. Rebuilt all five templates and repeated the physical-map and place-integrity checks. This improves format compatibility but does not replace a Studio import test.
+
 Preference saving now refuses to write after a failed initial load, validates the request shape and waits for an in-progress save during disconnect flushing. Studio settings remain explicitly session-only. Audio routing adds positional waterfall loops, a quiet hub bed, result stingers, bounded cue-history storage and visible preload counters. DataStore behavior and actual Roblox playback are still pending runtime acceptance.
 
 Integration review corrected biased tie selection, throttled repeated ballot changes and continued shrinking/damage on the duel deck. Added oriented-box checks for the generated collision geometry, including all eighty spawn supports, body/head clearance, weapon/duel support and rotation matrices. All 2,201 physical-map assertions passed. The default build now targets the Premium filename, preserving earlier places. Generated catalog compilation is included when the optional Luau tools are available. New tie/duel Luau cases are included but remain unexecuted here.

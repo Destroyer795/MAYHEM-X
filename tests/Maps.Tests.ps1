@@ -30,7 +30,7 @@ public static class MayhemMapGeometry {
         var boxes=new List<Box>(); int checks=0;
         foreach(XmlNode item in model.SelectNodes(".//Item[@class='Part']")) {
             XmlNode props=item.SelectSingleNode("Properties"), frame=props.SelectSingleNode("CoordinateFrame[@name='CFrame']");
-            var box=new Box { p=Point(frame),s=Point(props.SelectSingleNode("Vector3[@name='Size']")),r=new double[9],solid=props.SelectSingleNode("bool[@name='CanCollide']").InnerText=="true",name=props.SelectSingleNode("string[@name='Name']").InnerText };
+            var box=new Box { p=Point(frame),s=Point(props.SelectSingleNode("Vector3[@name='size']")),r=new double[9],solid=props.SelectSingleNode("bool[@name='CanCollide']").InnerText=="true",name=props.SelectSingleNode("string[@name='Name']").InnerText };
             for(int a=0;a<3;a++) for(int b=0;b<3;b++) box.r[a*3+b]=D(frame,"R"+a+b);
             for(int a=0;a<3;a++) for(int b=0;b<3;b++) {
                 double dot=0; for(int row=0;row<3;row++) dot+=box.r[row*3+a]*box.r[row*3+b];
@@ -80,9 +80,12 @@ foreach ($map in $reports) {
     $parts=@($model.SelectNodes('.//Item[@class="Part"]'))
     if ($parts.Count -gt 500) { throw "Map part budget exceeded: $($map.id)" }
     foreach ($part in $parts) {
-        $size=$part.SelectSingleNode('Properties/Vector3[@name="Size"]')
+        $size=$part.SelectSingleNode('Properties/Vector3[@name="size"]')
         if ([double]$size.X -le 0 -or [double]$size.Y -le 0 -or [double]$size.Z -le 0) { throw 'Invalid physical dimensions' }
         if ($part.SelectSingleNode('Properties/bool[@name="Anchored"]').InnerText -ne 'true') { throw 'Map templates must start anchored' }
+        $color=$part.SelectSingleNode('Properties/Color3uint8[@name="Color3uint8"]')
+        if (-not $color -or [long]$color.InnerText -lt 0 -or [long]$color.InnerText -gt 16777215) { throw 'Map color must use the canonical packed RGB property' }
+        if ($part.SelectSingleNode('Properties/token[@name="shape"]').InnerText -ne '1' -or $part.SelectSingleNode('Properties/token[@name="formFactorRaw"]').InnerText -ne '3') { throw 'Map parts must preserve block shape and custom dimensions' }
         $checks++
     }
     $actual=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
