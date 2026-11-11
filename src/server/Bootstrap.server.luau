@@ -7,6 +7,7 @@ local Protocol = require(ReplicatedStorage.Mayhem.Shared.Protocol)
 local Arena = require(script.Parent.ArenaService)
 local Scene = require(script.Parent.SceneService)
 local Presentation = require(script.Parent.PresentationService)
+local PreferenceService = require(script.Parent.PreferenceService)
 local MatchService = require(script.Parent.MatchService)
 
 Players.CharacterAutoLoads = false
@@ -14,7 +15,7 @@ Arena.build()
 workspace.MayhemWorld.TheCollapse:Destroy()
 workspace.MayhemWorld.FinalDuelDeck:Destroy()
 Scene.decorate()
-Presentation.start()
+Presentation.start(PreferenceService.new())
 local remotes = ReplicatedStorage.Mayhem.Remotes
 local matches = MatchService.new(remotes)
 local actionRemote = remotes:WaitForChild(Protocol.Remote.Action) :: RemoteEvent

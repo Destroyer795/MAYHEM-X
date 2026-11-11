@@ -1,17 +1,19 @@
 --!strict
 local Visuals = {}
 Visuals.Palette = table.freeze({
-	Void = { 7, 10, 20 }, Navy = { 14, 19, 35 }, Panel = { 24, 31, 49 }, Metal = { 47, 57, 78 },
-	Purple = { 149, 95, 255 }, Cyan = { 78, 229, 238 }, Magenta = { 238, 87, 189 },
-	Red = { 255, 95, 117 }, White = { 237, 242, 255 }, Muted = { 143, 158, 186 },
+	Void = { 16, 37, 58 }, Navy = { 34, 64, 91 }, Panel = { 231, 241, 246 }, Metal = { 148, 178, 199 },
+	Purple = { 27, 132, 213 }, Cyan = { 22, 177, 200 }, Magenta = { 217, 78, 153 },
+	Red = { 224, 79, 91 }, White = { 248, 251, 252 }, Muted = { 87, 115, 140 },
+	Surface = { 247, 249, 246 }, Ink = { 25, 49, 73 }, Gold = { 242, 174, 63 }, Violet = { 150, 106, 224 },
 })
-Visuals.Mode = table.freeze({ Id = "Collapse", Name = "LAST SIGNAL", Subtitle = "SOLO SURVIVAL / THE COLLAPSE", Description = "Sixteen contenders. One signal remains. Rifle, blade and Repulse. Every operative has the same combat stats." })
+Visuals.Mode = table.freeze({ Id = "LastSignal", Name = "LAST SIGNAL", Subtitle = "SOLO SURVIVAL / FIVE ARENAS", Description = "Sixteen contenders. Five arenas. Vote, survive the closing zone, and win the final signal. Every operative has the same combat stats." })
 Visuals.Skins = table.freeze({
 	{ id = "Pulse", name = "PULSE / AMETHYST", color = { 149, 95, 255 }, source = "starter", description = "Amethyst energy cells with a graphite shell." },
 	{ id = "Glacier", name = "GLACIER / CYAN", color = { 78, 229, 238 }, source = "starter", description = "A clean cyan circuit. Included in your collection." },
 	{ id = "Orchid", name = "ORCHID / MAGENTA", color = { 238, 87, 189 }, source = "shop", description = "Claim this complimentary style for this server session." },
 	{ id = "Ember", name = "EMBER / CORAL", color = { 255, 116, 132 }, source = "shop", description = "A controlled coral glow. Complimentary session unlock." },
 	{ id = "Prism", name = "PRISM / WHITE", color = { 220, 229, 255 }, source = "daily", description = "Daily cache trial, available for this server session." },
+	{ id = "Aurum", name = "AURUM / GOLD", color = { 255, 190, 67 }, source = "purchase", cost = 45, description = "45 earned session credits. Cosmetic only. Resets after leaving." },
 })
 Visuals.Operatives = table.freeze({
 	{ id = "Vanguard", name = "VANGUARD", description = "Wide signal plates with an amethyst default finish. Cosmetic only.", shoulders = 1.15 },

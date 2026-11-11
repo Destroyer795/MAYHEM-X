@@ -14,6 +14,7 @@ function Tests.run(): number
 	checks += require(script.VisualCases)(Visuals)
 	checks += require(script.StyleCases)(require(shared.StyleRules), Visuals)
 	checks += require(script.MapRulesCases)(require(shared.MapRules))
+	checks += require(script.PreferenceCases)(require(shared.PreferenceRules))
 	assert(ReplicatedStorage.Mayhem.Presentation:IsA("RemoteEvent"), "Presentation remote is missing")
 	checks += 1
 	for _, name in Protocol.Remote do

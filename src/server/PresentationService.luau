@@ -7,7 +7,7 @@ local StyleRules = require(shared.StyleRules)
 local Rules = require(shared.Rules)
 local Presentation = {}
 
-function Presentation.start()
+function Presentation.start(profiles: any)
 	local remote = ReplicatedStorage.Mayhem:WaitForChild("Presentation") :: RemoteEvent
 	local records: { [Player]: any } = {}
 	local connections: { [Player]: RBXScriptConnection } = {}
@@ -56,8 +56,10 @@ function Presentation.start()
 		remote:FireClient(player, {
 			skin = record.skin, operative = record.operative, owned = table.clone(record.owned), revision = record.revision,
 			dailyClaimed = record.dailyDay == day, nextDaily = (day + 1) * 86400, notice = notice,
+			profile = profiles:snapshot(player),
 		})
 	end
+	profiles.notify = function(player: Player) send(player, nil) end
 	local function add(player: Player)
 		if records[player] then return end
 		local record = StyleRules.new()
@@ -80,9 +82,21 @@ function Presentation.start()
 		record.tokens, record.requestAt = tokens, now
 		if not allowed or type(command) ~= "string" or #command > 12 then return end
 		if command == "Request" then send(player, nil); return end
+		if command == "Preferences" then profiles:update(player, payload); send(player, "Preferences accepted."); return end
+		if command == "Purchase" then
+			local item = if type(payload) == "string" then Visuals.skin(payload) else nil
+			if not item or item.source ~= "purchase" then send(player, "Unknown purchase."); return end
+			if record.owned[item.id] then send(player, "Already in your collection."); return end
+			if not profiles:spend(player, item.cost) then send(player, "Not enough session credits."); return end
+			record.owned[item.id] = true
+			record.revision += 1
+			send(player, "Aurum added. No combat stats changed.")
+			return
+		end
 		local previousRevision = record.revision
 		local accepted, notice = StyleRules.apply(record, Visuals, command, payload, math.floor(os.time() / 86400))
 		if accepted and record.revision ~= previousRevision then apply(player) end
+		if accepted and command == "Daily" and record.revision ~= previousRevision then profiles:bonus(player, 15) end
 		send(player, notice)
 	end)
 	Players.PlayerAdded:Connect(add)

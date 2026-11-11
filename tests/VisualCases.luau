@@ -5,7 +5,7 @@ return function(Visuals: any): number
 	for _, skin in Visuals.Skins do
 		assert(not ids[skin.id] and Visuals.skin(skin.id) == skin, "Style IDs must be unique and resolvable")
 		ids[skin.id] = true
-		assert(skin.source == "starter" or skin.source == "shop" or skin.source == "daily", "Unknown entitlement source")
+		assert(skin.source == "starter" or skin.source == "shop" or skin.source == "daily" or (skin.source == "purchase" and skin.cost > 0), "Unknown entitlement source")
 		assert(#skin.color == 3, "Style color needs three channels")
 		for _, channel in skin.color do assert(channel >= 0 and channel <= 255, "Color channel out of range"); checks += 1 end
 		checks += 3
