@@ -16,7 +16,7 @@ return function(Visuals: any): number
 		assert(Visuals.operative(operative.id) == operative and operative.shoulders >= 0.8 and operative.shoulders <= 1.2, "Invalid cosmetic operative")
 		checks += 1
 	end
-	assert(not Visuals.Capabilities.Ultimates and not Visuals.Capabilities.ChaosEvents, "Visual work cannot enable Phase 2 gameplay")
+	assert(Visuals.Capabilities.Ultimates and Visuals.Capabilities.ChaosEvents, "Premium maps require their live gameplay integrations")
 	assert(Visuals.Budgets.WorldParts <= 720 and Visuals.Budgets.EffectRoots <= 36, "Visual budgets must stay bounded")
 	for _, uri in Visuals.Audio do assert(uri == "", "Ship no unverified sound IDs"); checks += 1 end
 	return checks + 2

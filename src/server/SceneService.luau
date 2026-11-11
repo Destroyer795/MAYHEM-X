@@ -28,7 +28,6 @@ end
 
 function Scene.decorate()
 	local world = workspace:WaitForChild("MayhemWorld")
-	local arena = world:WaitForChild("TheCollapse")
 	local lobby = world:WaitForChild("ObservationLobby")
 	local previous = world:FindFirstChild("ArtDirection")
 	if previous then previous:Destroy() end
@@ -38,8 +37,8 @@ function Scene.decorate()
 	local purple, cyan, magenta = color("Purple"), color("Cyan"), color("Magenta")
 	for _, item in world:GetDescendants() do
 		if item:IsA("BasePart") then
-			if item.Material == Enum.Material.Neon then item.Color = purple
-			elseif item.Material == Enum.Material.Metal then item.Color = if item.Name == "FloatingDeck" or item.Name == "CentralDeck" then color("Panel") else color("Navy") end
+			if item.Material == Enum.Material.Neon then item.Color = cyan
+			elseif item.Material == Enum.Material.Metal then item.Color = if item.Name == "LobbyDeck" then Color3.fromRGB(230, 240, 242) else Color3.fromRGB(157, 186, 205) end
 		end
 	end
 
@@ -69,63 +68,10 @@ function Scene.decorate()
 	station(hub, Vector3.new(-28, 36, 218), "DAILY CACHE", "SESSION COSMETIC TRIAL", "Daily", purple)
 	station(hub, Vector3.new(0, 36, 249), "SYSTEMS", "AUDIO / GRAPHICS / CAMERA", "Settings", cyan)
 
-	local tower = Instance.new("Folder")
-	tower.Name = "ReactorArchitecture"
-	tower.Parent = art
-	for index = 0, 3 do
-		local frame = CFrame.new(0, 32, 0) * CFrame.Angles(0, index * math.pi / 2, 0)
-		detail(tower, "ReactorHousing", Vector3.new(8, 20, 0.6), frame * CFrame.new(0, 0, -5.8), color("Metal"))
-		for _, side in { -1, 1 } do
-			detail(tower, "EnergyCell", Vector3.new(0.5, 16, 0.2), frame * CFrame.new(side * 2.5, 0, -6.2), if index % 2 == 0 then purple else cyan, true)
-		end
-	end
-	Geometry.ring(tower, "ReactorHalo", CFrame.new(0, 55, 0), 10.5, 24, purple, 0.15)
-	Geometry.ring(tower, "CrownHalo", CFrame.new(0, 52, 0), 7, 16, cyan)
-	detail(tower, "SignalSpire", Vector3.new(2, 13, 2), CFrame.new(0, 55, 0), color("Metal"))
-	detail(tower, "SpireEmitter", Vector3.new(0.4, 10, 0.4), CFrame.new(0, 55, -1.1), purple, true)
-
-	local accents = { purple, cyan, magenta, color("Red") }
-	local centers = { Vector3.new(100, 20, 0), Vector3.new(0, 20, 100), Vector3.new(-100, 20, 0), Vector3.new(0, 20, -100) }
-	local subtitles = { "VECTOR / SIGNAL ARRAYS", "ION / POWER CELLS", "ORBIT / OBSERVATORY", "NULL / BLACK ARCHIVE" }
-	for index, center in centers do
-		local zone = Instance.new("Folder")
-		zone.Name = "District" .. index
-		zone.Parent = art
-		local accent = accents[index]
-		local facing = CFrame.lookAt(center, Vector3.new(0, center.Y, 0))
-		Geometry.sign(zone, facing * CFrame.new(0, 10, 22), Vector3.new(18, 3.4, 0.4), "0" .. index .. " / " .. ({ "VECTOR", "ION", "ORBIT", "NULL" })[index], subtitles[index], accent)
-		for column = -1, 1 do
-			local frame = facing * CFrame.new(column * 8, 6, 23)
-			detail(zone, "DistrictMachine", Vector3.new(3, if index == 4 then 10 else 6, 3), frame, color("Metal"))
-			detail(zone, "MachineCircuit", Vector3.new(0.16, 4, 3.1), frame, accent, true)
-			if index == 1 then detail(zone, "Antenna", Vector3.new(6, 0.2, 0.4), frame * CFrame.new(0, 5, 0) * CFrame.Angles(0, column, 0), accent)
-			elseif index == 2 then Geometry.ring(zone, "CellCollar", frame * CFrame.new(0, 3.4, 0), 2, 8, accent)
-			elseif index == 3 then Geometry.ring(zone, "ReceiverDish", frame * CFrame.new(0, 4, 0) * CFrame.Angles(0.6, 0, 0), 3, 10, accent) end
-		end
-		for _, x in { -18, 18 } do
-			for _, z in { -18, 18 } do
-				Geometry.ring(zone, "InsertionBeacon", CFrame.new(center + Vector3.new(x, 1.72, z)), 3.4, 8, accent)
-			end
-		end
-	end
-	for _, item in arena:GetDescendants() do
-		if item:IsA("BasePart") and item.Name == "Bridge" then
-			local length = item.Size.Z
-			for _, side in { -1, 1 } do
-				detail(art, "BridgeConduit", Vector3.new(0.2, 0.15, length - 4), item.CFrame * CFrame.new(side * (item.Size.X / 2 - 1.2), 1.06, 0), cyan, true)
-				for segment = 1, 3 do
-					detail(art, "BridgeTruss", Vector3.new(0.5, 3.5, length / 3 - 2), item.CFrame * CFrame.new(side * (item.Size.X / 2), -2.4, (segment - 2) * length / 3), color("Metal"))
-				end
-			end
-		elseif item:IsA("BasePart") and (item.Name == "TacticalCover" or item.Name == "CrownCover") then
-			detail(art, "CoverArmor", Vector3.new(item.Size.X - 0.5, 0.3, 0.12), item.CFrame * CFrame.new(0, item.Size.Y / 2 - 0.4, -item.Size.Z / 2 - 0.08), cyan, true)
-		end
-	end
-
-	Lighting.ClockTime = 0.6
-	Lighting.Brightness = 2
-	Lighting.Ambient = Color3.fromRGB(40, 37, 65)
-	Lighting.OutdoorAmbient = Color3.fromRGB(53, 61, 85)
+	Lighting.ClockTime = 13.5
+	Lighting.Brightness = 2.5
+	Lighting.Ambient = Color3.fromRGB(149, 174, 194)
+	Lighting.OutdoorAmbient = Color3.fromRGB(162, 189, 207)
 	Lighting.EnvironmentDiffuseScale = 0.4
 	Lighting.EnvironmentSpecularScale = 0.65
 	Lighting.ShadowSoftness = 0.4
@@ -135,24 +81,24 @@ function Scene.decorate()
 	end
 	local atmosphere = Instance.new("Atmosphere")
 	atmosphere.Name = "MayhemAtmosphere"
-	atmosphere.Color = Color3.fromRGB(133, 146, 187)
-	atmosphere.Decay = Color3.fromRGB(40, 34, 67)
-	atmosphere.Density = 0.26
+	atmosphere.Color = Color3.fromRGB(161, 215, 240)
+	atmosphere.Decay = Color3.fromRGB(160, 179, 201)
+	atmosphere.Density = 0.07
 	atmosphere.Offset = 0.15
-	atmosphere.Haze = 1.2
-	atmosphere.Glare = 0.04
+	atmosphere.Haze = 0.35
+	atmosphere.Glare = 0
 	atmosphere.Parent = Lighting
 	local bloom = Instance.new("BloomEffect")
 	bloom.Name = "MayhemBloom"
-	bloom.Intensity = 0.18
+	bloom.Intensity = 0.08
 	bloom.Size = 18
-	bloom.Threshold = 1.4
+	bloom.Threshold = 1.8
 	bloom.Parent = Lighting
 	local grade = Instance.new("ColorCorrectionEffect")
 	grade.Name = "MayhemGrade"
-	grade.Contrast = 0.12
-	grade.Saturation = -0.08
-	grade.TintColor = Color3.fromRGB(239, 242, 255)
+	grade.Contrast = 0.04
+	grade.Saturation = 0.08
+	grade.TintColor = Color3.fromRGB(255, 253, 249)
 	grade.Parent = Lighting
 	local count = 0
 	for _, item in world:GetDescendants() do if item:IsA("BasePart") then count += 1 end end

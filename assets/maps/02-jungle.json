@@ -20,7 +20,7 @@
     {"op":"bridge","a":[65,20,-65],"b":[65,20,65],"width":10,"color":"wall"},
     {"op":"box","name":"CanopyLookout","size":[26,2,26],"p":[0,34,0],"color":"wall"},
     {"op":"stairs","p":[18,21,20],"width":8,"steps":16,"rise":0.8,"run":2.8,"yaw":180,"color":"wall"},
-    {"op":"box","name":"LookoutLanding","size":[16,2,16],"p":[15,34,-18],"color":"wall"},
+    {"op":"box","name":"LookoutLanding","size":[10,2,16],"p":[8,34,-18],"color":"wall"},
     {"op":"palms","locations":[[-65,21,-72],[65,21,-72],[-65,21,72],[65,21,72],[-96,21,0],[96,21,0],[0,21,12]]},
     {"op":"grid","name":"RelayPod","size":[10,6,7],"x":[-65,65],"z":[-56,56],"y":24.5,"color":"wall"},
     {"op":"grid","name":"SupplyCover","group":"Destructibles","size":[6,4,6],"x":[-74,74],"z":[-65,65],"y":23.5,"color":"accent"},

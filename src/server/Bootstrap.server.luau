@@ -11,6 +11,8 @@ local MatchService = require(script.Parent.MatchService)
 
 Players.CharacterAutoLoads = false
 Arena.build()
+workspace.MayhemWorld.TheCollapse:Destroy()
+workspace.MayhemWorld.FinalDuelDeck:Destroy()
 Scene.decorate()
 Presentation.start()
 local remotes = ReplicatedStorage.Mayhem.Remotes

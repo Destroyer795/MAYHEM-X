@@ -12,6 +12,7 @@ export type Record = {
 	shotAt: number, swingAt: number, switchAt: number, abilityAt: number, reloadAt: number,
 	protectedUntil: number, damagedAt: number, lastAttacker: Player?,
 	accepted: CFrame, moveAt: number, moveCredit: number,
+	ultimate: number, playerHitAt: number?,
 }
 
 local Combat = {}
@@ -48,6 +49,7 @@ function Combat.beginLife(self: any, player: Player, character: Model)
 		shotAt = -math.huge, swingAt = -math.huge, switchAt = -math.huge,
 		abilityAt = 0, reloadAt = 0, protectedUntil = math.huge, damagedAt = 0, lastAttacker = nil,
 		accepted = root.CFrame, moveAt = os.clock(), moveCredit = Config.Security.MoveBurst,
+		ultimate = 0, playerHitAt = nil,
 	}
 	humanoid.MaxHealth = Config.Character.Health
 	humanoid.Health = Config.Character.Health
@@ -88,7 +90,7 @@ end
 
 function Combat.credit(self: any, player: Player, now: number): Player?
 	local record: Record? = self.records[player]
-	if record and now - record.damagedAt <= Config.Match.KillCreditWindow then
+	if record and now - (record.playerHitAt or -math.huge) <= Config.Match.KillCreditWindow then
 		return record.lastAttacker
 	end
 	return nil
@@ -114,8 +116,9 @@ function Combat.validatePosition(self: any, player: Player, now: number): boolea
 	local allowed, credit = Rules.spend(record.moveCredit, record.moveAt, now,
 		Config.Security.MoveSpeedAllowance, Config.Security.MoveBurst, Vector3.new(delta.X, 0, delta.Z).Magnitude)
 	local rise = math.max(6, (now - record.moveAt) * 75)
-	valid = valid and allowed and delta.Y <= rise and math.abs(position.X) <= Config.Arena.Bound
-		and math.abs(position.Z) <= Config.Arena.Bound and position.Y <= Config.Arena.Ceiling
+	local bounds = if self.context.bounds then self.context.bounds() else { center = Vector3.zero, half = Config.Arena.Bound, ceiling = Config.Arena.Ceiling }
+	valid = valid and allowed and delta.Y <= rise and math.abs(position.X - bounds.center.X) <= bounds.half
+		and math.abs(position.Z - bounds.center.Z) <= bounds.half and position.Y <= bounds.ceiling
 	if not valid then
 		root.CFrame = record.accepted
 		root.AssemblyLinearVelocity = Vector3.zero
@@ -166,9 +169,9 @@ function Combat.damage(self: any, victim: Player, attacker: Player?, amount: num
 	local nextHealth, nextShield = Rules.damage(humanoid.Health, record.shield, amount)
 	record.shield = nextShield
 	record.damagedAt = now
-	record.lastAttacker = attacker
+	if attacker then record.lastAttacker = attacker; record.playerHitAt = now end
 	if nextHealth <= 0 then
-		self.context.eliminate(victim, attacker, cause)
+		self.context.eliminate(victim, attacker or self:credit(victim, now), cause)
 	end
 	humanoid.Health = nextHealth
 	self.context.sendState(victim)
@@ -193,6 +196,7 @@ function Combat.fire(self: any, player: Player, direction: any, now: number)
 	local hit = self:raycast(record.character :: Model, origin, direction.Unit * Config.Rifle.Range)
 	local endpoint = if hit then hit.Position else origin + direction.Unit * Config.Rifle.Range
 	if hit then
+		if self.context.environmentHit then self.context.environmentHit(hit.Instance, Config.Rifle.Damage) end
 		for victim: Player, other: Record in self.records do
 			if victim ~= player and other.alive and other.character and hit.Instance:IsDescendantOf(other.character) then
 				self:damage(victim, player, Config.Rifle.Damage, Config.Rifle.Name, now)
@@ -200,7 +204,7 @@ function Combat.fire(self: any, player: Player, direction: any, now: number)
 			end
 		end
 	end
-	self.context.effect:FireAllClients("Shot", { from = origin, to = endpoint, userId = player.UserId })
+	self.context.effect:FireAllClients("Shot", { from = origin, to = endpoint, userId = player.UserId, impact = hit ~= nil })
 	self.context.sendState(player)
 end
 
@@ -231,6 +235,9 @@ function Combat.melee(self: any, player: Player, direction: any, now: number)
 	end
 	if nearest then
 		self:damage(nearest, player, Config.Blade.Damage, Config.Blade.Name, now)
+	elseif self.context.environmentHit then
+		local hit = self:raycast(record.character :: Model, root.Position + Vector3.new(0, 1, 0), direction.Unit * Config.Blade.Range)
+		if hit then self.context.environmentHit(hit.Instance, Config.Blade.Damage) end
 	end
 	self.context.effect:FireAllClients("Slash", { at = root.CFrame, userId = player.UserId })
 end
@@ -305,10 +312,42 @@ function Combat.remove(self: any, player: Player)
 	self.records[player] = nil
 end
 
+function Combat.transport(self: any, player: Player, frame: CFrame, grace: boolean)
+	local record: Record? = self.records[player]
+	if not record or not record.alive then return end
+	local _, root = body(record.character)
+	if not root then return end
+	local delta = frame.Position - root.Position
+	root.CFrame = frame
+	if grace then
+		root.AssemblyLinearVelocity = Vector3.zero
+		record.accepted, record.moveAt, record.moveCredit = frame, os.clock(), Config.Security.MoveBurst
+		record.protectedUntil, record.reloadAt = os.clock() + 2, 0
+	else record.accepted += delta end
+end
+
+function Combat.addCharge(self: any, player: Player)
+	local record: Record? = self.records[player]
+	if record and record.alive then record.ultimate = math.min(100, record.ultimate + 34) end
+end
+
+function Combat.ultimate(self: any, player: Player, now: number)
+	local record, root = self:ready(player, now)
+	if not record or not root or record.ultimate < 100 then return end
+	local humanoid = body(record.character)
+	if not humanoid then return end
+	record.ultimate = 0
+	record.shield = Config.Character.Shield
+	humanoid.Health = math.min(Config.Character.Health, humanoid.Health + 30)
+	record.protectedUntil = now + 1.25
+	self.context.effect:FireAllClients("Ultimate", { at = root.Position, userId = player.UserId })
+	self.context.sendState(player)
+end
+
 function Combat.snapshot(self: any, player: Player, now: number): any
 	local record: Record? = self.records[player]
 	if not record then
-		return { health = 100, shield = 0, ammo = 0, reserve = 0, slot = 1, abilityRemaining = 0, reloadRemaining = 0, protectionRemaining = 0 }
+		return { health = 100, shield = 0, ammo = 0, reserve = 0, slot = 1, abilityRemaining = 0, reloadRemaining = 0, protectionRemaining = 0, ultimate = 0 }
 	end
 	local humanoid = body(record.character)
 	return {
@@ -316,6 +355,7 @@ function Combat.snapshot(self: any, player: Player, now: number): any
 		ammo = record.ammo, reserve = record.reserve, slot = record.slot,
 		abilityRemaining = math.max(0, record.abilityAt - now), reloadRemaining = math.max(0, record.reloadAt - now),
 		protectionRemaining = if record.protectedUntil == math.huge then 0 else math.max(0, record.protectedUntil - now),
+		ultimate = record.ultimate,
 	}
 end
 

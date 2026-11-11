@@ -18,7 +18,7 @@ Visuals.Operatives = table.freeze({
 	{ id = "Spectre", name = "SPECTRE", description = "Narrow signal plates and a compact profile. Cosmetic only.", shoulders = 0.85 },
 	{ id = "Relay", name = "RELAY", description = "Balanced circuit plates. Cosmetic only.", shoulders = 1 },
 })
-Visuals.Capabilities = table.freeze({ Ultimates = false, ChaosEvents = false, Destruction = false })
+Visuals.Capabilities = table.freeze({ Ultimates = true, ChaosEvents = true, Destruction = true })
 Visuals.Budgets = table.freeze({ WorldParts = 720, EffectRoots = 36, EffectDistance = 360, AnimationDistance = 220, AnimatedRings = 3 })
 Visuals.Audio = table.freeze({
 	-- Add only audio you own or have verified permission to use. Empty routes stay silent.

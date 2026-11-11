@@ -7,6 +7,8 @@ local Protocol = require(shared.Protocol)
 local Rules = require(shared.Rules)
 local Combat = require(script.Parent.CombatService)
 local Arena = require(script.Parent.ArenaService)
+local MapService = require(script.Parent.MapService)
+local MapRules = require(shared.MapRules)
 
 local Match = {}
 Match.__index = Match
@@ -20,10 +22,13 @@ function Match.new(remotes: Folder)
 	}, Match)
 	self.combat = Combat.new({
 		canFight = function(): boolean return self.phase == Protocol.Phase.Active end,
+		bounds = function() return self.maps:bounds() end,
+		environmentHit = function(part: Instance, damage: number) self.maps:damageCover(part, damage) end,
 		eliminate = function(victim: Player, attacker: Player?, cause: string) self:eliminate(victim, attacker, cause) end,
 		sendState = function(player: Player) self:sendState(player) end,
 		effect = self.effect,
 	})
+	self.maps = MapService.new(self.combat, self.effect)
 	return self
 end
 
@@ -69,12 +74,16 @@ function Match.sendState(self: any, player: Player)
 		return
 	end
 	local now = os.clock()
+	local eligible = {}
+	local upcoming = self:queue()
+	for index = 1, math.min(#upcoming, Config.Match.Capacity) do table.insert(eligible, upcoming[index].UserId) end
 	self.state:FireClient(player, {
 		phase = self.phase, roundId = self.roundId, remaining = math.max(0, self.deadline - now),
 		queued = entry.wantsQueue, queueCount = #self:queue(), capacity = Config.Match.Capacity,
 		inMatch = entry.inMatch, alive = entry.inMatch and entry.loaded and not entry.eliminated,
 		remainingPlayers = #self:alive(), kills = entry.kills, combat = self.combat:snapshot(player, now),
 		result = self.result,
+		map = self.maps:snapshot(eligible), vote = self.maps.votes[player.UserId], ballotEligible = table.find(eligible, player.UserId) ~= nil,
 	})
 end
 
@@ -193,6 +202,7 @@ function Match.remove(self: any, player: Player)
 	entry.removingConnection:Disconnect()
 	self.entries[player] = nil
 	self.combat:remove(player)
+	self.maps.votes[player.UserId] = nil
 end
 
 function Match.eliminate(self: any, victim: Player, attacker: Player?, cause: string)
@@ -204,6 +214,7 @@ function Match.eliminate(self: any, victim: Player, attacker: Player?, cause: st
 		local killer = if attacker and attacker ~= victim then self.roster[attacker] else nil
 		if killer and self.entries[attacker] == killer then
 			killer.kills += 1
+			self.combat:addCharge(attacker)
 			local stats = (attacker :: Player):FindFirstChild("leaderstats")
 			if stats then
 				local value = stats:FindFirstChild("Kills") :: IntValue?
@@ -222,15 +233,25 @@ function Match.eliminate(self: any, victim: Player, attacker: Player?, cause: st
 end
 
 function Match.beginLoading(self: any)
+	local queued = self:queue()
+	local eligible = {}
+	for index = 1, math.min(#queued, Config.Match.Capacity) do table.insert(eligible, queued[index].UserId) end
+	local choice = self.maps:choose(eligible)
+	local ok, frames = pcall(function() return self.maps:load(choice) end)
+	if not ok then
+		warn("MAYHEM X map load failed: " .. tostring(frames))
+		self:transition(Protocol.Phase.Waiting, 0)
+		self.effect:FireAllClients("Notice", { title = "MAP LOAD FAILED", body = "Your queue position is preserved. Retrying next intermission." })
+		return
+	end
 	self.roundId += 1
 	self.result = nil
 	self.roster = {}
-	local frames = table.clone(Arena.frames())
+	frames = table.clone(frames)
 	for index = #frames, 2, -1 do
 		local swap = self.random:NextInteger(1, index)
 		frames[index], frames[swap] = frames[swap], frames[index]
 	end
-	local queued = self:queue()
 	for index = 1, math.min(#queued, Config.Match.Capacity) do
 		local player = queued[index]
 		local entry = self.entries[player]
@@ -252,6 +273,7 @@ end
 function Match.finish(self: any, winnerId: number?, reason: string)
 	if self.phase ~= Protocol.Phase.Active and self.phase ~= Protocol.Phase.Loading and self.phase ~= Protocol.Phase.Countdown then return end
 	local wasActive = self.phase == Protocol.Phase.Active
+	self.maps:stop()
 	local standings = {}
 	local winnerName = "NO WINNER"
 	for player, entry in self.roster do
@@ -292,6 +314,7 @@ function Match.reset(self: any)
 	end
 	self.roster = {}
 	self.result = nil
+	self.maps:load(self.maps.info.id)
 	self:transition(Protocol.Phase.Waiting, 0)
 end
 
@@ -325,11 +348,17 @@ function Match.handle(self: any, player: Player, action: any, payload: any)
 		self.combat:reload(player, now)
 	elseif action == actions.Ability then
 		self.combat:ability(player, now)
+	elseif action == MapRules.Command.Vote then
+		local rank = table.find(self:queue(), player)
+		if rank and rank <= Config.Match.Capacity and not entry.inMatch and (self.phase == "Waiting" or self.phase == "Intermission") and self.maps:vote(player.UserId, payload) then self:broadcast() end
+	elseif action == MapRules.Command.Ultimate then
+		self.combat:ultimate(player, now)
 	end
 end
 
 function Match.tick(self: any, dt: number)
 	local now = os.clock()
+	self.maps:tick(now)
 	self.combat:tick(now, dt)
 	local phase = Protocol.Phase
 	if self.phase == phase.Waiting then
@@ -358,6 +387,7 @@ function Match.tick(self: any, dt: number)
 		if #self:alive() < Config.Match.MinimumPlayers then
 			self:finish(nil, "Round canceled: not enough survivors")
 		elseif now >= self.deadline then
+			self.maps:start(#self:alive())
 			for player in self.roster do self.combat:release(player, now) end
 			self:transition(phase.Active, Config.Match.Duration)
 		end

@@ -35,7 +35,8 @@
         "$path": "tests/StudioTests.luau",
         "RulesCases": { "$path": "tests/RulesCases.luau" },
         "VisualCases": { "$path": "tests/VisualCases.luau" },
-        "StyleCases": { "$path": "tests/StyleCases.luau" }
+        "StyleCases": { "$path": "tests/StyleCases.luau" },
+        "MapRulesCases": { "$path": "tests/MapRulesCases.luau" }
       }
     },
     "ServerStorage": { "$className":"ServerStorage", "MapTemplates": { "$path":"build/generated/Maps" } },
