@@ -40,6 +40,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	self.nav = nav
 	local layout = Instance.new("UIListLayout")
 	layout.FillDirection = Enum.FillDirection.Horizontal
+	layout.SortOrder = Enum.SortOrder.LayoutOrder
 	layout.Padding = UDim.new(0, 8)
 	layout.Parent = nav
 	for index, definition in { { "Deploy", "01 / PLAY" }, { "Maps", "02 / ARENAS" }, { "Character", "03 / OPERATIVE" }, { "Inventory", "04 / COLLECTION" }, { "Shop", "05 / STYLE LAB" }, { "Daily", "06 / DAILY CACHE" }, { "Settings", "07 / SYSTEMS" } } do

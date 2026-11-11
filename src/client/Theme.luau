@@ -46,6 +46,7 @@ function Theme.stroke(item: Instance, color: Color3?, transparency: number?)
 	stroke.Color = color or Theme.Muted
 	stroke.Transparency = transparency or 0.8
 	stroke.Thickness = 1
+	stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 	stroke.Parent = item
 	return stroke
 end
