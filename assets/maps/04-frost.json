@@ -4,6 +4,7 @@
   "palette":{"floor":[232,244,250],"wall":[148,197,224],"accent":[35,171,226],"secondary":[121,140,244],"warm":[224,121,186]},
   "lighting":{"clock":11.2,"density":0.06,"ambient":[174,199,220],"sky":[186,221,247]},
   "hazard":"CRYO VENTS",
+  "landmarks":[{"name":"CRYSTAL FORTRESS","p":[0,37,-10]},{"name":"WEST RIDGE","p":[-95,29,0]},{"name":"EAST RIDGE","p":[95,29,0]}],
   "spawns":[[-110,26,-85],[-80,26,-85],[-110,26,85],[-80,26,85],[110,26,-85],[80,26,-85],[110,26,85],[80,26,85],[-23,26,-85],[23,26,-85],[-23,26,-55],[23,26,-55],[-23,26,55],[23,26,55],[-23,26,85],[23,26,85]],
   "weapons":[[-95,24,0],[95,24,0],[0,24,-70],[0,24,70]],
   "geometry":[
@@ -15,6 +16,8 @@
     {"op":"bridge","name":"FractureBridge","group":"Collapse","a":[-95,20,0],"b":[0,20,0],"width":11,"material":"Ice","color":"secondary"},
     {"op":"bridge","a":[0,20,0],"b":[95,20,0],"width":11,"material":"Ice","color":"secondary"},
     {"op":"crystals","locations":[[-95,21,-24],[-95,21,24],[95,21,-24],[95,21,24],[-11,21,-28],[11,21,28]],"color":"accent"},
+    {"op":"crystals","locations":[[-115,21,-98],[-75,21,-98],[115,21,98],[75,21,98],[-115,21,98],[115,21,-98]],"color":"secondary"},
+    {"op":"grid","group":"Decor","name":"FortressFin","size":[2,12,2],"x":[-11,11],"z":[-10,10],"y":38,"color":"floor","material":"Ice"},
     {"op":"grid","name":"CryoBunker","size":[12,7,9],"x":[-95,95],"z":[-48,48],"y":25,"color":"floor","material":"Snow"},
     {"op":"grid","name":"IceCell","group":"Destructibles","size":[6,4,7],"x":[-23,23],"z":[-30,30],"y":23.5,"color":"wall","material":"Ice"},
     {"op":"box","name":"FortressDeck","size":[26,2,24],"p":[0,32,0],"color":"wall","material":"Ice"},

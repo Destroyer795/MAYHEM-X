@@ -73,6 +73,11 @@ function WorldPresentation.step(self: any, state: any)
 	if not camera then return end
 	local low = self.preferences.graphics == "Low" or (self.preferences.graphics == "Auto" and (UserInputService.TouchEnabled or camera.ViewportSize.X < 760))
 	local map = state.map
+	local world = workspace:FindFirstChild("MayhemWorld")
+	local art = if world then world:FindFirstChild("ArtDirection") else nil
+	local telemetry = if art then art:FindFirstChild("HubTelemetry", true) else nil
+	local caption = if telemetry then telemetry:FindFirstChild("Caption", true) :: TextLabel? else nil
+	if caption then caption.Text = state.queueCount .. " QUEUED / " .. #Players:GetPlayers() .. " ONLINE / " .. string.upper(state.phase) end
 	local inArena = state.alive and state.phase ~= "Results"
 	local profile, mapId = lobbyLight, "Lobby"
 	if map and inArena then

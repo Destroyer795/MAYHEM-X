@@ -6,6 +6,7 @@ local shared = ReplicatedStorage.Mayhem.Shared
 local Catalog = require(shared.MapCatalog)
 local MapRules = require(shared.MapRules)
 local Config = require(shared.Config)
+local Geometry = require(shared.Geometry)
 local Maps = {}
 Maps.__index = Maps
 
@@ -64,6 +65,12 @@ function Maps.load(self: any, id: string)
 	for _, part in nextMap.Decor:GetChildren() do
 		if part:IsA("BasePart") then part:SetAttribute("MayhemDetail", true); if part.Name:find("Halo") then part:SetAttribute("QualityTier", 2) end end
 	end
+	for _, landmark in info.landmarks do
+		local position = Vector3.new(table.unpack(landmark.p))
+		local target = Vector3.new(0, position.Y, 0)
+		if Vector3.new(position.X, 0, position.Z).Magnitude < 1 then target += Vector3.new(0, 0, 1) end
+		Geometry.sign(nextMap.Decor, CFrame.lookAt(position, target), Vector3.new(11, 2.5, 0.2), landmark.name, info.name, Color3.fromRGB(table.unpack(info.palette.accent)))
+	end
 	for _, frame in points(nextMap.WeaponSpawns) do
 		local pad = Instance.new("Part")
 		pad.Name = "AmmoCache"
@@ -98,6 +105,10 @@ function Maps.load(self: any, id: string)
 	end
 	world:SetAttribute("ActiveMap", id)
 	world:SetAttribute("MapGeneration", self.generation)
+	local partCount = 0
+	for _, item in world:GetDescendants() do if item:IsA("BasePart") then partCount += 1 end end
+	world:SetAttribute("WorldPartCount", partCount)
+	assert(partCount <= 720, "Arena and hub exceeded the world part budget")
 	return spawns
 end
 

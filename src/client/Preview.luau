@@ -46,7 +46,7 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 			Geometry.part(world, "Cell", Vector3.new(0.6, 1, 0.9), frame * CFrame.new(0, -0.8, 0.2), color)
 		end
 	else
-		Geometry.figure(world, CFrame.new(), color, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders)
+		Geometry.figure(world, CFrame.new(), color, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders, kind == "victory")
 		Geometry.ring(world, "Dais", CFrame.new(0, -3.6, 0), 2.6, 12, color)
 	end
 end
@@ -63,7 +63,7 @@ function Preview.map(self: any, id: string)
 	self.world = world
 	for _, entry in definition.preview do
 		Geometry.part(world, "Terrain", Vector3.new(table.unpack(entry.size)) * 0.04,
-			CFrame.new(Vector3.new(table.unpack(entry.p)) * 0.04) * CFrame.Angles(0, math.rad(entry.yaw), 0), Color3.fromRGB(table.unpack(entry.color)))
+			CFrame.new(Vector3.new(table.unpack(entry.p)) * 0.04) * CFrame.Angles(0, math.rad(entry.yaw), 0) * CFrame.Angles(entry.pitch, 0, 0), Color3.fromRGB(table.unpack(entry.color)))
 	end
 	self.frame.BackgroundColor3 = Color3.fromRGB(table.unpack(definition.lighting.sky))
 	self.camera.CFrame = CFrame.lookAt(Vector3.new(11, 10, -13), Vector3.new(0, 0.7, 0))

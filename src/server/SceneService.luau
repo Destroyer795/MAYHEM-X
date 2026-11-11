@@ -67,6 +67,15 @@ function Scene.decorate()
 	station(hub, Vector3.new(28, 36, 244), "STYLE LAB", "COMPLIMENTARY SESSION STYLES", "Shop", magenta)
 	station(hub, Vector3.new(-28, 36, 218), "DAILY CACHE", "SESSION COSMETIC TRIAL", "Daily", purple)
 	station(hub, Vector3.new(0, 36, 249), "SYSTEMS", "AUDIO / GRAPHICS / CAMERA", "Settings", cyan)
+	station(hub, Vector3.new(-28, 36, 248), "FRONTIERS", "EXPLORE / VOTE / DEPLOY", "Maps", color("Gold"))
+	local telemetry = Geometry.sign(hub, CFrame.new(0, 40, 213) * CFrame.Angles(0, math.pi, 0), Vector3.new(14, 2.5, 0.3), "LAST SIGNAL", "WAITING FOR CONTENDERS", cyan)
+	telemetry.Name = "HubTelemetry"
+	for _, side in { -1, 1 } do
+		detail(hub, "GardenBed", Vector3.new(4, 0.6, 6), CFrame.new(side * 33, 32.2, 231), color("Panel"))
+		for index = -1, 1 do
+			detail(hub, "GardenLeaf", Vector3.new(0.6, 3 + math.abs(index), 1.5), CFrame.new(side * 33 + index, 34, 231) * CFrame.Angles(0, index * 0.5, index * 0.25), Color3.fromRGB(63, 156, 121))
+		end
+	end
 
 	Lighting.ClockTime = 13.5
 	Lighting.Brightness = 2.5

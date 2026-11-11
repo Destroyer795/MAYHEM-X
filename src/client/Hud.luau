@@ -295,7 +295,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.resultPreview.frame.Visible = self.results.Visible and not compact
 	self.resultRows.Size = UDim2.fromScale(if compact then 0.84 else 0.57, 0.37)
 	if self.resultPreview.frame.Visible then
-		self.resultPreview:show("operative", style.operative, style.skin)
+		self.resultPreview:show(if state.result and state.result.winnerId == Players.LocalPlayer.UserId then "victory" else "operative", style.operative, style.skin)
 		self.resultPreview:step(preferences.reducedMotion)
 	else self.resultPreview:hide() end
 	self.menus:render(state, elapsed, preferences, style)

@@ -82,6 +82,26 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $projectRoot 'assets/map
             default { throw "Unsupported map command: $($command.op)" }
         }
     }
+    $platforms = @($parts | Where-Object { $_.group -in @('Solid','Ice') -and $_.size[0] -ge 26 -and $_.size[2] -ge 24 -and $_.size[1] -le 3 })
+    foreach ($deck in $platforms) {
+        $x=$deck.p[0]; $y=$deck.p[1]; $z=$deck.p[2]; $sx=$deck.size[0]; $sz=$deck.size[2]
+        foreach ($side in @(-1,1)) {
+            Add-MapPart 'EdgeCladding' @($sx,0.7,0.32) @($x,($y+0.7),($z+$side*($sz/2+0.05))) 0 'Decor' 'wall' 'Metal'
+            Add-MapPart 'EdgeCladding' @(0.32,0.7,$sz) @(($x+$side*($sx/2+0.05)),($y+0.7),$z) 0 'Decor' 'wall' 'Metal'
+            Add-MapPart 'NavigationInlay' @(([math]::Min(16,$sx*0.45)),0.12,0.25) @($x,($y+$deck.size[1]/2+0.08),($z+$side*($sz/2-0.8))) 0 'Decor' 'accent' 'Neon'
+        }
+    }
+    if ($map.id -eq 'Skyline') {
+        foreach ($building in @($parts | Where-Object { $_.name -match 'Building_' })) {
+            foreach ($level in @(0.25,0.5,0.75)) {
+                foreach ($side in @(-1,1)) {
+                    $y=$building.p[1]-$building.size[1]/2+$building.size[1]*$level
+                    Add-MapPart 'FacadeWindow' @(42,1.1,0.12) @($building.p[0],$y,($building.p[2]+$side*29.07)) 0 'Decor' 'accent' 'Glass'
+                    Add-MapPart 'FacadeWindow' @(0.12,1.1,42) @(($building.p[0]+$side*29.07),$y,$building.p[2]) 0 'Decor' 'secondary' 'Glass'
+                }
+            }
+        }
+    }
     foreach ($spawn in $map.spawns) {
         $floor = @($parts | Where-Object { $_.group -in @('Solid','Ice') -and [math]::Abs($spawn[0]-$_.p[0]) -le $_.size[0]/2 -and [math]::Abs($spawn[2]-$_.p[2]) -le $_.size[2]/2 -and ($_.p[1]+$_.size[1]/2) -lt $spawn[1] } | Sort-Object { $_.p[1]+$_.size[1]/2 } -Descending | Select-Object -First 1)
         if ($floor.Count -ne 1) { throw "$($map.id) spawn has no support: $spawn" }
@@ -143,8 +163,8 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $projectRoot 'assets/map
         }
         $writer.WriteEndElement(); $writer.WriteEndElement(); $writer.WriteEndDocument()
     } finally { $writer.Dispose() }
-    $preview=@($parts | Where-Object { $_.group -in @('Solid','Destructibles') -and $_.size[1] -gt 0.5 } | Select-Object -First 110 | ForEach-Object { [pscustomobject]@{size=$_.size; p=$_.p; color=$_.color; yaw=$_.yaw} })
-    $catalog.Add([pscustomobject]@{id=$map.id; name=$map.name; subtitle=$map.subtitle; strategy=$map.strategy; palette=$map.palette; lighting=$map.lighting; preview=$preview; hazard=$map.hazard; bounds=145; ceiling=85})
+    $preview=@($parts | Where-Object { $_.group -ne 'Duel' -and $_.size[1] -gt 0.5 -and $_.name -notmatch '^(Stair|SpiralStep)_' } | Select-Object -First 110 | ForEach-Object { [pscustomobject]@{size=$_.size; p=$_.p; color=$_.color; yaw=$_.yaw; pitch=(Property $_ 'pitch' 0)} })
+    $catalog.Add([pscustomobject]@{id=$map.id; name=$map.name; subtitle=$map.subtitle; strategy=$map.strategy; palette=$map.palette; lighting=$map.lighting; preview=$preview; landmarks=$map.landmarks; hazard=$map.hazard; bounds=145; ceiling=85})
     $reports.Add([pscustomobject]@{id=$map.id; partCount=$parts.Count; spawnCount=$map.spawns.Count; weaponCount=$map.weapons.Count; source=$file.Name; templateSha256=(Get-FileHash -LiteralPath (Join-Path $output "Maps/$($map.id).rbxmx") -Algorithm SHA256).Hash.ToLowerInvariant()})
 }
 if ($catalog.Count -lt 1) { throw 'No authored maps found' }

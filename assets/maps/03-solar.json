@@ -4,6 +4,7 @@
   "palette":{"floor":[232,183,109],"wall":[188,127,74],"accent":[41,154,230],"secondary":[255,210,94],"warm":[255,161,57]},
   "lighting":{"clock":16.1,"density":0.065,"ambient":[199,169,137],"sky":[246,204,143]},
   "hazard":"ION STORM",
+  "landmarks":[{"name":"THE HELIOS GATE","p":[0,42,-3]},{"name":"BURIED GALLERY","p":[0,19,70]},{"name":"ION CHANNEL","p":[0,18,-87]}],
   "spawns":[[-88,26,-85],[-42,26,-85],[-88,26,-45],[-42,26,-45],[88,26,-85],[42,26,-85],[88,26,-45],[42,26,-45],[-88,26,85],[-42,26,85],[-88,26,45],[-42,26,45],[88,26,85],[42,26,85],[88,26,45],[42,26,45]],
   "weapons":[[-65,24,-65],[65,24,-65],[-65,24,65],[65,24,65]],
   "geometry":[
@@ -25,6 +26,10 @@
     {"op":"stairs","p":[50,8,-18],"steps":18,"rise":0.75,"run":2.8,"width":9,"color":"wall"},
     {"op":"grid","name":"GatePylon","size":[4,24,4],"x":[-12,12],"z":[0],"y":32,"color":"wall","material":"Slate"},
     {"op":"box","name":"GateLintel","size":[30,4,5],"p":[0,44,0],"color":"secondary","material":"Marble"},
+    {"op":"grid","group":"Decor","name":"GateGlyph","size":[2,1,0.18],"x":[-12,-6,0,6,12],"z":[-2.6],"y":44,"color":"accent","material":"Neon"},
+    {"op":"grid","group":"Decor","name":"MesaStratum","size":[81,1.1,70.2],"x":[-65,65],"z":[-65,65],"y":12,"color":"floor","material":"Sand"},
+    {"op":"grid","group":"Decor","name":"MesaStratum","size":[81,1.1,70.2],"x":[-65,65],"z":[-65,65],"y":16,"color":"secondary","material":"Sand"},
+    {"op":"grid","group":"Decor","name":"StormConductor","size":[2,17,2],"x":[-10,10],"z":[-68],"y":17,"color":"accent","material":"Metal"},
     {"op":"box","group":"Decor","name":"GateEnergy","size":[0.35,18,0.4],"p":[-9,32,-2.5],"color":"accent","material":"Neon"},
     {"op":"grid","name":"Ruins","size":[10,6,12],"x":[-72,72],"z":[-65,65],"y":24.5,"color":"wall","material":"Slate"},
     {"op":"grid","group":"Destructibles","name":"SolarCell","size":[6,4,6],"x":[-56,56],"z":[-65,65],"y":23.5,"color":"accent","material":"Metal"},
