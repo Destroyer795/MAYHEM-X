@@ -43,7 +43,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	layout.Padding = UDim.new(0, 8)
 	layout.Parent = nav
 	for index, definition in { { "Deploy", "01 / PLAY" }, { "Maps", "02 / ARENAS" }, { "Character", "03 / OPERATIVE" }, { "Inventory", "04 / COLLECTION" }, { "Shop", "05 / STYLE LAB" }, { "Daily", "06 / DAILY CACHE" }, { "Settings", "07 / SYSTEMS" } } do
-		local item = Theme.button(nav, definition[1], definition[2], UDim2.new(), UDim2.fromOffset(145, 36), function() self:open(definition[1]) end, true)
+		local item = Theme.button(nav, definition[1], definition[2], UDim2.new(), UDim2.fromOffset(145, 44), function() self:open(definition[1]) end, true)
 		item.LayoutOrder = index
 		self.navigation[definition[1]] = item
 	end
@@ -123,8 +123,8 @@ function Menus.new(parent: Instance, callbacks: any)
 
 	local inventory = page("Inventory")
 	Theme.text(inventory, "Title", "COLLECTION", UDim2.new(), UDim2.new(1, 0, 0, 40), 28, Theme.Ink, true)
-	self.rifleTab = Theme.button(inventory, "Rifle", "VECTOR-18", UDim2.fromOffset(0, 50), UDim2.new(0.24, 0, 0, 34), function() self.weapon = 1 end, true)
-	self.bladeTab = Theme.button(inventory, "Blade", "RIFT BLADE", UDim2.new(0.26, 0, 0, 50), UDim2.new(0.24, 0, 0, 34), function() self.weapon = 2 end, true)
+	self.rifleTab = Theme.button(inventory, "Rifle", "VECTOR-18", UDim2.fromOffset(0, 50), UDim2.new(0.24, 0, 0, 44), function() self.weapon = 1 end, true)
+	self.bladeTab = Theme.button(inventory, "Blade", "RIFT BLADE", UDim2.new(0.26, 0, 0, 50), UDim2.new(0.24, 0, 0, 44), function() self.weapon = 2 end, true)
 	self.skinButtons = {}
 	for index, entry in Visuals.Skins do
 		local item = Theme.button(inventory, entry.id, entry.name, UDim2.fromOffset(0, 96 + (index - 1) * 46), UDim2.new(0.5, -8, 0, 44), function() self.draftSkin = entry.id end, true)
@@ -184,11 +184,11 @@ function Menus.new(parent: Instance, callbacks: any)
 	self.confirm.Visible = false
 	Theme.text(self.confirm, "Title", "ADD AURUM TO YOUR COLLECTION?", UDim2.fromScale(0.1, 0.22), UDim2.fromScale(0.8, 0.15), 26, Theme.Ink, true)
 	Theme.text(self.confirm, "Scope", "45 earned session credits. Cosmetic only.\nYour collection and balance reset after leaving this server.", UDim2.fromScale(0.1, 0.4), UDim2.fromScale(0.8, 0.18), 16, Theme.Muted)
-	self.confirmBuy = Theme.button(self.confirm, "Confirm", "SPEND 45 CREDITS", UDim2.fromScale(0.1, 0.66), UDim2.fromScale(0.8, 0.1), function()
+	self.confirmBuy = Theme.button(self.confirm, "Confirm", "SPEND 45 CREDITS", UDim2.fromScale(0.1, 0.66), UDim2.new(0.8, 0, 0, 46), function()
 		self.confirm.Visible = false
 		callbacks.purchase("Aurum")
 	end)
-	Theme.button(self.confirm, "Cancel", "CANCEL", UDim2.fromScale(0.1, 0.8), UDim2.fromScale(0.8, 0.1), function() self.confirm.Visible = false end, true)
+	Theme.button(self.confirm, "Cancel", "CANCEL", UDim2.fromScale(0.1, 0.8), UDim2.new(0.8, 0, 0, 46), function() self.confirm.Visible = false end, true)
 	self:open("Deploy")
 	return self
 end
@@ -254,12 +254,12 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	local compact = width < 640
 	local short = height < 540
 	self.logo.TextSize = if compact then 21 else 26
-	self.closeButton.Size = UDim2.fromOffset(if compact then 100 else 130, 32)
+	self.closeButton.Size = UDim2.fromOffset(if compact then 100 else 130, 44)
 	self.closeButton.Position = UDim2.new(1, if compact then -116 else -154, 0, 18)
 	self.nav.Position = UDim2.fromOffset(24, 78)
-	self.nav.Size = UDim2.new(1, -48, 0, 38)
-	self.content.Position = UDim2.fromOffset(24, 128)
-	self.content.Size = UDim2.new(1, -48, 1, -176)
+	self.nav.Size = UDim2.new(1, -48, 0, 46)
+	self.content.Position = UDim2.fromOffset(24, 136)
+	self.content.Size = UDim2.new(1, -48, 1, -184)
 	for name, area in self.pages do
 		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 520 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Inventory" then 470 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then 470 else 420
 		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))

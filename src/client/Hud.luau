@@ -28,8 +28,8 @@ function Hud.new(callbacks: any)
 	self.kills = Theme.text(self.header, "Kills", "0 KILLS", UDim2.fromScale(0.72, 0.12), UDim2.fromScale(0.26, 0.72), 15, Theme.White, true)
 	self.phase = Theme.text(self.root, "Mode", "LAST SIGNAL / THE COLLAPSE", UDim2.new(0.5, -200, 0, 72), UDim2.fromOffset(400, 22), 10, Theme.Muted)
 	self.phase.TextXAlignment = Enum.TextXAlignment.Center
-	self.menuButton = Theme.button(self.root, "Menu", "MX", UDim2.fromOffset(12, 14), UDim2.fromOffset(44, 36), function() self:toggleMenu() end)
-	self.cameraButton = Theme.button(self.root, "Camera", "CAM", UDim2.new(1, -58, 0, 14), UDim2.fromOffset(46, 36), callbacks.camera, true)
+	self.menuButton = Theme.button(self.root, "Menu", "MX", UDim2.fromOffset(12, 14), UDim2.fromOffset(44, 44), function() self:toggleMenu() end)
+	self.cameraButton = Theme.button(self.root, "Camera", "CAM", UDim2.new(1, -58, 0, 14), UDim2.fromOffset(46, 44), callbacks.camera, true)
 	self.vitals = Theme.frame(self.root, "Vitals", UDim2.new(0, 18, 1, -142), UDim2.fromOffset(240, 124), Theme.Void, 0.04)
 	Theme.corner(self.vitals)
 	Theme.stroke(self.vitals)
@@ -77,11 +77,11 @@ function Hud.new(callbacks: any)
 	local feedLayout = Instance.new("UIListLayout")
 	feedLayout.Padding = UDim.new(0, 5)
 	feedLayout.Parent = self.feed
-	self.lobby = Theme.frame(self.root, "HubStatus", UDim2.fromOffset(16, 84), UDim2.fromOffset(250, 112), Theme.Void, 0.05)
+	self.lobby = Theme.frame(self.root, "HubStatus", UDim2.fromOffset(16, 84), UDim2.fromOffset(250, 128), Theme.Void, 0.05)
 	Theme.stroke(self.lobby, Theme.Purple)
 	self.lobbyTitle = Theme.text(self.lobby, "Title", "SIGNAL HUB", UDim2.fromOffset(12, 8), UDim2.new(1, -24, 0, 25), 16, Theme.White, true)
 	self.lobbyStatus = Theme.text(self.lobby, "Status", "", UDim2.fromOffset(12, 38), UDim2.new(1, -24, 0, 24), 11, Theme.Metal)
-	Theme.button(self.lobby, "Deploy", "OPEN DEPLOYMENT", UDim2.fromOffset(12, 73), UDim2.new(1, -24, 0, 28), function() self:openPage("Matchmaking") end)
+	Theme.button(self.lobby, "Deploy", "OPEN DEPLOYMENT", UDim2.fromOffset(12, 73), UDim2.new(1, -24, 0, 44), function() self:openPage("Matchmaking") end)
 	self.mobile = Theme.frame(self.root, "TouchCombat", UDim2.new(1, -184, 0.35, 0), UDim2.fromOffset(172, 180), nil, 1)
 	self.fireButton = Theme.button(self.mobile, "Attack", "FIRE", UDim2.fromOffset(104, 0), UDim2.fromOffset(64, 64), nil)
 	self.fireButton.InputBegan:Connect(function(input: InputObject)
@@ -204,6 +204,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.kills.Text = state.kills .. " KILLS"
 	self.kills.TextSize = if compact then 10 else 15
 	self.phase.Text = (if map.duel then "FINAL SHOWDOWN" else string.upper(state.phase)) .. " / " .. map.name
+	if self.touch and (self.announcementUntil or 0) > os.clock() then self.phase.Text = self.announcementTitle.Text end
 	self.phase.TextColor3 = Theme.White
 	self.phase.TextStrokeColor3 = Theme.Void
 	self.phase.TextStrokeTransparency = 0.2
@@ -265,7 +266,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.feed.Position = if topPanels then (if size.Y < 500 then UDim2.new(0.5, -120, 0, 102) else UDim2.fromOffset(12, 236)) else UDim2.new(1, -310, 0, 108)
 	self.announcement.Size = UDim2.fromOffset(math.min(370, size.X - 32), 70)
 	self.announcement.Position = UDim2.new(0.5, -math.min(370, size.X - 32) / 2, 0, if self.touch then 236 else 108)
-	self.announcement.Visible = not overlay and (self.announcementUntil or 0) > os.clock()
+	self.announcement.Visible = not overlay and not self.touch and (self.announcementUntil or 0) > os.clock()
 	self.lobby.Visible = not state.alive and not overlay and state.phase ~= "Results"
 	self.lobbyTitle.Text = if state.queued then "QUEUED / LAST SIGNAL" else "SIGNAL HUB"
 	self.lobbyStatus.Text = state.queueCount .. " QUEUED / " .. #Players:GetPlayers() .. " IN SERVER"

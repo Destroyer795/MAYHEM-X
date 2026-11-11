@@ -152,6 +152,7 @@ stateRemote.OnClientEvent:Connect(function(nextState: any)
 	end
 	if nextState.roundId ~= state.roundId or not nextState.alive then firing = false end
 	state = nextState
+	camera.reloadUntil = os.clock() + nextState.combat.reloadRemaining
 	receivedAt = os.clock()
 end)
 presentationRemote.OnClientEvent:Connect(function(snapshot: any)
@@ -201,6 +202,7 @@ effectRemote.OnClientEvent:Connect(function(kind: string, data: any)
 		effects:play(kind, data)
 		if kind == "Shot" then
 			audio:play("Shot", data.from, data.userId)
+			if data.userId == Players.LocalPlayer.UserId then camera.kickUntil = os.clock() + 0.1 end
 			if data.impact then audio:play("Impact", data.to, data.userId) end
 		elseif kind == "Slash" then audio:play("Slash", data.at.Position, data.userId)
 		elseif kind == "Pulse" then audio:play("Repulse", data.at)
@@ -239,10 +241,10 @@ RunService.Heartbeat:Connect(function(dt: number)
 			awaiting = true
 			presentationRemote:FireServer("Preferences", values)
 		end
-		preferences.audioStatus = audio:status() .. "\nOriginal tracks need manual upload before music can play."
+		preferences.audioStatus = audio:status() .. (if (audio.root:GetAttribute("MusicConfigured") or 0) < 10 then "\nRemaining original tracks need manual upload." else "\nRun the client audio check for upload permissions.")
 		hud:render(state, now - receivedAt, preferences, style)
 		worldPresentation:step(state)
-		audio:update(hud:blocked(), state)
+		audio:update(state)
 	end
 end)
 hud:render(state, 0, preferences, style)

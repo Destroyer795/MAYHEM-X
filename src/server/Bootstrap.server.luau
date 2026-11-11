@@ -35,4 +35,4 @@ RunService.Heartbeat:Connect(function(dt: number)
 		matches:tick(math.min(elapsed, 1))
 	end
 end)
-print("MAYHEM X Phase 1 loaded. Queue at least two players to start a round.")
+print("MAYHEM X Premium loaded. Queue two or more players and vote for an arena.")

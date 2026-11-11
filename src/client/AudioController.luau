@@ -59,6 +59,7 @@ function Audio.play(self: any, cue: string, position: Vector3?, emitterId: numbe
 	if not self.lastCue[key] then self.cueKeys += 1 end
 	if self.cueKeys > 512 then self.lastCue = {}; self.cueKeys = 1 end
 	self.lastCue[key] = os.clock()
+	if cue == "Shot" or cue == "Shield" or cue == "MeleeHit" or cue == "Repulse" then self.combatUntil = os.clock() + 8 end
 	local carrier: Part? = nil
 	if position then
 		carrier = Instance.new("Part")
@@ -114,7 +115,7 @@ function Audio.music(self: any, cue: string)
 	if not sound.Looped then sound.Ended:Once(function() if self.loop == sound then self.loop = nil end; sound:Destroy() end) end
 end
 
-function Audio.update(self: any, menu: boolean, state: any)
+function Audio.update(self: any, state: any)
 	local mute = if self.preferences.muted then 0 else 1
 	self.groups.Music.Volume = self.preferences.music * mute
 	self.groups.Ambience.Volume = self.preferences.music * mute
@@ -122,10 +123,11 @@ function Audio.update(self: any, menu: boolean, state: any)
 	self.groups.UI.Volume = self.preferences.ui * mute
 	local mapId = if state.map then state.map.id else "Collapse"
 	local resultCue = if state.result and state.result.winnerId == Players.LocalPlayer.UserId then "Victory" else "Defeat"
-	local context = if state.phase == "Results" and state.inMatch and state.result and state.result.winnerId then resultCue elseif state.map and state.map.duel and state.alive then "Showdown" elseif state.phase == "Active" and state.alive then mapId elseif menu or state.phase ~= "Active" then "Lobby" else "Combat"
-	if context == self.context then return end
-	self.context = context
-	self:music(context)
+	local context = if state.phase == "Results" and state.inMatch and state.result and state.result.winnerId then resultCue elseif state.map and state.map.duel and state.alive then "Showdown" elseif state.phase == "Active" and state.alive then (if os.clock() < (self.combatUntil or 0) then "Combat" else mapId) else "Lobby"
+	if context ~= self.context then self.context = context; self:music(context) end
+	local scene = mapId .. state.phase .. tostring(state.alive) .. tostring(state.map and state.map.duel)
+	if scene == self.scene then return end
+	self.scene = scene
 	if self.ambience then self.ambience:Destroy(); self.ambience = nil end
 	for _, sound in self.environmental do sound:Destroy() end
 	self.environmental = {}

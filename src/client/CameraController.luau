@@ -3,6 +3,7 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local Workspace = game:GetService("Workspace")
 local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visuals)
+local Config = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Config)
 local CameraController = {}
 CameraController.__index = CameraController
 
@@ -139,8 +140,12 @@ function CameraController.step(self: any, dt: number, slot: number)
 	if self.slot ~= slot or self.skin ~= self.preferences.skin or not self.viewmodel then self:makeViewmodel(slot) end
 	self.viewmodel.Parent = if firstPerson then camera else nil
 	if firstPerson then
-		local swing = math.max(0, (self.swingUntil or 0) - os.clock())
-		self.viewmodel:PivotTo(camera.CFrame * CFrame.Angles(0, 0, swing * 1.2))
+		local now = os.clock()
+		local swing = if self.preferences.reducedMotion then 0 else math.max(0, (self.swingUntil or 0) - now)
+		local kick = if self.preferences.reducedMotion then 0 else math.max(0, (self.kickUntil or 0) - now) * 2
+		local reload = math.clamp(((self.reloadUntil or 0) - now) / Config.Rifle.ReloadTime, 0, 1)
+		local tilt = if self.preferences.reducedMotion then 0 else math.sin(reload * math.pi) * 0.7
+		self.viewmodel:PivotTo(camera.CFrame * CFrame.new(0, -tilt * 0.2, kick) * CFrame.Angles(tilt * 0.2, 0, swing * 1.2 + tilt))
 	end
 end
 

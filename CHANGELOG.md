@@ -2,6 +2,8 @@
 
 ## 2026-11-11: Premium worlds and audio, in development
 
+Touch navigation, weapon tabs, return controls and purchase confirmation now have larger targets. Mobile chaos notices use the header ticker to avoid covering combat buttons. First-person weapons animate accepted shots and reloads without changing camera aim, with reduced-motion support. Combat music changes independently from map ambience. Added 81 game-configuration reference checks; the full structural pass now reports 1,592 passes and zero failures, with native-tool and Studio categories still skipped.
+
 The manual-upload audio pack now uses stereo 44.1 kHz PCM. Note/chord envelopes and loop edges are smoothed, and the percussion phase is continuous within each hit. All twenty-nine files pass format, level, edge and checksum checks (174 assertions). No listening review or Roblox upload/playback test has been performed.
 
 Checked the offline map writer against Rojo's reflection patches and XML color encoder. Templates now emit canonical `size`, packed `Color3uint8`, `shape` and `formFactorRaw` properties. Rebuilt all five templates and repeated the physical-map and place-integrity checks. This improves format compatibility but does not replace a Studio import test.

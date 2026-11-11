@@ -43,9 +43,20 @@ Check-Mayhem ($remoteNames.Count -eq 4) 'Four protocol RemoteEvents'
 $declaredActions = [regex]::Match($protocolText, 'Action = table\.freeze\(\{([^}]+)\}').Groups[1].Value
 $actionNames = @([regex]::Matches($declaredActions, '\b(\w+)\s*=\s*"(\w+)"') | ForEach-Object { $_.Groups[1].Value })
 $sourceFiles = @(Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src'),(Join-Path $projectRoot 'tests') -Recurse -Filter '*.luau' -File) + @(Get-Item -LiteralPath (Join-Path $projectRoot 'build/generated/MapCatalog.luau'))
+$gameConfigText = [IO.File]::ReadAllText((Join-Path $projectRoot 'src/shared/Config.luau'))
+$gameConfigGroups = @{}
+foreach ($section in [regex]::Matches($gameConfigText,'(\w+)\s*=\s*table\.freeze\(\{([^}]+)\}')) {
+    $gameConfigGroups[$section.Groups[1].Value] = @([regex]::Matches($section.Groups[2].Value,'\b(\w+)\s*=') | ForEach-Object { $_.Groups[1].Value })
+}
 foreach ($file in $sourceFiles) {
     $source = [IO.File]::ReadAllText($file.FullName)
     Check-Mayhem ($source.StartsWith('--!strict')) "Strict Luau directive: $($file.Name)"
+    if ($source -match 'local Config = require\([^\r\n]*(?:\.Config\)|WaitForChild\("Config"\))') {
+        foreach ($reference in [regex]::Matches($source,'\bConfig\.(\w+)\.(\w+)')) {
+            $group=$reference.Groups[1].Value; $field=$reference.Groups[2].Value
+            Check-Mayhem ($gameConfigGroups.ContainsKey($group) -and $gameConfigGroups[$group] -contains $field) "Game configuration reference: $($file.Name)/$group.$field"
+        }
+    }
     foreach ($reference in [regex]::Matches($source, 'Protocol\.Remote\.(\w+)')) {
         Check-Mayhem ($remoteNames -contains $reference.Groups[1].Value) "Remote reference: $($file.Name)/$($reference.Groups[1].Value)"
     }
