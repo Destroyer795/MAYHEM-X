@@ -82,7 +82,11 @@ function Presentation.start(profiles: any)
 		record.tokens, record.requestAt = tokens, now
 		if not allowed or type(command) ~= "string" or #command > 12 then return end
 		if command == "Request" then send(player, nil); return end
-		if command == "Preferences" then profiles:update(player, payload); send(player, "Preferences accepted."); return end
+		if command == "Preferences" then
+			local accepted = profiles:update(player, payload)
+			send(player, if accepted then "Preferences accepted." else "Preferences rejected. Try again after loading.")
+			return
+		end
 		if command == "Purchase" then
 			local item = if type(payload) == "string" then Visuals.skin(payload) else nil
 			if not item or item.source ~= "purchase" then send(player, "Unknown purchase."); return end

@@ -2,6 +2,8 @@
 
 ## 2026-11-11: Premium worlds and audio, in development
 
+Preference saving now refuses to write after a failed initial load, validates the request shape and waits for an in-progress save during disconnect flushing. Studio settings remain explicitly session-only. Audio routing adds positional waterfall loops, a quiet hub bed, result stingers, bounded cue-history storage and visible preload counters. DataStore behavior and actual Roblox playback are still pending runtime acceptance.
+
 Integration review corrected biased tie selection, throttled repeated ballot changes and continued shrinking/damage on the duel deck. Added oriented-box checks for the generated collision geometry, including all eighty spawn supports, body/head clearance, weapon/duel support and rotation matrices. All 2,201 physical-map assertions passed. The default build now targets the Premium filename, preserving earlier places. Generated catalog compilation is included when the optional Luau tools are available. New tie/duel Luau cases are included but remain unexecuted here.
 
 Arena art now includes district machinery, layered desert strata and glyphs, nineteen jungle palms, glacier fins/crystals, city facade bands and a distant skyline. Shared platform cladding and short navigation inlays remain nonphysical. In-world landmark signs use the same map catalog as previews. The hub gains a live queue display, map terminal and planted beds; showcase armor and a victory pose use original geometry. Templates range from 132 to 286 parts, below the 500-part template cap. Offline build and 1,510 structural checks passed; appearance, traversal and performance still require Studio.

@@ -3,6 +3,7 @@ local SoundService = game:GetService("SoundService")
 local ContentProvider = game:GetService("ContentProvider")
 local TweenService = game:GetService("TweenService")
 local Debris = game:GetService("Debris")
+local Players = game:GetService("Players")
 local Config = require(game:GetService("ReplicatedStorage").Mayhem.Shared.AudioConfig)
 local Audio = {}
 Audio.__index = Audio
@@ -14,7 +15,7 @@ function Audio.new(preferences: any)
 	local spatial = Instance.new("Folder")
 	spatial.Name = "MayhemSpatialAudio"
 	spatial.Parent = workspace
-	local self: any = setmetatable({ preferences = preferences, root = root, spatial = spatial, groups = {}, context = "", loop = nil, ambience = nil, activeVoices = 0, lastCue = {}, fetch = {}, failures = {} }, Audio)
+	local self: any = setmetatable({ preferences = preferences, root = root, spatial = spatial, groups = {}, context = "", loop = nil, ambience = nil, environmental = {}, activeVoices = 0, lastCue = {}, cueKeys = 0, fetch = {}, failures = {} }, Audio)
 	for _, name in { "Music", "Ambience", "Effects", "UI" } do
 		local group = Instance.new("SoundGroup")
 		group.Name = name
@@ -40,6 +41,9 @@ function Audio.status(self: any): string
 	local configured, loaded, failed = 0, 0, 0
 	for _, name in { "Lobby", "Collapse", "Jungle", "Solar", "Frost", "Skyline", "Combat", "Showdown", "Victory", "Defeat" } do if Config.Uploads[name] ~= "" then configured += 1 end end
 	for _, uri in Config.Builtins do if self.fetch[uri] == "Success" then loaded += 1 elseif self.failures[uri] then failed += 1 end end
+	self.root:SetAttribute("BuiltinsReady", loaded)
+	self.root:SetAttribute("BuiltinsFailed", failed)
+	self.root:SetAttribute("MusicConfigured", configured)
 	return string.format("BUILT-INS %d/6 READY, %d FAILED / MUSIC %d/10 CONFIGURED", loaded, failed, configured)
 end
 
@@ -52,6 +56,8 @@ function Audio.play(self: any, cue: string, position: Vector3?, emitterId: numbe
 	if position and camera and (position - camera.CFrame.Position).Magnitude > 160 then return false end
 	local key = cue .. tostring(emitterId or 0)
 	if os.clock() - (self.lastCue[key] or -math.huge) < (if cue == "Hover" then 0.09 else 0.04) then return false end
+	if not self.lastCue[key] then self.cueKeys += 1 end
+	if self.cueKeys > 512 then self.lastCue = {}; self.cueKeys = 1 end
 	self.lastCue[key] = os.clock()
 	local carrier: Part? = nil
 	if position then
@@ -99,12 +105,13 @@ function Audio.music(self: any, cue: string)
 	sound.Name = cue
 	sound.SoundId = uri
 	sound.Volume = 0
-	sound.Looped = true
+	sound.Looped = cue ~= "Victory" and cue ~= "Defeat"
 	sound.SoundGroup = self.groups.Music
 	sound.Parent = self.root
 	sound:Play()
 	TweenService:Create(sound, TweenInfo.new(0.8), { Volume = 0.6 }):Play()
 	self.loop = sound
+	if not sound.Looped then sound.Ended:Once(function() if self.loop == sound then self.loop = nil end; sound:Destroy() end) end
 end
 
 function Audio.update(self: any, menu: boolean, state: any)
@@ -114,22 +121,41 @@ function Audio.update(self: any, menu: boolean, state: any)
 	self.groups.Effects.Volume = self.preferences.sound * mute
 	self.groups.UI.Volume = self.preferences.ui * mute
 	local mapId = if state.map then state.map.id else "Collapse"
-	local context = if state.map and state.map.duel then "Showdown" elseif state.phase == "Active" and state.alive then mapId elseif menu or state.phase ~= "Active" then "Lobby" else "Combat"
+	local resultCue = if state.result and state.result.winnerId == Players.LocalPlayer.UserId then "Victory" else "Defeat"
+	local context = if state.phase == "Results" and state.inMatch and state.result and state.result.winnerId then resultCue elseif state.map and state.map.duel and state.alive then "Showdown" elseif state.phase == "Active" and state.alive then mapId elseif menu or state.phase ~= "Active" then "Lobby" else "Combat"
 	if context == self.context then return end
 	self.context = context
 	self:music(context)
 	if self.ambience then self.ambience:Destroy(); self.ambience = nil end
-	if state.phase == "Active" and state.alive and Config.Ambience[mapId] then
+	for _, sound in self.environmental do sound:Destroy() end
+	self.environmental = {}
+	if context == "Lobby" or (state.phase == "Active" and state.alive and Config.Ambience[mapId]) then
 		local sound = Instance.new("Sound")
 		sound.Name = "MapAmbience"
-		sound.SoundId = Config.Builtins[Config.Ambience[mapId]]
-		sound.Volume = if mapId == "Jungle" then 0.025 else 0.035
+		sound.SoundId = Config.Builtins[if context == "Lobby" then "Wind" else Config.Ambience[mapId]]
+		sound.Volume = if context == "Lobby" then 0.012 elseif mapId == "Jungle" then 0.018 else 0.035
 		sound.PlaybackSpeed = if mapId == "Frost" then 0.65 elseif mapId == "Skyline" then 1.2 else 0.85
 		sound.Looped = true
 		sound.SoundGroup = self.groups.Ambience
 		sound.Parent = self.root
 		if not self.failures[sound.SoundId] then sound:Play() end
 		self.ambience = sound
+	end
+	if mapId == "Jungle" and state.alive and state.phase == "Active" and not (state.map and state.map.duel) then
+		local world = workspace:FindFirstChild("MayhemWorld")
+		local arena = if world then world:FindFirstChild("ActiveArena") else nil
+		if arena then
+			for _, part in arena:GetDescendants() do
+				if part:IsA("BasePart") and part.Name:match("^Waterfall_") then
+					local sound = Instance.new("Sound")
+					sound.Name, sound.SoundId, sound.Looped = "Cascade", Config.Builtins.Water, true
+					sound.RollOffMinDistance, sound.RollOffMaxDistance, sound.Volume = 10, 85, 0.09
+					sound.SoundGroup, sound.Parent = self.groups.Ambience, part
+					if not self.failures[sound.SoundId] then sound:Play() end
+					table.insert(self.environmental, sound)
+				end
+			end
+		end
 	end
 end
 
