@@ -1,77 +1,85 @@
 # Changelog
 
-## 2026-11-11: Premium worlds and audio, in development
-
-The place now includes a daylight Collapse editor preview, sourced from the same physical template. The preserved startup builder replaces the preview before creating the hub and active map, so combat does not run on duplicate geometry. Earlier place files remain unchanged.
-
-Touch navigation, weapon tabs, return controls and purchase confirmation now have larger targets. Mobile chaos notices use the header ticker to avoid covering combat buttons. First-person weapons animate accepted shots and reloads without changing camera aim, with reduced-motion support. Combat music changes independently from map ambience. Added 81 game-configuration reference checks; the full structural pass now reports 1,592 passes and zero failures, with native-tool and Studio categories still skipped.
-
-The manual-upload audio pack now uses stereo 44.1 kHz PCM. Note/chord envelopes and loop edges are smoothed, and the percussion phase is continuous within each hit. All twenty-nine files pass format, level, edge and checksum checks (174 assertions). No listening review or Roblox upload/playback test has been performed.
-
-Checked the offline map writer against Rojo's reflection patches and XML color encoder. Templates now emit canonical `size`, packed `Color3uint8`, `shape` and `formFactorRaw` properties. Rebuilt all five templates and repeated the physical-map and place-integrity checks. This improves format compatibility but does not replace a Studio import test.
-
-Preference saving now refuses to write after a failed initial load, validates the request shape and waits for an in-progress save during disconnect flushing. Studio settings remain explicitly session-only. Audio routing adds positional waterfall loops, a quiet hub bed, result stingers, bounded cue-history storage and visible preload counters. DataStore behavior and actual Roblox playback are still pending runtime acceptance.
-
-Integration review corrected biased tie selection, throttled repeated ballot changes and continued shrinking/damage on the duel deck. Added oriented-box checks for the generated collision geometry, including all eighty spawn supports, body/head clearance, weapon/duel support and rotation matrices. All 2,201 physical-map assertions passed. The default build now targets the Premium filename, preserving earlier places. Generated catalog compilation is included when the optional Luau tools are available. New tie/duel Luau cases are included but remain unexecuted here.
-
-Arena art now includes district machinery, layered desert strata and glyphs, nineteen jungle palms, glacier fins/crystals, city facade bands and a distant skyline. Shared platform cladding and short navigation inlays remain nonphysical. In-world landmark signs use the same map catalog as previews. The hub gains a live queue display, map terminal and planted beds; showcase armor and a victory pose use original geometry. Templates range from 132 to 286 parts, below the 500-part template cap. Offline build and 1,510 structural checks passed; appearance, traversal and performance still require Studio.
-
-Premium client integration adds light menu surfaces, blue/violet branding, five geometry-based arena previews, eligible map ballots, earned-credit purchase confirmation, session profile values and debounced validated preference synchronization. The combat HUD now shows Aegis charge, zone warnings, map/chaos status and touch ultimate controls. Map lighting and sparse weather are client-specific, with a bounded nonphysical zone outline and reduced-motion/quality controls. Combat audio now follows authoritative events with spatial sources. Added Studio client reference and asset-preload checks; these have not executed here. Offline packaging and 1,134 structural checks passed before this milestone commit.
-
-Created branch `feature/premium-worlds-audio` from `58429c5`, tagged the baseline and archived 50 source/build files under `build/backups/premium-start-58429c5.zip`. Added a dependency-free authored map compiler that emits physical Roblox XML templates and a shared catalog. The new Collapse template includes sixteen supported insertion points, four weapon locations, a tower/vault layout, destructible cover, an outer collapse bridge, hazards and duel geometry. Map round assignment is the next integration step. The existing builds are preserved. Available checks passed; Studio physics and native Luau/Rojo checks remain pending.
-
-All five physical templates now package. Round integration adds eligible-player voting with randomized ties, map cleanup/cloning, per-map spawn assignment, shrinking safe zones, pulsed map hazards, Low Gravity/Shield Drought chaos, moving-platform carry, destructible cover, ammo caches and a final two-survivor deck. Aegis is a server-authoritative defensive ultimate charged by three credited eliminations. Original weapon damage/ammo/cooldown tuning, FIFO selection, character loading and Repulse are preserved. Preservation checks now protect five complete baseline files, fourteen unchanged methods and camera aiming; match/map integration and environmental hit hooks are explicit reviewed changes. Runtime verification is still pending.
-
-At the user's request, original music is prepared for manual Roblox upload. A deterministic PowerShell/.NET synthesizer produces ten original scores/stingers and nineteen effects, with PCM/header/level/hash tests. The central AudioConfig records each replacement field and verified built-in URI references from Roblox's Core-Scripts. Built-in SFX and ambience are configured; experience-specific playback remains untested. Music Upload fields deliberately stay empty until the original files are uploaded and permitted. The controller reports preload failures, caps voices, supports spatial effects, crossfades music and separates music/effects/UI volumes. No numeric audio IDs were invented.
-
-## 2026-11-11: Visual implementation, Studio acceptance pending
+## 2026-11-11: Premium milestone, Studio acceptance pending
 
 ### Implemented
 
-- Navy, purple, cyan and magenta art direction; orbital lobby canopy, large branding, operative display and five 3D menu consoles.
-- District-specific machinery, reactor housings, spawn beacons, bridge conduits, restrained bloom, atmospheric haze, local orbit animation and sparse built-in particles.
-- Deployment, live matchmaking, mode briefing, operative and weapon previews, inventory, complimentary Style Lab, daily session cache, settings, insertion/countdown and victory/defeat/draw screens.
-- Responsive HUD gauges, reload and Repulse clocks, weapon slots, eliminations, alive count, timer, hit/damage feedback and readable inactive ultimate/chaos status. Small-screen menu content scrolls, collection targets are 44 pixels high and gamepad navigation has explicit focus.
-- Separate, rate-limited session cosmetics: three signal-plate profiles, two starter finishes, two free shop claims and a daily Prism trial. Selections/claims are server-validated and do not change stats. They are not saved after leaving.
-- Bounded Beam tracers, muzzle flashes, sparkle impacts, sword Trails, Repulse segments, occluded shield Highlights and elimination effects. Mutation/ultimate/destruction renderers have no live gameplay triggers.
-- Functional Music/Ambience/Effects/UI SoundGroups and playback routes. No licensed sound IDs are configured, so the build is silent.
-- Auto/High/Low graphics, reduced effects/motion and camera/FOV/audio controls. World decoration has a 720-part runtime cap, VFX have 36 full-quality or 12 reduced roots, waves have per-kind caps and cleanup uses Debris. These caps are not measured performance results.
+- Five original physical arenas from independent authored JSON layouts and one reusable compiler: The Collapse, Neon Jungle, Solar Wasteland, Frostbite and Skyline Zero. Each has sixteen spawns, four ammo-cache locations, traversal/cover, a hazard and final duel geometry.
+- Daylight editor preview and hub, restrained per-map lighting, light UI surfaces, blue/cyan/violet identity and warm gold accents. Added district machinery, nineteen jungle palms, desert strata/glyphs, snow/crystals, city facades/skyscraper silhouettes, route signs and a live hub queue panel.
+- Eligible FIFO map ballots, uniform random ties/no-vote selection, round-to-map assignment, safe template swaps and cleanup. Added server hazards, moving-platform carry, collapsible links, destructible cover, ammo caches, shrinking zones, Low Gravity/Shield Drought and final-two duel transfer/zone.
+- Server-authoritative Aegis, charged by credited eliminations. Existing rifle, blade, Repulse, damage/ammo tuning, sixteen-player FIFO roster, serialized spawning and round state machine retained with explicit environmental integration hooks.
+- Main deployment, matchmaking, five geometry previews/ballots, mode briefing, operative profiles, collection/weapon previews, cosmetic shop with confirmation, daily cache, audio/graphics/camera settings, loading/countdown, combat HUD and victory/defeat/draw results.
+- HUD charge/cooldowns, map/zone/reality status, touch ultimate and mobile announcements. Bounded combat effects, accepted-shot/reload viewmodel motion, showcase/victory pose, reduced motion and graphics settings.
+- Session-only earned credits, XP/level and six cosmetic finishes. Purchases/claims and daily bonus are server-validated and idempotent. No paid advantage, purchase API or Robux transaction.
+- Validated preference hydration, debounced acknowledgements and production DataStore save path. Failed initial loads block writes, and disconnect/shutdown waits for pending save work. Studio remains session-only; inventory/economy/progression are not persisted.
+- Centralized audible built-in cues/ambience with source-backed URIs, preload diagnostics, spatial voices/waterfalls, independent volumes, mute, cleanup and music-context crossfades.
+- At the user's request, ten original scores/stingers and nineteen synthesized effects prepared for manual upload. Stereo 44.1 kHz PCM files have level/edge/header/hash checks and a route manifest. Music upload IDs remain empty.
+- Offline Premium place, original audio ZIP, complete Git bundle and machine-readable verification/storage/commit report. No new installed dependency.
 
-### Preservation and Git
+### Executed verification
 
-The initial project was inspected, backed up to `build/backups/phase1-source-baseline.zip` with 33 entries and recorded in commit `9172422`. Seven complete gameplay files remain byte-for-byte unchanged: MatchService, CombatService, ArenaService, Config, Rules, Protocol and the original RulesCases. The camera aiming function is also unchanged. Art runs after the original arena generator, without moving combat geometry. Cosmetic parts and arena decorations are excluded from combat raycasts.
+| Check | Result |
+| --- | --- |
+| Offline build | Succeeded, 36 mapped Luau sources plus physical templates/editor preview |
+| Normal verification | 1,808 structural checks passed, zero failed, three categories skipped |
+| Generated geometry | 2,201 assertions passed; five maps, all eighty spawns supported/clear, cache/duel support, matrices, budgets and hashes |
+| Original WAVs | 174 format/level/edge/checksum/route assertions passed for 29 files |
+| Loader and interface | Ten loader assertions and 72 callback/navigation/network/audio checks passed |
+| Preservation | Five complete Phase 1 files, fourteen methods and camera aiming preserved against 9172422 |
+| Strict required-tools gate | Failed because portable Luau and Rojo are unavailable; recorded separately |
+| Git bundle / old builds | Packaging verifies bundle integrity and compares both earlier places to the premium-start archive |
+| Studio / listening / devices | Not executed; installed Studio is running, but native control pipe and browser host are unavailable |
 
-Local history uses `.version-control/`, because the sandbox allowed initialization but denied subsequent `.git/` writes. Use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. No remote history could be fetched, and nothing was pushed. No existing commits were amended or replaced. The final file inventory and all hashes/messages are in `build/git-report.json`; `build/MAYHEM-X-visual.bundle` provides offline history migration.
+The final report has exact artifact hashes, file sizes and worktree state. Structural counts overlap subgroup checks. No test result above establishes Roblox runtime correctness.
 
-| Commit | Milestone | Executed verification |
-| --- | --- | --- |
-| `9172422` | Inspected Phase 1 baseline | 179 structural checks, ten loader assertions |
-| `ce64018` | Local Git wrapper and artifact isolation | 181 structural checks |
-| `2806dae` | Lobby/arena art and lighting | 206 checks, gameplay preservation |
-| `39f641b` | Session cosmetics and 3D preview components | 237 checks, gameplay preservation |
-| `7bf98bc` | Connected menus, HUD, graphics and audio routing | 262 checks, 34 interface checks |
-| `12f2d52` | Combat VFX and shield feedback | 262 checks, 37 interface checks |
-| `58b4565` | Reticle alignment, idempotency and client test module | 267 checks, preserved camera aim |
-| `578eaf0` | Small-screen controls and automatic effect quality | 267 checks, preservation and wiring |
+Review corrected biased tie selection, stopped vote spam broadcasts, continued duel zone damage after transfer, protected failed preference loads, fixed a reload configuration reference and emitted canonical serialized part properties. Broader actual gameplay bugs remain unknown until Studio testing.
 
-The final documentation/acceptance commit follows these milestones and is included in the generated Git report. Each code milestone was reviewed with a Git diff and available checks before committing. Runtime verification was explicitly pending in the commits.
+### Git milestones
 
-### Executed checks and limits
+Baseline: `58429c5`. Branch: `feature/premium-worlds-audio`. The source and two previous place files were archived in `build/backups/premium-start-58429c5.zip` before changes. All commits are local; nothing was pushed.
 
-Commands use `powershell.exe -NoProfile -ExecutionPolicy Bypass -File`:
+| Commit | Change |
+| --- | --- |
+| a9bce17 | Reusable physical templates and Collapse |
+| 5f5a7b9 | Neon Jungle |
+| 2909c0f | Solar Wasteland |
+| 8fff2e4 | Frostbite and lower-route exits |
+| 7e51a6d | Skyline Zero |
+| a2fef45 | Map voting, round assignment and arena systems |
+| 3a424cf | Validated preferences and earned session cosmetics |
+| b0dc978 | Original audio pack and audible fallback routes |
+| d0a7e6b | Bright navigation, ballots and combat telemetry |
+| 893b89f | Arena landmarks, facade detail and daylight hub |
+| 11ba347 | Balanced ballots, spawn and duel validation |
+| 272a949 | Preference save protection and spatial contexts |
+| 754f7dd | Canonical Roblox XML export fields |
+| 5b3d710 | 44.1 kHz score mastering and smooth edges |
+| 2973f73 | Touch targets, weapon feedback and audio transitions |
+| b2bfb17 | Daylight editor preview |
+| 0e9d6b9 | Controller confirmation focus and protection label |
+| e695e5f | Command/effect/audio replacement wiring checks |
+| 4f2b8e7 | Modal input refresh and compact combat labels |
 
-- `scripts/build.ps1 -Offline -OutputName MAYHEM-X-Visual.rbxlx`: succeeded, packaging 27 mapped Luau sources. The original `MAYHEM-X.rbxlx` was preserved.
-- `scripts/verify.ps1`: 267 checks passed, zero failed, three categories skipped. Executed subgroups include ten project-loader assertions, source/aim preservation, Git wrapper validation and 37 interface/wiring checks. XML source round-tripping, checksums, module paths, remotes, PowerShell syntax and the character policy passed.
-- Native build and `scripts/verify.ps1 -RequireTools`: blocked/failing because portable Rojo and Luau are unavailable. The required-tools report is saved separately under build/. No tool dependencies were installed.
-- Git origin inspection through `ls-remote`: network connection failed. Local origin configuration and commit history were checked successfully.
-- Server/client Studio test modules are included, but neither ran here. The computer/browser automation host is unavailable, and the existing Studio executable returned access denied. Luau compilation, pure Luau test execution and Rojo-native validation were not performed.
+Each code milestone ran its available offline/static checks and diff review before committing. Luau/native/Studio checks remained explicitly pending. The final documentation/package commit, full commit messages and changed-file inventory are included in `build/premium-git-report.json`.
 
-Known runtime bugs remain unknown until Studio testing. Actual lighting, traversal, avatar load timing, menu layout, mobile/controller input, multiplayer HUD synchronization, cosmetic replication, VFX cleanup and frame-time/network budgets require the acceptance checklist in DEVELOPMENT.md. Design caps and static checks do not verify runtime performance.
+### Known limitations and next steps
 
-The project remains in the supplied workspace because `C:\MAYHEM-X` is outside the writable sandbox. A normal checkout can be cloned from the bundle when the destination is available; see SETUP.md.
+The project has not passed Studio import, Script Analysis, multiplayer, actual UI rendering, movement/physics, asset loading, listening or device/performance acceptance. Follow DEVELOPMENT.md with two clients, then up to eight local clients; separately schedule an authorized sixteen-player test. Do not mark the milestone production-ready until that gate passes.
+
+Upload the original WAVs manually and set AudioConfig fields only after moderation and experience permission checks. Built-in cue paths have source evidence but current-client playback is unverified. No full music plays with empty Uploads fields.
+
+DataStore saving is implemented for preferences only and is untested in production. Session inventory, currency, daily guard and progression reset on reconnect. Cross-server preference conflicts use last successful writer behavior.
+
+Evolution paths, stolen powers, grenades, combos/finishers, quests, persistent economy/inventory/progression and additional reality mutations remain outside this implementation. PowerSteal is only an unused audio route. Procedural geometry/previews and viewmodel motion do not imply custom uploaded character animations.
+
+## 2026-11-11: Earlier visual milestone
+
+The previous visual build added the original orbital hub, single Collapse presentation, responsive menus/HUD, session cosmetics and bounded VFX. Its offline build and 267 structural checks passed, with native/Studio tests pending and audio routes empty. It is preserved as `build/MAYHEM-X-Visual.rbxlx`, with its source/history in the earlier visual bundle.
+
+Earlier commits: 9172422 (inspected Phase 1 baseline), ce64018 (local Git/artifact isolation), 2806dae (lobby/arena art), 39f641b (cosmetics/previews), 7bf98bc (menus/HUD), 12f2d52 (VFX), 58b4565 (reticle/idempotency), 578eaf0 (small-screen tuning), 58429c5 (acceptance/handoff documentation).
+
+Git metadata uses `.version-control/` because protected `.git/` writes are denied. Origin remains `https://github.com/Destroyer795/MAYHEM-X.git`. No remote history was fetched and no existing commits were rewritten.
 
 ## 2026-11-11: Original Phase 1 baseline
 
-Implemented the procedural Collapse map, lobby and FIFO queue, 16-slot roster, two-player minimum, round state machine, serialized character loading, countdown/protection, server rifle/melee/Repulse, health/shields, finite ammunition/reloading, kills, results and disconnect cleanup. Offline packaging and structural checks passed. Studio gameplay was not verified from this environment.
-
-Reality events, evolution, stolen powers, ultimates, destructibles, collapsing structures, shrinking zones, weapon drops, final-duel transitions, grenades, combos/finishers, extra maps, persistent progression/cosmetics, currency, quests and DataStore saving remain unimplemented. The inactive duel deck/drop markers are map preparation. No Phase 2 gameplay was enabled during the visual milestone. Complete Studio visual and multiplayer acceptance before proceeding.
+Implemented the procedural Collapse/lobby, FIFO queue, sixteen-slot roster, two-player minimum, round state machine, serialized character loading, countdown/protection, server rifle/melee/Repulse, health/shields, finite ammo/reloads, kills, results and disconnect cleanup. Initial offline packaging and structural checks passed. Runtime gameplay was not verified here. The original `build/MAYHEM-X.rbxlx` and `build/backups/phase1-source-baseline.zip` remain preserved.

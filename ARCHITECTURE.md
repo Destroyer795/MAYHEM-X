@@ -1,67 +1,77 @@
 # Architecture
 
-## Files and ownership
+## Source ownership
 
-| Path | Responsibility |
+| Location | Responsibility |
 | --- | --- |
-| `default.project.json` | Authoritative Rojo instance tree, service properties, shared modules, four remotes and Studio test module |
-| `src/server/Bootstrap.server.luau` | Manual character lifecycle, server startup, player connections, 10 Hz simulation |
-| `src/server/MatchService.luau` | FIFO queue, 16-slot roster, phase transitions, serialized spawn requests, eliminations, session stats and results |
-| `src/server/CombatService.luau` | Server loadouts, movement plausibility, shots, raycasts, melee, shield absorption/regen, reloads and Repulse |
-| `src/server/ArenaService.luau` | Anchored procedural lobby, four zones, central tower, bridges, vault, future drop markers and isolated duel deck |
-| `src/server/Equipment.luau` | Original weapon geometry attached to R6/R15 hands |
-| `src/server/SceneService.luau` | Additive art direction, lobby consoles, non-colliding arena decoration and lighting |
-| `src/server/PresentationService.luau` | Session cosmetics, entitlement validation, daily UTC guard, signal plates and a separate request limiter |
-| `src/shared/Config.luau` | Frozen match, balance, security and simulation settings |
-| `src/shared/Protocol.luau` | Remote, action and phase names |
-| `src/shared/Rules.luau` | Pure damage, magazine transfer, token bucket, round outcome and transition rules |
-| `src/shared/Visuals.luau` | Art tokens, style/operative catalog, feature availability, VFX budgets and empty licensed-audio routes |
-| `src/shared/StyleRules.luau` | Pure selection, ownership, duplicate-claim and daily-session rules |
-| `src/shared/Geometry.luau` | Shared original signs, segmented rings, decorative parts and operative figures |
-| `src/client/Bootstrap.client.luau` | Inputs, snapshot consumption and client controller wiring |
-| `src/client/CameraController.luau` | Shoulder/first-person aim, wall collision, mouse, touch, controller and procedural viewmodel |
-| `src/client/Hud.luau` | Combat gauges, slots, feed, hit/damage feedback, insertion and results |
-| `src/client/Menus.luau` | Deployment, matchmaking, mode briefing, operative/weapon selection, inventory, shop, daily and settings navigation |
-| `src/client/Theme.luau`, `Preview.luau` | Shared UI components and disposable ViewportFrame WorldModels |
-| `src/client/WorldPresentation.luau` | Client orbit animation, sparse particles and graphics quality |
-| `src/client/AudioController.luau` | Music/ambience/UI/effects routing and licensed-asset playback infrastructure |
-| `src/client/Effects.luau` | Bounded Beams, Trails, particle bursts, waves and occluded Highlights |
-| `tests/` | Reusable rule assertions, optional CLI runner and explicit Studio checks |
-| `scripts/` | Local setup, native/offline build, local serve and verification |
+| `default.project.json` | Rojo tree, four gameplay remotes, Presentation remote, shared modules, tests, map templates and daylight editor preview |
+| `src/server/MatchService.luau` | FIFO queue, sixteen-slot rounds, serialized spawning, lifecycle, attribution and results |
+| `src/server/CombatService.luau` | Server movement checks, weapons, ammo, health/shields, Repulse and Aegis |
+| `src/server/MapService.luau` | Voting, active template, spawn assignment, hazards, cover, movers, zone and duel |
+| `src/server/ArenaService.luau` | Preserved Phase 1 procedural builder/lobby spawn transforms |
+| `src/server/SceneService.luau` | Daylight hub, original signs/showcase/consoles and baseline lighting |
+| `src/server/PresentationService.luau` | Server-owned session cosmetics, claims, purchases and daily guard |
+| `src/server/PreferenceService.luau` | Validated preferences, production DataStore saving and derived session profile/wallet |
+| `src/server/Equipment.luau` | Original held weapon geometry |
+| `src/shared/` | Frozen balance/protocol, pure gameplay/style/map/preference rules, audio config, art tokens and geometry |
+| `src/client/Hud.luau`, `Menus.luau` | Combat telemetry, results and functional navigation/collection/settings/ballots |
+| `src/client/Theme.luau`, `Preview.luau` | Typography, colors, 8/16/24 spacing tokens, rounded buttons, state/hover feedback and disposable geometry previews |
+| `src/client/CameraController.luau` | Both perspectives, input/aim, camera obstruction and cosmetic viewmodel animation |
+| `src/client/Effects.luau` | Bounded tracers, Trails, waves, bursts and occluded Highlights |
+| `src/client/WorldPresentation.luau` | Map lighting, local orbit/weather, quality controls and nonphysical zone outline |
+| `src/client/AudioController.luau` | Preload diagnostics, SoundGroups, spatial effects, ambience and score transitions |
+| `assets/maps/*.json`, `scripts/maps.ps1` | Five authored layouts and shared physical-template compiler |
+| `assets/audio/scorebook.json`, `scripts/audio.ps1` | Original composition/effect definitions and PCM renderer |
+| `tests/`, `scripts/` | Structural/geometry/WAV checks, Luau cases, Studio helpers, local setup/build/package |
 
-There are no required external asset files. Assets are generated from Roblox parts and built-in materials. Sparkles use Roblox's built-in texture URI. UI is built on the client; gameplay geometry and held weapons are built by the server. This phase has no persistence layer or paid content. SceneService runs after ArenaService without moving the original collision geometry. Seven original gameplay files and the camera aiming function are checked against commit `9172422`.
+Five complete baseline files, fourteen original gameplay methods and the camera aiming function are checked against `9172422`. Match/map integration, damage attribution and environmental hit hooks are reviewed changes. Startup runs the preserved arena builder, removes its superseded arena/duel geometry, decorates the hub and clones one premium map. The editor preview is removed by that startup builder.
 
-## Match lifecycle
+## Maps and lifecycle
 
 `Waiting -> Intermission -> Loading -> Countdown -> Active -> Results -> Waiting`.
 
-Intermission cancels if fewer than two players remain queued. Loading and countdown may transition to canceled results when fewer than two characters are ready. Loading has an 18-second deadline. A monotonically increasing round ID and per-player spawn serial prevent old loads from activating a player in a newer round. One loading worker per player processes the latest requested spawn. Delayed death/respawn callbacks check their player entry, spawn serial or round ID.
+The first sixteen opt-in FIFO entries enter a round; overflow keeps its order. Loading workers retain round/character serial guards. Intermission cancels below two queued players. Loading/countdown cancel safely below two ready survivors. Eliminations are idempotent. Late joins remain in the hub; eliminated players respawn there. Results return participants to the queue according to their opt-in preference. Multiple survivors at timeout draw.
 
-Selected players leave the queue, preserving their opt-in preference. Overflow players keep their FIFO order. Participants rejoin the back of the queue after results. Late joins remain in the lobby. Characters are anchored during insertion/countdown and released for the round. Both incoming damage and outgoing attacks are blocked during the two-second insertion shield. Eliminated players return to the lobby and cannot attack. Session Kills/Wins reset when leaving the server.
+Map JSON defines palette, lighting, landmarks, spawns, cache locations and geometry commands. Shared compiler operations build floors, grids, stairs, spirals, sloped bridges, palms, crystals and rings. Generated files are `build/generated/Maps/*.rbxmx`, `MapCatalog.luau` and hash/budget metadata. Catalog previews derive from physical geometry with bounded detail. Serialized fields follow [Rojo's reflection patches](https://github.com/rojo-rbx/rbx-dom/blob/master/patches/parts.yml) and [XML RGB encoding](https://github.com/rojo-rbx/rbx-dom/blob/master/rbx_xml/src/types/colors.rs).
 
-Elimination is idempotent per roster entry. Death, unexpected character removal, falling below the arena and disconnects share this path. Kills use server damage attribution, with an eight-second credit window for subsequent void deaths or disconnects. Outcome resolution runs after the simulation's combat/death processing. Zero survivors and multi-survivor timeouts award no win. A single survivor at timeout wins. Results can be entered only once, preventing duplicate wins.
+Templates live in ServerStorage. Each has Solid, Decor, Destructibles, Collapse, Motion, Hazards, Ice and Duel groups, sixteen spawn CFrames, four cache CFrames and two duel CFrames. Runtime adds nonphysical signs and cache prompts. Only one active map is parented under `Workspace.MayhemWorld.ActiveArena`. Swaps disconnect prompts, destroy old geometry, reset gravity/state and invalidate delayed callbacks by generation.
 
-## Network contract
+Votes count only from the upcoming FIFO roster during Waiting/Intermission. A player has one changeable ballot. Repeated votes are ignored and changes are throttled. Highest count wins; ties use a uniform random draw. No-vote rounds choose a different map where possible. Loading selects and validates the map before changing the roster; failure preserves queue order.
 
-All events live in `ReplicatedStorage.Mayhem.Remotes`.
+Environment simulation shares the existing 10 Hz tick. Movers use authored travel/period metadata and adjust accepted character positions only for server-observed riders. Cover has 76 health, disappears at zero and restores after twenty seconds when clear. Collapse links warn for three seconds before a ten-second outage. Pulsed map hazards deal server damage. Caches grant eighteen reserve rounds, capped at 108, with distance/state validation and a 24-second respawn.
 
-| Remote | Direction | Contract |
-| --- | --- | --- |
-| `Action` | Client to server | `(command, payload)`; Ready, Queue(boolean), Switch(1 or 2), Fire(unit Vector3), Melee(unit Vector3), Reload, Ability |
-| `State` | Server to one client | Phase/time, queue, local participation, alive count, kills, authoritative loadout/vitals/cooldown snapshot and optional results |
-| `Effect` | Server to clients | Accepted Shot/Slash/Pulse visuals; Hit acknowledgement only to the attacker |
-| `Feed` | Server to clients | Server-attributed elimination names and cause |
+The circular zone starts at radius 185, shrinks after 45 seconds toward 24, and deals nine damage per second outside. Low Gravity and Shield Drought alternate every 38 seconds for nine seconds. Gravity is global while that event runs. With two survivors, the server transfers them to the isolated duel deck after the configured delay (60 seconds for two-player rounds, otherwise 12). Duel protection lasts two seconds; its zone shrinks from 31 to 8 after a ten-second grace.
 
-The separate `ReplicatedStorage.Mayhem.Presentation` RemoteEvent handles Request, Select({kind, id}), Claim(styleId) and Daily. Its server-owned catalog/records cannot change combat stats or rewards. A four-request/sec, six-burst limiter bounds requests. Duplicate selections and claims do not rebuild cosmetics or mint rewards. The reply contains owned finishes, selected profile/finish, revision, daily status, next UTC reset and feedback. Daily access is guarded per player and UTC day within this server, with no persistence across reconnects. Player attributes replicate the selected style; signal plates and weapon glow are massless and excluded from collision/raycasts.
+Aegis gains 34 charge per credited elimination, capped at 100. Activation spends a full charge, restores shields, heals at most thirty health and grants 1.25 seconds of symmetric protection. Server state, movement, life and protection checks apply. Clients cannot grant charge or damage.
 
-Clients never submit damage, hit targets, ammo, cooldowns, kills or rewards. Requests share a 24/sec token bucket with a burst of 32. Ready snapshots have an additional one-second limit. Fire rate, ammo, reload state, equipment, switch delay, current character, alive state and match state are enforced on the server. Aim vectors reject non-finite components and invalid magnitudes. Shot origin comes from the server root, then a server raycast determines the hit. Melee and Repulse use server distances and line-of-sight checks.
+## Networking and trust
 
-Horizontal movement uses a server speed budget and a bounded burst allowance. Invalid movement or arena bounds violations roll back to the last accepted transform before combat is accepted. Vertical rise and arena altitude are bounded. This is baseline plausibility checking for client-owned Roblox character physics. It is not complete flight detection, lag compensation or production anticheat; adversarial and latency tests remain required.
+| Remote | Contract |
+| --- | --- |
+| Action, client to server | Original Ready, Queue(boolean), Switch(1/2), Fire/Melee(unit Vector3), Reload, Ability, plus Vote(mapId) and Ultimate |
+| State, server to client | Phase/time, queue/ballot eligibility, map/generation/votes/zone/chaos/duel, participation, vitals/loadout/charge, kills, survivors and results |
+| Effect, server to clients | Accepted Shot/Slash/Pulse/Ultimate/Destruction; Notice; private attacker hit acknowledgement |
+| Feed, server to clients | Server-attributed elimination names/cause |
+| Presentation, bidirectional | Request, Select, Claim, Daily, Purchase and Preferences; owned styles, revision, profile/settings/save status and feedback reply |
 
-The server simulates at 10 Hz and broadcasts personalized state at 2 Hz, with additional targeted state on accepted actions or damage. Clients interpolate timers locally. World decoration has a 720-part runtime ceiling. VFX are limited to 36 root objects, or 12 on reduced graphics; a root may own bounded particles or wave segments. Heavy waves are limited to four of each kind. Debris handles expiration, effects are excluded from traces and distant effects are culled. These are design caps, not measured performance results.
+Original gameplay requests share the 24/sec, burst-32 limiter. Aim components/magnitudes, server origins/raycasts, fire rate, ammo, reloads, slot, switch delay, match phase, life, range and line of sight are validated. Movement has a speed budget, bounded rise/altitude and map-dependent bounds. Invalid movement rolls back before an attack is accepted. This is baseline plausibility checking, not complete flight detection or lag compensation.
 
-UI/graphics updates run at 10 Hz. At most three nearby rings animate locally. Low quality hides secondary ring segments, stops orbit animation and ambient particles, reduces haze and disables bloom. Original collision geometry stays visible. Viewport WorldModels are destroyed when leaving their page. The only per-frame application work remains local camera/viewmodel rendering. No new server per-frame work or VFX broadcasts were added. Damage and elimination feedback derive from existing snapshots/events and replicated character deaths.
+Presentation has a separate four/sec, burst-six limiter and allowlisted catalog/fields. Currency is derived from authoritative session Kills/Wins plus daily bonus minus validated spending. Claims and purchases cannot mint duplicates or change stats. Cosmetic parts are massless/noncolliding/nonquery. Player damage credit expires eight seconds after the last actual player hit; environmental ticks do not extend it.
 
-## Future boundaries
+## Persistence and presentation
 
-Reality events, evolution, stolen powers, ultimates, destructibles, shrinking zones, weapon pickups and the final duel transition remain deferred. Mutation/ultimate/destruction VFX renderers have no live gameplay trigger. Duel geometry and four drop-point values remain inactive map preparation. Persistent inventory/progression, currency, quests, paid shop content and DataStore saving are not implemented. The current collection is session-only. No DataStore or purchase API is called. Phase 2 remains blocked on Studio acceptance of the visual milestone.
+Only preferences use `MayhemXPreferences_v1`, keyed by player ID. Loads merge allowlisted fields; saves use UpdateAsync every thirty seconds and disconnect/shutdown flushing with revision guards. Failed initial loads prevent writes to unknown saved data. Studio deliberately uses no DataStore. Load/save failure states are visible. Cross-server preference conflicts use last successful writer behavior; no session-lock economy is claimed.
+
+Inventory, daily claim guard, wallet, XP and level are server-session data. Rejoining resets them. Production DataStore operation and failure recovery have not been runtime-tested.
+
+The visual system uses clean light surfaces, blue/cyan primary actions, violet/magenta accents and gold rewards. Navy panels support HUD contrast. Menus have horizontal navigation, vertical content scrolling, compact map/shop layouts and purchase confirmation. Main mode selection honestly presents Last Signal as the available mode. Preferences hydrate from server state and synchronize after a short debounce, with acknowledgement/retry.
+
+AudioConfig owns six built-in URI references, cue tuning, ambience and twenty-nine manual-upload fields. SoundGroups separate Music, Ambience, Effects and UI; preferences control music/ambience, effects, UI and master mute. One-shot voices are distance/throttle bounded, spatial carriers are nonphysical and voices expire after at most six seconds. Score contexts crossfade; Victory/Defeat are stingers. Recent combat can replace a map score without restarting its ambience. Full music depends on verified manual uploads.
+
+## Budgets and remaining boundaries
+
+Templates contain 132 to 286 parts, capped at 500. Hub plus active arena is capped at 720. Only the active map replicates into Workspace; templates remain server-side. Streaming is disabled for these bounded arenas. Effects allow 36 roots, or 12 at reduced quality, four waves per kind, distance culling and timed cleanup. Sound voices cap at twenty. Weather stays at nine particles/sec or less, zone outlines use 16/32 segments and at most three nearby hub rings animate.
+
+UI/world updates run at 10 Hz. Camera/viewmodel work is local per-frame; server effects do not use per-frame geometry. Low/Auto quality reduces bloom, secondary rings and particles. Reduced motion stops showcase/orbit/viewmodel motion. These caps are design limits, not measured frame-time results.
+
+Power stealing, evolution paths, grenades, melee combos/finishers, quests, persistent progression/inventory/economy and additional reality events are not implemented. Future cue names do not imply those systems exist. Complete the Studio gate before expanding scope.

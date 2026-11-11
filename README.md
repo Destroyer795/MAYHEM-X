@@ -2,38 +2,47 @@
 
 **ENTER THE CHAOS. BECOME THE LEGEND.**
 
-An original 16-contender Roblox arena survival game. The Collapse connects four floating districts to a central reactor tower with a spiral ascent, bridge network and hidden lower vault. The visual milestone adds a navy, electric-purple and cyan identity, a 3D orbital lobby, district machinery, restrained atmospheric lighting and a complete presentation flow. Geometry, weapons and operative previews are procedural, with no external asset IDs.
+An original Roblox PvP survival game for up to sixteen contenders. Vote for a frontier, fight with the VECTOR-18 and Rift Blade, use Repulse, and survive the closing signal. The premium milestone adds five physical arenas, a daylight hub, brighter menus, combat feedback and an original audio pack.
 
-Phase 1 and the visual overhaul are implemented in source. Offline packaging, source preservation and interface wiring checks pass. Studio import, multiplayer gameplay, device layouts, performance, Luau compilation and Rojo-native validation remain unverified here. The visual acceptance gate is pending, and Phase 2 gameplay is not enabled.
+The source and offline place build are implemented. Structural, geometry and WAV checks pass. Luau compilation, native Rojo validation, Studio import, multiplayer behavior, rendered appearance and device performance remain unverified here. This is a development build awaiting Studio acceptance.
 
-## Open the current build
+## Open and play
 
-1. In Roblox Studio, open `build/MAYHEM-X-Visual.rbxlx`. The arena is generated when simulation starts, so the edit viewport initially has no arena. The original `build/MAYHEM-X.rbxlx` is preserved.
-2. Select **Server & Clients**, choose two clients, then start the simulation.
-3. Click **PLAY / JOIN QUEUE** in both clients. After intermission and insertion, fight to become the final survivor. The hub's 3D consoles also open deployment, collection, Style Lab, daily cache and settings.
-4. Follow the multiplayer checklist in [DEVELOPMENT.md](DEVELOPMENT.md) before approving Phase 1.
+1. Open `build/MAYHEM-X-Premium.rbxlx` in the existing Roblox Studio. A daylight Collapse editor preview is included. Startup replaces it with the hub and active arena.
+2. Start **Server & Clients** with two clients. In each client, click **PLAY / JOIN QUEUE**.
+3. Open **ARENAS**, preview a map, then vote before intermission ends. Only the first sixteen queued contenders have ballots.
+4. After insertion/countdown, fight until one survivor remains. Repeat for each map and follow [DEVELOPMENT.md](DEVELOPMENT.md).
 
-Implemented: opt-in FIFO queue, up to 16 contenders, lobby respawning, round countdowns, spawn protection, VECTOR-18 rifle, Rift Blade, Repulse, health, shields, finite ammunition, reloading, weapon switching, two camera perspectives, PC and touch controls, controller bindings, elimination feed, round results, session Kills/Wins and client settings. Timeouts with multiple survivors are draws. Queue preference carries into subsequent rounds.
+| Arena | Layout and identity |
+| --- | --- |
+| The Collapse | Four floating machinery districts, central spiral tower, bridge loop, lower vault |
+| Neon Jungle | Tropical islands, nineteen palms, waterfalls, canopy lookout and lower passages |
+| Solar Wasteland | Warm mesas, canyon routes, ancient gate, buried gallery and moving skiff |
+| Frostbite | Three snow/ice ridges, frozen crossbridges, crystal cover and elevated fortress |
+| Skyline Zero | Four roof heights, sloped skybridges, elevators, service deck and city skyline |
 
-Presentation: animated lobby rings, 3D operative/weapon previews, matchmaking and mode briefing, session inventory, three signal-plate profiles, two starter finishes, two complimentary Style Lab finishes, a daily Prism session trial, loading/countdown feedback and victory/defeat/draw screens. Cosmetics have no combat advantage and are not saved after leaving. Last Signal is the available game mode. Ultimate and chaos indicators explicitly show unavailable/stable status.
+Every template has sixteen spawns, four ammo-cache locations, cover, a hazard and a final duel deck. Server integration includes map cleanup, destructible cover, collapsing links, Low Gravity/Shield Drought events, a shrinking safe zone and the defensive Aegis ultimate. These integrations need multiplayer testing.
 
-Settings control camera, FOV, automatic/high/low graphics, effects, environment motion and audio groups. Tracers, impacts, sword Trails, Repulse waves, shield Highlights and elimination effects are bounded and cleaned up locally. Audio infrastructure is connected, but no licensed tracks or sound IDs ship, so the current game is silent.
+The FIFO queue, round transitions, serialized spawning, health/shields, ammo/reloading, kill attribution and server combat validation are retained. New map/environment hooks are explicit changes. Cosmetics never change combat stats.
 
-PC controls: WASD and jump, hold left click to attack, 1/2 weapons, R reload, Q Repulse, C camera, M menu. Touch uses Roblox movement and jump plus custom combat buttons; drag the right side to aim. Controller: RT attack, LB swap, X reload, Y Repulse, D-pad down camera, D-pad left menu. Controller menu navigation requires Studio verification.
+## Menus, collection and audio
 
-## Rebuild
+Deployment, matchmaking, map ballots, operative profiles, weapon previews, inventory, Style Lab, daily cache, settings, loading and results share one responsive interface. The HUD shows vitals, ammo, cooldowns, Aegis charge, players, kills, timer, feed and reality/zone status.
 
-From the project root in Windows PowerShell:
+Three operative profiles and six finishes are cosmetic. Two styles are free claims, Prism is a daily session trial, and Aurum costs 45 earned session credits. Eliminations earn 15 credits and wins earn 45; the daily cache adds 15. Credits, XP, level and collection reset after leaving the server. Only preferences have a production DataStore path; Studio preferences are session-only.
+
+Built-in sound cues and ambience have source-backed Roblox URIs, with client load diagnostics. Ten original scores/stingers and nineteen effects are in `build/audio/` and the audio ZIP. Music needs the manual upload and experience-permission steps in [SETUP.md](SETUP.md). No numeric asset IDs were invented, and actual playback is unverified.
+
+PC: WASD/jump, left click attack, 1/2 weapons, R reload, Q Repulse, G Aegis, C camera, M menu. Touch uses Roblox movement/jump, right-side aiming and combat buttons. Controller: RT attack, LB swap, X reload, Y Repulse, B Aegis, D-pad down camera, D-pad left menu.
+
+## Build and handoff
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1 -Offline -OutputName MAYHEM-X-Visual.rbxlx
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1 -Offline
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\package.ps1
 ```
 
-The offline builder reads the same project tree as Rojo and embeds the source into a place XML file. It supports this project's current file/property types and rejects unsupported inputs. It does not replace Rojo's API validation or Studio testing.
+The default output is the Premium place. The Phase 1 and earlier Visual places are preserved. The package command produces an audio ZIP, source/history bundle and machine-readable Git/verification report. Native build/setup and live sync are described in [SETUP.md](SETUP.md); module ownership is in [ARCHITECTURE.md](ARCHITECTURE.md); milestones and limitations are in [CHANGELOG.md](CHANGELOG.md).
 
-For the pinned local Rojo and Luau tools, installation and live sync, see [SETUP.md](SETUP.md). Architecture is in [ARCHITECTURE.md](ARCHITECTURE.md), workflow and tests in [DEVELOPMENT.md](DEVELOPMENT.md), and implemented scope and remaining work in [CHANGELOG.md](CHANGELOG.md).
-
-Local history uses `.version-control/` because this sandbox denies `.git/` writes. Use `scripts/git.ps1` for Git operations. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`; nothing was pushed. A portable history bundle and per-commit file report are generated under `build/` at handoff.
-
-The requested destination is `C:\MAYHEM-X`. This session can write only inside the supplied workspace, so the current project is at `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`. All scripts resolve their own project root and support moving the folder later. No publishing, Robux spending or credential access is required.
+Work remains in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`, the writable workspace. Scripts are relocatable to the requested `C:\MAYHEM-X` after inspecting that destination. Git history uses `.version-control/`; use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. Nothing was published or pushed, no Robux was spent, and no credentials were accessed.
