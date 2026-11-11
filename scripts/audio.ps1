@@ -6,6 +6,27 @@ $scorePath = Join-Path $projectRoot 'assets/audio/scorebook.json'
 $score = Get-Content -Raw -LiteralPath $scorePath | ConvertFrom-Json
 $stamp = (Get-FileHash -LiteralPath $scorePath -Algorithm SHA256).Hash + (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash
 $manifestPath = Join-Path $output 'manifest.json'
+$uploadedIds = @{}
+$mappingPath = Join-Path $projectRoot 'audio-upload/audio-ids.txt'
+if (Test-Path -LiteralPath $mappingPath) {
+    foreach ($line in Get-Content -LiteralPath $mappingPath) {
+        if ($line -notmatch '^(\w+)\s+([1-9]\d*)$' -or $uploadedIds.ContainsKey($Matches[1])) { throw "Invalid or duplicate audio upload entry: $line" }
+        $uploadedIds[$Matches[1]]=$Matches[2]
+    }
+}
+function Write-MayhemAudioManifest($data) {
+    $enriched = @()
+    foreach ($entry in $data.files) {
+        $item = $entry | ConvertTo-Json -Depth 4 | ConvertFrom-Json
+        $assetId = $uploadedIds[$item.id]
+        $item | Add-Member -NotePropertyName assetId -NotePropertyValue $assetId -Force
+        $item.uploadRequired = -not $assetId
+        $enriched += $item
+    }
+    $data.files=$enriched
+    $data.runtimeUploaded=(@($enriched | Where-Object uploadRequired).Count -eq 0)
+    $data | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
+}
 if (Test-Path -LiteralPath $manifestPath) {
     $prior = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
     $complete = $true
@@ -14,7 +35,7 @@ if (Test-Path -LiteralPath $manifestPath) {
         if (-not (Test-Path -LiteralPath $path)) { $complete=$false; continue }
         if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $entry.sha256) { throw "Generated audio was modified: $path. Preserve that edit before rebuilding." }
     }
-    if ($complete -and $prior.sourceStamp -eq $stamp) { Write-Output 'Original audio pack is current'; return }
+    if ($complete -and $prior.sourceStamp -eq $stamp) { Write-MayhemAudioManifest $prior; Write-Output 'Original audio pack and upload mapping are current'; return }
 }
 New-Item -ItemType Directory -Path $output -Force | Out-Null
 if (-not ('MayhemComposer' -as [type])) {
@@ -86,5 +107,5 @@ foreach ($id in $score.effects) {
     [MayhemComposer]::Effect($path,$score.sampleRate,$id)
     $entries += [ordered]@{id=$id; file=$file; kind='effect'; sha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant(); uploadRequired=$true}
 }
-[ordered]@{sourceStamp=$stamp; license=$score.license; format='Stereo PCM WAV, 44100 Hz, 16 bit'; files=$entries; runtimeUploaded=$false} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
-Write-Output "Generated $($entries.Count) original WAV files for manual Roblox audio upload"
+Write-MayhemAudioManifest ([pscustomobject][ordered]@{sourceStamp=$stamp; license=$score.license; format='Stereo PCM WAV, 44100 Hz, 16 bit'; files=$entries; runtimeUploaded=$false})
+Write-Output "Generated $($entries.Count) original WAV files with their supplied Roblox upload IDs"

@@ -33,4 +33,16 @@ $config = [IO.File]::ReadAllText((Join-Path $projectRoot 'src/shared/AudioConfig
 $uploads = [regex]::Match($config,'(?s)AudioConfig.Uploads = table.freeze\(\{(.*?)\}\)').Groups[1].Value
 foreach ($entry in $manifest.files) { if ($uploads -notmatch ('\b'+$entry.id+'\s*=')) { throw "Missing upload field: $($entry.id)" }; $checks++ }
 if ($manifest.files.Count -ne 29) { throw 'Expected ten original scores/stingers and nineteen effects' }
-Write-Output "PASS: $checks PCM, waveform, checksum and route checks for 29 original audio files (Roblox upload/playback pending)"
+$mapping = @{}
+foreach ($line in Get-Content -LiteralPath (Join-Path $projectRoot 'audio-upload/audio-ids.txt')) {
+    if ($line -notmatch '^(\w+)\s+([1-9]\d*)$') { throw "Invalid uploaded audio mapping: $line" }
+    $name=$Matches[1]; $assetId=$Matches[2]
+    if ($mapping.ContainsKey($name) -or $mapping.Values -contains $assetId) { throw "Duplicate uploaded audio route or ID: $name" }
+    $mapping[$name]=$assetId
+}
+if ($mapping.Count -ne 29) { throw 'All twenty-nine uploaded audio routes are required' }
+foreach ($entry in $manifest.files) {
+    if (-not $mapping.ContainsKey($entry.id) -or $uploads -notmatch ('\b'+$entry.id+'\s*=\s*"rbxassetid://'+$mapping[$entry.id]+'"')) { throw "Uploaded audio route differs from the supplied mapping: $($entry.id)" }
+    $checks++
+}
+Write-Output "PASS: $checks PCM, waveform, checksum and uploaded-ID route checks for 29 original audio files (static checks only)"

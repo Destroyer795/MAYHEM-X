@@ -243,7 +243,7 @@ RunService.Heartbeat:Connect(function(dt: number)
 			awaiting = true
 			presentationRemote:FireServer("Preferences", values)
 		end
-		preferences.audioStatus = audio:status() .. (if (audio.root:GetAttribute("MusicConfigured") or 0) < 10 then "\nRemaining original tracks need manual upload." else "\nRun the client audio check for upload permissions.")
+		preferences.audioStatus = audio:status() .. (if (audio.root:GetAttribute("MusicConfigured") or 0) < 10 then "\nSome soundtrack routes are unconfigured." else "\nOriginal tracks configured. Check failures in Studio Output.")
 		hud:render(state, now - receivedAt, preferences, style)
 		worldPresentation:step(state)
 		audio:update(state)

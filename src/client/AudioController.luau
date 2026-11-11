@@ -35,16 +35,23 @@ function Audio.new(preferences: any)
 end
 
 function Audio.preload(self: any, uris: { string })
-	for _, uri in uris do self.fetch[uri] = "PENDING" end
-	local ok, message = pcall(function()
-		ContentProvider:PreloadAsync(uris, function(uri: string, status: Enum.AssetFetchStatus)
-			self.fetch[uri] = status.Name
-			self.failures[uri] = if status == Enum.AssetFetchStatus.Success then nil else true
-			if self.failures[uri] then warn("MAYHEM X audio unavailable: " .. uri .. " (" .. status.Name .. ")") end
-		end)
-	end)
+	local probes, statuses = {}, {}
 	for _, uri in uris do
-		if self.fetch[uri] == "PENDING" then self.fetch[uri] = "Failure"; self.failures[uri] = true end
+		self.fetch[uri] = "PENDING"
+		local probe = Instance.new("Sound")
+		probe.Name, probe.SoundId, probe.Volume = "AudioLoadProbe", uri, 0
+		probe.Parent = self.root
+		table.insert(probes, probe)
+	end
+	local ok, message = pcall(function()
+		ContentProvider:PreloadAsync(probes, function(uri: string, status: Enum.AssetFetchStatus) statuses[uri] = status.Name end)
+	end)
+	for _, probe in probes do
+		local uri = probe.SoundId
+		self.fetch[uri] = if probe.IsLoaded then "Success" else statuses[uri] or "Failure"
+		self.failures[uri] = if probe.IsLoaded then nil else true
+		if self.failures[uri] then warn("MAYHEM X audio unavailable: " .. uri .. " (" .. self.fetch[uri] .. ")") end
+		probe:Destroy()
 	end
 	if not ok then warn("MAYHEM X audio preload did not finish: " .. tostring(message)) end
 end
@@ -58,7 +65,7 @@ function Audio.volumes(self: any)
 end
 
 function Audio.status(self: any): string
-	local configured, loaded, failed, musicReady, musicFailed = 0, 0, 0, 0, 0
+	local configured, loaded, failed, musicReady, musicFailed, effectsReady, effectsFailed = 0, 0, 0, 0, 0, 0, 0
 	for _, name in Config.Music do
 		local uri = Config.Uploads[name]
 		if uri ~= "" then
@@ -67,27 +74,34 @@ function Audio.status(self: any): string
 		end
 	end
 	for _, uri in Config.Builtins do if self.fetch[uri] == "Success" then loaded += 1 elseif self.failures[uri] then failed += 1 end end
+	for name, uri in Config.Uploads do
+		if not table.find(Config.Music, name) then
+			if self.fetch[uri] == "Success" then effectsReady += 1 elseif self.failures[uri] then effectsFailed += 1 end
+		end
+	end
 	self.root:SetAttribute("BuiltinsReady", loaded)
 	self.root:SetAttribute("BuiltinsFailed", failed)
 	self.root:SetAttribute("MusicConfigured", configured)
 	self.root:SetAttribute("MusicReady", musicReady)
 	self.root:SetAttribute("MusicFailed", musicFailed)
-	return string.format("SFX %d/6 READY, %d FAILED / MUSIC %d/10 CONFIGURED, %d READY, %d FAILED", loaded, failed, configured, musicReady, musicFailed)
+	self.root:SetAttribute("EffectsReady", effectsReady)
+	self.root:SetAttribute("EffectsFailed", effectsFailed)
+	return string.format("SFX %d/19 READY, %d FAILED / FALLBACK %d/6 / MUSIC %d/10 CONFIGURED, %d READY, %d FAILED", effectsReady, effectsFailed, loaded, configured, musicReady, musicFailed)
 end
 
 function Audio.play(self: any, cue: string, position: Vector3?, emitterId: number?): boolean
-	local uri, speed, volume = Config.effect(cue, self.failures)
+	local camera = workspace.CurrentCamera
+	if position and camera and (position - camera.CFrame.Position).Magnitude > 160 then return false end
+	if cue == "Shot" or cue == "Shield" or cue == "MeleeHit" or cue == "Repulse" then self.combatUntil = os.clock() + 8 end
+	local uri, speed, volume = Config.effect(cue, self.failures, self.fetch)
 	local isUI = Config.isUI(cue)
 	local budget = if isUI then Config.MaxVoices else Config.MaxVoices - Config.UIReserve
 	if not uri or self.activeVoices >= budget or self.preferences.muted or (if isUI then self.preferences.ui else self.preferences.sound) <= 0 then return false end
-	local camera = workspace.CurrentCamera
-	if position and camera and (position - camera.CFrame.Position).Magnitude > 160 then return false end
 	local key = cue .. tostring(emitterId or 0)
 	if os.clock() - (self.lastCue[key] or -math.huge) < (if cue == "Hover" then 0.09 else 0.04) then return false end
 	if not self.lastCue[key] then self.cueKeys += 1 end
 	if self.cueKeys > 512 then self.lastCue = {}; self.cueKeys = 1 end
 	self.lastCue[key] = os.clock()
-	if cue == "Shot" or cue == "Shield" or cue == "MeleeHit" or cue == "Repulse" then self.combatUntil = os.clock() + 8 end
 	local carrier: Part? = nil
 	if position then
 		carrier = Instance.new("Part")
@@ -106,7 +120,7 @@ function Audio.play(self: any, cue: string, position: Vector3?, emitterId: numbe
 	sound.SoundGroup = self.groups[if isUI then "UI" else "Effects"]
 	sound.RollOffMinDistance, sound.RollOffMaxDistance = 6, 120
 	sound.Parent = carrier or self.root
-	sound.Loaded:Once(function() self.fetch[uri] = "Success" end)
+	sound.Loaded:Once(function() self.fetch[uri] = "Success"; self.failures[uri] = nil end)
 	self.activeVoices += 1
 	local closed = false
 	local function cleanup()
@@ -124,11 +138,14 @@ end
 function Audio.music(self: any, cue: string)
 	self.musicSerial = (self.musicSerial or 0) + 1
 	local serial = self.musicSerial
+	if self.fading then self.fading:Destroy(); self.fading = nil end
 	if self.loop then
 		local old = self.loop
+		self.fading = old
 		TweenService:Create(old, TweenInfo.new(0.6), { Volume = 0 }):Play()
 		Debris:AddItem(old, 0.65)
 		self.loop = nil
+		task.delay(0.65, function() if self.fading == old then self.fading = nil end end)
 	end
 	local uri = Config.Uploads[cue]
 	if not uri or uri == "" or self.failures[uri] then return end
@@ -152,10 +169,10 @@ end
 function Audio.update(self: any, state: any)
 	self:volumes()
 	local mapId = if state.map then state.map.id else "Collapse"
-	local resultCue = if state.result and state.result.winnerId == Players.LocalPlayer.UserId then "Victory" else "Defeat"
-	local context = if state.phase == "Results" and state.inMatch and state.result and state.result.winnerId then resultCue elseif state.map and state.map.duel and state.alive then "Showdown" elseif state.phase == "Active" and state.alive then (if os.clock() < (self.combatUntil or 0) then "Combat" else mapId) else "Lobby"
-	if context ~= self.context then self.context = context; self:music(context) end
-	local scene = mapId .. state.phase .. tostring(state.alive) .. tostring(state.map and state.map.duel)
+	if self.roundId ~= state.roundId then self.combatUntil = 0 end
+	local context = Config.context(state, Players.LocalPlayer.UserId, os.clock() < (self.combatUntil or 0))
+	if context ~= self.context or self.roundId ~= state.roundId then self.context = context; self.roundId = state.roundId; self:music(context) end
+	local scene = mapId .. tostring(state.map and state.map.generation) .. state.phase .. tostring(state.alive) .. tostring(state.map and state.map.duel)
 	if scene == self.scene then return end
 	self.scene = scene
 	if self.ambience then self.ambience:Destroy(); self.ambience = nil end

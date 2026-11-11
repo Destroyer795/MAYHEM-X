@@ -1,5 +1,15 @@
 # Changelog
 
+## Live Studio audit and uploaded audio
+
+- Connected the official Studio MCP to the local `MAYHEM-X-Premium.rbxlx`, inspected the live service hierarchy and captured actual Collapse/menu screenshots. All five templates have sixteen spawns and four caches, but zero MeshParts. The full arena, weapon and progression transformation remains unfinished.
+- Integrated all twenty-nine user-provided original audio IDs. The requested `audio-upload/audio-ids.txt` was absent, so it was reconstructed from the supplied list using canonical cue names. PowerSteal is configured but reserved, because that gameplay is not implemented.
+- Fixed an actual runtime bug: preloading bare strings caused asset-type mismatch errors and falsely disabled valid sounds. Production and test preload paths now use Sound instances and check IsLoaded. All twenty-nine uploads and six built-in fallbacks loaded in Studio.
+- Map scores start during insertion/countdown, nearby accepted combat changes the score, showdown and result tracks follow server state, and new rounds clear combat timing. Music keeps at most a current score plus one fading predecessor. Pending/failed effects use a ready fallback. Music/effects/UI volumes and mute retain their existing server preference path.
+- Executed 11,033 server assertions, eighty actual spawn raycasts, and client checks. Two real simulated clients each passed seventy client checks and thirty-five audio loads. Queue/voting selected Jungle, real shots spent ammo, reloading restored it, and switch/melee/Repulse requests produced uploaded sounds. Both clients entered the duel; a simulated character reset exercised Victory/Defeat, lobby return and another map round. Observed music voices never exceeded two during transitions. Mute and independent volume propagation passed in both clients.
+- Recorded nonzero playback positions and loudness for live tracks/effects. This verifies engine playback in the local Studio context, not human listening quality, published-experience permissions, production persistence or sixteen-player performance.
+- Saved a live source backup for seven affected scripts under `build/backups/Studio-source-before-uploaded-audio.json`. Studio saved the local place, but Windows denied copying its open file. Earlier source/place backups remain preserved. No publishing, remote push, new dependency or Robux spending occurred.
+
 ## Premium acceptance follow-up
 
 - Backed up the accepted source and Premium place at `09d6b8a` before further edits. Original Phase 1 and Visual places remain preserved.

@@ -51,9 +51,19 @@ function Tests.audio(): number
 	for _, uri in AudioConfig.Builtins do table.insert(uris, uri) end
 	for _, uri in AudioConfig.Uploads do if uri ~= "" then table.insert(uris, uri) end end
 	local failures = {}
-	game:GetService("ContentProvider"):PreloadAsync(uris, function(uri: string, status: Enum.AssetFetchStatus)
-		if status ~= Enum.AssetFetchStatus.Success then table.insert(failures, uri .. " / " .. status.Name) end
-	end)
+	local folder = Instance.new("Folder")
+	folder.Name = "MayhemAudioCheck"
+	folder.Parent = SoundService
+	local probes = {}
+	for _, uri in uris do
+		local sound = Instance.new("Sound")
+		sound.SoundId, sound.Volume, sound.Parent = uri, 0, folder
+		table.insert(probes, sound)
+	end
+	local ok, message = pcall(function() game:GetService("ContentProvider"):PreloadAsync(probes) end)
+	for _, sound in probes do if not sound.IsLoaded then table.insert(failures, sound.SoundId) end end
+	folder:Destroy()
+	assert(ok, tostring(message))
 	assert(#failures == 0, "Unavailable audio: " .. table.concat(failures, ", "))
 	print("MAYHEM X: " .. #uris .. " audio URIs loaded. Listening, volumes and spatial acceptance still need manual checks.")
 	return #uris
