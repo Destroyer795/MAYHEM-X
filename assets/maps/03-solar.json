@@ -1,0 +1,33 @@
+{
+  "id":"Solar", "name":"SOLAR WASTELAND", "subtitle":"CANYON CIRCUIT / ANCIENT ARRAYS",
+  "strategy":"High mesas expose long lanes. Canyon floors and a buried gallery offer lower rotations. Watch the storm channel.",
+  "palette":{"floor":[232,183,109],"wall":[188,127,74],"accent":[41,154,230],"secondary":[255,210,94],"warm":[255,161,57]},
+  "lighting":{"clock":16.1,"density":0.065,"ambient":[199,169,137],"sky":[246,204,143]},
+  "hazard":"ION STORM",
+  "spawns":[[-88,26,-85],[-42,26,-85],[-88,26,-45],[-42,26,-45],[88,26,-85],[42,26,-85],[88,26,-45],[42,26,-45],[-88,26,85],[-42,26,85],[-88,26,45],[-42,26,45],[88,26,85],[42,26,85],[88,26,45],[42,26,45]],
+  "weapons":[[-65,24,-65],[65,24,-65],[-65,24,65],[65,24,65]],
+  "geometry":[
+    {"op":"box","name":"CanyonFloor","size":[240,3,230],"p":[0,7,0],"material":"Sand"},
+    {"op":"grid","name":"Mesa","size":[88,3,78],"x":[-65,65],"z":[-65,65],"y":20,"material":"Sand"},
+    {"op":"grid","name":"MesaRock","size":[80,10,70],"x":[-65,65],"z":[-65,65],"y":13,"material":"Slate","color":"wall"},
+    {"op":"bridge","a":[-65,20,-65],"b":[65,20,-65],"width":10,"color":"secondary"},
+    {"op":"bridge","a":[-65,20,65],"b":[65,20,65],"width":10,"color":"secondary"},
+    {"op":"bridge","a":[-65,20,-65],"b":[-65,20,65],"width":10,"color":"secondary"},
+    {"op":"bridge","group":"Collapse","a":[65,20,-65],"b":[65,20,65],"width":10,"color":"secondary"},
+    {"op":"stairs","p":[-18,8,30],"steps":14,"rise":1,"run":2.6,"width":9,"yaw":180,"color":"wall"},
+    {"op":"stairs","p":[18,8,-30],"steps":14,"rise":1,"run":2.6,"width":9,"color":"wall"},
+    {"op":"box","name":"MesaLanding","size":[12,2,28],"p":[-20,20,-6],"color":"wall"},
+    {"op":"box","name":"MesaLanding","size":[12,2,28],"p":[20,20,6],"color":"wall"},
+    {"op":"box","name":"AncientGate","size":[32,3,30],"p":[0,20,0],"material":"Marble","color":"secondary"},
+    {"op":"grid","name":"GatePylon","size":[4,24,4],"x":[-12,12],"z":[0],"y":32,"color":"wall","material":"Slate"},
+    {"op":"box","name":"GateLintel","size":[30,4,5],"p":[0,44,0],"color":"secondary","material":"Marble"},
+    {"op":"box","group":"Decor","name":"GateEnergy","size":[0.35,18,0.4],"p":[-9,32,-2.5],"color":"accent","material":"Neon"},
+    {"op":"grid","name":"Ruins","size":[10,6,12],"x":[-72,72],"z":[-65,65],"y":24.5,"color":"wall","material":"Slate"},
+    {"op":"grid","group":"Destructibles","name":"SolarCell","size":[6,4,6],"x":[-56,56],"z":[-65,65],"y":23.5,"color":"accent","material":"Metal"},
+    {"op":"box","name":"BuriedGalleryRoof","size":[58,2,18],"p":[0,16,78],"color":"wall","material":"Slate"},
+    {"op":"grid","name":"GalleryPillars","size":[3,8,3],"x":[-24,-8,8,24],"z":[72,84],"y":12,"color":"wall","material":"Slate"},
+    {"op":"box","group":"Motion","name":"SandSkiff","size":[14,1,12],"p":[0,10,-18],"color":"accent","material":"Metal","motion":{"travel":[0,0,36],"period":10}},
+    {"op":"box","group":"Hazards","name":"IonChannel","size":[14,4,34],"p":[0,11,-68],"color":"warm","transparency":0.7},
+    {"op":"ring","name":"GateArray","p":[0,46,0],"radius":9,"count":16,"color":"accent"}
+  ]
+}
