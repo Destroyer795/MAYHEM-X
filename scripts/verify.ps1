@@ -12,6 +12,10 @@ function Check-Mayhem {
     if ($Condition) { $passed.Add($Description) } else { $failed.Add($Description) }
 }
 $model = Get-MayhemProjectModel -ProjectRoot $projectRoot
+try {
+    & (Join-Path $projectRoot 'tests\Maps.Tests.ps1')
+    $passed.Add('Generated physical map templates, spawns and budgets')
+} catch { $failed.Add('Map templates: ' + $_.Exception.Message) }
 Check-Mayhem ($model.Config.serveAddress -eq '127.0.0.1') 'Rojo serve binds to localhost'
 $logicalPaths = @($model.Entries.LogicalPath)
 Check-Mayhem (($logicalPaths | Sort-Object -Unique).Count -eq $logicalPaths.Count) 'No duplicate instance paths'

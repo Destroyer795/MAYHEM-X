@@ -16,7 +16,7 @@
       "$className": "ReplicatedStorage",
       "Mayhem": {
         "$className": "Folder",
-        "Shared": { "$path": "src/shared" },
+        "Shared": { "$path": "src/shared", "MapCatalog": { "$path": "build/generated/MapCatalog.luau" } },
         "Presentation": { "$className": "RemoteEvent" },
         "ClientChecks": { "$path": "tests/ClientTests.luau" },
         "Remotes": {
@@ -38,6 +38,7 @@
         "StyleCases": { "$path": "tests/StyleCases.luau" }
       }
     },
+    "ServerStorage": { "$className":"ServerStorage", "MapTemplates": { "$path":"build/generated/Maps" } },
     "StarterPlayer": {
       "$className": "StarterPlayer",
       "$properties": { "CameraMinZoomDistance": 0.5, "CameraMaxZoomDistance": 16, "EnableMouseLockOption": false },

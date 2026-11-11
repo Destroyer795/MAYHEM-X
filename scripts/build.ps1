@@ -4,6 +4,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $projectRoot = Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'ProjectModel.ps1')
+& (Join-Path $PSScriptRoot 'maps.ps1')
 $model = Get-MayhemProjectModel -ProjectRoot $projectRoot
 $outputDirectory = Join-Path $projectRoot 'build'
 New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null
@@ -32,6 +33,7 @@ if (-not $Offline) {
         $writer.WriteAttributeString('referent', $Entry.Referent)
         $writer.WriteStartElement('Properties')
         $writer.WriteStartElement('string'); $writer.WriteAttributeString('name','Name'); $writer.WriteString($Entry.Name); $writer.WriteEndElement()
+        if ($Entry.XmlProperties) { foreach ($property in $Entry.XmlProperties.ChildNodes) { if ($property.GetAttribute('name') -ne 'Name') { $property.WriteTo($writer) } } }
         if ($Entry.Source) {
             $writer.WriteStartElement('ProtectedString'); $writer.WriteAttributeString('name','Source')
             $writer.WriteString([IO.File]::ReadAllText($Entry.Source)); $writer.WriteEndElement()

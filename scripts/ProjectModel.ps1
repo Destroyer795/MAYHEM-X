@@ -7,6 +7,17 @@ function Get-MayhemProjectModel {
     $entries = [Collections.Generic.List[object]]::new()
     $sourcePaths = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 
+    function Add-MayhemXml {
+        param($Item, [string]$Name, [string]$Parent, [string]$LogicalParent)
+        $logical = if ($LogicalParent) { "$LogicalParent.$Name" } else { $Name }
+        $referent = 'RBX' + ($entries.Count + 1)
+        $entries.Add([pscustomobject]@{Name=$Name; Class=$Item.GetAttribute('class'); Parent=$Parent; Referent=$referent; LogicalPath=$logical; Source=$null; Properties=$null; XmlProperties=$Item.Properties})
+        foreach ($child in $Item.SelectNodes('Item')) {
+            $childName = $child.SelectSingleNode('Properties/string[@name="Name"]').InnerText
+            Add-MayhemXml -Item $child -Name $childName -Parent $referent -LogicalParent $logical
+        }
+    }
+
     function Add-MayhemNode {
         param([string]$Name, $Node, [string]$Parent, [string]$LogicalParent)
         $source = $null
@@ -19,6 +30,11 @@ function Get-MayhemProjectModel {
             if (-not (Test-Path -LiteralPath $resolved)) { throw "Missing project path: $resolved" }
             if (Test-Path -LiteralPath $resolved -PathType Container) { $directory = $resolved }
             else {
+                if ([IO.Path]::GetExtension($resolved) -eq '.rbxmx') {
+                    $document = [xml][IO.File]::ReadAllText($resolved)
+                    Add-MayhemXml -Item $document.roblox.Item -Name $Name -Parent $Parent -LogicalParent $LogicalParent
+                    return
+                }
                 if ([IO.Path]::GetExtension($resolved) -ne '.luau') { throw "Offline builder only supports Luau source files: $resolved" }
                 $source = $resolved
                 [void]$sourcePaths.Add($source)
@@ -31,14 +47,14 @@ function Get-MayhemProjectModel {
         $referent = 'RBX' + ($entries.Count + 1)
         $entries.Add([pscustomobject]@{
             Name=$Name; Class=$class; Parent=$Parent; Referent=$referent; LogicalPath=$logical;
-            Source=$source; Properties=$(if ($properties) { $properties.Value } else { $null })
+            Source=$source; Properties=$(if ($properties) { $properties.Value } else { $null }); XmlProperties=$null
         })
         if ($directory) {
             foreach ($child in Get-ChildItem -LiteralPath $directory | Sort-Object Name) {
                 if ($child.PSIsContainer) { $childNode = [pscustomobject]@{ '$path'=$child.FullName }; $childName=$child.Name }
-                elseif ($child.Extension -eq '.luau') {
+                elseif ($child.Extension -in @('.luau','.rbxmx')) {
                     $childNode = [pscustomobject]@{ '$path'=$child.FullName }
-                    $childName = $child.Name -replace '(\.server|\.client)?\.luau$',''
+                    $childName = $child.Name -replace '(\.server|\.client)?\.luau$|\.rbxmx$',''
                 } else { throw "Unsupported file under mapped source directory: $($child.FullName)" }
                 Add-MayhemNode -Name $childName -Node $childNode -Parent $referent -LogicalParent $logical
             }

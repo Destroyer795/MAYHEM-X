@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-11: Premium worlds and audio, in development
+
+Created branch `feature/premium-worlds-audio` from `58429c5`, tagged the baseline and archived 50 source/build files under `build/backups/premium-start-58429c5.zip`. Added a dependency-free authored map compiler that emits physical Roblox XML templates and a shared catalog. The new Collapse template includes sixteen supported insertion points, four weapon locations, a tower/vault layout, destructible cover, an outer collapse bridge, hazards and duel geometry. Map round assignment is the next integration step. The existing builds are preserved. Available checks passed; Studio physics and native Luau/Rojo checks remain pending.
+
 ## 2026-11-11: Visual implementation, Studio acceptance pending
 
 ### Implemented
