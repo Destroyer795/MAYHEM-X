@@ -185,10 +185,10 @@ function Menus.new(parent: Instance, callbacks: any)
 	Theme.text(self.confirm, "Title", "ADD AURUM TO YOUR COLLECTION?", UDim2.fromScale(0.1, 0.22), UDim2.fromScale(0.8, 0.15), 26, Theme.Ink, true)
 	Theme.text(self.confirm, "Scope", "45 earned session credits. Cosmetic only.\nYour collection and balance reset after leaving this server.", UDim2.fromScale(0.1, 0.4), UDim2.fromScale(0.8, 0.18), 16, Theme.Muted)
 	self.confirmBuy = Theme.button(self.confirm, "Confirm", "SPEND 45 CREDITS", UDim2.fromScale(0.1, 0.66), UDim2.new(0.8, 0, 0, 46), function()
-		self.confirm.Visible = false
+		self:dismissConfirmation()
 		callbacks.purchase("Aurum")
 	end)
-	Theme.button(self.confirm, "Cancel", "CANCEL", UDim2.fromScale(0.1, 0.8), UDim2.new(0.8, 0, 0, 46), function() self.confirm.Visible = false end, true)
+	self.confirmCancel = Theme.button(self.confirm, "Cancel", "CANCEL", UDim2.fromScale(0.1, 0.8), UDim2.new(0.8, 0, 0, 46), function() self:dismissConfirmation() end, true)
 	self:open("Deploy")
 	return self
 end
@@ -197,7 +197,7 @@ function Menus.open(self: any, page: string)
 	if not self.pages[page] then return end
 	self.serial += 1
 	self.page = page
-	self.confirm.Visible = false
+	self:dismissConfirmation()
 	self.content.CanvasPosition = Vector2.zero
 	self.group.Visible = true
 	if self.fade then self.fade:Cancel() end
@@ -219,16 +219,24 @@ end
 function Menus.confirmPurchase(self: any, id: string)
 	if id ~= "Aurum" then return end
 	self.confirm.Visible = true
+	for _, item in self.group:GetDescendants() do if item:IsA("GuiButton") and not item:IsDescendantOf(self.confirm) then item.Selectable = false end end
 	self.confirmBuy.Active = self.style and self.style.ready and (self.style.profile.credits or 0) >= 45
 	self.confirmBuy.Text = if self.confirmBuy.Active then "SPEND 45 CREDITS" else "EARN MORE SESSION CREDITS"
-	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = self.confirmBuy end
+	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = if self.confirmBuy.Active then self.confirmBuy else self.confirmCancel end
+end
+
+function Menus.dismissConfirmation(self: any)
+	if not self.confirm.Visible then return end
+	self.confirm.Visible = false
+	for _, item in self.group:GetDescendants() do if item:IsA("GuiButton") then item.Selectable = true end end
+	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = self.shopButtons.Aurum end
 end
 
 function Menus.close(self: any)
 	self.serial += 1
 	local serial = self.serial
 	self.page = nil
-	self.confirm.Visible = false
+	self:dismissConfirmation()
 	GuiService.SelectedObject = nil
 	if self.fade then self.fade:Cancel() end
 	self.fade = TweenService:Create(self.group, TweenInfo.new(if self.reducedMotion then 0 else 0.14), { GroupTransparency = 1 })

@@ -253,7 +253,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.touchUltimate.BackgroundColor3 = if charge >= 100 then Theme.Gold else Theme.Panel
 	self.crosshair.Visible = active and not overlay
 	self.protection.Visible = active and not overlay
-	self.protection.Text = if state.combat.protectionRemaining > elapsed then "AEGIS / PROTECTION ACTIVE" else ""
+	self.protection.Text = if state.combat.protectionRemaining > elapsed then "SIGNAL PROTECTION / ACTIVE" else ""
 	self.reality.Visible = active and not overlay
 	local character = Players.LocalPlayer.Character
 	local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
