@@ -80,7 +80,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	self.online = Theme.text(deploy, "Online", "", UDim2.new(0.56, 0, 1, -35), UDim2.new(0.44, 0, 0, 26), 11, Theme.Muted)
 
 	local maps = page("Maps")
-	Theme.text(maps, "Title", "CHOOSE YOUR FRONTIER", UDim2.new(), UDim2.new(1, 0, 0, 40), 27, Theme.Ink, true)
+	self.mapsTitle = Theme.text(maps, "Title", "CHOOSE YOUR FRONTIER", UDim2.new(), UDim2.new(1, 0, 0, 40), 27, Theme.Ink, true)
 	self.voteStatus = Theme.text(maps, "VoteStatus", "", UDim2.fromOffset(0, 44), UDim2.new(1, 0, 0, 40), 12, Theme.Muted)
 	self.mapButtons = {}
 	for index, entry in Catalog do
@@ -113,7 +113,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	Theme.text(character, "Title", "OPERATIVE", UDim2.new(), UDim2.new(1, 0, 0, 40), 28, Theme.Ink, true)
 	self.operativeButtons = {}
 	for index, entry in Visuals.Operatives do
-		self.operativeButtons[entry.id] = Theme.button(character, entry.id, entry.name, UDim2.fromOffset(0, 54 + (index - 1) * 48), UDim2.new(0.5, -8, 0, 40), function() self.draftOperative = entry.id end, true)
+		self.operativeButtons[entry.id] = Theme.button(character, entry.id, entry.name, UDim2.fromOffset(0, 54 + (index - 1) * 48), UDim2.new(0.5, -8, 0, 44), function() self.draftOperative = entry.id end, true)
 	end
 	self.operativeDetail = Theme.text(character, "Detail", "", UDim2.fromOffset(0, 210), UDim2.new(0.5, -8, 0, 80), 14, Theme.Muted)
 	self.equipOperative = Theme.button(character, "Equip", "EQUIP PROFILE", UDim2.new(0, 0, 1, -54), UDim2.new(0.5, -8, 0, 46), function() callbacks.select("operative", self.draftOperative) end)
@@ -254,8 +254,9 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.style = style
 	self.state = state
 	self.reducedMotion = preferences.reducedMotion
-	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 and (not GuiService.SelectedObject or not GuiService.SelectedObject:IsDescendantOf(self.group)) then
-		GuiService.SelectedObject = if self.page == "Deploy" then self.play elseif self.page == "Matchmaking" then self.queueCancel else self.navigation[self.page] or self.closeButton
+	local selected = GuiService.SelectedObject
+	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 and (not selected or not selected:IsDescendantOf(self.group) or (self.confirm.Visible and not selected:IsDescendantOf(self.confirm))) then
+		GuiService.SelectedObject = if self.confirm.Visible then (if self.confirmBuy.Active then self.confirmBuy else self.confirmCancel) elseif self.page == "Deploy" then self.play elseif self.page == "Matchmaking" then self.queueCancel else self.navigation[self.page] or self.closeButton
 	end
 	local width = self.group.AbsoluteSize.X
 	local height = self.group.AbsoluteSize.Y
@@ -273,16 +274,21 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))
 	end
 	self.brandGradient.Offset = if preferences.reducedMotion then Vector2.zero else Vector2.new(math.sin(os.clock() * 0.3) * 0.35, 0)
-	self.hero.TextSize = if compact then 36 elseif short then 40 else 58
+	self.hero.TextSize = if compact then 32 elseif short then 40 else 58
+	self.mapsTitle.TextSize = if compact then 22 else 27
 	self.hero.Size = UDim2.new(0.62, 0, 0, if short then 88 else 124)
 	self.deployDescription.Position = UDim2.fromOffset(0, if short then 116 else 158)
 	self.deployDescription.TextSize = if compact or short then 13 else 16
 	self.deployDescription.Visible = true
 	self.mapLink.Position = UDim2.fromOffset(0, if short then 208 else 238)
 	self.profile.Position = UDim2.fromOffset(0, if short then 258 else 288)
-	self.mapLink.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 38)
+	self.mapLink.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 44)
 	self.profile.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 54)
 	local profile = style.profile or { credits = 0, level = 1, xp = 0, status = "LOADING" }
+	if self.confirm.Visible then
+		self.confirmBuy.Active = style.ready and profile.credits >= 45
+		self.confirmBuy.Text = if self.confirmBuy.Active then "SPEND 45 CREDITS" else "EARN MORE SESSION CREDITS"
+	end
 	self.profile.Text = string.upper(Players.LocalPlayer.DisplayName) .. " / LV " .. profile.level .. "\n" .. profile.credits .. " CREDITS / " .. profile.xp .. " XP / THIS SESSION"
 	self.preview.frame.Position = UDim2.fromScale(if compact then 0.65 else 0.56, 0.03)
 	self.preview.frame.Size = UDim2.fromScale(if compact then 0.35 else 0.44, if compact then 0.38 else 0.72)

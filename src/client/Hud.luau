@@ -228,6 +228,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.ultimateLabel.Text = if charge >= 100 then "AEGIS / READY" else "AEGIS / " .. charge .. "%"
 	local rifle = state.combat.slot == 1
 	local reloading = state.combat.reloadRemaining > elapsed
+	self.ammo.TextSize = if compact and (not rifle or reloading) then 26 else 34
 	self.weaponName.Text = if rifle then "VECTOR-18 / AUTO" else "RIFT / MELEE"
 	self.ammo.Text = if reloading then "LOAD" elseif rifle then tostring(state.combat.ammo) else "RIFT"
 	self.reserve.Text = if reloading then string.format("%.1fs", state.combat.reloadRemaining - elapsed) elseif rifle then "/ " .. state.combat.reserve else "BLADE"
