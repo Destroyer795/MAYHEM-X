@@ -37,15 +37,17 @@ public static class MayhemComposer {
             for(int i=0;i<count;i++) {
                 double t=i/(double)rate,beat=t*bpm/60.0,localBeat=beat-Math.Floor(beat),stepTime=60.0/bpm/2;
                 int step=(int)Math.Floor(beat*2), chord=progression[((int)beat/8)%4]; double nt=t-step*stepTime;
-                double frequency=F(root+12+notes[step%notes.Length]); double arp=Bell(frequency,nt,mood==4?4.2:8.5)*0.19;
-                double pad=(S(F(root-12+chord),t)+S(F(root+chord+7),t)*0.5+S(F(root+chord+((mood==1||mood==2||mood==3||mood==6||mood==7||mood==9)?3:4)),t)*0.35)*0.055;
-                double kick=S(47+95*Math.Exp(-localBeat*22),t)*Math.Exp(-localBeat*14)*(mood==4?0.05:0.17);
+                double frequency=F(root+12+notes[step%notes.Length]); double arp=Bell(frequency,nt,mood==4?4.2:8.5)*0.19*Math.Min(1,(stepTime-nt)/0.015);
+                double chordTime=beat%8,padWindow=Math.Min(1,chordTime/0.3)*Math.Min(1,(8-chordTime)/0.3);
+                double pad=(S(F(root-12+chord),t)+S(F(root+chord+7),t)*0.5+S(F(root+chord+((mood==1||mood==2||mood==3||mood==6||mood==7||mood==9)?3:4)),t)*0.35)*0.055*padWindow;
+                double kt=localBeat*60/bpm;
+                double kick=Math.Sin(2*Math.PI*(47*kt+95*(1-Math.Exp(-kt*22))/22))*Math.Exp(-kt*14)*(mood==4?0.05:0.17);
                 double noise=random.NextDouble()*2-1, snare=(((int)beat%4==1)||((int)beat%4==3))?noise*Math.Exp(-localBeat*24)*0.075:0;
                 double hat=noise*Math.Exp(-nt*90)*(mood==4?0.008:0.025);
                 double fade=Math.Min(1,t/0.04)*Math.Min(1,(duration-t)/0.08);
-                double common=(pad+kick+snare+hat)*fade;
-                double left=Math.Tanh((common+arp*(0.84+0.16*Math.Sin(step)))*1.4)*0.82;
-                double right=Math.Tanh((common+arp*(0.84-0.16*Math.Sin(step)))*1.4)*0.82;
+                double common=pad+kick+snare+hat;
+                double left=Math.Tanh((common+arp*(0.84+0.16*Math.Sin(step)))*1.4)*0.82*fade;
+                double right=Math.Tanh((common+arp*(0.84-0.16*Math.Sin(step)))*1.4)*0.82*fade;
                 w.Write((short)(left*32767)); w.Write((short)(right*32767));
             }
         }
@@ -84,5 +86,5 @@ foreach ($id in $score.effects) {
     [MayhemComposer]::Effect($path,$score.sampleRate,$id)
     $entries += [ordered]@{id=$id; file=$file; kind='effect'; sha256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant(); uploadRequired=$true}
 }
-[ordered]@{sourceStamp=$stamp; license=$score.license; format='Stereo PCM WAV, 22050 Hz, 16 bit'; files=$entries; runtimeUploaded=$false} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
+[ordered]@{sourceStamp=$stamp; license=$score.license; format='Stereo PCM WAV, 44100 Hz, 16 bit'; files=$entries; runtimeUploaded=$false} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $manifestPath -Encoding UTF8
 Write-Output "Generated $($entries.Count) original WAV files for manual Roblox audio upload"

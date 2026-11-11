@@ -1,6 +1,6 @@
 {
   "license":"Original compositions and synthesized effects created for MAYHEM X. May be used, modified and distributed with this project.",
-  "sampleRate":22050,
+  "sampleRate":44100,
   "tracks":[
     {"id":"Lobby","bpm":108,"root":62,"beats":32,"mood":0,"notes":[0,7,9,4,2,7,12,9,0,4,7,2,9,7,4,2]},
     {"id":"Collapse","bpm":128,"root":57,"beats":32,"mood":1,"notes":[0,7,3,10,0,12,7,5,3,7,10,14,12,7,5,3]},

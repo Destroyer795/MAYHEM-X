@@ -10,11 +10,12 @@ public static class MayhemWaveCheck {
  public static double[] Inspect(string path) {
   byte[] data=File.ReadAllBytes(path);
   if(System.Text.Encoding.ASCII.GetString(data,0,4)!="RIFF"||System.Text.Encoding.ASCII.GetString(data,8,4)!="WAVE") throw new Exception("Invalid WAV container");
-  if(BitConverter.ToInt16(data,20)!=1||BitConverter.ToInt16(data,22)!=2||BitConverter.ToInt16(data,34)!=16||BitConverter.ToInt32(data,24)!=22050) throw new Exception("Unexpected PCM format");
+  if(BitConverter.ToInt16(data,20)!=1||BitConverter.ToInt16(data,22)!=2||BitConverter.ToInt16(data,34)!=16||BitConverter.ToInt32(data,24)!=44100) throw new Exception("Unexpected PCM format");
   if(BitConverter.ToInt32(data,40)!=data.Length-44) throw new Exception("WAV data length mismatch");
   double peak=0,sum=0; int samples=(data.Length-44)/2;
   for(int i=44;i<data.Length;i+=2) { double sample=BitConverter.ToInt16(data,i)/32768.0; peak=Math.Max(peak,Math.Abs(sample)); sum+=sample*sample; }
-  return new double[]{peak,Math.Sqrt(sum/samples),(data.Length-44)/88200.0};
+  double edge=Math.Max(Math.Abs(BitConverter.ToInt16(data,44)/32768.0),Math.Abs(BitConverter.ToInt16(data,data.Length-2)/32768.0));
+  return new double[]{peak,Math.Sqrt(sum/samples),(data.Length-44)/176400.0,edge};
  }
 }
 '@
@@ -24,8 +25,9 @@ foreach ($entry in $manifest.files) {
     $path=Join-Path $audioRoot $entry.file
     $stats=[MayhemWaveCheck]::Inspect($path)
     if ($stats[0] -ge 0.95 -or $stats[1] -lt 0.002 -or $stats[2] -le 0.05 -or $stats[2] -gt 60) { throw "Silent, clipped or malformed original audio: $($entry.file)" }
+    if ($stats[3] -gt 0.01) { throw "Abrupt waveform edge: $($entry.file)" }
     if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $entry.sha256) { throw "Original audio hash mismatch: $($entry.file)" }
-    $checks+=4
+    $checks+=5
 }
 $config = [IO.File]::ReadAllText((Join-Path $projectRoot 'src/shared/AudioConfig.luau'))
 $uploads = [regex]::Match($config,'(?s)AudioConfig.Uploads = table.freeze\(\{(.*?)\}\)').Groups[1].Value
