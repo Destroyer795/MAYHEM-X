@@ -1,0 +1,26 @@
+{
+  "id":"Frost", "name":"FROSTBITE", "subtitle":"GLACIER LANES / CRYSTAL FORTRESS",
+  "strategy":"Three ice ridges create parallel lanes. Frozen crossbridges and crystal cover let you switch flanks. Ice carries momentum.",
+  "palette":{"floor":[232,244,250],"wall":[148,197,224],"accent":[35,171,226],"secondary":[121,140,244],"warm":[224,121,186]},
+  "lighting":{"clock":11.2,"density":0.06,"ambient":[174,199,220],"sky":[186,221,247]},
+  "hazard":"CRYO VENTS",
+  "spawns":[[-110,26,-85],[-80,26,-85],[-110,26,85],[-80,26,85],[110,26,-85],[80,26,-85],[110,26,85],[80,26,85],[-23,26,-85],[23,26,-85],[-23,26,-55],[23,26,-55],[-23,26,55],[23,26,55],[-23,26,85],[23,26,85]],
+  "weapons":[[-95,24,0],[95,24,0],[0,24,-70],[0,24,70]],
+  "geometry":[
+    {"op":"box","name":"CentralIceRidge","group":"Ice","size":[70,3,200],"p":[0,20,0],"material":"Ice"},
+    {"op":"grid","name":"OuterSnowRidge","size":[50,3,200],"x":[-95,95],"z":[0],"y":20,"material":"Snow"},
+    {"op":"grid","name":"GlacierBase","group":"Decor","size":[42,22,190],"x":[-95,95],"z":[0],"y":7,"material":"Ice","color":"wall"},
+    {"op":"bridge","name":"FrozenBridge","group":"Ice","a":[-95,20,-70],"b":[95,20,-70],"width":12,"material":"Ice","color":"wall"},
+    {"op":"bridge","name":"FrozenBridge","group":"Ice","a":[-95,20,70],"b":[95,20,70],"width":12,"material":"Ice","color":"wall"},
+    {"op":"bridge","name":"FractureBridge","group":"Collapse","a":[-95,20,0],"b":[0,20,0],"width":11,"material":"Ice","color":"secondary"},
+    {"op":"bridge","a":[0,20,0],"b":[95,20,0],"width":11,"material":"Ice","color":"secondary"},
+    {"op":"crystals","locations":[[-95,21,-24],[-95,21,24],[95,21,-24],[95,21,24],[-11,21,-28],[11,21,28]],"color":"accent"},
+    {"op":"grid","name":"CryoBunker","size":[12,7,9],"x":[-95,95],"z":[-48,48],"y":25,"color":"floor","material":"Snow"},
+    {"op":"grid","name":"IceCell","group":"Destructibles","size":[6,4,7],"x":[-23,23],"z":[-30,30],"y":23.5,"color":"wall","material":"Ice"},
+    {"op":"box","name":"FortressDeck","size":[26,2,24],"p":[0,32,0],"color":"wall","material":"Ice"},
+    {"op":"stairs","p":[-25,21,-17],"width":8,"steps":15,"rise":0.75,"run":2.5,"color":"floor","material":"Snow"},
+    {"op":"box","name":"FortressLanding","size":[20,2,13],"p":[-18,32,18],"color":"floor","material":"Snow"},
+    {"op":"box","group":"Hazards","name":"CryoVent","size":[14,4,28],"p":[20,23,0],"color":"secondary","transparency":0.75},
+    {"op":"ring","name":"CrystalCrown","p":[0,39,0],"radius":8,"count":14,"color":"accent"}
+  ]
+}
