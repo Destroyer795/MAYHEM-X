@@ -42,7 +42,7 @@ foreach ($name in $remoteNames) {
 Check-Mayhem ($remoteNames.Count -eq 4) 'Four protocol RemoteEvents'
 $declaredActions = [regex]::Match($protocolText, 'Action = table\.freeze\(\{([^}]+)\}').Groups[1].Value
 $actionNames = @([regex]::Matches($declaredActions, '\b(\w+)\s*=\s*"(\w+)"') | ForEach-Object { $_.Groups[1].Value })
-$sourceFiles = @(Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src'),(Join-Path $projectRoot 'tests') -Recurse -Filter '*.luau' -File)
+$sourceFiles = @(Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src'),(Join-Path $projectRoot 'tests') -Recurse -Filter '*.luau' -File) + @(Get-Item -LiteralPath (Join-Path $projectRoot 'build/generated/MapCatalog.luau'))
 foreach ($file in $sourceFiles) {
     $source = [IO.File]::ReadAllText($file.FullName)
     Check-Mayhem ($source.StartsWith('--!strict')) "Strict Luau directive: $($file.Name)"

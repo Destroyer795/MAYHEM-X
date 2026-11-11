@@ -9,6 +9,8 @@ MapRules.ChaosDuration = 9
 MapRules.LowGravity = 110
 MapRules.DuelDelay = 12
 MapRules.SparseDuelDelay = 60
+MapRules.DuelRadius = 31
+MapRules.DuelMinimum = 8
 
 function MapRules.resolve(catalog: any, votes: { [number]: string }, eligible: { number }, previous: string?, roll: number): string
 	local counts: { [string]: number } = {}
@@ -20,7 +22,11 @@ function MapRules.resolve(catalog: any, votes: { [number]: string }, eligible: {
 	for _, map in catalog do
 		if counts[map.id] == highest and (highest > 0 or #catalog == 1 or map.id ~= previous) then table.insert(choices, map.id) end
 	end
-	return choices[math.clamp(math.floor(roll), 1, #choices)]
+	return choices[math.clamp(1 + math.floor(roll * #choices), 1, #choices)]
+end
+
+function MapRules.duelRadius(elapsed: number): number
+	return MapRules.DuelRadius + (MapRules.DuelMinimum - MapRules.DuelRadius) * math.clamp((elapsed - 10) / 45, 0, 1)
 end
 
 function MapRules.radius(elapsed: number, duration: number): number

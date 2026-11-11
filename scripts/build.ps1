@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([switch]$Offline, [ValidatePattern('^[A-Za-z0-9_-]+\.rbxlx$')][string]$OutputName = 'MAYHEM-X.rbxlx')
+param([switch]$Offline, [ValidatePattern('^[A-Za-z0-9_-]+\.rbxlx$')][string]$OutputName = 'MAYHEM-X-Premium.rbxlx')
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $projectRoot = Split-Path -Parent $PSScriptRoot

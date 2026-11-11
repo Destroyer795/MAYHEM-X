@@ -203,6 +203,7 @@ function Match.remove(self: any, player: Player)
 	self.entries[player] = nil
 	self.combat:remove(player)
 	self.maps.votes[player.UserId] = nil
+	self.maps.voteAt[player.UserId] = nil
 end
 
 function Match.eliminate(self: any, victim: Player, attacker: Player?, cause: string)

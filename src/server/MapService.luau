@@ -19,7 +19,7 @@ local function points(folder: Instance): { CFrame }
 end
 
 function Maps.new(combat: any, effect: RemoteEvent)
-	local self: any = setmetatable({ combat = combat, effect = effect, votes = {}, movers = {}, covers = {}, collapsing = {}, hazards = {}, connections = {}, running = false, duel = false, generation = 0, random = Random.new(), safeRadius = 185, center = Vector3.zero }, Maps)
+	local self: any = setmetatable({ combat = combat, effect = effect, votes = {}, voteAt = {}, movers = {}, covers = {}, collapsing = {}, hazards = {}, connections = {}, running = false, duel = false, generation = 0, random = Random.new(), safeRadius = 185, center = Vector3.zero }, Maps)
 	self:load("Collapse")
 	return self
 end
@@ -39,6 +39,7 @@ function Maps.load(self: any, id: string)
 	assert(#spawns == Config.Match.Capacity and #points(nextMap.DuelSpawns) == 2, "Map spawn contract failed")
 	self:stop()
 	self.generation += 1
+	self.voteAt = {}
 	for _, connection in self.connections do connection:Disconnect() end
 	self.connections = {}
 	local world = Workspace:WaitForChild("MayhemWorld")
@@ -130,13 +131,16 @@ function Maps.bounds(self: any): any
 end
 
 function Maps.choose(self: any, eligible: { number }): string
-	local id = MapRules.resolve(Catalog, self.votes, eligible, self.info.id, self.random:NextInteger(1, #Catalog))
+	local id = MapRules.resolve(Catalog, self.votes, eligible, self.info.id, self.random:NextNumber())
 	self.votes = {}
 	return id
 end
 
 function Maps.vote(self: any, userId: number, choice: any): boolean
 	if type(choice) ~= "string" or not self:find(choice) then return false end
+	local now = os.clock()
+	if self.votes[userId] == choice or now - (self.voteAt[userId] or -math.huge) < 0.4 then return false end
+	self.voteAt[userId] = now
 	self.votes[userId] = choice
 	return true
 end
@@ -171,14 +175,24 @@ function Maps.tick(self: any, now: number)
 		if record.alive and humanoid and humanoid.Health > 0 and root then table.insert(alive, { player = player, record = record, root = root }) end
 	end
 	if #alive == 2 and not self.duel and elapsed >= (if self.initialCount <= 2 then MapRules.SparseDuelDelay else MapRules.DuelDelay) then
-		self.duel, self.center, self.safeRadius = true, Vector3.new(0, 0, -230), 31
+		self.duel, self.duelAt, self.center, self.safeRadius = true, now, Vector3.new(0, 0, -230), MapRules.DuelRadius
 		Workspace.Gravity = 196.2
 		self.chaos = "FINAL SHOWDOWN"
 		local frames = points(self.model.DuelSpawns)
 		for index, contender in alive do self.combat:transport(contender.player, frames[index], true) end
 		self.effect:FireAllClients("Notice", { title = "FINAL SHOWDOWN", body = "Two signals remain. The duel deck is live." })
 	end
-	if self.duel then return end
+	if self.duel then
+		self.safeRadius = MapRules.duelRadius(now - self.duelAt)
+		if now - self.lastDamageTick >= 1 then
+			self.lastDamageTick = now
+			for _, contender in alive do
+				local offset = contender.root.Position - self.center
+				if Vector3.new(offset.X, 0, offset.Z).Magnitude > self.safeRadius then self.combat:damage(contender.player, nil, 9, "Outside the duel signal", now) end
+			end
+		end
+		return
+	end
 	self.safeRadius = MapRules.radius(elapsed, Config.Match.Duration)
 	if elapsed >= self.nextChaos then
 		self.chaosIndex += 1

@@ -258,7 +258,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
 	local offset = if root then root.Position - map.center else Vector3.zero
 	local outside = Vector3.new(offset.X, 0, offset.Z).Magnitude > map.safeRadius
-	self.reality.Text = if outside then "OUTSIDE SIGNAL / RETURN TO THE SAFE ZONE" elseif map.chaos ~= "STABLE" then map.chaos .. " / " .. math.ceil(math.max(0, (map.chaosRemaining or 0) - elapsed)) .. "s" else "SAFE ZONE / " .. math.ceil(map.safeRadius) .. " STUDS"
+	self.reality.Text = if outside then "OUTSIDE SIGNAL / RETURN TO THE SAFE ZONE" elseif map.duel then "FINAL DUEL / " .. math.ceil(map.safeRadius) .. " STUDS" elseif map.chaos ~= "STABLE" then map.chaos .. " / " .. math.ceil(math.max(0, (map.chaosRemaining or 0) - elapsed)) .. "s" else "SAFE ZONE / " .. math.ceil(map.safeRadius) .. " STUDS"
 	self.reality.TextColor3 = if outside then Theme.Gold else Theme.White
 	self.feed.Visible = not overlay and state.phase ~= "Results"
 	self.feed.Size = UDim2.fromOffset(if topPanels then (if size.Y < 500 then 240 else 160) else 296, if topPanels then 80 else 180)
