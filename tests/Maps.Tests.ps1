@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$reports = @(Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'build/generated/maps.json') | ConvertFrom-Json)
+$reports = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'build/generated/maps.json') | ConvertFrom-Json
 $checks=0
 foreach ($map in $reports) {
     $path=Join-Path $projectRoot "build/generated/Maps/$($map.id).rbxmx"
