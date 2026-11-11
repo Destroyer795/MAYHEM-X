@@ -11,6 +11,12 @@
 - First-person character hiding now follows newly replicated weapon/cosmetic parts. Its listener disconnects on deactivation or character replacement; camera aiming remains unchanged.
 - Desktop inventory now works, but the Studio launch attempt timed out at app approval. The node helper failed to start, and portable tool setup could not connect to the remote server. Studio runtime acceptance remains pending.
 
+Executed after the follow-up: offline place build, 1,811 structural checks, 2,201 geometry assertions, 174 WAV assertions, ten loader assertions, 73 interface wiring checks, twelve contrast pairs and baseline gameplay preservation all passed. Luau compilation/rule execution, native Rojo, listening and Studio multiplayer remain pending. No new dependency was installed.
+
+Follow-up commits: `df02b30` (audio fallback/loading), `bacd8fc` (portrait and narrow HUD), `0520635` (local animation/caching), `6dc882d` (text contrast), `f30c963` (first-person cosmetic visibility). The final package report includes full hashes/messages, changed paths and the documentation/package commit. The review baseline is tagged `premium-review-baseline-09d6b8a`.
+
+Packaging found the existing Visual working place unreadable by Windows, with a different observed size from its archived baseline. It was left untouched. The original Visual build remains in the premium-start ZIP; the Phase 1 place and previous Premium backup match their recorded hashes. Current working-place preservation is a separate pending review in the package report, not a passed comparison.
+
 ## 2026-11-11: Premium milestone, Studio acceptance pending
 
 ### Implemented

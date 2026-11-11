@@ -4,7 +4,7 @@
 
 The writable root is `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`. The requested `C:\MAYHEM-X` is outside this session's writable roots. Scripts resolve their own project root and can run after relocation. Inspect an existing destination before copying or cloning.
 
-Roblox Studio is installed and a running Studio process was observed. Its computer-control helper returned a missing native-pipe error; browser access was also unavailable. This prevents automated Studio testing here. Studio was not reinstalled. Shell access to its executable previously returned access denied.
+Roblox Studio is installed and a running Studio process was observed. The earlier computer-control helper returned a missing native-pipe error. During the acceptance follow-up, desktop inventory became available but Studio exposed no window; launching it timed out at app approval. The separate node helper also failed to start. Automated Studio testing remains pending. Studio was not reinstalled. Shell access to its executable previously returned access denied.
 
 No dependencies were installed for this milestone. No Python environment, npm package, Rust installation, administrator access or permanent PATH change is required. Map compilation and audio synthesis use existing PowerShell/.NET.
 
@@ -45,7 +45,7 @@ The user selected original tracks for manual upload. `assets/audio/scorebook.jso
 4. Edit `src/shared/AudioConfig.luau`, replacing the matching empty `Uploads` value with the returned `rbxassetid://` URI. The manifest `id` matches the config field. Example: `Lobby.wav` maps to `Uploads.Lobby`; `SFX-Shot.wav` maps to `Uploads.Shot`. Do not substitute guesses.
 5. Rebuild, run the client audio check in DEVELOPMENT.md and listen in multiple simulated clients. Verify music/effects/UI volumes and mute. If an asset fails, inspect Output and its experience permission; leave its field empty until resolved.
 
-Music fields are intentionally empty. Built-in SFX/ambience fallbacks use six URIs listed in [Roblox Core-Scripts](https://github.com/Roblox/Core-Scripts/blob/master/PlayerScripts/StarterCharacterScripts/Sound.server.lua). This verifies their source, not successful loading in the current client. Settings show preload/configuration status. `PowerSteal` is an unused future audio cue, with no power-stealing gameplay.
+Music fields are intentionally empty. Built-in SFX/ambience fallbacks use six URIs listed in [Roblox Core-Scripts](https://github.com/Roblox/Core-Scripts/blob/master/PlayerScripts/StarterCharacterScripts/Sound.server.lua). This verifies their source, not successful loading in the current client. Failed uploaded effects fall back when their built-in cue is available. Music preloads on context selection, so a configured track is not necessarily loaded yet. Settings show configured, ready and failed music counts. `PowerSteal` is an unused future audio cue, with no power-stealing gameplay.
 
 If no existing authorized experience is available for permissions, keep that acceptance test pending. Do not publish the game or access credentials to resolve it during this milestone.
 
@@ -62,4 +62,4 @@ These relocation commands were not run here. The bundle includes source/history,
 
 Update a tool by choosing an official release, reviewing its checksum, changing its lockfile entry and testing the new versioned local folder. Keep one active version per function. Remove only the old named version folder/archive after stopping that tool. Update/remove the optional plugin separately through Studio. Existing Git, PowerShell and Studio require no project uninstaller.
 
-Generated `build/generated/`, `build/audio/`, manifests and verification reports can be rebuilt. Preserve edited WAVs before regeneration. Inspect artifacts before cleanup. Keep the original Phase 1/Visual places, both baseline archives, bundles and `.version-control/` until acceptance and migration. Never delete live Studio lock files. Temporary download `.partial` files can be removed after failed setup; ZIP downloads can be removed after a verified install. Do not remove source, lockfiles or unrelated Roblox/user files.
+Generated `build/generated/`, `build/audio/`, manifests and verification reports can be rebuilt. Preserve edited WAVs before regeneration. Inspect artifacts before cleanup. Keep the original Phase 1/Visual places, baseline archives, the `09d6b8a` source/place review backups, bundles and `.version-control/` until acceptance and migration. Never delete live Studio lock files. Temporary download `.partial` files can be removed after failed setup; ZIP downloads can be removed after a verified install. Do not remove source, lockfiles or unrelated Roblox/user files.
