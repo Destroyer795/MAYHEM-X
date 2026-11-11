@@ -22,7 +22,7 @@ local stateRemote = remotes:WaitForChild(Protocol.Remote.State) :: RemoteEvent
 local effectRemote = remotes:WaitForChild(Protocol.Remote.Effect) :: RemoteEvent
 local feedRemote = remotes:WaitForChild(Protocol.Remote.Feed) :: RemoteEvent
 local presentationRemote = mayhem:WaitForChild("Presentation") :: RemoteEvent
-local preferences = { firstPerson = false, fov = 80, reducedEffects = false, reducedMotion = false, graphics = "Auto", music = 0.35, sound = 0.7, skin = "Pulse" }
+local preferences = { firstPerson = false, fov = 80, reducedEffects = false, reducedMotion = false, graphics = "Auto", music = 0.35, sound = 0.7, ui = 0.55, muted = false, skin = "Pulse" }
 local style: any = { skin = "Pulse", operative = "Vanguard", owned = { Pulse = true, Glacier = true }, dailyClaimed = false, nextDaily = 0, revision = 0, ready = false }
 local camera = CameraController.new(preferences)
 local effects = Effects.new(preferences)
@@ -169,7 +169,7 @@ RunService.Heartbeat:Connect(function(dt: number)
 		accumulated = 0
 		hud:render(state, now - receivedAt, preferences, style)
 		worldPresentation:step()
-		audio:update(hud:blocked(), state.phase)
+		audio:update(hud:blocked(), state)
 	end
 end)
 hud:render(state, 0, preferences, style)

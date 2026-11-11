@@ -6,6 +6,8 @@ Created branch `feature/premium-worlds-audio` from `58429c5`, tagged the baselin
 
 All five physical templates now package. Round integration adds eligible-player voting with randomized ties, map cleanup/cloning, per-map spawn assignment, shrinking safe zones, pulsed map hazards, Low Gravity/Shield Drought chaos, moving-platform carry, destructible cover, ammo caches and a final two-survivor deck. Aegis is a server-authoritative defensive ultimate charged by three credited eliminations. Original weapon damage/ammo/cooldown tuning, FIFO selection, character loading and Repulse are preserved. Preservation checks now protect five complete baseline files, fourteen unchanged methods and camera aiming; match/map integration and environmental hit hooks are explicit reviewed changes. Runtime verification is still pending.
 
+At the user's request, original music is prepared for manual Roblox upload. A deterministic PowerShell/.NET synthesizer produces ten original scores/stingers and nineteen effects, with PCM/header/level/hash tests. The central AudioConfig records each replacement field and verified built-in URI references from Roblox's Core-Scripts. Built-in SFX and ambience are configured; experience-specific playback remains untested. Music Upload fields deliberately stay empty until the original files are uploaded and permitted. The controller reports preload failures, caps voices, supports spatial effects, crossfades music and separates music/effects/UI volumes. No numeric audio IDs were invented.
+
 ## 2026-11-11: Visual implementation, Studio acceptance pending
 
 ### Implemented

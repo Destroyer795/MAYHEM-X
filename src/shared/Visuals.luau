@@ -22,10 +22,6 @@ Visuals.Operatives = table.freeze({
 })
 Visuals.Capabilities = table.freeze({ Ultimates = true, ChaosEvents = true, Destruction = true })
 Visuals.Budgets = table.freeze({ WorldParts = 720, EffectRoots = 36, EffectDistance = 360, AnimationDistance = 220, AnimatedRings = 3 })
-Visuals.Audio = table.freeze({
-	-- Add only audio you own or have verified permission to use. Empty routes stay silent.
-	Menu = "", Lobby = "", Combat = "", Shot = "", Slash = "", Repulse = "", UI = "", Eliminate = "", Victory = "", Defeat = "",
-})
 
 function Visuals.skin(id: string): any
 	for _, entry in Visuals.Skins do if entry.id == id then return entry end end

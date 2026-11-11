@@ -1,0 +1,17 @@
+{
+  "license":"Original compositions and synthesized effects created for MAYHEM X. May be used, modified and distributed with this project.",
+  "sampleRate":22050,
+  "tracks":[
+    {"id":"Lobby","bpm":108,"root":62,"beats":32,"mood":0,"notes":[0,7,9,4,2,7,12,9,0,4,7,2,9,7,4,2]},
+    {"id":"Collapse","bpm":128,"root":57,"beats":32,"mood":1,"notes":[0,7,3,10,0,12,7,5,3,7,10,14,12,7,5,3]},
+    {"id":"Jungle","bpm":112,"root":60,"beats":32,"mood":2,"notes":[0,2,7,9,5,7,12,9,2,5,7,14,12,9,7,5]},
+    {"id":"Solar","bpm":100,"root":50,"beats":32,"mood":3,"notes":[0,7,8,3,0,11,7,5,3,8,11,12,7,5,3,0]},
+    {"id":"Frost","bpm":84,"root":69,"beats":32,"mood":4,"notes":[0,4,7,11,9,7,4,2,0,7,12,11,9,7,4,2]},
+    {"id":"Skyline","bpm":132,"root":64,"beats":32,"mood":5,"notes":[0,7,10,14,12,10,7,5,2,7,12,14,17,14,10,7]},
+    {"id":"Combat","bpm":140,"root":57,"beats":32,"mood":6,"notes":[0,0,7,10,12,7,3,5,0,7,12,15,14,10,7,3]},
+    {"id":"Showdown","bpm":152,"root":57,"beats":32,"mood":7,"notes":[0,12,7,15,0,10,7,14,12,19,15,14,10,7,3,0]},
+    {"id":"Victory","bpm":120,"root":62,"beats":4,"mood":8,"notes":[0,4,7,12,16,19,24,19,16,12,7,4,0,4,7,12]},
+    {"id":"Defeat","bpm":88,"root":57,"beats":4,"mood":9,"notes":[12,10,7,3,0,-2,-5,-12,0,3,7,10,7,3,0,-12]}
+  ],
+  "effects":["Shot","Reload","Switch","Slash","MeleeHit","Impact","Explosion","Shield","Eliminate","Repulse","Ultimate","Mutation","PowerSteal","UI","Hover","Transition","Notification","Reward","Purchase"]
+}

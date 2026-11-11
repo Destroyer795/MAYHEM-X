@@ -5,6 +5,7 @@ Set-StrictMode -Version Latest
 $projectRoot = Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'ProjectModel.ps1')
 & (Join-Path $PSScriptRoot 'maps.ps1')
+& (Join-Path $PSScriptRoot 'audio.ps1')
 $model = Get-MayhemProjectModel -ProjectRoot $projectRoot
 $outputDirectory = Join-Path $projectRoot 'build'
 New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null

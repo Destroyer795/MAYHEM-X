@@ -18,6 +18,5 @@ return function(Visuals: any): number
 	end
 	assert(Visuals.Capabilities.Ultimates and Visuals.Capabilities.ChaosEvents, "Premium maps require their live gameplay integrations")
 	assert(Visuals.Budgets.WorldParts <= 720 and Visuals.Budgets.EffectRoots <= 36, "Visual budgets must stay bounded")
-	for _, uri in Visuals.Audio do assert(uri == "", "Ship no unverified sound IDs"); checks += 1 end
 	return checks + 2
 end

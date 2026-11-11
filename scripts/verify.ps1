@@ -16,6 +16,10 @@ try {
     & (Join-Path $projectRoot 'tests\Maps.Tests.ps1')
     $passed.Add('Generated physical map templates, spawns and budgets')
 } catch { $failed.Add('Map templates: ' + $_.Exception.Message) }
+try {
+    & (Join-Path $projectRoot 'tests\Audio.Tests.ps1')
+    $passed.Add('Original PCM audio, levels, checksums and route manifest')
+} catch { $failed.Add('Original audio: ' + $_.Exception.Message) }
 Check-Mayhem ($model.Config.serveAddress -eq '127.0.0.1') 'Rojo serve binds to localhost'
 $logicalPaths = @($model.Entries.LogicalPath)
 Check-Mayhem (($logicalPaths | Sort-Object -Unique).Count -eq $logicalPaths.Count) 'No duplicate instance paths'
