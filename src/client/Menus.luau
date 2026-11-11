@@ -65,7 +65,7 @@ function Menus.new(parent: Instance, callbacks: any)
 		return area
 	end
 	local deploy = page("Deploy")
-	Theme.text(deploy, "Eyebrow", "FIVE WORLDS / ONE FINAL SIGNAL", UDim2.new(), UDim2.new(0.65, 0, 0, 22), 11, Theme.Purple)
+	Theme.text(deploy, "Eyebrow", "FIVE WORLDS / ONE FINAL SIGNAL", UDim2.new(), UDim2.new(0.65, 0, 0, 22), 11, Theme.Action)
 	self.hero = Theme.text(deploy, "Title", "ENTER THE\nCHAOS.", UDim2.fromOffset(0, 28), UDim2.new(0.62, 0, 0, 124), 58, Theme.Ink, true)
 	self.deployDescription = Theme.text(deploy, "Description", "BECOME THE LEGEND.\nVote for your arena. Outlast every contender.", UDim2.fromOffset(0, 158), UDim2.new(0.52, 0, 0, 68), 16, Theme.Muted)
 	self.mapLink = Theme.button(deploy, "ArenaInfo", "EXPLORE FIVE ARENAS  >", UDim2.fromOffset(0, 238), UDim2.new(0.52, 0, 0, 38), function() self:open("Maps") end, true)
@@ -76,7 +76,7 @@ function Menus.new(parent: Instance, callbacks: any)
 		self:open("Matchmaking")
 	end)
 	self.preview = Preview.new(deploy)
-	self.previewCaption = Theme.text(deploy, "PreviewCaption", "VANGUARD / PULSE", UDim2.new(0.56, 0, 1, -70), UDim2.new(0.44, 0, 0, 30), 12, Theme.Purple)
+	self.previewCaption = Theme.text(deploy, "PreviewCaption", "VANGUARD / PULSE", UDim2.new(0.56, 0, 1, -70), UDim2.new(0.44, 0, 0, 30), 12, Theme.Action)
 	self.online = Theme.text(deploy, "Online", "", UDim2.new(0.56, 0, 1, -35), UDim2.new(0.44, 0, 0, 26), 11, Theme.Muted)
 
 	local maps = page("Maps")
@@ -91,7 +91,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	self.mapPreview.frame.Name = "ArenaPreview"
 	self.mapPreview.frame.Position = UDim2.fromScale(0.46, 0.17)
 	self.mapPreview.frame.Size = UDim2.fromScale(0.54, 0.46)
-	self.mapSubtitle = Theme.text(maps, "MapSubtitle", "", UDim2.new(0.46, 0, 0.66, 0), UDim2.new(0.54, 0, 0, 30), 12, Theme.Purple, true)
+	self.mapSubtitle = Theme.text(maps, "MapSubtitle", "", UDim2.new(0.46, 0, 0.66, 0), UDim2.new(0.54, 0, 0, 30), 12, Theme.Action, true)
 	self.mapStrategy = Theme.text(maps, "MapStrategy", "", UDim2.new(0.46, 0, 0.73, 0), UDim2.new(0.54, 0, 0, 70), 13, Theme.Muted)
 	self.voteButton = Theme.button(maps, "Vote", "VOTE FOR THIS ARENA", UDim2.new(0, 0, 1, -54), UDim2.new(1, 0, 0, 46), function() callbacks.vote(self.draftMap) end)
 
@@ -102,10 +102,10 @@ function Menus.new(parent: Instance, callbacks: any)
 
 	local matchmaking = page("Matchmaking")
 	Theme.text(matchmaking, "Title", "FIND YOUR SIGNAL", UDim2.new(), UDim2.new(1, 0, 0, 44), 30, Theme.Ink, true)
-	self.queueTitle = Theme.text(matchmaking, "Status", "WAITING FOR SERVER", UDim2.fromOffset(0, 62), UDim2.new(1, 0, 0, 50), 24, Theme.Purple, true)
+	self.queueTitle = Theme.text(matchmaking, "Status", "WAITING FOR SERVER", UDim2.fromOffset(0, 62), UDim2.new(1, 0, 0, 50), 24, Theme.Action, true)
 	self.queueDetail = Theme.text(matchmaking, "Detail", "", UDim2.fromOffset(0, 130), UDim2.new(0.9, 0, 0, 95), 17, Theme.Muted)
 	Theme.button(matchmaking, "ChooseMap", "MAP BALLOT  >", UDim2.fromOffset(0, 244), UDim2.new(0.62, 0, 0, 42), function() self:open("Maps") end, true)
-	self.queueTimer = Theme.text(matchmaking, "Clock", "", UDim2.new(0, 0, 1, -128), UDim2.new(1, 0, 0, 44), 28, Theme.Cyan, true)
+	self.queueTimer = Theme.text(matchmaking, "Clock", "", UDim2.new(0, 0, 1, -128), UDim2.new(1, 0, 0, 44), 28, Theme.Action, true)
 	self.queueCancel = Theme.button(matchmaking, "Queue", "LEAVE QUEUE", UDim2.new(0, 0, 1, -58), UDim2.new(0.62, 0, 0, 48), callbacks.queue)
 	Theme.button(matchmaking, "Observe", "VIEW HUB", UDim2.new(0.66, 0, 1, -58), UDim2.new(0.34, 0, 0, 48), function() self:close() end, true)
 
@@ -164,7 +164,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	Theme.frame(daily, "PrismSwatch", UDim2.fromOffset(0, 66), UDim2.new(1, 0, 0, 4), Theme.Cyan)
 	Theme.text(daily, "Reward", "PRISM + 15 SESSION CREDITS", UDim2.fromOffset(0, 92), UDim2.new(1, 0, 0, 50), 23, Theme.Ink, true)
 	Theme.text(daily, "Scope", "A white finish and credits for this server session.\nOne claim per UTC day while in this server. Collection, credits and progression reset after leaving.", UDim2.fromOffset(0, 154), UDim2.new(0.9, 0, 0, 110), 16, Theme.Muted)
-	self.dailyClock = Theme.text(daily, "Clock", "", UDim2.new(0, 0, 1, -112), UDim2.new(1, 0, 0, 34), 14, Theme.Cyan)
+	self.dailyClock = Theme.text(daily, "Clock", "", UDim2.new(0, 0, 1, -112), UDim2.new(1, 0, 0, 34), 14, Theme.Action)
 	self.dailyButton = Theme.button(daily, "Claim", "CLAIM SESSION TRIAL", UDim2.new(0, 0, 1, -58), UDim2.new(0.78, 0, 0, 48), function()
 		if self.style and self.style.dailyClaimed then self:open("Inventory"); self.draftSkin = "Prism" else callbacks.daily() end
 	end)
@@ -177,7 +177,7 @@ function Menus.new(parent: Instance, callbacks: any)
 		self.settingButtons[definition[1]] = item
 	end
 	self.audioNote = Theme.text(settings, "AudioNote", "", UDim2.new(0, 0, 1, -100), UDim2.new(1, 0, 0, 54), 12, Theme.Muted)
-	self.saveNote = Theme.text(settings, "SaveStatus", "", UDim2.new(0, 0, 1, -42), UDim2.new(1, 0, 0, 36), 12, Theme.Purple)
+	self.saveNote = Theme.text(settings, "SaveStatus", "", UDim2.new(0, 0, 1, -42), UDim2.new(1, 0, 0, 36), 12, Theme.Action)
 	self.confirm = Theme.frame(group, "PurchaseConfirmation", UDim2.new(), UDim2.fromScale(1, 1), Theme.Surface)
 	self.confirm.ZIndex = 30
 	self.confirm.Active = true

@@ -3,7 +3,7 @@ local Visuals = {}
 Visuals.Palette = table.freeze({
 	Void = { 16, 37, 58 }, Navy = { 34, 64, 91 }, Panel = { 231, 241, 246 }, Metal = { 148, 178, 199 },
 	Purple = { 27, 132, 213 }, Cyan = { 22, 177, 200 }, Magenta = { 217, 78, 153 },
-	Red = { 224, 79, 91 }, White = { 248, 251, 252 }, Muted = { 87, 115, 140 },
+	Red = { 224, 79, 91 }, White = { 248, 251, 252 }, Muted = { 76, 104, 126 }, Action = { 18, 108, 183 },
 	Surface = { 247, 249, 246 }, Ink = { 25, 49, 73 }, Gold = { 242, 174, 63 }, Violet = { 150, 106, 224 },
 })
 Visuals.Mode = table.freeze({ Id = "LastSignal", Name = "LAST SIGNAL", Subtitle = "SOLO SURVIVAL / FIVE ARENAS", Description = "Sixteen contenders. Five arenas. Vote, survive the closing zone, and win the final signal. Every operative has the same combat stats." })

@@ -94,13 +94,13 @@ function Hud.new(callbacks: any)
 	self.touchUltimate = Theme.button(self.mobile, "Aegis", "AEGIS", UDim2.fromOffset(88, 128), UDim2.fromOffset(80, 44), callbacks.ultimate, true)
 	self.loading = Theme.frame(self.root, "Insertion", UDim2.new(0.5, -150, 0.5, -95), UDim2.fromOffset(300, 190), Theme.Void, 0.03)
 	Theme.stroke(self.loading, Theme.Purple, 0.3)
-	Theme.text(self.loading, "Label", "SIGNAL INSERTION", UDim2.fromOffset(20, 16), UDim2.new(1, -40, 0, 22), 12, Theme.Purple, true)
+	Theme.text(self.loading, "Label", "SIGNAL INSERTION", UDim2.fromOffset(20, 16), UDim2.new(1, -40, 0, 22), 12, Theme.Cyan, true)
 	self.loadingCount = Theme.text(self.loading, "Count", "", UDim2.fromOffset(20, 46), UDim2.new(1, -40, 0, 62), 46, Theme.White, true)
 	self.loadingDetail = Theme.text(self.loading, "Detail", "", UDim2.fromOffset(20, 124), UDim2.new(1, -40, 0, 48), 13, Theme.Metal)
 	self.results = Theme.frame(self.root, "Results", UDim2.new(), UDim2.fromScale(1, 1), Theme.Surface, 0)
 	self.results.ZIndex = 10
 	self.resultTitle = Theme.text(self.results, "Title", "", UDim2.fromScale(0.08, 0.05), UDim2.new(0.84, 0, 0, 54), 40, Theme.Ink, true)
-	self.resultWinner = Theme.text(self.results, "Winner", "", UDim2.fromScale(0.08, 0.18), UDim2.new(0.84, 0, 0, 38), 21, Theme.Purple, true)
+	self.resultWinner = Theme.text(self.results, "Winner", "", UDim2.fromScale(0.08, 0.18), UDim2.new(0.84, 0, 0, 38), 21, Theme.Action, true)
 	self.resultReason = Theme.text(self.results, "Reason", "", UDim2.fromScale(0.08, 0.28), UDim2.new(0.84, 0, 0, 26), 13, Theme.Muted)
 	local rows = Instance.new("ScrollingFrame")
 	rows.Name = "Standings"
@@ -295,7 +295,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 		for index, entry in state.result.standings do
 			local row = Theme.frame(self.resultRows, "Contender", UDim2.new(), UDim2.new(1, -8, 0, 34), Theme.Panel)
 			row.LayoutOrder = index
-			Theme.text(row, "Name", entry.name, UDim2.fromOffset(12, 2), UDim2.new(0.68, -12, 1, -4), 13, if entry.userId == Players.LocalPlayer.UserId then Theme.Purple else Theme.Ink)
+			Theme.text(row, "Name", entry.name, UDim2.fromOffset(12, 2), UDim2.new(0.68, -12, 1, -4), 13, if entry.userId == Players.LocalPlayer.UserId then Theme.Action else Theme.Ink)
 			Theme.text(row, "Kills", entry.kills .. " KILLS", UDim2.fromScale(0.74, 0), UDim2.fromScale(0.25, 1), 11, Theme.Muted)
 		end
 		if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = self.resultContinue end

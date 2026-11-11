@@ -55,7 +55,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	item.Name = name
 	item.Position = position
 	item.Size = size
-	item.BackgroundColor3 = if secondary then Theme.Panel else Theme.Purple
+	item.BackgroundColor3 = if secondary then Theme.Panel else Theme.Action
 	item.TextColor3 = if secondary then Theme.Ink else Theme.White
 	item.BorderSizePixel = 0
 	item.Text = content
@@ -66,7 +66,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	item.Selectable = true
 	item.Parent = parent
 	Theme.corner(item, 6)
-	local border = Theme.stroke(item, if secondary then Theme.Muted else Theme.Purple, if secondary then 0.7 else 0.2)
+	local border = Theme.stroke(item, if secondary then Theme.Muted else Theme.Action, if secondary then 0.7 else 0.2)
 	item.MouseEnter:Connect(function()
 		if not item.Active then return end
 		TweenService:Create(border, TweenInfo.new(0.12), { Transparency = 0 }):Play()
@@ -82,7 +82,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 end
 
 function Theme.selected(item: TextButton, selected: boolean)
-	item.BackgroundColor3 = if selected then Theme.Purple else Theme.Panel
+	item.BackgroundColor3 = if selected then Theme.Action else Theme.Panel
 	item.TextColor3 = if selected then Theme.White else Theme.Ink
 end
 

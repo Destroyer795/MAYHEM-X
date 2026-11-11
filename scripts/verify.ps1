@@ -99,6 +99,10 @@ if (Test-Path -LiteralPath (Join-Path $projectRoot 'tests\Interface.Tests.ps1'))
     } catch { $failed.Add('Interface wiring: ' + $_.Exception.Message) }
 }
 $primaryDocs = @(Get-ChildItem -LiteralPath $projectRoot -Filter '*.md' -File | Select-Object -ExpandProperty Name | Sort-Object)
+try {
+    & (Join-Path $projectRoot 'tests\Presentation.Tests.ps1')
+    $passed.Add('Small text color contrast')
+} catch { $failed.Add('Text contrast: ' + $_.Exception.Message) }
 Check-Mayhem (($primaryDocs -join ',') -eq 'ARCHITECTURE.md,CHANGELOG.md,DEVELOPMENT.md,README.md,SETUP.md') 'Exactly five primary documentation files'
 $lock = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'tools.lock.json') | ConvertFrom-Json
 foreach ($name in @('rojo','luau')) {
