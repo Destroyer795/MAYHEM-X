@@ -2,6 +2,8 @@
 
 ## 2026-11-11: Premium worlds and audio, in development
 
+The place now includes a daylight Collapse editor preview, sourced from the same physical template. The preserved startup builder replaces the preview before creating the hub and active map, so combat does not run on duplicate geometry. Earlier place files remain unchanged.
+
 Touch navigation, weapon tabs, return controls and purchase confirmation now have larger targets. Mobile chaos notices use the header ticker to avoid covering combat buttons. First-person weapons animate accepted shots and reloads without changing camera aim, with reduced-motion support. Combat music changes independently from map ambience. Added 81 game-configuration reference checks; the full structural pass now reports 1,592 passes and zero failures, with native-tool and Studio categories still skipped.
 
 The manual-upload audio pack now uses stereo 44.1 kHz PCM. Note/chord envelopes and loop edges are smoothed, and the percussion phase is continuous within each hit. All twenty-nine files pass format, level, edge and checksum checks (174 assertions). No listening review or Roblox upload/playback test has been performed.
