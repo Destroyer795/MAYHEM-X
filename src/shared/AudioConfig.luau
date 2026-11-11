@@ -25,5 +25,23 @@ AudioConfig.Cues = table.freeze({
 	Victory = { builtin = "Rise", speed = 1.2, volume = 0.25 }, Defeat = { builtin = "Land", speed = 0.6, volume = 0.2 },
 })
 AudioConfig.Ambience = table.freeze({ Collapse = "Wind", Jungle = "Water", Solar = "Wind", Frost = "Wind", Skyline = "Wind" })
+AudioConfig.Music = table.freeze({ "Lobby", "Collapse", "Jungle", "Solar", "Frost", "Skyline", "Combat", "Showdown", "Victory", "Defeat" })
 AudioConfig.MaxVoices = 20
+AudioConfig.UIReserve = 2
+
+function AudioConfig.effect(cue: string, failures: { [string]: boolean }): (string?, number, number)
+	local fallback = AudioConfig.Cues[cue]
+	local upload = AudioConfig.Uploads[cue]
+	if upload and upload ~= "" and not failures[upload] then
+		return upload, 1, if fallback then fallback.volume else 0.3
+	end
+	local uri = if fallback then AudioConfig.Builtins[fallback.builtin] else nil
+	if uri and not failures[uri] then return uri, fallback.speed, fallback.volume end
+	return nil, 1, 0
+end
+
+function AudioConfig.isUI(cue: string): boolean
+	return cue == "UI" or cue == "Hover" or cue == "Transition" or cue == "Notification" or cue == "Reward" or cue == "Purchase"
+end
+
 return table.freeze(AudioConfig)
