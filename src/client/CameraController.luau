@@ -78,6 +78,7 @@ function CameraController.setActive(self: any, active: boolean)
 	local character = Players.LocalPlayer.Character
 	local changedCharacter = character ~= self.character
 	if self.active == active and not changedCharacter then return end
+	if self.visibilityConnection then self.visibilityConnection:Disconnect(); self.visibilityConnection = nil end
 	if self.character then
 		self:transparency(self.character, false)
 		local previousHumanoid = self.character:FindFirstChildOfClass("Humanoid")
@@ -94,6 +95,9 @@ function CameraController.setActive(self: any, active: boolean)
 		self.yaw = math.atan2(-look.X, -look.Z)
 		self.pitch = 0
 		self.hidden = nil
+		self.visibilityConnection = character.DescendantAdded:Connect(function(item: Instance)
+			if item:IsA("BasePart") then item.LocalTransparencyModifier = if self.preferences.firstPerson then 1 else 0 end
+		end)
 		camera.CameraType = Enum.CameraType.Scriptable
 		if humanoid then humanoid.AutoRotate = false end
 	else
