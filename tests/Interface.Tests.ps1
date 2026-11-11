@@ -19,7 +19,7 @@ foreach ($name in @([regex]::Matches($menus + $hud, '(?:self:open|self:openPage)
     if ($pages -notcontains $name) { throw "Missing menu destination: $name" }
     $checks++
 }
-foreach ($name in @('Matchmaking','Inventory','Shop','Daily','Settings')) {
+foreach ($name in @('Matchmaking','Maps','Inventory','Shop','Daily','Settings')) {
     if ($pages -notcontains $name -or $scene -notmatch ('"' + $name + '"')) { throw "World terminal is not connected: $name" }
     $checks++
 }
@@ -32,6 +32,25 @@ if ($config.tree.ReplicatedStorage.Mayhem.Presentation.'$className' -ne 'RemoteE
 $checks++
 foreach ($name in @([regex]::Matches($bootstrap, 'effects:play\("(\w+)"') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)) {
     if ($effects -notmatch ('kind == "' + $name + '"')) { throw "Missing visual effect handler: $name" }
+    $checks++
+}
+$serverText = (Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src/server') -Filter '*.luau' | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join "`n"
+foreach ($name in @([regex]::Matches($serverText, '(?:FireAllClients\(|FireClient\(\w+,\s*)"(\w+)"') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)) {
+    $client = if ($name -in @('Hit','Notice')) { $bootstrap } else { $effects }
+    if ($client -notmatch ('kind == "'+$name+'"')) { throw "Server effect has no client handler: $name" }
+    $checks++
+}
+$mapRules = [IO.File]::ReadAllText((Join-Path $projectRoot 'src/shared/MapRules.luau'))
+$commands = [regex]::Match($mapRules,'Command = table\.freeze\(\{([^}]+)\}').Groups[1].Value
+if ([regex]::Matches($commands,'\b(\w+)\s*=\s*"(\w+)"').Count -ne 2) { throw 'Two map/gameplay commands must be declared' }
+foreach ($match in [regex]::Matches($commands,'\b(\w+)\s*=\s*"(\w+)"')) {
+    $name = $match.Groups[1].Value
+    if ($bootstrap -notmatch [regex]::Escape('MapRules.Command.'+$name) -or $serverText -notmatch [regex]::Escape('action == MapRules.Command.'+$name)) { throw "Unconnected map/gameplay command: $name" }
+    $checks++
+}
+$manifest = Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'build/audio/manifest.json') | ConvertFrom-Json
+foreach ($name in @([regex]::Matches($bootstrap,'audio:play\("(\w+)"') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)) {
+    if ($manifest.files.id -notcontains $name) { throw "Audio cue has no original replacement file: $name" }
     $checks++
 }
 Write-Output "PASS: $checks interface callback, navigation and presentation wiring checks"
