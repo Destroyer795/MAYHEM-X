@@ -9,7 +9,10 @@
 - Executed 11,033 server assertions, eighty actual spawn raycasts, and client checks. Two real simulated clients each passed seventy client checks and thirty-five audio loads. Queue/voting selected Jungle, real shots spent ammo, reloading restored it, and switch/melee/Repulse requests produced uploaded sounds. Both clients entered the duel; a simulated character reset exercised Victory/Defeat, lobby return and another map round. Observed music voices never exceeded two during transitions. Mute and independent volume propagation passed in both clients.
 - Recorded nonzero playback positions and loudness for live tracks/effects. This verifies engine playback in the local Studio context, not human listening quality, published-experience permissions, production persistence or sixteen-player performance.
 - Fixed live screenshot defects: navigation sorts by LayoutOrder, and button strokes apply to borders instead of outlining text. Before/after Studio captures document the change. The overall UI still requires the requested production redesign.
+- Used the iPhone 17 Pro landscape simulator (750 x 381 viewport) to scroll to Play, join the queue and navigate to arena previews. No game Output errors appeared. Navigation consumes too much height on short screens; comprehensive touch/safe-area and physical-device acceptance remain open. Simulation was disabled after testing.
 - Saved a live source backup for seven affected scripts under `build/backups/Studio-source-before-uploaded-audio.json`. Studio saved the local place, but Windows denied copying its open file. Earlier source/place backups remain preserved. No publishing, remote push, new dependency or Robux spending occurred.
+
+Historical entries below describe the state at their original commits. The live audit above supersedes their earlier Studio/audio blockers.
 
 ## Premium acceptance follow-up
 

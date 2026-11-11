@@ -4,7 +4,7 @@
 
 The writable root is `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`. The requested `C:\MAYHEM-X` is outside this session's writable roots. Scripts resolve their own project root and can run after relocation. Inspect an existing destination before copying or cloning.
 
-Roblox Studio is installed and a running Studio process was observed. The earlier computer-control helper returned a missing native-pipe error. During the acceptance follow-up, desktop inventory became available but Studio exposed no window; launching it timed out at app approval. The separate node helper also failed to start. Automated Studio testing remains pending. Studio was not reinstalled. Shell access to its executable previously returned access denied.
+The official Roblox Studio MCP is connected to the local `build/MAYHEM-X-Premium.rbxlx`. Live DataModel inspection, script editing, screenshots, saving and two-client playtesting work. Studio was not reinstalled. The earlier desktop-control connection failures are historical and no longer block this workflow.
 
 No dependencies were installed for this milestone. No Python environment, npm package, Rust installation, administrator access or permanent PATH change is required. Map compilation and audio synthesis use existing PowerShell/.NET.
 
@@ -23,6 +23,8 @@ The WAV pack is generated project content, not a new dependency: about 25.1 MiB 
 
 `tools.lock.json` pins official release URLs, versions and SHA-256 hashes. Setup validates existing receipts/executable hashes and reuses intact installations. It stops for inspection if an existing tool folder is incomplete or modified.
 
+The commands below describe the source-build workflow. The default build target is the live Premium filename. Preserve that file and use a separate OutputName before running a source snapshot build; do not replace Studio-authored scene changes.
+
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\setup.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1
@@ -35,17 +37,53 @@ Run installed tools by local path, for example `& '.\.tools\rojo-7.7.1\rojo.exe'
 
 Opening the Premium place needs no plugin. For live sync, manually install the matching plugin using [Rojo's instructions](https://rojo.space/docs/v7/getting-started/installation/). The plugin is not fully contained in this project. Run `scripts/serve.ps1`, connect to `127.0.0.1:34872`, review changes and sync into the intended local test place. Stop simulation before syncing.
 
-## Original audio, manual upload
+## Uploaded audio
 
-The user selected original tracks for manual upload. `assets/audio/scorebook.json` and `scripts/audio.ps1` produce stereo 44.1 kHz, 16-bit WAVs under `build/audio/`. Their manifest contains route names, hashes and usage terms. Generated-file edits are detected before regeneration.
+The user uploaded the original pack and supplied all twenty-nine IDs below. `audio-upload/audio-ids.txt` preserves the canonical mapping; `src/shared/AudioConfig.luau` supplies runtime URIs. `scripts/audio.ps1` writes those IDs into the generated WAV manifest. It does not upload files or grant permissions. Original stereo 44.1 kHz, 16-bit WAVs come from `assets/audio/scorebook.json`; their manifest records hashes and usage terms. Generated-file edits are detected before regeneration.
+
+| Cue | Roblox audio ID | Intended event |
+| --- | --- | --- |
+| Lobby | 115295081724326 | Hub, waiting and nonparticipant music |
+| Collapse | 119354128442400 | The Collapse insertion and arena score |
+| Jungle | 137323613567452 | Neon Jungle insertion and arena score |
+| Solar | 93912277388041 | Solar Wasteland insertion and arena score |
+| Frost | 132327355812260 | Frostbite insertion and arena score |
+| Skyline | 75930625752768 | Skyline Zero insertion and arena score |
+| Combat | 74401952086561 | Recent nearby accepted combat |
+| Showdown | 93832246189768 | Final duel music |
+| Victory | 126488632915135 | Winning participant result stinger |
+| Defeat | 93717867149696 | Losing participant result stinger |
+| Shot | 117384060288786 | Accepted rifle fire, spatial |
+| Reload | 127622753054141 | Server-confirmed local reload |
+| Switch | 133299106908058 | Server-confirmed weapon slot change |
+| Slash | 85161275315961 | Accepted blade swing, spatial |
+| MeleeHit | 75145654636700 | Blade hit acknowledgement and local hull damage |
+| Impact | 125720845191168 | Rifle world impact, spatial |
+| Explosion | 130673317918385 | Destructible cover breaking, spatial |
+| Shield | 79794280696752 | Local shield damage feedback |
+| Eliminate | 85795250351709 | Character elimination effect, spatial |
+| Repulse | 120827402091841 | Accepted Repulse wave, spatial |
+| Ultimate | 116582094733707 | Accepted Aegis activation, spatial |
+| Mutation | 118969565930031 | Reality mutation announcement |
+| PowerSteal | 125966715610498 | Reserved only, power-stealing gameplay is absent |
+| UI | 87868301798689 | Enabled button activation |
+| Hover | 83803776836215 | Enabled button hover |
+| Transition | 78810693063926 | Menu page transition |
+| Notification | 123408274839656 | Notices and nonwinning result feedback |
+| Reward | 104912968188467 | Unlock/daily reward, win feedback and audio-test button |
+| Purchase | 113975906689066 | Confirmed Aurum session-credit purchase |
+
+All uploads and six built-in fallbacks loaded in both Studio clients. Live tracks/effects produced advancing positions and nonzero loudness. This establishes engine playback in the local Studio context, not human listening quality or permission grants for the eventual published universe. PowerSteal was load-tested but has no live gameplay caller.
+
+For replacement uploads or permission failures:
 
 1. Listen to the WAVs and review `manifest.json`. Start with `Lobby.wav`, the five map tracks, `Combat.wav`, `Showdown.wav`, `Victory.wav` and `Defeat.wav`.
 2. In Creator Dashboard, choose **Development Items > Audio > Upload Asset**. Upload the files under the intended creator and wait for moderation. Studio's Asset Manager Import is another supported route. Follow the current [audio import instructions](https://create.roblox.com/docs/audio/assets).
 3. For each approved asset, open **Configure > Permissions > Experiences > Add experiences** and use the intended existing experience's universe ID. Check the selected experience carefully. See [asset permissions](https://create.roblox.com/docs/projects/assets/privacy#on-an-asset-level). No upload or permission change was performed here.
-4. Edit `src/shared/AudioConfig.luau`, replacing the matching empty `Uploads` value with the returned `rbxassetid://` URI. The manifest `id` matches the config field. Example: `Lobby.wav` maps to `Uploads.Lobby`; `SFX-Shot.wav` maps to `Uploads.Shot`. Do not substitute guesses.
-5. Rebuild, run the client audio check in DEVELOPMENT.md and listen in multiple simulated clients. Verify music/effects/UI volumes and mute. If an asset fails, inspect Output and its experience permission; leave its field empty until resolved.
+4. Update the matching entry in both `audio-upload/audio-ids.txt` and `src/shared/AudioConfig.luau`. The manifest `id` matches the config field: `Lobby.wav` maps to `Uploads.Lobby`, and `SFX-Shot.wav` maps to `Uploads.Shot`. Inspect and edit the live AudioConfig through Studio MCP, then mirror source. Do not substitute guesses.
+5. Run `scripts/audio.ps1` and `tests/Audio.Tests.ps1` using process-local execution-policy bypass. Run the client audio check in DEVELOPMENT.md and listen in two simulated clients. Verify music/effects/UI volumes and mute. If an asset fails, inspect Output and its experience permission. Unavailable effects use an available built-in cue; unavailable music stays silent and is reported in settings.
 
-Music fields are intentionally empty. Built-in SFX/ambience fallbacks use six URIs listed in [Roblox Core-Scripts](https://github.com/Roblox/Core-Scripts/blob/master/PlayerScripts/StarterCharacterScripts/Sound.server.lua). This verifies their source, not successful loading in the current client. Failed uploaded effects fall back when their built-in cue is available. Music preloads on context selection, so a configured track is not necessarily loaded yet. Settings show configured, ready and failed music counts. `PowerSteal` is an unused future audio cue, with no power-stealing gameplay.
+Built-in SFX/ambience fallbacks use six URIs listed in [Roblox Core-Scripts](https://github.com/Roblox/Core-Scripts/blob/master/PlayerScripts/StarterCharacterScripts/Sound.server.lua). Sound-instance probes verify loading; bare URI preload requests incorrectly rejected these assets in the live audit. Music preloads on context selection, so configured and ready counts differ normally. Settings report ready/failed effects and configured/ready/failed music.
 
 If no existing authorized experience is available for permissions, keep that acceptance test pending. Do not publish the game or access credentials to resolve it during this milestone.
 
@@ -62,4 +100,4 @@ These relocation commands were not run here. The bundle includes source/history,
 
 Update a tool by choosing an official release, reviewing its checksum, changing its lockfile entry and testing the new versioned local folder. Keep one active version per function. Remove only the old named version folder/archive after stopping that tool. Update/remove the optional plugin separately through Studio. Existing Git, PowerShell and Studio require no project uninstaller.
 
-Generated `build/generated/`, `build/audio/`, manifests and verification reports can be rebuilt. Preserve edited WAVs before regeneration. Inspect artifacts before cleanup. Keep the original Phase 1/Visual places, baseline archives, the `09d6b8a` source/place review backups, bundles and `.version-control/` until acceptance and migration. Never delete live Studio lock files. Temporary download `.partial` files can be removed after failed setup; ZIP downloads can be removed after a verified install. Do not remove source, lockfiles or unrelated Roblox/user files.
+Generated templates and WAVs can be rebuilt. Preserve edited WAVs before regeneration. The live Premium place, screenshots and Studio verification report now contain evidence not reproduced by the offline build. Preserve them before cleanup, together with Phase 1/Visual archives, Premium/source backups, bundles and `.version-control/`. Windows denied a shell copy of the open Studio place; the seven-script live source backup is `build/backups/Studio-source-before-uploaded-audio.json`. Never delete live Studio lock files. Temporary download `.partial` files can be removed after failed setup; ZIP downloads can be removed after a verified install. Do not remove source, lockfiles or unrelated Roblox/user files.
