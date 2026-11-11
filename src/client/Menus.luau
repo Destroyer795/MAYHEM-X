@@ -270,18 +270,19 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.content.Position = UDim2.fromOffset(24, 136)
 	self.content.Size = UDim2.new(1, -48, 1, -184)
 	for name, area in self.pages do
-		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 520 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Inventory" then 470 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then 470 else 420
+		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then (if compact then 840 else 520) elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Inventory" then 470 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then 470 else 420
 		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))
 	end
 	self.brandGradient.Offset = if preferences.reducedMotion then Vector2.zero else Vector2.new(math.sin(os.clock() * 0.3) * 0.35, 0)
 	self.hero.TextSize = if compact then 32 elseif short then 40 else 58
 	self.mapsTitle.TextSize = if compact then 22 else 27
-	self.hero.Size = UDim2.new(0.62, 0, 0, if short then 88 else 124)
-	self.deployDescription.Position = UDim2.fromOffset(0, if short then 116 else 158)
+	self.hero.Size = UDim2.new(if compact then 1 else 0.62, 0, 0, if short and not compact then 88 else 124)
+	self.deployDescription.Position = UDim2.fromOffset(0, if short and not compact then 116 else 158)
+	self.deployDescription.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 68)
 	self.deployDescription.TextSize = if compact or short then 13 else 16
 	self.deployDescription.Visible = true
-	self.mapLink.Position = UDim2.fromOffset(0, if short then 208 else 238)
-	self.profile.Position = UDim2.fromOffset(0, if short then 258 else 288)
+	self.mapLink.Position = UDim2.fromOffset(0, if compact then 568 elseif short then 208 else 238)
+	self.profile.Position = UDim2.fromOffset(0, if compact then 624 elseif short then 258 else 288)
 	self.mapLink.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 44)
 	self.profile.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 54)
 	local profile = style.profile or { credits = 0, level = 1, xp = 0, status = "LOADING" }
@@ -290,12 +291,16 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 		self.confirmBuy.Text = if self.confirmBuy.Active then "SPEND 45 CREDITS" else "EARN MORE SESSION CREDITS"
 	end
 	self.profile.Text = string.upper(Players.LocalPlayer.DisplayName) .. " / LV " .. profile.level .. "\n" .. profile.credits .. " CREDITS / " .. profile.xp .. " XP / THIS SESSION"
-	self.preview.frame.Position = UDim2.fromScale(if compact then 0.65 else 0.56, 0.03)
-	self.preview.frame.Size = UDim2.fromScale(if compact then 0.35 else 0.44, if compact then 0.38 else 0.72)
+	self.preview.frame.Position = if compact then UDim2.fromOffset(0, 240) else UDim2.fromScale(0.56, 0.03)
+	self.preview.frame.Size = if compact then UDim2.new(1, 0, 0, 240) else UDim2.fromScale(0.44, 0.72)
 	self.modeButton.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 46)
 	self.play.Size = UDim2.new(if compact then 1 else 0.52, 0, 0, 54)
-	self.previewCaption.Visible = not compact and not short
-	self.online.Visible = not compact and not short
+	self.previewCaption.Position = if compact then UDim2.fromOffset(0, 488) else UDim2.new(0.56, 0, 1, -70)
+	self.previewCaption.Size = UDim2.new(if compact then 1 else 0.44, 0, 0, 30)
+	self.online.Position = if compact then UDim2.fromOffset(0, 524) else UDim2.new(0.56, 0, 1, -35)
+	self.online.Size = UDim2.new(if compact then 1 else 0.44, 0, 0, 26)
+	self.previewCaption.Visible = compact or not short
+	self.online.Visible = compact or not short
 	self.online.Text = #Players:GetPlayers() .. " IN SERVER / 16 CONTENDERS PER ROUND"
 	self.previewCaption.Text = string.upper(style.operative .. " / " .. style.skin)
 	self.play.Text = if state.inMatch then "VIEW MATCH STATUS" elseif state.queued then "VIEW QUEUE" else "PLAY  /  JOIN QUEUE"

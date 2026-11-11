@@ -88,8 +88,8 @@ function Hud.new(callbacks: any)
 		if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then self.fireInput = input; callbacks.fire(true) end
 	end)
 	UserInputService.InputEnded:Connect(function(input: InputObject) if self.fireInput == input then self.fireInput = nil; callbacks.fire(false) end end)
-	Theme.button(self.mobile, "Reload", "RELOAD", UDim2.fromOffset(16, 72), UDim2.fromOffset(72, 40), callbacks.reload, true)
-	Theme.button(self.mobile, "Swap", "SWAP", UDim2.fromOffset(96, 72), UDim2.fromOffset(72, 40), callbacks.switch, true)
+	Theme.button(self.mobile, "Reload", "RELOAD", UDim2.fromOffset(16, 72), UDim2.fromOffset(72, 44), callbacks.reload, true)
+	Theme.button(self.mobile, "Swap", "SWAP", UDim2.fromOffset(96, 72), UDim2.fromOffset(72, 44), callbacks.switch, true)
 	self.touchAbility = Theme.button(self.mobile, "Repulse", "REPULSE", UDim2.fromOffset(0, 128), UDim2.fromOffset(76, 44), callbacks.ability)
 	self.touchUltimate = Theme.button(self.mobile, "Aegis", "AEGIS", UDim2.fromOffset(88, 128), UDim2.fromOffset(80, 44), callbacks.ultimate, true)
 	self.loading = Theme.frame(self.root, "Insertion", UDim2.new(0.5, -150, 0.5, -95), UDim2.fromOffset(300, 190), Theme.Void, 0.03)
@@ -204,6 +204,8 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.kills.Text = state.kills .. " KILLS"
 	self.kills.TextSize = if compact then 10 else 15
 	self.phase.Text = (if map.duel then "FINAL SHOWDOWN" else string.upper(state.phase)) .. " / " .. map.name
+	self.phase.Size = UDim2.fromOffset(math.min(400, size.X - 24), 22)
+	self.phase.Position = UDim2.new(0.5, -math.min(400, size.X - 24) / 2, 0, 72)
 	if self.touch and (self.announcementUntil or 0) > os.clock() then self.phase.Text = self.announcementTitle.Text end
 	self.phase.TextColor3 = Theme.White
 	self.phase.TextStrokeColor3 = Theme.Void
@@ -214,11 +216,12 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.cameraButton.Visible = self.menuButton.Visible
 	self.vitals.Visible = state.alive and not overlay and state.phase ~= "Results"
 	self.weapon.Visible = self.vitals.Visible
-	self.vitals.Size = UDim2.fromOffset(if compact then 160 else 240, 124)
+	local panelWidth = if compact then math.min(160, math.floor((size.X - 36) / 2)) else 240
+	self.vitals.Size = UDim2.fromOffset(panelWidth, 124)
 	self.weapon.Size = self.vitals.Size
 	local topPanels = self.touch or size.X < 560
 	self.vitals.Position = if topPanels then UDim2.fromOffset(12, 98) else UDim2.new(0, 18, 1, -142)
-	self.weapon.Position = if topPanels then UDim2.new(1, if compact then -172 else -252, 0, 98) else UDim2.new(1, if compact then -178 else -258, 1, -142)
+	self.weapon.Position = if topPanels then UDim2.new(1, -panelWidth - 12, 0, 98) else UDim2.new(1, -panelWidth - 18, 1, -142)
 	self.health.Text = tostring(state.combat.health)
 	self.shield.Text = "SHIELD " .. state.combat.shield
 	self:fill("lastHealth", self.healthFill, state.combat.health / Config.Character.Health)
@@ -256,15 +259,19 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.protection.Visible = active and not overlay
 	self.protection.Text = if state.combat.protectionRemaining > elapsed then "SIGNAL PROTECTION / ACTIVE" else ""
 	self.reality.Visible = active and not overlay
+	self.reality.Size = UDim2.fromOffset(math.min(360, size.X - 24), 18)
+	self.reality.Position = UDim2.new(0.5, -math.min(360, size.X - 24) / 2, 1, -28)
 	local character = Players.LocalPlayer.Character
 	local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
 	local offset = if root then root.Position - map.center else Vector3.zero
 	local outside = Vector3.new(offset.X, 0, offset.Z).Magnitude > map.safeRadius
 	self.reality.Text = if outside then "OUTSIDE SIGNAL / RETURN TO THE SAFE ZONE" elseif map.duel then "FINAL DUEL / " .. math.ceil(map.safeRadius) .. " STUDS" elseif map.chaos ~= "STABLE" then map.chaos .. " / " .. math.ceil(math.max(0, (map.chaosRemaining or 0) - elapsed)) .. "s" else "SAFE ZONE / " .. math.ceil(map.safeRadius) .. " STUDS"
 	self.reality.TextColor3 = if outside then Theme.Gold else Theme.White
-	self.feed.Visible = not overlay and state.phase ~= "Results"
-	self.feed.Size = UDim2.fromOffset(if topPanels then (if size.Y < 500 then 240 else 160) else 296, if topPanels then 80 else 180)
-	self.feed.Position = if topPanels then (if size.Y < 500 then UDim2.new(0.5, -120, 0, 102) else UDim2.fromOffset(12, 236)) else UDim2.new(1, -310, 0, 108)
+	local shortFeed = topPanels and size.Y < 500
+	local feedWidth = if shortFeed then math.min(240, size.X - panelWidth * 2 - 48) elseif topPanels then 160 else 296
+	self.feed.Visible = not overlay and state.phase ~= "Results" and feedWidth >= 120
+	self.feed.Size = UDim2.fromOffset(math.max(0, feedWidth), if topPanels then 80 else 180)
+	self.feed.Position = if topPanels then (if shortFeed then UDim2.new(0.5, -feedWidth / 2, 0, 102) else UDim2.fromOffset(12, 236)) else UDim2.new(1, -310, 0, 108)
 	self.announcement.Size = UDim2.fromOffset(math.min(370, size.X - 32), 70)
 	self.announcement.Position = UDim2.new(0.5, -math.min(370, size.X - 32) / 2, 0, if self.touch then 236 else 108)
 	self.announcement.Visible = not overlay and not self.touch and (self.announcementUntil or 0) > os.clock()
