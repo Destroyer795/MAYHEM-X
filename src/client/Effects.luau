@@ -44,7 +44,10 @@ function Effects.new(preferences: any)
 				if not humanoid or self.watches[player] ~= record or player.Character ~= character then return end
 				record.death = humanoid.Died:Connect(function()
 					local root = character:FindFirstChild("HumanoidRootPart") :: BasePart?
-					if root then self:play("Eliminate", { at = root.Position, character = character }) end
+					if root then
+						self:play("Eliminate", { at = root.Position, character = character })
+						if self.onEliminated then self.onEliminated(root.Position, player.UserId) end
+					end
 				end)
 			end)
 		end

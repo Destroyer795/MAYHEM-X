@@ -3,6 +3,15 @@ local TweenService = game:GetService("TweenService")
 local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visuals)
 local Theme: any = {}
 for name, rgb in Visuals.Palette do Theme[name] = Color3.fromRGB(table.unpack(rgb)) end
+Theme.Spacing = table.freeze({ Tight = 8, Card = 16, Section = 24 })
+Theme.Font = Enum.Font.GothamMedium
+Theme.FontStrong = Enum.Font.GothamBold
+
+function Theme.corner(item: Instance, radius: number?)
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, radius or 8)
+	corner.Parent = item
+end
 
 function Theme.frame(parent: Instance, name: string, position: UDim2, size: UDim2, color: Color3?, transparency: number?): Frame
 	local frame = Instance.new("Frame")
@@ -24,7 +33,7 @@ function Theme.text(parent: Instance, name: string, content: string, position: U
 	label.Size = size
 	label.TextSize = textSize or 14
 	label.TextColor3 = color or Theme.White
-	label.Font = if bold then Enum.Font.GothamBold else Enum.Font.GothamMedium
+	label.Font = if bold then Theme.FontStrong else Theme.Font
 	label.BackgroundTransparency = 1
 	label.TextXAlignment = Enum.TextXAlignment.Left
 	label.TextWrapped = true
@@ -47,20 +56,34 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	item.Position = position
 	item.Size = size
 	item.BackgroundColor3 = if secondary then Theme.Panel else Theme.Purple
-	item.TextColor3 = Theme.White
+	item.TextColor3 = if secondary then Theme.Ink else Theme.White
 	item.BorderSizePixel = 0
 	item.Text = content
 	item.TextSize = 13
 	item.TextWrapped = true
-	item.Font = Enum.Font.GothamBold
+	item.Font = Theme.FontStrong
 	item.AutoButtonColor = false
 	item.Selectable = true
 	item.Parent = parent
+	Theme.corner(item, 6)
 	local border = Theme.stroke(item, if secondary then Theme.Muted else Theme.Purple, if secondary then 0.7 else 0.2)
-	item.MouseEnter:Connect(function() TweenService:Create(border, TweenInfo.new(0.12), { Transparency = 0 }):Play() end)
+	item.MouseEnter:Connect(function()
+		if not item.Active then return end
+		TweenService:Create(border, TweenInfo.new(0.12), { Transparency = 0 }):Play()
+		if Theme.onHover then Theme.onHover() end
+	end)
 	item.MouseLeave:Connect(function() TweenService:Create(border, TweenInfo.new(0.12), { Transparency = if secondary then 0.7 else 0.2 }):Play() end)
-	if callback then item.Activated:Connect(function() if Theme.onClick then Theme.onClick() end; callback() end) end
+	if callback then item.Activated:Connect(function()
+		if not item.Active then return end
+		if Theme.onClick then Theme.onClick() end
+		callback()
+	end) end
 	return item
+end
+
+function Theme.selected(item: TextButton, selected: boolean)
+	item.BackgroundColor3 = if selected then Theme.Purple else Theme.Panel
+	item.TextColor3 = if selected then Theme.White else Theme.Ink
 end
 
 function Theme.bar(parent: Instance, name: string, position: UDim2, size: UDim2, color: Color3): Frame
