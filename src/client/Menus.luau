@@ -273,7 +273,6 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then (if compact then 840 else 520) elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Inventory" then 470 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then 470 else 420
 		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))
 	end
-	self.brandGradient.Offset = if preferences.reducedMotion then Vector2.zero else Vector2.new(math.sin(os.clock() * 0.3) * 0.35, 0)
 	self.hero.TextSize = if compact then 32 elseif short then 40 else 58
 	self.mapsTitle.TextSize = if compact then 22 else 27
 	self.hero.Size = UDim2.new(if compact then 1 else 0.62, 0, 0, if short and not compact then 88 else 124)
@@ -377,7 +376,14 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	elseif self.page == "Character" then self.characterPreview:show("operative", self.draftOperative, style.skin)
 	elseif self.page == "Inventory" then self.weaponPreview:show("weapon", style.operative, self.draftSkin, self.weapon)
 	elseif self.page == "Maps" then self.mapPreview:map(self.draftMap) end
-	self.preview:step(preferences.reducedMotion); self.characterPreview:step(preferences.reducedMotion); self.weaponPreview:step(preferences.reducedMotion)
+end
+
+function Menus.animate(self: any)
+	if not self.page then return end
+	self.brandGradient.Offset = if self.reducedMotion then Vector2.zero else Vector2.new(math.sin(os.clock() * 0.3) * 0.35, 0)
+	if self.page == "Deploy" then self.preview:step(self.reducedMotion)
+	elseif self.page == "Character" then self.characterPreview:step(self.reducedMotion)
+	elseif self.page == "Inventory" then self.weaponPreview:step(self.reducedMotion) end
 end
 
 return Menus

@@ -215,6 +215,8 @@ end)
 RunService:BindToRenderStep("MayhemCamera", Enum.RenderPriority.Camera.Value + 1, function(dt: number)
 	camera:setActive(canAct())
 	camera:step(dt, state.combat.slot)
+	worldPresentation:animate()
+	hud:animate(preferences)
 end)
 local accumulated = 0
 RunService.Heartbeat:Connect(function(dt: number)

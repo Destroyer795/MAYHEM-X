@@ -48,7 +48,6 @@ function Maps.load(self: any, id: string)
 	local active = Instance.new("Folder")
 	active.Name = "ActiveArena"
 	nextMap.Parent = active
-	active.Parent = world
 	self.model, self.info, self.spawns = nextMap, info, spawns
 	self.center, self.safeRadius, self.duel = Vector3.zero, MapRules.SafeStart, false
 	self.movers, self.covers, self.collapsing, self.hazards = {}, {}, {}, {}
@@ -104,6 +103,7 @@ function Maps.load(self: any, id: string)
 			task.delay(24, function() if self.generation == generation and pad.Parent then prompt.Enabled = true; pad.Transparency = 0 end end)
 		end))
 	end
+	active.Parent = world
 	world:SetAttribute("ActiveMap", id)
 	world:SetAttribute("MapGeneration", self.generation)
 	local partCount = 0

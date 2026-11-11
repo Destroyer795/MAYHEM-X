@@ -1,7 +1,7 @@
 --!strict
 local Geometry = {}
 
-function Geometry.part(parent: Instance, name: string, size: Vector3, frame: CFrame, color: Color3, material: Enum.Material?, solid: boolean?): Part
+function Geometry.part(parent: Instance, name: string, size: Vector3, frame: CFrame, color: Color3, material: Enum.Material?, solid: boolean?, qualityTier: number?): Part
 	local item = Instance.new("Part")
 	item.Name = name
 	item.Size = size
@@ -16,6 +16,7 @@ function Geometry.part(parent: Instance, name: string, size: Vector3, frame: CFr
 	item.TopSurface = Enum.SurfaceType.Smooth
 	item.BottomSurface = Enum.SurfaceType.Smooth
 	item:SetAttribute("MayhemDetail", not solid)
+	if qualityTier then item:SetAttribute("QualityTier", qualityTier) end
 	item.Parent = parent
 	return item
 end
@@ -24,14 +25,13 @@ function Geometry.ring(parent: Instance, name: string, frame: CFrame, radius: nu
 	local model = Instance.new("Model")
 	model.Name = name
 	model.WorldPivot = frame
+	if orbit then model:SetAttribute("OrbitSpeed", orbit) end
 	model.Parent = parent
 	for index = 1, count do
 		local angle = (index - 1) * math.pi * 2 / count
 		local transform = frame * CFrame.Angles(0, angle, 0) * CFrame.new(0, 0, -radius)
-		local arc = Geometry.part(model, "Arc", Vector3.new(radius * 2 * math.sin(math.pi / count) * 0.87, 0.14, 0.24), transform, color, Enum.Material.Neon)
-		arc:SetAttribute("QualityTier", 2)
+		Geometry.part(model, "Arc", Vector3.new(radius * 2 * math.sin(math.pi / count) * 0.87, 0.14, 0.24), transform, color, Enum.Material.Neon, false, 2)
 	end
-	if orbit then model:SetAttribute("OrbitSpeed", orbit) end
 	return model
 end
 

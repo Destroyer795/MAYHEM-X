@@ -47,9 +47,8 @@ function WorldPresentation.new(preferences: any)
 		local world = workspace:WaitForChild("MayhemWorld", 30)
 		if not world then return end
 		local function cache(item: Instance)
-			if item:IsA("Model") and item:GetAttribute("OrbitSpeed") then table.insert(self.rings, { model = item, base = item:GetPivot(), speed = item:GetAttribute("OrbitSpeed") }) end
-			if item:IsA("BasePart") and item:GetAttribute("QualityTier") == 2 then table.insert(self.details, item) end
-			self.applied = ""
+			if item:IsA("Model") and item:GetAttribute("OrbitSpeed") then table.insert(self.rings, { model = item, base = item:GetPivot(), speed = item:GetAttribute("OrbitSpeed") }); self.applied = "" end
+			if item:IsA("BasePart") and item:GetAttribute("QualityTier") == 2 then table.insert(self.details, item); self.applied = "" end
 		end
 		world.DescendantAdded:Connect(cache)
 		for _, item in world:GetDescendants() do cache(item) end
@@ -72,18 +71,23 @@ function WorldPresentation.step(self: any, state: any)
 	local camera = workspace.CurrentCamera
 	if not camera then return end
 	local low = self.preferences.graphics == "Low" or (self.preferences.graphics == "Auto" and (UserInputService.TouchEnabled or camera.ViewportSize.X < 760))
+	self.low = low
 	local map = state.map
 	local world = workspace:FindFirstChild("MayhemWorld")
-	local art = if world then world:FindFirstChild("ArtDirection") else nil
-	local telemetry = if art then art:FindFirstChild("HubTelemetry", true) else nil
-	local caption = if telemetry then telemetry:FindFirstChild("Caption", true) :: TextLabel? else nil
+	local caption = self.caption
+	if not caption or not caption.Parent then
+		local art = if world then world:FindFirstChild("ArtDirection") else nil
+		local telemetry = if art then art:FindFirstChild("HubTelemetry", true) else nil
+		caption = if telemetry then telemetry:FindFirstChild("Caption", true) :: TextLabel? else nil
+		self.caption = caption
+	end
 	if caption then caption.Text = state.queueCount .. " QUEUED / " .. #Players:GetPlayers() .. " ONLINE / " .. string.upper(state.phase) end
 	local inArena = state.alive and state.phase ~= "Results"
 	local profile, mapId = lobbyLight, "Lobby"
 	if map and inArena then
 		for _, entry in Catalog do if entry.id == map.id then profile, mapId = entry.lighting, entry.id; break end end
 	end
-	local key = mapId .. tostring(low) .. tostring(self.preferences.reducedMotion)
+	local key = mapId .. tostring(world and world:GetAttribute("MapGeneration")) .. tostring(low) .. tostring(self.preferences.reducedMotion) .. tostring(self.preferences.reducedEffects)
 	if key ~= self.applied then
 		self.applied = key
 		Lighting.ClockTime = profile.clock
@@ -116,30 +120,39 @@ function WorldPresentation.step(self: any, state: any)
 		self.emitter.Color = ColorSequence.new(if mapId == "Frost" then Color3.new(1, 1, 1) elseif mapId == "Solar" then Color3.fromRGB(246, 193, 98) else Color3.fromRGB(78, 219, 177))
 		self.emitter.Rate = if mapId == "Frost" then 9 elseif mapId == "Jungle" then 2 elseif mapId == "Solar" then 3 else 0
 	end
-	local animated = 0
-	for _, item in self.rings do
-		if item.model.Parent and not low and not self.preferences.reducedMotion and animated < Visuals.Budgets.AnimatedRings
-			and (item.base.Position - camera.CFrame.Position).Magnitude <= Visuals.Budgets.AnimationDistance then
-			item.model:PivotTo(item.base * CFrame.Angles(0, os.clock() * item.speed, 0))
-			animated += 1
-		end
-	end
 	local character = Players.LocalPlayer.Character
 	local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
 	self.emitter.Enabled = inArena and root ~= nil and not low and not self.preferences.reducedEffects and not self.preferences.reducedMotion
-	if root then self.weather.Position = root.Position + Vector3.new(0, 24, 0) end
 	local showZone = inArena and state.phase == "Active" and root ~= nil and map ~= nil
+	local offset = if root and map then root.Position - map.center else Vector3.zero
+	local outside = map ~= nil and Vector3.new(offset.X, 0, offset.Z).Magnitude > map.safeRadius
 	for index, item in self.zone do
 		item.Transparency = if showZone then 0.25 else 1
 		if showZone then
 			local radius = map.safeRadius
 			local angle = (index - 0.5) * math.pi * 2 / #self.zone
-			local offset = (root :: BasePart).Position - map.center
-			local outside = Vector3.new(offset.X, 0, offset.Z).Magnitude > radius
 			item.Color = if outside then Color3.fromRGB(255, 171, 68) else Color3.fromRGB(22, 177, 200)
 			item.Size = Vector3.new(2 * radius * math.sin(math.pi / #self.zone), 0.15, 0.3)
 			item.CFrame = CFrame.new(map.center.X, (root :: BasePart).Position.Y - 2.8, map.center.Z) * CFrame.Angles(0, angle, 0) * CFrame.new(0, 0, radius)
 		end
+	end
+end
+
+function WorldPresentation.animate(self: any)
+	local camera = workspace.CurrentCamera
+	if not camera or self.low or self.preferences.reducedMotion then return end
+	local animated = 0
+	for _, item in self.rings do
+		if item.model.Parent and animated < Visuals.Budgets.AnimatedRings
+			and (item.base.Position - camera.CFrame.Position).Magnitude <= Visuals.Budgets.AnimationDistance then
+			item.model:PivotTo(item.base * CFrame.Angles(0, os.clock() * item.speed, 0))
+			animated += 1
+		end
+	end
+	if self.emitter.Enabled then
+		local character = Players.LocalPlayer.Character
+		local root = if character then character:FindFirstChild("HumanoidRootPart") :: BasePart? else nil
+		if root then self.weather.Position = root.Position + Vector3.new(0, 24, 0) end
 	end
 end
 

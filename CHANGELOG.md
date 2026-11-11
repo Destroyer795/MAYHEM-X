@@ -6,6 +6,7 @@
 - Failed uploaded effects now select available built-in fallbacks. Music loads per context, late preload completions cannot restart an obsolete score, initial group volumes honor preferences, and two of twenty one-shot voices are reserved for UI feedback. Music diagnostics distinguish configured, ready and failed assets.
 - Added pure audio routing cases for fallback selection, unavailable assets, tuning, unknown cues and group classification. Execution still requires Luau or Studio.
 - Portrait deployment now stacks the showcase, map link, profile and actions in scrollable content. HUD vitals/ammo share available width on narrow screens, status lines stay inside the screen, short landscape kill feeds fit between panels, and reload/swap touch targets are 44 pixels high. Rendered device acceptance remains pending.
+- Menu/showcase cameras, branding and bounded nearby hub rings now animate on the client render loop; telemetry stays at 10 Hz. Cached hub caption lookup, one zone-distance calculation per update and selective art invalidation reduce repeated work. Quality/orbit attributes are set before world parenting, and map generations refresh local art caches. Reduced effects clears existing weather promptly.
 - Desktop inventory now works, but the Studio launch attempt timed out at app approval. The node helper failed to start, and portable tool setup could not connect to the remote server. Studio runtime acceptance remains pending.
 
 ## 2026-11-11: Premium milestone, Studio acceptance pending
