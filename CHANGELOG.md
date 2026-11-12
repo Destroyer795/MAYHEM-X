@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-13: Live operator showcase refinement
+
+- Connected the Studio-generated R15 operator model in `ReplicatedStorage.Mayhem.Art.OperatorShowcase` to menu and character previews, retaining the existing player-character fallback when the model is absent.
+- Added a restrained framed stage to the operator page, enlarged the compact-height preview without overlapping the selection controls, and placed the display pedestal from the model's actual bounds to remove the visible foot gap.
+- Inspected the deployment screen and operator page in the live Studio client. Clicked Operators and Spectre and confirmed the selected state changes. The model is in a static A-pose and is not final character-selection animation content. The generated rig is not included in the Rojo art library, so the source export does not reproduce this showcase.
+- Studio Output showed the normal local-place notice and no script errors during this visual check. Full-screen navigation, mobile, animation and multiplayer checks remain pending.
+
 ## Versioned account profile and Studio fallback
 
 - Replaced the preferences-only service with a version 2 server profile for allowlisted settings, cumulative kills and wins, earned credits, cosmetic ownership/equipment and the daily claim day. Account XP and level derive from the persisted server stats.

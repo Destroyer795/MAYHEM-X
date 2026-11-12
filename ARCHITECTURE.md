@@ -18,7 +18,7 @@
 | `src/shared/` | Frozen balance/protocol, pure gameplay/style/map/preference rules, audio config, art tokens and geometry |
 | `src/shared/ProfileRules.luau` | Profile defaults, schema migration and catalog validation |
 | `src/client/Hud.luau`, `Menus.luau` | Combat telemetry, results and functional navigation/collection/settings/ballots |
-| `src/client/Theme.luau`, `Preview.luau` | Typography, colors, 8/16/24 spacing tokens, rounded buttons, state/hover feedback and disposable geometry previews |
+| `src/client/Theme.luau`, `Preview.luau` | Typography, colors, 8/16/24 spacing tokens, rounded buttons, state/hover feedback and disposable previews, including the optional live operator showcase |
 | `src/client/CameraController.luau` | Both perspectives, input/aim, camera obstruction and cosmetic viewmodel animation |
 | `src/client/Effects.luau` | Bounded tracers, Trails, waves, bursts and occluded Highlights |
 | `src/client/WorldPresentation.luau` | Map lighting, local orbit/weather, quality controls and nonphysical zone outline |
@@ -72,7 +72,7 @@ The UI uses dark navy surfaces, violet actions, cyan selection marks and gold re
 
 AudioConfig owns six built-in URI references, cue tuning, ambience, twenty-nine uploaded IDs and pure music-context selection. SETUP.md maps every ID to its caller. SoundGroups separate Music, Ambience, Effects and UI; preferences control music/ambience, effects, UI and master mute from initialization. One-shot voices are distance/throttle bounded, spatial carriers are nonphysical and voices expire after at most six seconds. Pending/failed uploaded effects use an available built-in fallback. Preloading passes silent Sound instances to ContentProvider and checks IsLoaded before destroying the probes. Music preloads on context selection, with serial guards against late playback. Crossfades retain at most the current score and one fading predecessor. Loading/countdown use the selected map score, accepted nearby combat changes context, duel takes priority, and results select participant win/loss stingers. Round changes clear combat timing. Map generation invalidates ambience. Settings distinguish configured, loaded and failed assets. Local Studio playback is tested; published-universe permission grants remain unverified.
 
-Live scene edits belong to the open local Studio DataModel. Script changes are inspected, backed up, edited through MCP and mirrored in source. Rojo sync is toward Studio, not a scene export. A generated operator draft remains in live `ServerStorage.ArtDrafts`; it is unreviewed, unused and not part of the Rojo source bundle. Do not rebuild or sync over live scene changes without reviewing what would be replaced. Earlier offline XML/hash reports do not describe a subsequent Studio save.
+Live scene edits belong to the open local Studio DataModel. Script changes are inspected, backed up, edited through MCP and mirrored in source. Rojo sync is toward Studio, not a scene export. The generated operator showcase is live at `ReplicatedStorage.Mayhem.Art.OperatorShowcase` and is consumed by `Preview.luau` when present. Its model is not included in `assets/art/Library.rbxmx`, so source-only builds retain the player-character preview fallback. Do not rebuild or sync over live scene changes without reviewing what would be replaced. Earlier offline XML/hash reports do not describe a subsequent Studio save.
 
 ## Budgets and remaining boundaries
 

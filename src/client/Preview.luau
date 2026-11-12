@@ -29,10 +29,12 @@ end
 function Preview.show(self: any, kind: string, operative: string, skin: string, weapon: number?)
 	local character = Players.LocalPlayer.Character
 	local appearance = if character then character:FindFirstChild("MayhemStyle") else nil
-	if kind ~= "weapon" and (not character or not appearance or not character:FindFirstChild("Head") or not (character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso"))) then return end
+	local showcase = if kind == "operative" then ReplicatedStorage.Mayhem.Art:FindFirstChild("OperatorShowcase") else nil
+	if showcase and not showcase:IsA("Model") then showcase = nil end
+	if kind ~= "weapon" and not showcase and (not character or not appearance or not character:FindFirstChild("Head") or not (character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso"))) then return end
 	local key = kind .. operative .. skin .. tostring(weapon)
-	if self.key == key and self.character == character and self.appearance == appearance then return end
-	self.key, self.character, self.appearance = key, character, appearance
+	if self.key == key and self.character == character and self.appearance == appearance and self.showcase == showcase then return end
+	self.key, self.character, self.appearance, self.showcase = key, character, appearance, showcase
 	if self.world then self.world:Destroy() end
 	local world = Instance.new("WorldModel")
 	world.Parent = self.frame
@@ -43,13 +45,14 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 	if kind == "weapon" then
 		self.subject = Art.weapon(world, weapon or 1, CFrame.identity, accent)
 		self.direction = if weapon == 2 then Vector3.new(0.5, 0.2, -1).Unit else Vector3.new(1, 0.25, 0.2).Unit
-	elseif character then
-		local before = character.Archivable
-		character.Archivable = true
-		local rig = character:Clone()
-		character.Archivable = before
+	elseif showcase or character then
+		local source = (showcase or character) :: Model
+		local before = source.Archivable
+		source.Archivable = true
+		local rig = source:Clone()
+		source.Archivable = before
 		for _, child in rig:GetDescendants() do
-			if child:IsA("LuaSourceContainer") or child:IsA("Accessory") or child.Name == "MayhemWeapon" then child:Destroy()
+			if child:IsA("LuaSourceContainer") or (not showcase and child:IsA("Accessory")) or child.Name == "MayhemWeapon" then child:Destroy()
 			elseif child:IsA("BasePart") then
 				child.Anchored, child.CanCollide, child.CanTouch, child.CanQuery = true, false, false, false
 				child.LocalTransparencyModifier = 0
@@ -57,7 +60,21 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 		end
 		rig:PivotTo(CFrame.identity)
 		rig.Parent = world
-		Art.outfit(rig, accent, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders)
+		if showcase then
+			local chest = rig:FindFirstChild("UpperTorso")
+			if chest and chest:IsA("BasePart") then
+				local profileAccent = if operative == "Spectre" then Color3.fromRGB(89, 220, 239) elseif operative == "Relay" then Color3.fromRGB(255, 190, 88) else accent
+				local inlay = Instance.new("Part")
+				inlay.Name = "MayhemPreviewInlay"
+				inlay.Size = Vector3.new(0.22, 0.055, 0.035)
+				inlay.CFrame = chest.CFrame * CFrame.new(0, chest.Size.Y * 0.24, -chest.Size.Z * 0.55)
+				inlay.Color, inlay.Material = profileAccent, Enum.Material.Neon
+				inlay.Anchored, inlay.CanCollide, inlay.CanTouch, inlay.CanQuery = true, false, false, false
+				inlay.CastShadow, inlay.Parent = false, rig
+			end
+		else
+			Art.outfit(rig, accent, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders)
+		end
 		for _, part in rig:GetDescendants() do if part:IsA("BasePart") then part.Anchored = true end end
 		if kind == "victory" then
 			for _, joint in rig:GetDescendants() do
@@ -68,7 +85,12 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 		self.direction = Vector3.new(0.35, 0.15, -1).Unit
 		local humanoid = rig:FindFirstChildOfClass("Humanoid")
 		if humanoid then humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None end
-		Art.place(world, "AerialBastion", CFrame.new(0, -3.95, 0), Vector3.new(6, 0.9, 6))
+		local pedestalY = -3.25
+		if kind ~= "weapon" then
+			local bounds, size = self.subject:GetBoundingBox()
+			pedestalY = bounds.Position.Y - size.Y * 0.5 - 0.45
+		end
+		Art.place(world, "AerialBastion", CFrame.new(0, pedestalY, 0), Vector3.new(6, 0.9, 6))
 	else self.key = "" end
 	if self.subject then
 		local bounds, size = self.subject:GetBoundingBox()

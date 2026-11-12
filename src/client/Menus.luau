@@ -158,6 +158,9 @@ function Menus.new(parent: Instance, callbacks: any)
 	end
 	self.operativeDetail = Theme.text(character, "Detail", "", UDim2.fromOffset(0, 210), UDim2.new(0.5, -8, 0, 80), 14, Theme.Muted)
 	self.equipOperative = Theme.button(character, "Equip", "EQUIP PROFILE", UDim2.new(0, 0, 1, -54), UDim2.new(0.5, -8, 0, 46), function() callbacks.select("operative", self.draftOperative) end)
+	self.characterStage = Theme.frame(character, "ShowcaseStage", UDim2.new(0.53, 0, 0, 42), UDim2.new(0.47, 0, 0, 300), Theme.Panel, 0.22)
+	Theme.corner(self.characterStage, 8)
+	Theme.stroke(self.characterStage, Theme.Cyan, 0.82)
 	self.characterPreview = Preview.new(character)
 	self.characterPreview.frame.Position = UDim2.fromScale(0.53, 0.12)
 	self.characterPreview.frame.Size = UDim2.fromScale(0.47, 0.72)
@@ -430,8 +433,10 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	else self.frontier.Visible = true end
 	self.deployDescription.Visible = heroHeight > 420 and not portrait
 	self.mapLink.Visible = heroHeight > 480 and not portrait
-	self.characterPreview.frame.Position = UDim2.new(0.53, 0, 0, 42)
-	self.characterPreview.frame.Size = UDim2.new(0.47, 0, 0, if short then 150 else 300)
+	self.characterPreview.frame.Position = UDim2.new(0.53, 0, 0, if short then 0 else 42)
+	self.characterPreview.frame.Size = UDim2.new(0.47, 0, 0, if short then 250 else 300)
+	self.characterStage.Position = self.characterPreview.frame.Position
+	self.characterStage.Size = self.characterPreview.frame.Size
 	for index, entry in Visuals.Operatives do
 		local item = self.operativeButtons[entry.id]
 		item.Position = if short then UDim2.new((index - 1) * 0.18, 0, 0, 48) else UDim2.fromOffset(0, 54 + (index - 1) * 48)
@@ -439,7 +444,12 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	end
 	self.equipOperative.Position = if short then UDim2.fromOffset(0, 108) else UDim2.new(0, 0, 1, -54)
 	self.equipOperative.Size = UDim2.new(if short then 0.52 else 0.5, -8, 0, 44)
-	if short then self.characterPreview.frame.Position = UDim2.new(0.57, 0, 0, 0) end
+	if short then
+		self.characterPreview.frame.Position = UDim2.new(0.56, 0, 0, 0)
+		self.characterPreview.frame.Size = UDim2.new(0.44, 0, 0, 250)
+		self.characterStage.Position = self.characterPreview.frame.Position
+		self.characterStage.Size = self.characterPreview.frame.Size
+	end
 	local profile = style.profile or { credits = 0, level = 1, xp = 0, status = "LOADING" }
 	if self.confirm.Visible then
 		self.confirmBuy.Active = style.ready and profile.credits >= 45
