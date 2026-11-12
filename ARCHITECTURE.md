@@ -22,6 +22,7 @@
 | `src/client/AudioController.luau` | Preload diagnostics, SoundGroups, spatial effects, ambience and score transitions |
 | `assets/maps/*.json`, `scripts/maps.ps1` | Five authored layouts and shared physical-template compiler |
 | `assets/audio/scorebook.json`, `scripts/audio.ps1` | Original composition/effect definitions and PCM renderer |
+| `assets/art/manifest.json`, `Library.rbxmx`, `scripts/art.ps1` | Ten original Studio-generated models, returned asset references and reproducible source export; scene integration pending |
 | `tests/`, `scripts/` | Structural/geometry/WAV checks, Luau cases, Studio helpers, local setup/build/package |
 
 Five complete baseline files, fourteen original gameplay methods and the camera aiming function are checked against `9172422`. Match/map integration, damage attribution and environmental hit hooks are reviewed changes. Startup runs the preserved arena builder, removes its superseded arena/duel geometry, decorates the hub and clones one premium map. The editor preview is removed by that startup builder.

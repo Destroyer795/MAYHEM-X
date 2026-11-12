@@ -4,9 +4,11 @@
 
 The writable root is `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`. The requested `C:\MAYHEM-X` is outside this session's writable roots. Scripts resolve their own project root and can run after relocation. Inspect an existing destination before copying or cloning.
 
-The official Roblox Studio MCP is connected to the local `build/MAYHEM-X-Premium.rbxlx`. Live DataModel inspection, script editing, screenshots, saving and two-client playtesting work. Studio was not reinstalled. The earlier desktop-control connection failures are historical and no longer block this workflow.
+The official Roblox Studio MCP previously verified live inspection, editing, screenshots, saving and two-client playtesting. During the transformation it reconnected without an attached place; the user is reopening `build/MAYHEM-X-Transformation.rbxl` and checking the connection indicator. Do not proceed with live edits until the tool lists that file in Edit mode. Studio was not reinstalled.
 
 No dependencies were installed for this milestone. No Python environment, npm package, Rust installation, administrator access or permanent PATH change is required. Map compilation and audio synthesis use existing PowerShell/.NET.
+
+The active transformation working file is `build/MAYHEM-X-Transformation.rbxl`; the previous Premium file is preserved. Ten original models were generated inside Studio, with returned asset IDs, prompts and geometry in `assets/art/manifest.json`. `scripts/art.ps1` exports that captured geometry to `assets/art/Library.rbxmx`; it does not generate a place, upload assets or install software. `tests/Art.Tests.ps1` checks its static asset/collision contract. Asset permissions in a published universe still need verification. Keep the library and manifest as source; the generator tooling remains Roblox Studio itself.
 
 | Dependency | Purpose and version | Location/form | Storage |
 | --- | --- | --- | --- |

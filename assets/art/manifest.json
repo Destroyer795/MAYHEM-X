@@ -1,0 +1,1080 @@
+{
+  "version": 1,
+  "source": "Original assets generated specifically for MAYHEM X with Roblox Studio mesh generation. No third-party Creator Store models.",
+  "created": "2026-11-12",
+  "models": [
+    {
+      "key": "ReactorTurbine",
+      "assetId": "88435253383185",
+      "generationId": "6e7149ee-33b0-4b5e-8b57-159a289fe4b2",
+      "prompt": "Original suspended reactor turbine, ivory ceramic armor, cobalt chamber and gunmetal turbine."
+    },
+    {
+      "key": "CanopyTree",
+      "assetId": "89174172455152",
+      "generationId": "a63df50d-da64-4271-8950-8ca6e95d9ee3",
+      "prompt": "Original premium stylized tropical alien jungle tree for a bright science fiction combat game. A gracefully curved organic trunk with spreading buttress roots, layered broad teal and emerald palm fronds, hanging vines and a few tiny gold seed pods. Rich hand-painted PBR texture, convincing organic silhouette with many tapered leaves, beautiful saturated green foliage, no blocks, no cubes, no base or ground, no surrounding objects. Game-ready vegetation prop, readable canopy, open space beneath foliage for combat visibility."
+    },
+    {
+      "key": "SolarRelic",
+      "assetId": "128699549590763",
+      "generationId": "102121e7-91cc-4804-a31e-b691941726e3",
+      "prompt": "An original ancient futuristic desert monument for a premium stylized sci-fi game. Tall asymmetrical carved sandstone arch-obelisk, weathered terracotta and golden stone surfaces, intricate recessed geometric channels and blue ceramic technology embedded inside the carved stone. Sculptural sweeping silhouette with broken layered edges and a small suspended sun disk inset. Beautiful detailed PBR surface, no floor, no people, no text, no logos. Freestanding environment landmark, warm ochre and restrained cobalt, optimized game mesh."
+    },
+    {
+      "key": "FrostCrown",
+      "assetId": "138569879902554",
+      "generationId": "74034526-d180-48c4-8442-3c9dc0f1e49a",
+      "prompt": "An original premium stylized frozen crystal formation for a futuristic ice combat arena. A striking sweeping crown of large translucent-looking blue ice blades and slender branching ice shards growing around a carved white stone technological core. Deep sapphire at crevices, pale cyan tips, powder snow on upward surfaces, convincing faceted non-cubic crystalline geometry. Beautiful PBR painted surface details and elegant silhouette. No ground plane, no base platform, no logos, no text, optimized game environment landmark."
+    },
+    {
+      "key": "SkySpire",
+      "assetId": "107351392358090",
+      "generationId": "ecdeda24-756c-4e4a-82a4-7aafcfa2b97a",
+      "prompt": "An original premium stylized futuristic skyscraper for a colorful competitive sci-fi city arena. Artful aerodynamic stepped silhouette with curved silver-white facade panels, deep blue glass ribbons, vertical recessed magenta lighting strips used sparingly, rooftop antenna and mechanical vents. Beautiful architectural model with balconies, panel seams and metallic structure. Rich blue hour PBR textures but bright white facade, no surrounding city, no ground plane, no floating platform, no text or logos. Freestanding tower for a game skyline, optimized."
+    },
+    {
+      "key": "VectorRifle",
+      "assetId": "127937725864195",
+      "generationId": "68a25557-28a9-45b9-8ebb-134b312bbdc5",
+      "prompt": "Original premium sci-fi assault rifle named VECTOR-18, a game-ready weapon model only. Long barrel pointing forward on the horizontal axis, sculpted ivory ceramic receiver shell over gunmetal mechanism, deep cobalt blue energy cartridge, restrained violet emitter details, bronze fasteners, skeletonized ergonomic stock, muzzle brake, raised iron sights, detailed panel lines and recessed vents. Practical elegant military industrial design, hard surface chamfered edges, no oversized glow, no text, no logos, no hands, no background, no pedestal. Beautiful high quality PBR texture, clearly recognizable rifle silhouette."
+    },
+    {
+      "key": "RiftBlade",
+      "assetId": "137007323080342",
+      "generationId": "236a45a0-42fb-44fd-bc7c-ce0a5d31e9df",
+      "prompt": "Original premium futuristic sci-fi short sword, Rift Blade weapon model only, vertical sword with blade pointing upward. A slender elegant single edged titanium blade with a curved tapered spear tip, a narrow cobalt blue energy channel inset into the silver blade, asymmetric ivory hand guard with gunmetal inner structure, textured charcoal grip and brass pommel. Beautiful detailed hard surface PBR materials, beveled facets, professional game weapon, no text, no logos, no hands, no pedestal, no background."
+    },
+    {
+      "key": "AerialBastion",
+      "assetId": "123757637316172",
+      "generationId": "9e83902c-14b4-43a9-8413-56e41f02e18e",
+      "prompt": "An original premium stylized futuristic floating fortress platform hull, environment asset for a sci-fi combat arena. Broad octagonal footprint with a FLAT OPEN WALKABLE TOP, armored deep cobalt gunmetal lower hull, swept ivory ceramic rim panels, four sculpted downward fins, layered mechanical underbelly with turbines and restrained blue vent glow. No buildings on top, no people, no guns, no text, no logos. Elegant chamfered contours, rich hard surface PBR panel seams and warm brass hardware. Thick complex tapered hull below a clear open top deck, not a cube, not a rectangular block."
+    },
+    {
+      "key": "RockShelf",
+      "assetId": "80979018143868",
+      "generationId": "4581ddd1-b6b6-4b11-8152-ccb93e482b5b",
+      "prompt": "An original premium stylized tropical floating island cliff base for a science fiction jungle game. Broad flat grass-covered top, irregular rounded footprint with thick tapered stratified rock below, warm gray and ochre eroded stone with lush moss and hanging vines, asymmetrical craggy root formations along rim. No trees, no people, no buildings, no text, no platform or square edges. Organic sculpted layered rock, painted PBR textures, readable stylized silhouette, optimized game environment."
+    },
+    {
+      "key": "FieldCover",
+      "assetId": "122171152834722",
+      "generationId": "2687468d-985f-4c43-a59d-ee81577de02a",
+      "prompt": "An original premium stylized sci-fi field generator used as waist-high combat cover. A compact squat industrial machine with chamfered ivory armor panels, a dark cobalt metal chassis, recessed cooling grille, side handle and small brass fasteners, two narrow blue indicator strips. Rectangular footprint but sculpted rounded corners and detailed mechanical surfaces, solid broad silhouette with no large protrusions. Hard surface PBR textures, no text, no logos, no surrounding floor, no pedestal, game ready."
+    }
+  ],
+  "geometry": [
+    {
+      "name": "ReactorTurbine",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "outer shell_geom",
+          "size": [
+            18,
+            21.15554428100586,
+            16.002819061279297
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00021982192993164062,
+            0.0001163482666015625,
+            0,
+            1.000000238418579,
+            0,
+            -2.9802322387695312e-8,
+            0,
+            1,
+            0,
+            -2.9802322387695312e-8,
+            0,
+            0.9999999403953552
+          ],
+          "mesh": "rbxassetid://101129099610711",
+          "texture": "rbxassetid://85181203219363"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "turbine_geom",
+          "size": [
+            13.888951301574707,
+            17.895645141601562,
+            5.246477127075195
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.024549007415771484,
+            0.2863483428955078,
+            0.031180381774902344,
+            1.000000238418579,
+            0,
+            -2.9802322387695312e-8,
+            0,
+            1,
+            0,
+            -2.9802322387695312e-8,
+            0,
+            0.9999999403953552
+          ],
+          "mesh": "rbxassetid://94153031234104",
+          "texture": "rbxassetid://133749793547694"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "energy chamber_geom",
+          "size": [
+            8.352363586425781,
+            8.399311065673828,
+            13.547200202941895
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.0033402442932128906,
+            0.06921195983886719,
+            -0.02550792694091797,
+            1.000000238418579,
+            0,
+            -2.9802322387695312e-8,
+            0,
+            1,
+            0,
+            -2.9802322387695312e-8,
+            0,
+            0.9999999403953552
+          ],
+          "mesh": "rbxassetid://78568713067829",
+          "texture": "rbxassetid://95948224623969"
+        }
+      ]
+    },
+    {
+      "name": "CanopyTree",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "trunk_geom",
+          "size": [
+            4.601377487182617,
+            9.71621322631836,
+            3.7445430755615234
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.5018730163574219,
+            -5.742051124572754,
+            -0.04487800598144531,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://93379175816166",
+          "texture": "rbxassetid://74264750154799"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "foliage_geom",
+          "size": [
+            20.058876037597656,
+            13.18478012084961,
+            20
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0,
+            4.209921836853027,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://89183362161107",
+          "texture": "rbxassetid://99898780698178"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "roots_geom",
+          "size": [
+            9.481111526489258,
+            4.194247722625732,
+            8.865533828735352
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.15365219116210938,
+            -8.70455265045166,
+            -0.021539688110351562,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://76406648336394",
+          "texture": "rbxassetid://125375038599029"
+        }
+      ]
+    },
+    {
+      "name": "SolarRelic",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "arch-obelisk_geom",
+          "size": [
+            14,
+            19.003948211669922,
+            5.845541954040527
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.0001220703125,
+            0.0001163482666015625,
+            0.20367324352264404,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://120744873032947",
+          "texture": "rbxassetid://119600538135013"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "embedded technology_geom",
+          "size": [
+            13.842331886291504,
+            18.758907318115234,
+            5.659314155578613
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.041057586669921875,
+            0.06301307678222656,
+            0.20610320568084717,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://129085636120004",
+          "texture": "rbxassetid://97736264746828"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "sun disk_geom",
+          "size": [
+            1.6196708679199219,
+            1.6783294677734375,
+            1.6194441318511963
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.010623931884765625,
+            7.908414840698242,
+            -2.3164358139038086,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://131069759100919",
+          "texture": "rbxassetid://109037561036645"
+        }
+      ]
+    },
+    {
+      "name": "FrostCrown",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "ice blades_geom",
+          "size": [
+            4.121785640716553,
+            7.3281707763671875,
+            4.209079742431641
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.029000282287597656,
+            -2.7825984954833984,
+            0.004169464111328125,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://122510816699700",
+          "texture": "rbxassetid://105543010703419"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "ice shards_geom",
+          "size": [
+            9.228683471679688,
+            14.725526809692383,
+            9.196428298950195
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.007950782775878906,
+            -1.3432369232177734,
+            -0.023248672485351562,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://99172073171010",
+          "texture": "rbxassetid://130956271292522"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "stone core_geom",
+          "size": [
+            9.291973114013672,
+            18,
+            9.241795539855957
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00011348724365234375,
+            -0.0001163482666015625,
+            0.00063323974609375,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://79918114184162",
+          "texture": "rbxassetid://134836741949065"
+        }
+      ]
+    },
+    {
+      "name": "SkySpire",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "walls_geom",
+          "size": [
+            17.76848602294922,
+            28.329025268554688,
+            18
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00021648406982421875,
+            -3.933778762817383,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://114169093311671",
+          "texture": "rbxassetid://122272855563833"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "windows_geom",
+          "size": [
+            9.95225715637207,
+            15.296327590942383,
+            10.082862854003906
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.033843040466308594,
+            -4.347021102905273,
+            0.09357833862304688,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://101057217240018",
+          "texture": "rbxassetid://117318376313062"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "door_geom",
+          "size": [
+            0.9032120704650879,
+            3.2804994583129883,
+            3.529252767562866
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            7.489476203918457,
+            -16.126773834228516,
+            0.3374671936035156,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://87353363019315",
+          "texture": "rbxassetid://105269080138767"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "roof_geom",
+          "size": [
+            4.622426986694336,
+            8.365925788879395,
+            3.9136099815368652
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.03240489959716797,
+            13.91533088684082,
+            -0.00434112548828125,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://127618947477392",
+          "texture": "rbxassetid://117932222879559"
+        }
+      ]
+    },
+    {
+      "name": "VectorRifle",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "grip_geom",
+          "size": [
+            0.1605990082025528,
+            0.4355681538581848,
+            0.5686778426170349
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00115203857421875,
+            -0.05753886699676514,
+            0.5388554930686951,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://121302217912589",
+          "texture": "rbxassetid://91851063376730"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "frame_geom",
+          "size": [
+            0.33516034483909607,
+            1.0724093914031982,
+            2.256948947906494
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0,
+            -0.013795733451843262,
+            0.24269002676010132,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://127742886295934",
+          "texture": "rbxassetid://133206722097963"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "barrel_geom",
+          "size": [
+            0.13870570063591003,
+            0.305986613035202,
+            1.3205596208572388
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.001316070556640625,
+            0.3970071077346802,
+            -0.7108927369117737,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://94235300294553",
+          "texture": "rbxassetid://84380104515601"
+        }
+      ]
+    },
+    {
+      "name": "RiftBlade",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "handle_geom",
+          "size": [
+            0.1605646014213562,
+            0.41020703315734863,
+            0.15578922629356384
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.000156402587890625,
+            -1.0269896984100342,
+            -0.0009136199951171875,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://132158180969750",
+          "texture": "rbxassetid://104667945318233"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "hand guard_geom",
+          "size": [
+            0.699999988079071,
+            0.22863894701004028,
+            0.2093898355960846
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0,
+            -0.7342363595962524,
+            -0.0007419586181640625,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://108600697517060",
+          "texture": "rbxassetid://95123779898702"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "blade_geom",
+          "size": [
+            0.26075848937034607,
+            2.1480982303619385,
+            0.2083873748779297
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.000148773193359375,
+            0.34753739833831787,
+            -0.0004863739013671875,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://89430485720445",
+          "texture": "rbxassetid://98967172709847"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "pommel_geom",
+          "size": [
+            0.3034643530845642,
+            0.21771836280822754,
+            0.2605956792831421
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00084686279296875,
+            -1.3127009868621826,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://86236350183812",
+          "texture": "rbxassetid://99028276153503"
+        }
+      ]
+    },
+    {
+      "name": "AerialBastion",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "walkable top deck_geom",
+          "size": [
+            19.57097625732422,
+            0.40952444076538086,
+            19.70453643798828
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0012760162353515625,
+            7.5548858642578125,
+            0.006688117980957031,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://135606220271492",
+          "texture": "rbxassetid://103932643392389"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "armored lower hull_geom",
+          "size": [
+            21.3857364654541,
+            10.733402252197266,
+            21.33621597290039
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.009763717651367188,
+            0.4714469909667969,
+            0.005129814147949219,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://80567446814204",
+          "texture": "rbxassetid://87373039045396"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "mechanical underbelly_geom",
+          "size": [
+            22.64910888671875,
+            16,
+            22.59733009338379
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0001621246337890625,
+            0,
+            0.00015354156494140625,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://79288178455684",
+          "texture": "rbxassetid://105481226895129"
+        }
+      ]
+    },
+    {
+      "name": "RockShelf",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "grass top_geom",
+          "size": [
+            22.473228454589844,
+            15.506596565246582,
+            22.567325592041016
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00010395050048828125,
+            4.24642276763916,
+            0.0005512237548828125,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://113474228500353",
+          "texture": "rbxassetid://80523813343293"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "rock base_geom",
+          "size": [
+            21.724454879760742,
+            22.75214385986328,
+            21.811336517333984
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.006417274475097656,
+            -0.6242055892944336,
+            0.0044002532958984375,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://103194970954617",
+          "texture": "rbxassetid://128109320503327"
+        }
+      ]
+    },
+    {
+      "name": "FieldCover",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "chassis_geom",
+          "size": [
+            5.74158239364624,
+            3.897613525390625,
+            4.637764930725098
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.005008220672607422,
+            -0.04232609272003174,
+            -0.001346588134765625,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://97875253900896",
+          "texture": "rbxassetid://96233022930062"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "armor panels_geom",
+          "size": [
+            5.95105504989624,
+            3.6138157844543457,
+            4.696880340576172
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0017275810241699219,
+            0.1842249631881714,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://83900228573344",
+          "texture": "rbxassetid://81256841305204"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "handle_geom",
+          "size": [
+            7,
+            0.7396628856658936,
+            2.32875394821167
+          ],
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.000019550323486328125,
+            0.5658243894577026,
+            -0.001369476318359375,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://119144096299160",
+          "texture": "rbxassetid://84876851592953"
+        }
+      ]
+    }
+  ]
+}

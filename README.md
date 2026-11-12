@@ -6,6 +6,8 @@ An original Roblox PvP survival game for up to sixteen contenders. Vote for a fr
 
 The current Premium place is being edited and tested through the official Roblox Studio MCP. Uploaded audio, queue/voting, combat requests, duel transfer and result music have passed a two-client Studio smoke test. This remains a development build: production progression, the full visual transformation, device performance and sixteen-player acceptance are unfinished.
 
+The ongoing transformation uses branch `feature/studio-production-transformation` and the separate live file `build/MAYHEM-X-Transformation.rbxl`. Ten original mesh assets have been created and exported for source control; they are not yet integrated arena or weapon replacements. Studio must have that file open in Edit mode to continue. The previous Premium/audio build remains preserved.
+
 ## Open and play
 
 1. Open `build/MAYHEM-X-Premium.rbxlx` in the existing Roblox Studio. A daylight Collapse editor preview is included. Startup replaces it with the hub and active arena.

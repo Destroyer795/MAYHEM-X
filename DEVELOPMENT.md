@@ -5,6 +5,7 @@
 Use Windows PowerShell from the project root. Execution policy changes below apply only to that process.
 
 ```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Art.Tests.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Audio.Tests.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Maps.Tests.ps1
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\Interface.Tests.ps1
@@ -59,6 +60,8 @@ The smoke tests above have run. The checklist below is the broader acceptance ga
 Record failures with map, phase, client count, device size, exact actions and Output text in CHANGELOG.md. Fix issues and repeat affected checks, then the multiplayer regression gate. `build/Studio-audio-verification.json` records the current observations and limits; `build/screenshots/menu-before.jpg` and `menu-after.jpg` are actual Studio captures. Only Collapse and menu screens have had visual review so far. Multi-view reviews of the other arenas, weapons and all major screens are pending.
 
 ## Next production stages
+
+The transformation asset foundation contains ten original models and thirty-one MeshParts. Its export passes 269 static asset/collision checks and a deterministic regeneration check. It has not replaced the arena/weapon systems yet. The resumable state is `build/transformation-checkpoint.json`; the working place is `build/MAYHEM-X-Transformation.rbxl`. Reopen that file in Studio Edit mode before continuing live work. Inspect the saved library against the manifest after reconnecting. Draft helper code is outside src and must be corrected and tested before use.
 
 1. Complete the visual audit with multiple live viewpoints of every arena, held weapons and major screen. Preserve before captures. Retain combat silhouettes/routes while replacing repeated primitive scenery with original architectural kits. Check available modelling tools before adding dependencies; record licenses for any imported content.
 2. Establish one material/font/icon system, then finish Collapse as the quality reference in Studio. Review daylight balance, focal landmarks, cover readability and low-quality rendering before adapting distinct jungle, desert, ice and city kits. Capture and refine each arena individually.

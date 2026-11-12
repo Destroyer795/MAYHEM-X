@@ -1,0 +1,1267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<roblox version="4">
+  <Item class="Folder" referent="ART1">
+    <Properties>
+      <string name="Name">Art</string>
+    </Properties>
+    <Item class="Model" referent="ART2">
+      <Properties>
+        <string name="Name">ReactorTurbine</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART3">
+        <Properties>
+          <string name="Name">outer shell_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://101129099610711</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://85181203219363</url>
+          </Content>
+          <Vector3 name="size">
+            <X>18</X>
+            <Y>21.155544281</Y>
+            <Z>16.002819061</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000219822</X>
+            <Y>0.000116348</Y>
+            <Z>0</Z>
+            <R00>1.000000238</R00>
+            <R01>0</R01>
+            <R02>-0.00000003</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>-0.00000003</R20>
+            <R21>0</R21>
+            <R22>0.99999994</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART4">
+        <Properties>
+          <string name="Name">turbine_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://94153031234104</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://133749793547694</url>
+          </Content>
+          <Vector3 name="size">
+            <X>13.888951302</X>
+            <Y>17.895645142</Y>
+            <Z>5.246477127</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.024549007</X>
+            <Y>0.286348343</Y>
+            <Z>0.031180382</Z>
+            <R00>1.000000238</R00>
+            <R01>0</R01>
+            <R02>-0.00000003</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>-0.00000003</R20>
+            <R21>0</R21>
+            <R22>0.99999994</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART5">
+        <Properties>
+          <string name="Name">energy chamber_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://78568713067829</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://95948224623969</url>
+          </Content>
+          <Vector3 name="size">
+            <X>8.352363586</X>
+            <Y>8.399311066</Y>
+            <Z>13.547200203</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.003340244</X>
+            <Y>0.06921196</Y>
+            <Z>-0.025507927</Z>
+            <R00>1.000000238</R00>
+            <R01>0</R01>
+            <R02>-0.00000003</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>-0.00000003</R20>
+            <R21>0</R21>
+            <R22>0.99999994</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART6">
+      <Properties>
+        <string name="Name">CanopyTree</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART7">
+        <Properties>
+          <string name="Name">trunk_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://93379175816166</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://74264750154799</url>
+          </Content>
+          <Vector3 name="size">
+            <X>4.601377487</X>
+            <Y>9.716213226</Y>
+            <Z>3.744543076</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.501873016</X>
+            <Y>-5.742051125</Y>
+            <Z>-0.044878006</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART8">
+        <Properties>
+          <string name="Name">foliage_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89183362161107</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://99898780698178</url>
+          </Content>
+          <Vector3 name="size">
+            <X>20.058876038</X>
+            <Y>13.184780121</Y>
+            <Z>20</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>4.209921837</Y>
+            <Z>0</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART9">
+        <Properties>
+          <string name="Name">roots_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://76406648336394</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://125375038599029</url>
+          </Content>
+          <Vector3 name="size">
+            <X>9.481111526</X>
+            <Y>4.194247723</Y>
+            <Z>8.865533829</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.153652191</X>
+            <Y>-8.70455265</Y>
+            <Z>-0.021539688</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART10">
+      <Properties>
+        <string name="Name">SolarRelic</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART11">
+        <Properties>
+          <string name="Name">arch-obelisk_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://120744873032947</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://119600538135013</url>
+          </Content>
+          <Vector3 name="size">
+            <X>14</X>
+            <Y>19.003948212</Y>
+            <Z>5.845541954</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.00012207</X>
+            <Y>0.000116348</Y>
+            <Z>0.203673244</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART12">
+        <Properties>
+          <string name="Name">embedded technology_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://129085636120004</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://97736264746828</url>
+          </Content>
+          <Vector3 name="size">
+            <X>13.842331886</X>
+            <Y>18.758907318</Y>
+            <Z>5.659314156</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.041057587</X>
+            <Y>0.063013077</Y>
+            <Z>0.206103206</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART13">
+        <Properties>
+          <string name="Name">sun disk_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://131069759100919</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://109037561036645</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.619670868</X>
+            <Y>1.678329468</Y>
+            <Z>1.619444132</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.010623932</X>
+            <Y>7.908414841</Y>
+            <Z>-2.316435814</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART14">
+      <Properties>
+        <string name="Name">FrostCrown</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART15">
+        <Properties>
+          <string name="Name">ice blades_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://122510816699700</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://105543010703419</url>
+          </Content>
+          <Vector3 name="size">
+            <X>4.121785641</X>
+            <Y>7.328170776</Y>
+            <Z>4.209079742</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.029000282</X>
+            <Y>-2.782598495</Y>
+            <Z>0.004169464</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART16">
+        <Properties>
+          <string name="Name">ice shards_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://99172073171010</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://130956271292522</url>
+          </Content>
+          <Vector3 name="size">
+            <X>9.228683472</X>
+            <Y>14.72552681</Y>
+            <Z>9.196428299</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.007950783</X>
+            <Y>-1.343236923</Y>
+            <Z>-0.023248672</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART17">
+        <Properties>
+          <string name="Name">stone core_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://79918114184162</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://134836741949065</url>
+          </Content>
+          <Vector3 name="size">
+            <X>9.291973114</X>
+            <Y>18</Y>
+            <Z>9.24179554</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000113487</X>
+            <Y>-0.000116348</Y>
+            <Z>0.00063324</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART18">
+      <Properties>
+        <string name="Name">SkySpire</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART19">
+        <Properties>
+          <string name="Name">walls_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://114169093311671</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://122272855563833</url>
+          </Content>
+          <Vector3 name="size">
+            <X>17.768486023</X>
+            <Y>28.329025269</Y>
+            <Z>18</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000216484</X>
+            <Y>-3.933778763</Y>
+            <Z>0</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART20">
+        <Properties>
+          <string name="Name">windows_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://101057217240018</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://117318376313062</url>
+          </Content>
+          <Vector3 name="size">
+            <X>9.952257156</X>
+            <Y>15.296327591</Y>
+            <Z>10.082862854</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.03384304</X>
+            <Y>-4.347021103</Y>
+            <Z>0.093578339</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART21">
+        <Properties>
+          <string name="Name">door_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://87353363019315</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://105269080138767</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.90321207</X>
+            <Y>3.280499458</Y>
+            <Z>3.529252768</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>7.489476204</X>
+            <Y>-16.126773834</Y>
+            <Z>0.337467194</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART22">
+        <Properties>
+          <string name="Name">roof_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://127618947477392</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://117932222879559</url>
+          </Content>
+          <Vector3 name="size">
+            <X>4.622426987</X>
+            <Y>8.365925789</Y>
+            <Z>3.913609982</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.0324049</X>
+            <Y>13.915330887</Y>
+            <Z>-0.004341125</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART23">
+      <Properties>
+        <string name="Name">VectorRifle</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART24">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://121302217912589</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://91851063376730</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160599008</X>
+            <Y>0.435568154</Y>
+            <Z>0.568677843</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001152039</X>
+            <Y>-0.057538867</Y>
+            <Z>0.538855493</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART25">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://127742886295934</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://133206722097963</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.335160345</X>
+            <Y>1.072409391</Y>
+            <Z>2.256948948</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.013795733</Y>
+            <Z>0.242690027</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART26">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://94235300294553</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://84380104515601</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.138705701</X>
+            <Y>0.305986613</Y>
+            <Z>1.320559621</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001316071</X>
+            <Y>0.397007108</Y>
+            <Z>-0.710892737</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART27">
+      <Properties>
+        <string name="Name">RiftBlade</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART28">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://132158180969750</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://104667945318233</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160564601</X>
+            <Y>0.410207033</Y>
+            <Z>0.155789226</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000156403</X>
+            <Y>-1.026989698</Y>
+            <Z>-0.00091362</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART29">
+        <Properties>
+          <string name="Name">hand guard_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://108600697517060</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://95123779898702</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.699999988</X>
+            <Y>0.228638947</Y>
+            <Z>0.209389836</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.73423636</Y>
+            <Z>-0.000741959</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART30">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89430485720445</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://98967172709847</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.260758489</X>
+            <Y>2.14809823</Y>
+            <Z>0.208387375</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000148773</X>
+            <Y>0.347537398</Y>
+            <Z>-0.000486374</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART31">
+        <Properties>
+          <string name="Name">pommel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://86236350183812</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://99028276153503</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.303464353</X>
+            <Y>0.217718363</Y>
+            <Z>0.260595679</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000846863</X>
+            <Y>-1.312700987</Y>
+            <Z>0</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART32">
+      <Properties>
+        <string name="Name">AerialBastion</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART33">
+        <Properties>
+          <string name="Name">walkable top deck_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://135606220271492</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://103932643392389</url>
+          </Content>
+          <Vector3 name="size">
+            <X>19.570976257</X>
+            <Y>0.409524441</Y>
+            <Z>19.704536438</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001276016</X>
+            <Y>7.554885864</Y>
+            <Z>0.006688118</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART34">
+        <Properties>
+          <string name="Name">armored lower hull_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://80567446814204</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://87373039045396</url>
+          </Content>
+          <Vector3 name="size">
+            <X>21.385736465</X>
+            <Y>10.733402252</Y>
+            <Z>21.336215973</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.009763718</X>
+            <Y>0.471446991</Y>
+            <Z>0.005129814</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART35">
+        <Properties>
+          <string name="Name">mechanical underbelly_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://79288178455684</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://105481226895129</url>
+          </Content>
+          <Vector3 name="size">
+            <X>22.649108887</X>
+            <Y>16</Y>
+            <Z>22.597330093</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000162125</X>
+            <Y>0</Y>
+            <Z>0.000153542</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART36">
+      <Properties>
+        <string name="Name">RockShelf</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART37">
+        <Properties>
+          <string name="Name">grass top_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://113474228500353</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://80523813343293</url>
+          </Content>
+          <Vector3 name="size">
+            <X>22.473228455</X>
+            <Y>15.506596565</Y>
+            <Z>22.567325592</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000103951</X>
+            <Y>4.246422768</Y>
+            <Z>0.000551224</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART38">
+        <Properties>
+          <string name="Name">rock base_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://103194970954617</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://128109320503327</url>
+          </Content>
+          <Vector3 name="size">
+            <X>21.72445488</X>
+            <Y>22.75214386</Y>
+            <Z>21.811336517</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.006417274</X>
+            <Y>-0.624205589</Y>
+            <Z>0.004400253</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART39">
+      <Properties>
+        <string name="Name">FieldCover</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART40">
+        <Properties>
+          <string name="Name">chassis_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://97875253900896</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://96233022930062</url>
+          </Content>
+          <Vector3 name="size">
+            <X>5.741582394</X>
+            <Y>3.897613525</Y>
+            <Z>4.637764931</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.005008221</X>
+            <Y>-0.042326093</Y>
+            <Z>-0.001346588</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART41">
+        <Properties>
+          <string name="Name">armor panels_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://83900228573344</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://81256841305204</url>
+          </Content>
+          <Vector3 name="size">
+            <X>5.95105505</X>
+            <Y>3.613815784</Y>
+            <Z>4.696880341</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001727581</X>
+            <Y>0.184224963</Y>
+            <Z>0</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART42">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://119144096299160</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://84876851592953</url>
+          </Content>
+          <Vector3 name="size">
+            <X>7</X>
+            <Y>0.739662886</Y>
+            <Z>2.328753948</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.00001955</X>
+            <Y>0.565824389</Y>
+            <Z>-0.001369476</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+  </Item>
+</roblox>

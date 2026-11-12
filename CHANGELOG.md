@@ -1,5 +1,13 @@
 # Changelog
 
+## Studio transformation, asset foundation in progress
+
+- Created `feature/studio-production-transformation` from the clean audio checkpoint. Saved a live Studio baseline to `build/backups/MAYHEM-X-live-4a5f2ad.rbxl` and a separate working place to `build/MAYHEM-X-Transformation.rbxl`, preserving the previous Premium file.
+- Generated ten original mesh models through official Studio MCP: reactor, canopy tree, desert relic, ice crown, city spire, floating hull, rock shelf, field generator, rifle and blade. Recorded their returned model/mesh/texture IDs and prompts in `assets/art/manifest.json`, exported the live geometry for source control and mapped the library into Rojo. These are assets awaiting gameplay-scene integration, not completed arena or weapon replacements.
+- Captured two baseline viewpoints of all five arenas in Studio. Reviewed the textured reactor clone. The review confirmed primitive composition, excessive white surfaces and weak landmarks. No arena redesign is marked complete.
+- Backed up ten live presentation scripts before editing. The attempted Art helper insertion did not run because Studio disconnected; its unverified source is preserved under `build/drafts/`, outside the source tree.
+- Studio reconnected with no place open. Desktop control reported an unavailable native pipe, and Windows denied launching the saved place. Live editing and verification require reopening the transformation file in Edit mode. No offline replacement build, publishing, remote push, new dependency or Robux spending occurred.
+
 ## Live Studio audit and uploaded audio
 
 - Connected the official Studio MCP to the local `MAYHEM-X-Premium.rbxlx`, inspected the live service hierarchy and captured actual Collapse/menu screenshots. All five templates have sixteen spawns and four caches, but zero MeshParts. The full arena, weapon and progression transformation remains unfinished.

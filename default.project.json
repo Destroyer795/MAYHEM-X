@@ -17,6 +17,7 @@
       "$className": "ReplicatedStorage",
       "Mayhem": {
         "$className": "Folder",
+        "Art": { "$path": "assets/art/Library.rbxmx" },
         "Shared": { "$path": "src/shared", "MapCatalog": { "$path": "build/generated/MapCatalog.luau" } },
         "Presentation": { "$className": "RemoteEvent" },
         "ClientChecks": { "$path": "tests/ClientTests.luau" },
