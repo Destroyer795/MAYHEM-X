@@ -15,10 +15,15 @@ foreach ($entry in $manifest.models) {
     if ($parts.Count -lt 1) { throw "Missing mesh geometry: $($entry.key)" }
     $checks += 2
     foreach ($part in $parts) {
-        foreach ($name in @('MeshId','TextureID')) {
-            if ($part.SelectSingleNode("Properties/Content[@name='$name']/url").InnerText -notmatch '^rbxassetid://[1-9]\d*$') { throw "Invalid art content URI: $($entry.key)/$name" }
-            $checks++
+        if ($part.SelectSingleNode("Properties/Content[@name='MeshId']/url").InnerText -notmatch '^rbxassetid://[1-9]\d*$') { throw "Invalid art mesh URI: $($entry.key)/MeshId" }
+        $checks++
+        $texture = $part.SelectSingleNode("Properties/Content[@name='TextureID']/url")
+        if ($texture) {
+            if ($texture.InnerText -notmatch '^rbxassetid://[1-9]\d*$') { throw "Invalid art texture URI: $($entry.key)/TextureID" }
+        } elseif ($entry.key -ne 'SkySpire' -or $part.SelectSingleNode("Properties/string[@name='Name']").InnerText -ne 'windows_geom') {
+            throw "Unexpected untextured art mesh: $($entry.key)"
         }
+        $checks++
         foreach ($name in @('CanCollide','CanQuery','CanTouch')) {
             if ($part.SelectSingleNode("Properties/bool[@name='$name']").InnerText -ne 'false') { throw "Art cannot alter combat collision: $($entry.key)/$name" }
             $checks++

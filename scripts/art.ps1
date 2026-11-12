@@ -27,9 +27,12 @@ try {
         if ($model.parts.Count -lt 1) { throw "Empty original mesh model: $($model.name)" }
         Start-Item 'Model' $model.name; $writer.WriteEndElement()
         foreach ($part in $model.parts) {
-            if ($part.mesh -notmatch '^rbxassetid://[1-9]\d*$' -or $part.texture -notmatch '^rbxassetid://[1-9]\d*$') { throw "Invalid generated mesh reference: $($model.name)" }
+            if ($part.mesh -notmatch '^rbxassetid://[1-9]\d*$' -or ($part.texture -and $part.texture -notmatch '^rbxassetid://[1-9]\d*$')) { throw "Invalid generated mesh reference: $($model.name)" }
             Start-Item 'MeshPart' $part.name
-            foreach ($entry in @(@('MeshId', $part.mesh), @('TextureID', $part.texture))) {
+            $contents = [System.Collections.Generic.List[object]]::new()
+            $contents.Add(@('MeshId', $part.mesh))
+            if ($part.texture) { $contents.Add(@('TextureID', $part.texture)) }
+            foreach ($entry in $contents) {
                 $writer.WriteStartElement('Content'); $writer.WriteAttributeString('name', $entry[0])
                 $writer.WriteElementString('url', $entry[1]); $writer.WriteEndElement()
             }

@@ -541,9 +541,6 @@
           <Content name="MeshId">
             <url>rbxassetid://101057217240018</url>
           </Content>
-          <Content name="TextureID">
-            <url>rbxassetid://117318376313062</url>
-          </Content>
           <Vector3 name="size">
             <X>9.952257156</X>
             <Y>15.296327591</Y>
@@ -571,7 +568,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+          <Color3uint8 name="Color3uint8">2728406</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART21">

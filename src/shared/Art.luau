@@ -14,7 +14,7 @@ function Art.place(parent: Instance?, name: string, frame: CFrame, size: Vector3
 			local position = part.Position
 			part.CFrame = CFrame.new(position * ratio) * (part.CFrame - position)
 			part.Size *= ratio
-			part.Color = Color3.new(1, 1, 1)
+			if not part:IsA("MeshPart") or part.TextureID ~= "" then part.Color = Color3.new(1, 1, 1) end
 			part.Anchored, part.Massless = true, true
 			part.CanCollide, part.CanTouch, part.CanQuery = false, false, false
 			part:SetAttribute("MayhemDetail", true)

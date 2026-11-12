@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-13: Remove unavailable skyline texture
+
+- Studio Output identified unavailable generated texture `rbxassetid://117318376313062` on `SkySpire.windows_geom`.
+- Removed that texture reference from the art manifest and exported library, applied a source blue-cyan mesh tint, and updated `Art.place` to preserve original color when a MeshPart has no texture. The art exporter and structural test now explicitly support that intentional case.
+- In the next live Play run, the DataModel had zero references to the unavailable texture and Studio Output showed only the normal local-place message. The screenshot request stalled, so no post-fix capture was produced.
+
 ## 2026-11-13: Animated operator preview
 
 - Generated the operator idle animation in the live Studio session and configured the returned asset `rbxassetid://128214294905072` in `AnimationConfig.luau`.
