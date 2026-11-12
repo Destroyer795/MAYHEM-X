@@ -24,8 +24,24 @@ function Menus.new(parent: Instance, callbacks: any)
 	group.Parent = parent
 	self.group = group
 	self.topInset = GuiService:GetGuiInset().Y
-	group.Position = UDim2.new(0, 0, 0, -self.topInset)
-	group.Size = UDim2.new(1, 0, 1, self.topInset)
+	local hostScreen = parent:FindFirstAncestorOfClass("ScreenGui")
+	if hostScreen then
+		local insetLayer = Instance.new("ScreenGui")
+		insetLayer.Name = "MayhemMenuInset"
+		insetLayer.ResetOnSpawn = false
+		insetLayer.ScreenInsets = Enum.ScreenInsets.None
+		insetLayer.DisplayOrder = math.max(0, hostScreen.DisplayOrder - 1)
+		insetLayer.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		local insetFill = Theme.frame(insetLayer, "TopSafeArea", UDim2.new(), UDim2.new(1, 0, 0, self.topInset), Theme.Surface)
+		local insetGradient = Instance.new("UIGradient")
+		insetGradient.Color = ColorSequence.new(Theme.Surface, Theme.Navy)
+		insetGradient.Rotation = 18
+		insetGradient.Parent = insetFill
+		insetLayer.Enabled = false
+		insetLayer.Parent = hostScreen.Parent
+		self.insetLayer, self.insetFill = insetLayer, insetFill
+		group:GetPropertyChangedSignal("Visible"):Connect(function() insetLayer.Enabled = group.Visible end)
+	end
 	self.rail = Theme.frame(group, "NavigationRail", UDim2.new(), UDim2.new(0, 188, 1, 0), Theme.Void)
 	self.topbar = Theme.frame(group, "MobileHeader", UDim2.new(), UDim2.new(1, 0, 0, 52), Theme.Void)
 	self.headerProfile = Theme.text(group, "PlayerSummary", "", UDim2.new(), UDim2.new(), 11, Theme.Metal)
@@ -339,8 +355,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	local topInset = GuiService:GetGuiInset().Y
 	if topInset ~= self.topInset then
 		self.topInset = topInset
-		self.group.Position = UDim2.new(0, 0, 0, -topInset)
-		self.group.Size = UDim2.new(1, 0, 1, topInset)
+		if self.insetFill then self.insetFill.Size = UDim2.new(1, 0, 0, topInset) end
 	end
 	local compact = width < 640
 	local short = height < 540

@@ -2,10 +2,11 @@
 
 ## Compact UI fixes and Studio review, visual gate in progress
 
-- Reconnected to the correct saved Studio place and restored live screenshot capture. The new menu group extends behind the Roblox core safe inset and updates when the inset changes, removing the exposed world strip above the menu.
+- Reconnected to the correct saved Studio place and restored live screenshot capture. A separate full-screen menu backdrop now covers the Roblox safe-inset strip without moving menu controls under the Roblox top bar. Its height follows the current inset.
 - Replaced the operator base outfit's mottled Fabric shading with SmoothPlastic while retaining the existing armor and helmet meshes.
 - Short matchmaking pages now keep LEAVE QUEUE and VIEW HUB visible. The queue timer yields space on short viewports. In Studio, PLAY opened matchmaking, LEAVE QUEUE returned the display to READY TO QUEUE with zero queued players, and the edited output reported no game errors.
 - Saved fresh live screenshots at `build/screenshots/main-menu-ui-refined.jpg` and `build/screenshots/matchmaking-ui-refined.jpg`. The current 678 x 521 viewport was reviewed. The character remains visibly block-shaped, and the map and other-screen visual gates remain incomplete.
+- Original rigged-operator generation through Studio MCP timed out after five minutes and produced no model. No new avatar asset was inserted; the existing block-shaped showcase remains a known limitation.
 - Source-only checks passed 325, art contracts 379, map checks 2,201, audio checks 203, interface wiring 75, preservation checks 5 baseline files and 14 methods, and contrast checks 12 pairs. No Roblox runtime, device or performance completion is implied.
 - Studio saved `build/MAYHEM-X-Transformation.rbxl`. No gameplay system or combat balance was changed.
 
