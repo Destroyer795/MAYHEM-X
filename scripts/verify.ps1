@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([switch]$RequireTools)
+param([switch]$RequireTools, [switch]$SourceOnly)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -113,7 +113,9 @@ $manifestPath = Join-Path $projectRoot 'build\manifest.json'
 $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
 if ($manifest.place -notmatch '^[A-Za-z0-9_-]+\.rbxlx$') { throw 'Invalid place filename in build manifest' }
 $place = Join-Path (Join-Path $projectRoot 'build') $manifest.place
-if (Test-Path -LiteralPath $place) {
+if ($SourceOnly) {
+    $skipped.Add('Offline place integrity: source-only mode; current deliverable is saved in live Studio')
+} elseif (Test-Path -LiteralPath $place) {
     $xml = [xml][IO.File]::ReadAllText($place)
     Check-Mayhem ($xml.roblox.version -eq '4') 'Place XML version'
     $items = @($xml.SelectNodes('//Item'))

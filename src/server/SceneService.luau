@@ -3,6 +3,7 @@ local Lighting = game:GetService("Lighting")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Visuals = require(ReplicatedStorage.Mayhem.Shared.Visuals)
 local Geometry = require(ReplicatedStorage.Mayhem.Shared.Geometry)
+local Art = require(ReplicatedStorage.Mayhem.Shared.Art)
 local Scene = {}
 local function color(name: string): Color3
 	return Color3.fromRGB(table.unpack(Visuals.Palette[name]))
@@ -45,14 +46,15 @@ function Scene.decorate()
 	local hub = Instance.new("Folder")
 	hub.Name = "HubArchitecture"
 	hub.Parent = art
-	for _, z in { 211, 231, 251 } do
-		for _, side in { -1, 1 } do
-			local frame = CFrame.new(side * 36, 42, z)
-			detail(hub, "PortalRib", Vector3.new(2.4, 19, 2.2), frame, color("Metal"))
-			detail(hub, "RibInlay", Vector3.new(0.18, 16, 0.15), frame * CFrame.new(-side * 1.3, 0, -1.15), purple, true)
+	Art.place(hub, "AerialBastion", CFrame.new(0, 20, 230), Vector3.new(88, 23, 66))
+	for _, side in { -1, 1 } do
+		for _, z in { 209, 253 } do
+			Art.place(hub, "SkySpire", CFrame.new(side * 44, 36, z), Vector3.new(12, 42, 14))
 		end
-		detail(hub, "CanopyBeam", Vector3.new(74, 1.5, 2), CFrame.new(0, 51, z), color("Metal"))
 	end
+	Art.place(hub, "ReactorTurbine", CFrame.new(0, 48, 231), Vector3.new(8, 12, 8))
+	local deck = lobby:FindFirstChild("LobbyDeck")
+	if deck and deck:IsA("BasePart") then deck.Material, deck.MaterialVariant, deck.Color = Enum.Material.Metal, "MayhemDeck", Color3.new(1, 1, 1) end
 	Geometry.sign(hub, CFrame.new(0, 46, 207) * CFrame.Angles(0, math.pi, 0), Vector3.new(33, 6, 0.6), "MAYHEM X", "ENTER THE CHAOS. BECOME THE LEGEND.", purple)
 	for _, side in { -1, 1 } do
 		detail(hub, "FloorCircuit", Vector3.new(0.16, 0.08, 35), CFrame.new(side * 9, 32.08, 231), cyan, true)
@@ -60,7 +62,9 @@ function Scene.decorate()
 	Geometry.ring(hub, "HubOrrery", CFrame.new(0, 49, 230), 10, 20, purple, 0.2)
 	Geometry.ring(hub, "HubOrreryInner", CFrame.new(0, 48.5, 230), 6.8, 16, cyan, -0.3)
 	local pedestal = Geometry.part(hub, "ShowcaseDais", Vector3.new(10, 1.4, 8), CFrame.new(-27, 32.7, 240), color("Panel"), Enum.Material.Metal, true)
-	Geometry.figure(hub, pedestal.CFrame * CFrame.new(0, 4.8, 0), purple, 1.15)
+	local showcase = pedestal.CFrame * CFrame.Angles(0, math.rad(35), 0)
+	Art.place(hub, "SignalArmor", showcase * CFrame.new(0, 3, 0), Vector3.new(3, 3.2, 1.7))
+	Art.place(hub, "SignalHelmet", showcase * CFrame.new(0, 5.4, 0), Vector3.new(1.8, 1.8, 1.7))
 	Geometry.ring(hub, "ShowcaseLight", CFrame.new(-27, 33.5, 240), 4.2, 12, purple)
 	station(hub, Vector3.new(0, 36, 213), "DEPLOY", "LAST SIGNAL / SOLO SURVIVAL", "Matchmaking", purple)
 	station(hub, Vector3.new(28, 36, 218), "COLLECTION", "OPERATIVES / WEAPON STYLES", "Inventory", cyan)
@@ -72,9 +76,7 @@ function Scene.decorate()
 	telemetry.Name = "HubTelemetry"
 	for _, side in { -1, 1 } do
 		detail(hub, "GardenBed", Vector3.new(4, 0.6, 6), CFrame.new(side * 33, 32.2, 231), color("Panel"))
-		for index = -1, 1 do
-			detail(hub, "GardenLeaf", Vector3.new(0.6, 3 + math.abs(index), 1.5), CFrame.new(side * 33 + index, 34, 231) * CFrame.Angles(0, index * 0.5, index * 0.25), Color3.fromRGB(63, 156, 121))
-		end
+		Art.place(hub, "CanopyTree", CFrame.new(side * 35, 38, 231), Vector3.new(9, 12, 9), 2)
 	end
 
 	Lighting.ClockTime = 13.5

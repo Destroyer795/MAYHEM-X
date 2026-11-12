@@ -4,6 +4,7 @@ local UserInputService = game:GetService("UserInputService")
 local Workspace = game:GetService("Workspace")
 local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visuals)
 local Config = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Config)
+local Art = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Art)
 local CameraController = {}
 CameraController.__index = CameraController
 
@@ -44,34 +45,14 @@ end
 
 function CameraController.makeViewmodel(self: any, slot: number)
 	if self.viewmodel then self.viewmodel:Destroy() end
-	local model = Instance.new("Model")
-	model.Name = "MayhemViewmodel"
 	local accent = Color3.fromRGB(table.unpack((Visuals.skin(self.preferences.skin or "Pulse") or Visuals.Skins[1]).color))
-	local function piece(name: string, size: Vector3, position: Vector3, neon: boolean)
-		local item = Instance.new("Part")
-		item.Name = name
-		item.Size = size
-		item.CFrame = CFrame.new(position)
-		item.Color = if neon then accent else Color3.fromRGB(33, 43, 59)
-		item.Material = if neon then Enum.Material.Neon else Enum.Material.Metal
-		item.Anchored = true
-		item.CanCollide = false
-		item.CanTouch = false
-		item.CanQuery = false
-		item.CastShadow = false
-		item.Parent = model
-	end
-	if slot == 1 then
-		piece("Receiver", Vector3.new(0.35, 0.4, 1.6), Vector3.new(0.65, -0.55, -1.4), false)
-		piece("Barrel", Vector3.new(0.13, 0.13, 0.7), Vector3.new(0.65, -0.5, -2.4), true)
-	else
-		piece("Hilt", Vector3.new(0.18, 0.65, 0.2), Vector3.new(0.65, -0.8, -1.3), false)
-		piece("Blade", Vector3.new(0.12, 1.8, 0.3), Vector3.new(0.65, 0.35, -1.3), true)
-	end
+	local frame = if slot == 1 then CFrame.new(0.68, -0.55, -1.7) else CFrame.new(0.65, -0.35, -1.45)
+	local model = Art.weapon(nil, slot, frame, accent)
+	model:ScaleTo(0.65)
+	model.Name = "MayhemViewmodel"
 	model.WorldPivot = CFrame.identity
-	self.viewmodel = model
-	self.slot = slot
-	self.skin = self.preferences.skin
+	for _, part in model:GetDescendants() do if part:IsA("BasePart") then part.CastShadow = false end end
+	self.viewmodel, self.slot, self.skin = model, slot, self.preferences.skin
 end
 
 function CameraController.setActive(self: any, active: boolean)

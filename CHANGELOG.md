@@ -1,6 +1,13 @@
 # Changelog
 
-## Studio transformation, asset foundation in progress
+## Live arena and equipment integration
+
+- Reconnected to the transformation place in Edit mode. Integrated twelve original mesh models, including the new helmet and torso armor, plus an original four-map PBR deck material. Arena templates now use map-specific landmarks, hulls, vegetation and cover shells while keeping the existing physical routes and spawns.
+- Added Art and MapArt modules. Destructible visual shells now follow existing destruction/restoration. Rifle and blade use original models in held equipment, first-person presentation and collection previews. Character appearance loading refreshes the armor, and previews wait for a complete character.
+- Replaced hub block scenery with original hull/tower/reactor models and a helmet/armor exhibit. No new dependency, balance change, publish or remote push.
+- Executed 11,208 server assertions, eighty spawn raycasts and fifty-two client checks in single-player Studio. Source-only verification passed 312 checks; original mesh contracts passed 345. Offline Premium XML integrity was not run because the preserved file could not be read, and native Rojo/Luau tools are unavailable.
+- Generated textures can emit initial content-representation warnings even when explicit fetches report Success. Actual appearance needs continued device and multiplayer review. Full traversal, sixteen-player performance and current-art multiplayer are not verified. The following UI milestone is in progress.
+## Earlier transformation asset checkpoint
 
 - Created `feature/studio-production-transformation` from the clean audio checkpoint. Saved a live Studio baseline to `build/backups/MAYHEM-X-live-4a5f2ad.rbxl` and a separate working place to `build/MAYHEM-X-Transformation.rbxl`, preserving the previous Premium file.
 - Generated ten original mesh models through official Studio MCP: reactor, canopy tree, desert relic, ice crown, city spire, floating hull, rock shelf, field generator, rifle and blade. Recorded their returned model/mesh/texture IDs and prompts in `assets/art/manifest.json`, exported the live geometry for source control and mapped the library into Rojo. These are assets awaiting gameplay-scene integration, not completed arena or weapon replacements.

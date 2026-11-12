@@ -7,6 +7,7 @@ local Catalog = require(shared.MapCatalog)
 local MapRules = require(shared.MapRules)
 local Config = require(shared.Config)
 local Geometry = require(shared.Geometry)
+local MapArt = require(shared.MapArt)
 local Maps = {}
 Maps.__index = Maps
 
@@ -35,6 +36,7 @@ function Maps.load(self: any, id: string)
 	local template = ServerStorage.MapTemplates:FindFirstChild(id)
 	assert(template and template:IsA("Model"), "Map template is missing: " .. id)
 	local nextMap = template:Clone()
+	MapArt.dress(nextMap, id)
 	local spawns = points(nextMap.Spawns)
 	assert(#spawns == Config.Match.Capacity and #points(nextMap.DuelSpawns) == 2, "Map spawn contract failed")
 	self:stop()
@@ -152,7 +154,8 @@ function Maps.damageCover(self: any, target: Instance, amount: number)
 	if record.health <= 0 then
 		record.restoreAt = os.clock() + 20
 		local part = target :: BasePart
-		part.CanCollide, part.CanQuery, part.Transparency = false, false, 1
+		part.CanCollide, part.CanQuery = false, false
+		MapArt.coverVisible(part, false)
 		self.effect:FireAllClients("Destruction", { at = part.Position })
 	end
 end
@@ -227,7 +230,7 @@ function Maps.tick(self: any, now: number)
 		if record.restoreAt > 0 and now >= record.restoreAt then
 			local occupied = false
 			for _, contender in alive do if MapRules.inside(contender.root.Position, part.Position, part.Size / 2 + Vector3.new(2, 4, 2)) then occupied = true end end
-			if occupied then record.restoreAt = now + 1 else record.restoreAt = 0; record.health = 76; part.CanCollide, part.CanQuery, part.Transparency = true, true, 0 end
+			if occupied then record.restoreAt = now + 1 else record.restoreAt = 0; record.health = 76; part.CanCollide, part.CanQuery = true, true; MapArt.coverVisible(part, true) end
 		end
 	end
 	if now - self.lastDamageTick >= 1 then

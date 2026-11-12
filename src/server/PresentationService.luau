@@ -5,12 +5,14 @@ local shared = ReplicatedStorage.Mayhem.Shared
 local Visuals = require(shared.Visuals)
 local StyleRules = require(shared.StyleRules)
 local Rules = require(shared.Rules)
+local Art = require(shared.Art)
 local Presentation = {}
 
 function Presentation.start(profiles: any)
 	local remote = ReplicatedStorage.Mayhem:WaitForChild("Presentation") :: RemoteEvent
 	local records: { [Player]: any } = {}
 	local connections: { [Player]: RBXScriptConnection } = {}
+	local appearanceConnections: { [Player]: RBXScriptConnection } = {}
 	local function apply(player: Player)
 		local record = records[player]
 		local character = player.Character
@@ -20,34 +22,9 @@ function Presentation.start(profiles: any)
 		player:SetAttribute("MayhemSkin", record.skin)
 		player:SetAttribute("MayhemOperative", record.operative)
 		character:SetAttribute("MayhemAccent", accent)
-		local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
-		if not torso or not torso:IsA("BasePart") then return end
-		local old = character:FindFirstChild("MayhemStyle")
-		if old then old:Destroy() end
-		local model = Instance.new("Model")
-		model.Name = "MayhemStyle"
-		model.Parent = character
-		local width = Visuals.operative(record.operative).shoulders
-		for _, side in { -1, 0, 1 } do
-			local item = Instance.new("Part")
-			item.Name = "SignalPlate"
-			item.Size = Vector3.new(if side == 0 then 0.22 else 0.28 * width, if side == 0 then 0.9 else 0.35, 0.08)
-			item.CFrame = torso.CFrame * CFrame.new(side * torso.Size.X * 0.32, if side == 0 then 0 else 0.25, -torso.Size.Z / 2 - 0.06)
-			item.Material = Enum.Material.Neon
-			item.Color = accent
-			item.CanCollide = false
-			item.CanTouch = false
-			item.CanQuery = false
-			item.Massless = true
-			item.CastShadow = false
-			item.Parent = model
-			local weld = Instance.new("WeldConstraint")
-			weld.Part0 = torso
-			weld.Part1 = item
-			weld.Parent = item
-		end
+		Art.outfit(character, accent, Visuals.operative(record.operative).shoulders)
 		local weapon = character:FindFirstChild("MayhemWeapon")
-		if weapon then for _, item in weapon:GetChildren() do if item:IsA("BasePart") and item.Material == Enum.Material.Neon then item.Color = accent end end end
+		if weapon then for _, item in weapon:GetDescendants() do if item:IsA("BasePart") and item.Material == Enum.Material.Neon then item.Color = accent end end end
 	end
 	local function send(player: Player, notice: string?)
 		local record = records[player]
@@ -71,6 +48,9 @@ function Presentation.start(profiles: any)
 				local torso = character:WaitForChild("HumanoidRootPart", 8)
 				if torso and records[player] == record and player.Character == character then apply(player) end
 			end)
+		end)
+		appearanceConnections[player] = player.CharacterAppearanceLoaded:Connect(function(character: Model)
+			if records[player] == record and player.Character == character then apply(player) end
 		end)
 		if player.Character then apply(player) end
 	end
@@ -106,6 +86,7 @@ function Presentation.start(profiles: any)
 	Players.PlayerAdded:Connect(add)
 	Players.PlayerRemoving:Connect(function(player: Player)
 		if connections[player] then connections[player]:Disconnect(); connections[player] = nil end
+		if appearanceConnections[player] then appearanceConnections[player]:Disconnect(); appearanceConnections[player] = nil end
 		records[player] = nil
 	end)
 	for _, player in Players:GetPlayers() do add(player) end

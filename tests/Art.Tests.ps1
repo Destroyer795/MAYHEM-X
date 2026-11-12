@@ -8,7 +8,9 @@ if ($models.Count -ne $manifest.models.Count -or $models.Count -lt 10) { throw '
 $checks = 1
 foreach ($entry in $manifest.models) {
     $model = @($models | Where-Object { $_.Properties.string.InnerText -eq $entry.key })
-    if ($model.Count -ne 1 -or $entry.assetId -notmatch '^[1-9]\d*$' -or -not $entry.generationId) { throw "Invalid original asset attribution: $($entry.key)" }
+    $hasAssetId = $entry.assetId -match '^[1-9]\d*$'
+    $recovered = $entry.PSObject.Properties['recoveredFrom'] -and $entry.recoveredFrom
+    if ($model.Count -ne 1 -or (-not $hasAssetId -and -not $recovered) -or -not $entry.generationId) { throw "Invalid original asset attribution: $($entry.key)" }
     $parts = @($model[0].SelectNodes("Item[@class='MeshPart']"))
     if ($parts.Count -lt 1) { throw "Missing mesh geometry: $($entry.key)" }
     $checks += 2

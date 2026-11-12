@@ -4,6 +4,7 @@
   "servePort": 34872,
   "tree": {
     "$className": "DataModel",
+    "MaterialService": { "$className": "MaterialService", "MayhemDeck": { "$path": "assets/art/MayhemDeck.rbxmx" } },
     "Workspace": {
       "$className": "Workspace",
       "$properties": { "Gravity": 196.2, "FallenPartsDestroyHeight": -100, "StreamingEnabled": false },

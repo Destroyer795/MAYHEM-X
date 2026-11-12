@@ -49,7 +49,7 @@ function Geometry.sign(parent: Instance, frame: CFrame, size: Vector3, title: st
 		label.BackgroundTransparency = 1
 		label.Size = UDim2.fromScale(0.92, if index == 1 then 0.6 else 0.3)
 		label.Position = UDim2.fromScale(0.04, if index == 1 then 0.04 else 0.65)
-		label.Font = if index == 1 then Enum.Font.GothamBlack else Enum.Font.GothamMedium
+		label.Font = if index == 1 then Enum.Font.Oswald else Enum.Font.BuilderSansMedium
 		label.Text = content
 		label.TextColor3 = if index == 1 then Color3.fromRGB(237, 242, 255) else accent
 		label.TextScaled = true

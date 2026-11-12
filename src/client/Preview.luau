@@ -3,6 +3,8 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Geometry = require(ReplicatedStorage.Mayhem.Shared.Geometry)
 local Visuals = require(ReplicatedStorage.Mayhem.Shared.Visuals)
 local Catalog = require(ReplicatedStorage.Mayhem.Shared.MapCatalog)
+local Art = require(ReplicatedStorage.Mayhem.Shared.Art)
+local Players = game:GetService("Players")
 local Preview = {}
 Preview.__index = Preview
 
@@ -10,7 +12,8 @@ function Preview.new(parent: Instance)
 	local viewport = Instance.new("ViewportFrame")
 	viewport.Name = "OperativePreview"
 	viewport.BackgroundColor3 = Color3.fromRGB(214, 235, 245)
-	viewport.BackgroundTransparency = 0
+	viewport.BackgroundTransparency = 1
+	viewport.BorderSizePixel = 0
 	viewport.Ambient = Color3.fromRGB(177, 197, 211)
 	viewport.LightColor = Color3.fromRGB(255, 250, 238)
 	viewport.LightDirection = Vector3.new(-1, -1, -1)
@@ -24,31 +27,46 @@ function Preview.new(parent: Instance)
 end
 
 function Preview.show(self: any, kind: string, operative: string, skin: string, weapon: number?)
+	local character = Players.LocalPlayer.Character
+	local appearance = if character then character:FindFirstChild("MayhemStyle") else nil
+	if kind ~= "weapon" and (not character or not appearance or not character:FindFirstChild("Head") or not (character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso"))) then return end
 	local key = kind .. operative .. skin .. tostring(weapon)
-	if self.key == key then return end
-	self.key = key
+	if self.key == key and self.character == character and self.appearance == appearance then return end
+	self.key, self.character, self.appearance = key, character, appearance
 	if self.world then self.world:Destroy() end
 	local world = Instance.new("WorldModel")
 	world.Parent = self.frame
 	self.world = world
-	self.frame.BackgroundColor3 = Color3.fromRGB(214, 235, 245)
+	self.frame.BackgroundColor3 = Color3.fromRGB(205, 222, 232)
 	self.camera.CFrame = CFrame.lookAt(Vector3.new(5.4, 2.5, -9), Vector3.new(0, -0.3, 0))
-	local color = Color3.fromRGB(table.unpack((Visuals.skin(skin) or Visuals.Skins[1]).color))
+	local accent = Color3.fromRGB(table.unpack((Visuals.skin(skin) or Visuals.Skins[1]).color))
 	if kind == "weapon" then
-		local frame = CFrame.Angles(0, -0.25, 0)
-		if weapon == 2 then
-			Geometry.part(world, "Hilt", Vector3.new(0.4, 1, 0.4), frame * CFrame.new(0, -1.5, 0), Color3.fromRGB(37, 45, 65))
-			Geometry.part(world, "Guard", Vector3.new(1.4, 0.25, 0.4), frame * CFrame.new(0, -1, 0), color)
-			Geometry.part(world, "Blade", Vector3.new(0.3, 3.2, 0.6), frame * CFrame.new(0, 0.7, 0), color, Enum.Material.Neon)
-		else
-			Geometry.part(world, "Receiver", Vector3.new(0.8, 0.85, 3.6), frame, Color3.fromRGB(37, 45, 65))
-			Geometry.part(world, "Barrel", Vector3.new(0.3, 0.3, 2), frame * CFrame.new(0, 0.05, -2.7), color, Enum.Material.Neon)
-			Geometry.part(world, "Cell", Vector3.new(0.6, 1, 0.9), frame * CFrame.new(0, -0.8, 0.2), color)
+		Art.weapon(world, weapon or 1, CFrame.Angles(0, -0.25, 0), accent)
+	elseif character then
+		local before = character.Archivable
+		character.Archivable = true
+		local rig = character:Clone()
+		character.Archivable = before
+		for _, child in rig:GetDescendants() do
+			if child:IsA("LuaSourceContainer") or child:IsA("Accessory") or child.Name == "MayhemWeapon" then child:Destroy()
+			elseif child:IsA("BasePart") then
+				child.Anchored, child.CanCollide, child.CanTouch, child.CanQuery = true, false, false, false
+				child.LocalTransparencyModifier = 0
+			end
 		end
-	else
-		Geometry.figure(world, CFrame.new(), color, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders, kind == "victory")
-		Geometry.ring(world, "Dais", CFrame.new(0, -3.6, 0), 2.6, 12, color)
-	end
+		rig:PivotTo(CFrame.identity)
+		rig.Parent = world
+		Art.outfit(rig, accent, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders)
+		for _, part in rig:GetDescendants() do if part:IsA("BasePart") then part.Anchored = true end end
+		if kind == "victory" then
+			for _, joint in rig:GetDescendants() do
+				if joint:IsA("Motor6D") and joint.Name == "RightShoulder" then joint.Transform = CFrame.Angles(-0.5, 0, 0.7) end
+			end
+		end
+		local humanoid = rig:FindFirstChildOfClass("Humanoid")
+		if humanoid then humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None end
+		Geometry.ring(world, "Dais", CFrame.new(0, -3.4, 0), 2.5, 12, accent)
+	else self.key = "" end
 end
 
 function Preview.map(self: any, id: string)
@@ -64,6 +82,25 @@ function Preview.map(self: any, id: string)
 	for _, entry in definition.preview do
 		Geometry.part(world, "Terrain", Vector3.new(table.unpack(entry.size)) * 0.04,
 			CFrame.new(Vector3.new(table.unpack(entry.p)) * 0.04) * CFrame.Angles(0, math.rad(entry.yaw), 0) * CFrame.Angles(entry.pitch, 0, 0), Color3.fromRGB(table.unpack(entry.color)))
+	end
+	local function prop(name: string, x: number, y: number, z: number, size: Vector3)
+		Art.place(world, name, CFrame.new(x, y, z), size)
+	end
+	if id == "Collapse" then
+		prop("ReactorTurbine", 0, 1.4, 0, Vector3.new(0.6, 1, 0.6))
+		for _, p in {Vector3.new(4, 0.2, 0), Vector3.new(-4, 0.2, 0), Vector3.new(0, 0.2, 4), Vector3.new(0, 0.2, -4)} do prop("AerialBastion", p.X, p.Y, p.Z, Vector3.new(2.3, 0.7, 2.3)) end
+	elseif id == "Jungle" then
+		for _, x in {-2.6, 2.6} do for _, z in {-2.6, 2.6} do
+			prop("RockShelf", x, 0.2, z, Vector3.new(3.4, 1, 3.4))
+			prop("CanopyTree", x, 1.8, z, Vector3.new(1.2, 1.8, 1.2))
+		end end
+	elseif id == "Solar" then
+		prop("SolarRelic", 0, 1.6, 0, Vector3.new(1, 1.8, 0.6))
+		for _, x in {-4.5, 4.5} do prop("SolarRelic", x, 1.4, -3.4, Vector3.new(0.9, 1.8, 0.6)) end
+	elseif id == "Frost" then
+		for _, x in {-3, 0, 3} do prop("FrostCrown", x, 1.9, 0, Vector3.new(0.7, 1.6, 0.6)) end
+	elseif id == "Skyline" then
+		for _, x in {-3.3, 3.3} do for _, z in {-3.1, 3.1} do prop("SkySpire", x, 0.7, z, Vector3.new(1.5, 2.6, 1.5)) end end
 	end
 	self.frame.BackgroundColor3 = Color3.fromRGB(table.unpack(definition.lighting.sky))
 	self.camera.CFrame = CFrame.lookAt(Vector3.new(11, 10, -13), Vector3.new(0, 0.7, 0))

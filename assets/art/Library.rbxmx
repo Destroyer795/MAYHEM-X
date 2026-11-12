@@ -44,7 +44,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART4">
@@ -83,7 +83,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART5">
@@ -122,7 +122,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -166,7 +166,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART8">
@@ -205,7 +205,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART9">
@@ -244,7 +244,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -288,7 +288,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART12">
@@ -327,7 +327,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART13">
@@ -366,7 +366,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -410,7 +410,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART16">
@@ -449,7 +449,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART17">
@@ -488,7 +488,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -532,7 +532,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART20">
@@ -571,7 +571,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART21">
@@ -610,7 +610,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART22">
@@ -649,7 +649,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -693,7 +693,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART25">
@@ -732,7 +732,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART26">
@@ -771,7 +771,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -815,7 +815,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART29">
@@ -854,7 +854,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART30">
@@ -893,7 +893,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART31">
@@ -932,7 +932,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -976,7 +976,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART34">
@@ -1015,7 +1015,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART35">
@@ -1054,7 +1054,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -1098,7 +1098,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART38">
@@ -1137,7 +1137,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>
@@ -1181,7 +1181,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART41">
@@ -1220,7 +1220,7 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
       <Item class="MeshPart" referent="ART42">
@@ -1259,7 +1259,368 @@
           <bool name="CanTouch">false</bool>
           <bool name="CastShadow">true</bool>
           <token name="Material">256</token>
-          <Color3uint8 name="Color3uint8">10724005</Color3uint8>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART43">
+      <Properties>
+        <string name="Name">SignalHelmet</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART44">
+        <Properties>
+          <string name="Name">face_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://117988868316961</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://104559793863975</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.434131444</X>
+            <Y>0.45670709</Y>
+            <Z>0.491026998</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001766205</X>
+            <Y>-0.350280613</Y>
+            <Z>-0.289271355</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART45">
+        <Properties>
+          <string name="Name">hair_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://83028949185249</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://137103188579310</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.15028429</X>
+            <Y>1.110809207</Y>
+            <Z>1.219180346</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.008686066</X>
+            <Y>0.023229599</Y>
+            <Z>0.011860847</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART46">
+        <Properties>
+          <string name="Name">eyes_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://100028504162686</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://90812545958620</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.816655397</X>
+            <Y>0.441188067</Y>
+            <Z>0.218199879</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001209259</X>
+            <Y>0.027394056</Y>
+            <Z>-0.39228344</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART47">
+        <Properties>
+          <string name="Name">nose_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://94082177122058</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://105969394009033</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.208873495</X>
+            <Y>0.281765103</Y>
+            <Z>0.115683794</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001426697</X>
+            <Y>-0.366997629</Y>
+            <Z>-0.563609123</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART48">
+        <Properties>
+          <string name="Name">mouth_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://137734574570199</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://94470594726838</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.543855906</X>
+            <Y>0.128449589</Y>
+            <Z>0.111089885</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001880646</X>
+            <Y>-0.419805616</Y>
+            <Z>-0.547099113</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART49">
+        <Properties>
+          <string name="Name">ears_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://97743501336019</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://88014326518837</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.25</X>
+            <Y>0.356593251</Y>
+            <Z>0.427378297</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.104620695</Y>
+            <Z>-0.047068596</Z>
+            <R00>1</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART50">
+      <Properties>
+        <string name="Name">SignalArmor</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART51">
+        <Properties>
+          <string name="Name">chest plate_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://88547531559223</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://130930656896257</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.190909863</X>
+            <Y>1.775524855</Y>
+            <Z>1.045321226</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000006258</X>
+            <Y>0.012237549</Y>
+            <Z>-0.004376173</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>0.999999881</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART52">
+        <Properties>
+          <string name="Name">abdominal panels_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://107593839942641</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://137134570533821</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.108029366</X>
+            <Y>1.733394146</Y>
+            <Z>0.999422073</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001699984</X>
+            <Y>-0.033302903</Y>
+            <Z>-0.034435987</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>0.999999881</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART53">
+        <Properties>
+          <string name="Name">back shell_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://138948865860045</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://95314124117901</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.136006951</X>
+            <Y>1.775183201</Y>
+            <Z>0.96028614</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.004090726</X>
+            <Y>0.010201216</Y>
+            <Z>0.054003954</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>0.999999881</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
         </Properties>
       </Item>
     </Item>

@@ -5,9 +5,10 @@ local UserInputService = game:GetService("UserInputService")
 local shared = game:GetService("ReplicatedStorage").Mayhem.Shared
 local Catalog = require(shared.MapCatalog)
 local Visuals = require(shared.Visuals)
+local MapArt = require(shared.MapArt)
 local WorldPresentation = {}
 WorldPresentation.__index = WorldPresentation
-local lobbyLight = { clock = 13.8, density = 0.055, ambient = { 164, 188, 207 }, sky = { 157, 211, 242 } }
+local lobbyLight = { clock = 14.2, density = 0.045, ambient = { 112, 137, 156 }, sky = { 152, 210, 238 } }
 
 local function carrier(parent: Instance, name: string): Part
 	local item = Instance.new("Part")
@@ -85,14 +86,14 @@ function WorldPresentation.step(self: any, state: any)
 	local inArena = state.alive and state.phase ~= "Results"
 	local profile, mapId = lobbyLight, "Lobby"
 	if map and inArena then
-		for _, entry in Catalog do if entry.id == map.id then profile, mapId = entry.lighting, entry.id; break end end
+		for _, entry in Catalog do if entry.id == map.id then profile, mapId = MapArt.Lighting[entry.id] or entry.lighting, entry.id; break end end
 	end
 	local key = mapId .. tostring(world and world:GetAttribute("MapGeneration")) .. tostring(low) .. tostring(self.preferences.reducedMotion) .. tostring(self.preferences.reducedEffects)
 	if key ~= self.applied then
 		self.applied = key
 		Lighting.ClockTime = profile.clock
-		Lighting.Brightness = 2.5
-		Lighting.ExposureCompensation = 0.1
+		Lighting.Brightness = 2.2
+		Lighting.ExposureCompensation = -0.1
 		Lighting.Ambient = Color3.fromRGB(table.unpack(profile.ambient))
 		Lighting.OutdoorAmbient = Lighting.Ambient
 		Lighting.ColorShift_Top = Color3.fromRGB(255, 242, 218)
