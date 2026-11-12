@@ -21,7 +21,7 @@ local function points(folder: Instance): { CFrame }
 end
 
 function Maps.new(combat: any, effect: RemoteEvent)
-	local self: any = setmetatable({ combat = combat, effect = effect, votes = {}, voteAt = {}, movers = {}, covers = {}, collapsing = {}, hazards = {}, connections = {}, running = false, duel = false, generation = 0, random = Random.new(), safeRadius = 185, center = Vector3.zero }, Maps)
+	local self: any = setmetatable({ combat = combat, effect = effect, votes = {}, voteAt = {}, movers = {}, covers = {}, collapsing = {}, hazards = {}, connections = {}, running = false, duel = false, loading = false, generation = 0, random = Random.new(), safeRadius = 185, center = Vector3.zero }, Maps)
 	self:load("Collapse")
 	return self
 end
@@ -34,87 +34,98 @@ end
 function Maps.load(self: any, id: string)
 	local info = self:find(id)
 	assert(info, "Unknown map selection")
-	local template = ServerStorage.MapTemplates:FindFirstChild(id)
-	assert(template and template:IsA("Model"), "Map template is missing: " .. id)
-	local nextMap = template:Clone()
-	MapArt.dress(nextMap, id)
-	local spawns = points(nextMap.Spawns)
-	assert(#spawns == Config.Match.Capacity and #points(nextMap.DuelSpawns) == 2, "Map spawn contract failed")
-	self:stop()
-	self.generation += 1
-	self.voteAt = {}
-	for _, connection in self.connections do connection:Disconnect() end
-	self.connections = {}
 	local world = Workspace:WaitForChild("MayhemWorld")
-	local old = world:FindFirstChild("ActiveArena")
-	if old then old:Destroy() end
-	local active = Instance.new("Folder")
-	active.Name = "ActiveArena"
-	nextMap.Parent = active
-	self.model, self.info, self.spawns = nextMap, info, spawns
-	self.center, self.safeRadius, self.duel = Vector3.zero, MapRules.SafeStart, false
-	Environment.build(nextMap, id)
-	self.movers, self.covers, self.collapsing, self.hazards = {}, {}, {}, {}
-	for _, part in nextMap.Motion:GetChildren() do
-		if part:IsA("BasePart") then
-			table.insert(self.movers, { part = part, base = part.CFrame, travel = part.Travel.Value, period = part.Period.Value })
+	while self.loading do task.wait() end
+	if self.info == info and self.model and self.model:IsDescendantOf(world)
+		and world:GetAttribute("ActiveMap") == id and world:GetAttribute("MapGeneration") == self.generation then
+		return self.spawns
+	end
+	self.loading = true
+	local ok, result = xpcall(function()
+		local template = ServerStorage.MapTemplates:FindFirstChild(id)
+		assert(template and template:IsA("Model"), "Map template is missing: " .. id)
+		local nextMap = template:Clone()
+		MapArt.dress(nextMap, id)
+		local spawns = points(nextMap.Spawns)
+		assert(#spawns == Config.Match.Capacity and #points(nextMap.DuelSpawns) == 2, "Map spawn contract failed")
+		self:stop()
+		self.generation += 1
+		self.voteAt = {}
+		for _, connection in self.connections do connection:Disconnect() end
+		self.connections = {}
+		local old = world:FindFirstChild("ActiveArena")
+		if old then old:Destroy() end
+		local active = Instance.new("Folder")
+		active.Name = "ActiveArena"
+		nextMap.Parent = active
+		self.model, self.info, self.spawns = nextMap, info, spawns
+		self.center, self.safeRadius, self.duel = Vector3.zero, MapRules.SafeStart, false
+		Environment.build(nextMap, id)
+		self.movers, self.covers, self.collapsing, self.hazards = {}, {}, {}, {}
+		for _, part in nextMap.Motion:GetChildren() do
+			if part:IsA("BasePart") then
+				table.insert(self.movers, { part = part, base = part.CFrame, travel = part.Travel.Value, period = part.Period.Value })
+			end
 		end
-	end
-	for _, part in nextMap.Destructibles:GetChildren() do
-		if part:IsA("BasePart") then self.covers[part] = { health = 76, restoreAt = 0, color = part.Color } end
-	end
-	for _, part in nextMap.Collapse:GetChildren() do if part:IsA("BasePart") then table.insert(self.collapsing, { part = part, color = part.Color }) end end
-	for _, part in nextMap.Hazards:GetChildren() do if part:IsA("BasePart") then table.insert(self.hazards, part); part.Transparency = 0.92 end end
-	for _, part in nextMap.Ice:GetChildren() do if part:IsA("BasePart") then part.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.035, 0.05, 50, 1) end end
-	for _, part in nextMap.Decor:GetChildren() do
-		if part:IsA("BasePart") then part:SetAttribute("MayhemDetail", true); if part.Name:find("Halo") then part:SetAttribute("QualityTier", 2) end end
-	end
-	for _, landmark in info.landmarks do
-		local position = Vector3.new(table.unpack(landmark.p))
-		local target = Vector3.new(0, position.Y, 0)
-		if Vector3.new(position.X, 0, position.Z).Magnitude < 1 then target += Vector3.new(0, 0, 1) end
-		Geometry.sign(nextMap.Decor, CFrame.lookAt(position, target), Vector3.new(11, 2.5, 0.2), landmark.name, info.name, Color3.fromRGB(table.unpack(info.palette.accent)))
-	end
-	for _, frame in points(nextMap.WeaponSpawns) do
-		local pad = Instance.new("Part")
-		pad.Name = "AmmoCache"
-		pad.Size = Vector3.new(2, 1.5, 2)
-		pad.CFrame = frame
-		pad.Color = Color3.fromRGB(255, 191, 85)
-		pad.Material = Enum.Material.Metal
-		pad.Anchored = true
-		pad.CanCollide, pad.CanTouch, pad.CanQuery = false, false, false
-		pad.Parent = nextMap
-		local prompt = Instance.new("ProximityPrompt")
-		prompt.ActionText = "Collect 18 reserve rounds"
-		prompt.ObjectText = "AMMO CACHE"
-		prompt.HoldDuration = 0.2
-		prompt.MaxActivationDistance = 8
-		prompt.Parent = pad
-		local readyAt = 0
-		table.insert(self.connections, prompt.Triggered:Connect(function(player: Player)
-			local now = os.clock()
-			if not self.running or self.duel or now < readyAt then return end
-			local record, root = self.combat:ready(player, now)
-			if not record or not root or (root.Position - pad.Position).Magnitude > 8 then return end
-			if record.reserve >= Config.Rifle.Reserve then self.effect:FireClient(player, "Notice", { title = "AMMO FULL", body = "Your reserve is already full." }); return end
-			readyAt = now + 24
-			record.reserve = math.min(Config.Rifle.Reserve, record.reserve + 18)
-			prompt.Enabled = false
-			pad.Transparency = 0.8
-			self.combat.context.sendState(player)
-			local generation = self.generation
-			task.delay(24, function() if self.generation == generation and pad.Parent then prompt.Enabled = true; pad.Transparency = 0 end end)
-		end))
-	end
-	active.Parent = world
-	world:SetAttribute("ActiveMap", id)
-	world:SetAttribute("MapGeneration", self.generation)
-	local partCount = 0
-	for _, item in world:GetDescendants() do if item:IsA("BasePart") then partCount += 1 end end
-	world:SetAttribute("WorldPartCount", partCount)
-	assert(partCount <= 720, "Arena and hub exceeded the world part budget")
-	return spawns
+		for _, part in nextMap.Destructibles:GetChildren() do
+			if part:IsA("BasePart") then self.covers[part] = { health = 76, restoreAt = 0, color = part.Color } end
+		end
+		for _, part in nextMap.Collapse:GetChildren() do if part:IsA("BasePart") then table.insert(self.collapsing, { part = part, color = part.Color }) end end
+		for _, part in nextMap.Hazards:GetChildren() do if part:IsA("BasePart") then table.insert(self.hazards, part); part.Transparency = 0.92 end end
+		for _, part in nextMap.Ice:GetChildren() do if part:IsA("BasePart") then part.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.035, 0.05, 50, 1) end end
+		for _, part in nextMap.Decor:GetChildren() do
+			if part:IsA("BasePart") then part:SetAttribute("MayhemDetail", true); if part.Name:find("Halo") then part:SetAttribute("QualityTier", 2) end end
+		end
+		for _, landmark in info.landmarks do
+			local position = Vector3.new(table.unpack(landmark.p))
+			local target = Vector3.new(0, position.Y, 0)
+			if Vector3.new(position.X, 0, position.Z).Magnitude < 1 then target += Vector3.new(0, 0, 1) end
+			Geometry.sign(nextMap.Decor, CFrame.lookAt(position, target), Vector3.new(11, 2.5, 0.2), landmark.name, info.name, Color3.fromRGB(table.unpack(info.palette.accent)))
+		end
+		for _, frame in points(nextMap.WeaponSpawns) do
+			local pad = Instance.new("Part")
+			pad.Name = "AmmoCache"
+			pad.Size = Vector3.new(2, 1.5, 2)
+			pad.CFrame = frame
+			pad.Color = Color3.fromRGB(255, 191, 85)
+			pad.Material = Enum.Material.Metal
+			pad.Anchored = true
+			pad.CanCollide, pad.CanTouch, pad.CanQuery = false, false, false
+			pad.Parent = nextMap
+			local prompt = Instance.new("ProximityPrompt")
+			prompt.ActionText = "Collect 18 reserve rounds"
+			prompt.ObjectText = "AMMO CACHE"
+			prompt.HoldDuration = 0.2
+			prompt.MaxActivationDistance = 8
+			prompt.Parent = pad
+			local readyAt = 0
+			table.insert(self.connections, prompt.Triggered:Connect(function(player: Player)
+				local now = os.clock()
+				if not self.running or self.duel or now < readyAt then return end
+				local record, root = self.combat:ready(player, now)
+				if not record or not root or (root.Position - pad.Position).Magnitude > 8 then return end
+				if record.reserve >= Config.Rifle.Reserve then self.effect:FireClient(player, "Notice", { title = "AMMO FULL", body = "Your reserve is already full." }); return end
+				readyAt = now + 24
+				record.reserve = math.min(Config.Rifle.Reserve, record.reserve + 18)
+				prompt.Enabled = false
+				pad.Transparency = 0.8
+				self.combat.context.sendState(player)
+				local generation = self.generation
+				task.delay(24, function() if self.generation == generation and pad.Parent then prompt.Enabled = true; pad.Transparency = 0 end end)
+			end))
+		end
+		active.Parent = world
+		world:SetAttribute("ActiveMap", id)
+		world:SetAttribute("MapGeneration", self.generation)
+		local partCount = 0
+		for _, item in world:GetDescendants() do if item:IsA("BasePart") then partCount += 1 end end
+		world:SetAttribute("WorldPartCount", partCount)
+		assert(partCount <= 720, "Arena and hub exceeded the world part budget")
+		return spawns
+	end, debug.traceback)
+	self.loading = false
+	if not ok then error(result, 0) end
+	return result
 end
 
 function Maps.stop(self: any)

@@ -92,4 +92,18 @@ foreach ($map in $reports) {
     if ($actual -ne $map.templateSha256) { throw 'Map template hash is stale' }
     $checks+=5
 }
+$mapService=[IO.File]::ReadAllText((Join-Path $projectRoot 'src/server/MapService.luau'))
+$matchService=[IO.File]::ReadAllText((Join-Path $projectRoot 'src/server/MatchService.luau'))
+$loadGuards=@(
+    @($mapService,'while self\.loading do task\.wait\(\) end'),
+    @($mapService,'if self\.info == info and self\.model and self\.model:IsDescendantOf\(world\)'),
+    @($mapService,'local ok, result = xpcall\(function\(\)'),
+    @($mapService,'self\.loading = false\s+if not ok then error\(result, 0\) end'),
+    @($matchService,'now >= self\.deadline and not self\.loadingRound'),
+    @($matchService,'now >= self\.deadline and not self\.resetting')
+)
+foreach ($guard in $loadGuards) {
+    if ($guard[0] -notmatch $guard[1]) { throw "Missing map lifecycle regression guard: $($guard[1])" }
+    $checks++
+}
 Write-Output "PASS: $checks physical-map checks across $($reports.Count) generated templates (Studio physics pending)"

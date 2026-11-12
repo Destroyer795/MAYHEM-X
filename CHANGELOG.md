@@ -1,5 +1,14 @@
 # Changelog
 
+## Map transition race and UI fixes, visual gate in progress
+
+- Fixed a server tick reentry discovered in a real two-client Studio test. Terrain generation yields during map loading, which had allowed additional Intermission ticks to start conflicting selections. Match startup and Results reset now have guards, while MapService serializes loads, avoids duplicate same-map builds, and releases its guard after errors.
+- Repeated a two-client session through two consecutive rounds. The first active map was Skyline, the second was voted Solar after a server-simulated elimination. Both rounds had exactly one ActiveArena whose model matched the server ActiveMap attribute. MapGeneration advanced once per round, from two to three, and remained stable after ten seconds. This verifies transition sequencing, not a combat-earned win or five-map visual acceptance.
+- Both clients passed 68 client checks and 35 audio asset loads after the fix. Server output contained no MAYHEM X script errors; original mesh asset requests still log content-representation warnings.
+- The standalone map suite passed 2,207 assertions, including six new source regression checks for load serialization, idempotency, error unlock and MatchService reentry guards.
+- Saved live Studio images at `build/screenshots/skyline-zero-live-post-lock.jpg` and `build/screenshots/solar-wasteland-live.jpg`. The flat Solar combat floor and block-shaped player remain clear visual defects.
+- Studio saved `build/MAYHEM-X-Transformation.rbxl`. Static source and match changes are included in this checkpoint.
+
 ## Compact UI fixes and Studio review, visual gate in progress
 
 - Reconnected to the correct saved Studio place and restored live screenshot capture. A separate full-screen menu backdrop now covers the Roblox safe-inset strip without moving menu controls under the Roblox top bar. Its height follows the current inset.
@@ -7,7 +16,7 @@
 - Short matchmaking pages now keep LEAVE QUEUE and VIEW HUB visible. The queue timer yields space on short viewports. In Studio, PLAY opened matchmaking, LEAVE QUEUE returned the display to READY TO QUEUE with zero queued players, and the edited output reported no game errors.
 - Saved fresh live screenshots at `build/screenshots/main-menu-ui-refined.jpg` and `build/screenshots/matchmaking-ui-refined.jpg`. The current 678 x 521 viewport was reviewed. The character remains visibly block-shaped, and the map and other-screen visual gates remain incomplete.
 - Original rigged-operator generation through Studio MCP timed out after five minutes and produced no model. No new avatar asset was inserted; the existing block-shaped showcase remains a known limitation.
-- Source-only checks passed 325, art contracts 379, map checks 2,201, audio checks 203, interface wiring 75, preservation checks 5 baseline files and 14 methods, and contrast checks 12 pairs. No Roblox runtime, device or performance completion is implied.
+- Source-only checks passed 325, art contracts 379, map checks 2,207, audio checks 203, interface wiring 75, preservation checks 5 baseline files and 14 methods, and contrast checks 12 pairs. No Roblox runtime, device or performance completion is implied.
 - Studio saved `build/MAYHEM-X-Transformation.rbxl`. No gameplay system or combat balance was changed.
 
 ## Terrain and horizon integration, visual gate in progress

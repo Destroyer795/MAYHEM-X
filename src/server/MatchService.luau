@@ -16,7 +16,7 @@ Match.__index = Match
 function Match.new(remotes: Folder)
 	local self: any = setmetatable({
 		phase = Protocol.Phase.Waiting, deadline = 0, roundId = 0, order = 0,
-		entries = {}, roster = {}, lastBroadcast = 0, result = nil, random = Random.new(),
+		entries = {}, roster = {}, lastBroadcast = 0, result = nil, random = Random.new(), loadingRound = false, resetting = false,
 		action = remotes:WaitForChild(Protocol.Remote.Action), state = remotes:WaitForChild(Protocol.Remote.State),
 		effect = remotes:WaitForChild(Protocol.Remote.Effect), feed = remotes:WaitForChild(Protocol.Remote.Feed),
 	}, Match)
@@ -367,8 +367,14 @@ function Match.tick(self: any, dt: number)
 	elseif self.phase == phase.Intermission then
 		if #self:queue() < Config.Match.MinimumPlayers then
 			self:transition(phase.Waiting, 0)
-		elseif now >= self.deadline then
-			self:beginLoading()
+		elseif now >= self.deadline and not self.loadingRound then
+			self.loadingRound = true
+			local ok, message = pcall(function() self:beginLoading() end)
+			self.loadingRound = false
+			if not ok then
+				warn("MAYHEM X round startup failed: " .. tostring(message))
+				if self.phase == phase.Intermission then self:transition(phase.Waiting, 0) end
+			end
 		end
 	elseif self.phase == phase.Loading then
 		local pending = 0
@@ -395,8 +401,11 @@ function Match.tick(self: any, dt: number)
 	elseif self.phase == phase.Active then
 		local done, winner, reason = Rules.outcome(self:alive(), now >= self.deadline)
 		if done then self:finish(winner, reason) end
-	elseif self.phase == phase.Results and now >= self.deadline then
-		self:reset()
+	elseif self.phase == phase.Results and now >= self.deadline and not self.resetting then
+		self.resetting = true
+		local ok, message = pcall(function() self:reset() end)
+		self.resetting = false
+		if not ok then warn("MAYHEM X round reset failed: " .. tostring(message)) end
 	end
 	if now - self.lastBroadcast >= Config.NetworkInterval then self:broadcast() end
 end
