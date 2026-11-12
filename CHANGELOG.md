@@ -1,5 +1,12 @@
 # Changelog
 
+## Premium interface redesign, integration checkpoint
+
+- Replaced the light menu shell with dark layered surfaces, violet actions, cyan selection marks and an Oswald / Builder Sans / Roboto Mono font system. Added nine navigation sections, adaptive desktop rail and scrolling mobile navigation, press/hover/disabled feedback, original-model showcases, fitted weapon cameras and collection previews.
+- Armory statistics read the actual shared weapon configuration. Progression shows real server-session XP. Leaderboards read live replicated wins and eliminations. Ranked, permanent mastery and daily/weekly missions are explicitly unavailable; the daily cache remains a working session trial.
+- Tested actual desktop navigation and the iPhone 17 Pro landscape layout. Fixed Play clipping and early-character preview cloning. Portrait display was inspected, but portrait navigation clicks remain under investigation. No complete mobile acceptance is claimed.
+- Two actual Studio clients each passed 68 client checks and 35 audio loads. The server passed 11,208 assertions and 80 spawn raycasts. Both queued into Jungle; accepted shots spent ammunition, reload restored 18 with 92 reserve, switching and Repulse updated the HUD, and both entered the final duel with the uploaded showdown track. A simulated Player2 reset produced victory/defeat screens. This was not a combat-earned full match and did not verify persistence or sixteen-player performance.
+- Source-only verification passed 321 checks with no failures. After a helper placement correction, a fresh single-player boot passed 52 client checks. Current screenshots are under build/screenshots. Remaining work includes portrait input, short-screen layouts, result rewards, full visual review and performance measurements. The UI phase is still in progress.
 ## Live arena and equipment integration
 
 - Reconnected to the transformation place in Edit mode. Integrated twelve original mesh models, including the new helmet and torso armor, plus an original four-map PBR deck material. Arena templates now use map-specific landmarks, hulls, vegetation and cover shells while keeping the existing physical routes and spawns.

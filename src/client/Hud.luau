@@ -21,30 +21,33 @@ function Hud.new(callbacks: any)
 	self.screen = screen
 	self.root = Theme.frame(screen, "Interface", UDim2.new(), UDim2.fromScale(1, 1), nil, 1)
 	self.header = Theme.frame(self.root, "Telemetry", UDim2.new(0.5, -230, 0, 12), UDim2.fromOffset(460, 54), Theme.Void, 0.05)
-	Theme.corner(self.header)
+	Theme.corner(self.header, 3)
 	Theme.stroke(self.header, Theme.Purple, 0.5)
 	self.remaining = Theme.text(self.header, "Remaining", "16 ALIVE", UDim2.fromScale(0.04, 0.12), UDim2.fromScale(0.3, 0.72), 17, Theme.White, true)
 	self.timer = Theme.text(self.header, "Timer", "00:00", UDim2.fromScale(0.38, 0.12), UDim2.fromScale(0.26, 0.72), 25, Theme.Cyan, true)
 	self.kills = Theme.text(self.header, "Kills", "0 KILLS", UDim2.fromScale(0.72, 0.12), UDim2.fromScale(0.26, 0.72), 15, Theme.White, true)
+	self.timer.Font = Theme.FontNumeric
 	self.phase = Theme.text(self.root, "Mode", "LAST SIGNAL / THE COLLAPSE", UDim2.new(0.5, -200, 0, 72), UDim2.fromOffset(400, 22), 10, Theme.Muted)
 	self.phase.TextXAlignment = Enum.TextXAlignment.Center
 	self.menuButton = Theme.button(self.root, "Menu", "MX", UDim2.fromOffset(12, 14), UDim2.fromOffset(44, 44), function() self:toggleMenu() end)
 	self.cameraButton = Theme.button(self.root, "Camera", "CAM", UDim2.new(1, -58, 0, 14), UDim2.fromOffset(46, 44), callbacks.camera, true)
 	self.vitals = Theme.frame(self.root, "Vitals", UDim2.new(0, 18, 1, -142), UDim2.fromOffset(240, 124), Theme.Void, 0.04)
-	Theme.corner(self.vitals)
+	Theme.corner(self.vitals, 3)
 	Theme.stroke(self.vitals)
 	self.health = Theme.text(self.vitals, "Health", "100", UDim2.fromOffset(12, 6), UDim2.fromOffset(72, 32), 26, Theme.White, true)
 	Theme.text(self.vitals, "Hull", "HULL", UDim2.fromOffset(83, 12), UDim2.fromOffset(65, 22), 11, Theme.Metal)
-	self.healthFill = Theme.bar(self.vitals, "HealthTrack", UDim2.fromOffset(12, 42), UDim2.new(1, -24, 0, 6), Theme.Purple)
+	self.healthFill = Theme.bar(self.vitals, "HealthTrack", UDim2.fromOffset(12, 42), UDim2.new(1, -24, 0, 6), Theme.Cyan)
 	self.shield = Theme.text(self.vitals, "Shield", "SHIELD 40", UDim2.fromOffset(12, 54), UDim2.new(1, -24, 0, 22), 11, Theme.Cyan)
 	self.shieldFill = Theme.bar(self.vitals, "ShieldTrack", UDim2.fromOffset(12, 80), UDim2.new(1, -24, 0, 4), Theme.Cyan)
 	self.ultimateLabel = Theme.text(self.vitals, "Ultimate", "AEGIS / 0%", UDim2.fromOffset(12, 93), UDim2.new(1, -24, 0, 17), 9, Theme.Gold)
 	self.ultimateFill = Theme.bar(self.vitals, "UltimateTrack", UDim2.fromOffset(12, 114), UDim2.new(1, -24, 0, 3), Theme.Gold)
 	self.weapon = Theme.frame(self.root, "Weapon", UDim2.new(1, -258, 1, -142), UDim2.fromOffset(240, 124), Theme.Void, 0.04)
-	Theme.corner(self.weapon)
+	Theme.corner(self.weapon, 3)
 	Theme.stroke(self.weapon)
 	self.weaponName = Theme.text(self.weapon, "Name", "VECTOR-18", UDim2.fromOffset(12, 8), UDim2.new(1, -24, 0, 22), 14, Theme.White, true)
 	self.ammo = Theme.text(self.weapon, "Ammo", "18", UDim2.fromOffset(12, 32), UDim2.new(0.48, 0, 0, 42), 34, Theme.White, true)
+	self.health.Font = Theme.FontNumeric
+	self.ammo.Font = Theme.FontNumeric
 	self.reserve = Theme.text(self.weapon, "Reserve", "/ 108", UDim2.new(0.49, 0, 0, 46), UDim2.new(0.42, 0, 0, 24), 14, Theme.Metal)
 	self.slotHint = Theme.text(self.weapon, "Slots", "1 / VECTOR     2 / RIFT", UDim2.fromOffset(12, 92), UDim2.new(1, -24, 0, 20), 10, Theme.Cyan)
 	self.ability = Theme.button(self.root, "Repulse", "Q / REPULSE", UDim2.new(0.5, -174, 1, -90), UDim2.fromOffset(164, 50), callbacks.ability)
@@ -242,6 +245,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.ultimate.Active = active and charge >= 100
 	self.ultimate.Text = if charge >= 100 then "G / AEGIS READY" else "AEGIS / " .. charge .. "%"
 	self.ultimate.BackgroundColor3 = if charge >= 100 then Theme.Gold else Theme.Panel
+	self.ultimate.TextColor3 = if charge >= 100 then Theme.Void else Theme.Ink
 	self.ability.Size = UDim2.fromOffset(if compact then 142 else 164, 50)
 	self.ability.Position = UDim2.new(0.5, if compact then -150 else -174, 1, -90)
 	self.ultimate.Size = self.ability.Size
@@ -255,6 +259,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.touchUltimate.Text = if charge >= 100 then "AEGIS" else charge .. "%"
 	self.touchUltimate.Active = active and charge >= 100
 	self.touchUltimate.BackgroundColor3 = if charge >= 100 then Theme.Gold else Theme.Panel
+	self.touchUltimate.TextColor3 = if charge >= 100 then Theme.Void else Theme.Ink
 	self.crosshair.Visible = active and not overlay
 	self.protection.Visible = active and not overlay
 	self.protection.Text = if state.combat.protectionRemaining > elapsed then "SIGNAL PROTECTION / ACTIVE" else ""

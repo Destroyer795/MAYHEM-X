@@ -41,7 +41,8 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 	self.camera.CFrame = CFrame.lookAt(Vector3.new(5.4, 2.5, -9), Vector3.new(0, -0.3, 0))
 	local accent = Color3.fromRGB(table.unpack((Visuals.skin(skin) or Visuals.Skins[1]).color))
 	if kind == "weapon" then
-		Art.weapon(world, weapon or 1, CFrame.Angles(0, -0.25, 0), accent)
+		self.subject = Art.weapon(world, weapon or 1, CFrame.identity, accent)
+		self.direction = if weapon == 2 then Vector3.new(0.5, 0.2, -1).Unit else Vector3.new(1, 0.25, 0.2).Unit
 	elseif character then
 		local before = character.Archivable
 		character.Archivable = true
@@ -63,10 +64,18 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 				if joint:IsA("Motor6D") and joint.Name == "RightShoulder" then joint.Transform = CFrame.Angles(-0.5, 0, 0.7) end
 			end
 		end
+		self.subject = rig
+		self.direction = Vector3.new(0.35, 0.15, -1).Unit
 		local humanoid = rig:FindFirstChildOfClass("Humanoid")
 		if humanoid then humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None end
-		Geometry.ring(world, "Dais", CFrame.new(0, -3.4, 0), 2.5, 12, accent)
+		Art.place(world, "AerialBastion", CFrame.new(0, -3.95, 0), Vector3.new(6, 0.9, 6))
 	else self.key = "" end
+	if self.subject then
+		local bounds, size = self.subject:GetBoundingBox()
+		self.focus, self.bounds = bounds.Position, size
+		self.camera.FieldOfView = if kind == "weapon" then 34 else 40
+		self:step(true)
+	end
 end
 
 function Preview.map(self: any, id: string)
@@ -107,14 +116,25 @@ function Preview.map(self: any, id: string)
 end
 
 function Preview.step(self: any, reducedMotion: boolean)
-	if not self.world or reducedMotion or self.key:sub(1, 4) == "map:" then return end
-	local angle = math.sin(os.clock() * 0.4) * 0.2
-	self.camera.CFrame = CFrame.Angles(0, angle, 0) * CFrame.lookAt(Vector3.new(5.4, 2.5, -9), Vector3.new(0, -0.3, 0))
+	if not self.world or not self.bounds or self.key:sub(1, 4) == "map:" then return end
+	local angle = if reducedMotion then 0 else math.sin(os.clock() * 0.4) * 0.12
+	local direction = CFrame.Angles(0, angle, 0):VectorToWorldSpace(self.direction)
+	local rotation = CFrame.lookAt(Vector3.zero, -direction)
+	local extent = Vector3.zero
+	for _, x in {-0.5, 0.5} do for _, y in {-0.5, 0.5} do for _, z in {-0.5, 0.5} do
+		local v = rotation:VectorToObjectSpace(self.bounds * Vector3.new(x, y, z))
+		extent = Vector3.new(math.max(extent.X, math.abs(v.X)), math.max(extent.Y, math.abs(v.Y)), math.max(extent.Z, math.abs(v.Z)))
+	end end end
+	local aspect = math.max(0.3, self.frame.AbsoluteSize.X / math.max(1, self.frame.AbsoluteSize.Y))
+	local tangent = math.tan(math.rad(self.camera.FieldOfView / 2))
+	local distance = math.max(extent.Y / tangent, extent.X / (tangent * aspect)) * 1.12 + extent.Z
+	self.camera.CFrame = CFrame.lookAt(self.focus + direction * distance, self.focus)
 end
 
 function Preview.hide(self: any)
 	if self.world then self.world:Destroy(); self.world = nil end
 	self.key = ""
+	self.subject, self.bounds = nil, nil
 end
 
 return Preview

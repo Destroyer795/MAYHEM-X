@@ -50,6 +50,7 @@ function Art.outfit(character: Model, accent: Color3, width: number)
 		elseif item:IsA("BasePart") and item.Name ~= "HumanoidRootPart" and item.Name ~= "Head" then
 			item.Color, item.Material = Color3.fromRGB(34, 47, 65), Enum.Material.Fabric
 			if item:IsA("MeshPart") then item.TextureID = "" end
+			for _, surface in item:GetChildren() do if surface:IsA("SurfaceAppearance") or surface:IsA("Decal") then surface:Destroy() end end
 		end
 	end
 	head.Transparency = 1
@@ -80,8 +81,8 @@ function Art.weapon(parent: Instance?, slot: number, frame: CFrame, accent: Colo
 	model.Name = "MayhemWeapon"
 	local inlay = Instance.new("Part")
 	inlay.Name = "EnergyInlay"
-	inlay.Size = if slot == 1 then Vector3.new(0.025, 0.09, 0.65) else Vector3.new(0.06, 1.6, 0.025)
-	inlay.CFrame = frame * (if slot == 1 then CFrame.new(0.255, 0.08, -0.4) else CFrame.new(0, 0.8, -0.155))
+	inlay.Size = if slot == 1 then Vector3.new(0.015, 0.035, 0.28) else Vector3.new(0.06, 1.6, 0.025)
+	inlay.CFrame = frame * (if slot == 1 then CFrame.new(0.23, 0.12, -0.3) else CFrame.new(0, 0.8, -0.155))
 	inlay.Color, inlay.Material = accent, Enum.Material.Neon
 	inlay.Anchored, inlay.Massless, inlay.CastShadow = true, true, false
 	inlay.CanCollide, inlay.CanTouch, inlay.CanQuery = false, false, false

@@ -2,6 +2,8 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $source = [IO.File]::ReadAllText((Join-Path $projectRoot 'src/shared/Visuals.luau'))
 $palette = [regex]::Match($source, '(?s)Visuals.Palette = table.freeze\(\{(.*?)\}\)').Groups[1].Value
+$theme = [IO.File]::ReadAllText((Join-Path $projectRoot 'src/client/Theme.luau'))
+$palette += [regex]::Match($theme, '(?s)for name, rgb in \{(.*?)\} do Theme').Groups[1].Value
 $luminance = @{}
 foreach ($match in [regex]::Matches($palette, '(\w+)\s*=\s*\{\s*(\d+),\s*(\d+),\s*(\d+)\s*\}')) {
     $linear = @()
@@ -12,7 +14,7 @@ foreach ($match in [regex]::Matches($palette, '(\w+)\s*=\s*\{\s*(\d+),\s*(\d+),\
     $luminance[$match.Groups[1].Value] = 0.2126 * $linear[0] + 0.7152 * $linear[1] + 0.0722 * $linear[2]
 }
 $checks = 0
-foreach ($pair in @(@('White','Action'),@('Ink','Panel'),@('Ink','Surface'),@('Muted','Panel'),@('Muted','Surface'),@('Action','Panel'),@('Action','Surface'),@('White','Void'),@('Metal','Void'),@('Cyan','Void'),@('Gold','Void'),@('Ink','Gold'))) {
+foreach ($pair in @(@('White','Action'),@('Ink','Panel'),@('Ink','Surface'),@('Muted','Panel'),@('Muted','Surface'),@('Cyan','Panel'),@('Cyan','Surface'),@('White','Void'),@('Metal','Void'),@('Cyan','Void'),@('Gold','Void'),@('Void','Gold'))) {
     $a = $pair[0]; $b = $pair[1]
     if (-not $luminance.ContainsKey($a) -or -not $luminance.ContainsKey($b)) { throw "Missing text color pair: $a/$b" }
     $ratio = ([Math]::Max($luminance[$a],$luminance[$b]) + 0.05) / ([Math]::Min($luminance[$a],$luminance[$b]) + 0.05)
