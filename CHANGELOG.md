@@ -1,5 +1,13 @@
 # Changelog
 
+## Terrain and horizon integration, visual gate blocked
+
+- Added owned Terrain generation and cleanup, per-map cloud/atmosphere profiles and distant architectural, vegetation, desert and ice compositions. Removed the old flat Jungle water panel. Refined floating terrain spheres with connected ground and ridges, and reduced the build to eight horizon sectors. Existing combat routes and server damage contracts remain intact.
+- Generated and exported the original abandoned-city tower (105435080279086). The earlier abandoned-tower attempt failed moderation and created no accepted asset. No Creator Store search result was inserted.
+- Latest source-only verification passed 325 checks; thirteen-model art contracts passed 379. The reduced environment boot passed 11,276 live server assertions and eighty spawn raycasts, with 502,970 occupied terrain cells. These numbers do not establish rendering performance.
+- Captured intermediate Collapse and Jungle terrain views. Solar capture stalled, and later capture attempts did not return even after a playtest/renderer reset. Script execution and save remained available. Windows denied process termination, open-place copying and desktop recovery. The saved transformation place and source recovery snapshot are preserved; manual Studio restart is pending.
+- This phase is incomplete. All five final environment captures, remaining UI/mobile fixes, animations, persistence, missions, ranked systems, full match acceptance and performance profiling remain required.
+
 ## Premium interface redesign, integration checkpoint
 
 - Replaced the light menu shell with dark layered surfaces, violet actions, cyan selection marks and an Oswald / Builder Sans / Roboto Mono font system. Added nine navigation sections, adaptive desktop rail and scrolling mobile navigation, press/hover/disabled feedback, original-model showcases, fitted weapon cameras and collection previews.
@@ -9,7 +17,7 @@
 - Source-only verification passed 321 checks with no failures. After a helper placement correction, a fresh single-player boot passed 52 client checks. Current screenshots are under build/screenshots. Remaining work includes portrait input, short-screen layouts, result rewards, full visual review and performance measurements. The UI phase is still in progress.
 ## Live arena and equipment integration
 
-- Reconnected to the transformation place in Edit mode. Integrated twelve original mesh models, including the new helmet and torso armor, plus an original four-map PBR deck material. Arena templates now use map-specific landmarks, hulls, vegetation and cover shells while keeping the existing physical routes and spawns.
+- Reconnected to the transformation place in Edit mode. Integrated twelve original mesh models, including the new helmet and torso armor, plus an original four-channel PBR deck material. Arena templates now use map-specific landmarks, hulls, vegetation and cover shells while keeping the existing physical routes and spawns.
 - Added Art and MapArt modules. Destructible visual shells now follow existing destruction/restoration. Rifle and blade use original models in held equipment, first-person presentation and collection previews. Character appearance loading refreshes the armor, and previews wait for a complete character.
 - Replaced hub block scenery with original hull/tower/reactor models and a helmet/armor exhibit. No new dependency, balance change, publish or remote push.
 - Executed 11,208 server assertions, eighty spawn raycasts and fifty-two client checks in single-player Studio. Source-only verification passed 312 checks; original mesh contracts passed 345. Offline Premium XML integrity was not run because the preserved file could not be read, and native Rojo/Luau tools are unavailable.

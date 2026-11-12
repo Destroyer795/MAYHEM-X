@@ -23,7 +23,7 @@ function WorldPresentation.new(preferences: any)
 	local folder = Instance.new("Folder")
 	folder.Name = "MayhemLocalWorld"
 	folder.Parent = workspace
-	local self: any = setmetatable({ preferences = preferences, rings = {}, details = {}, applied = "", folder = folder, zone = {} }, WorldPresentation)
+	local self: any = setmetatable({ preferences = preferences, rings = {}, details = {}, ambientEmitters = {}, applied = "", folder = folder, zone = {} }, WorldPresentation)
 	local weather = carrier(folder, "Weather")
 	weather.Size = Vector3.new(48, 1, 48)
 	local emitter = Instance.new("ParticleEmitter")
@@ -38,6 +38,9 @@ function WorldPresentation.new(preferences: any)
 	emitter.Enabled = false
 	emitter.Parent = weather
 	self.weather, self.emitter = weather, emitter
+	local clouds = workspace.Terrain:FindFirstChildOfClass("Clouds") or Instance.new("Clouds")
+	clouds.Name, clouds.Parent = "MayhemClouds", workspace.Terrain
+	self.clouds = clouds
 	if not Lighting:FindFirstChildOfClass("Sky") then
 		local sky = Instance.new("Sky")
 		sky.Name = "MayhemSky"
@@ -48,6 +51,7 @@ function WorldPresentation.new(preferences: any)
 		local world = workspace:WaitForChild("MayhemWorld", 30)
 		if not world then return end
 		local function cache(item: Instance)
+			if item:IsA("ParticleEmitter") and item:GetAttribute("MayhemAmbient") then table.insert(self.ambientEmitters, item); self.applied = "" end
 			if item:IsA("Model") and item:GetAttribute("OrbitSpeed") then table.insert(self.rings, { model = item, base = item:GetPivot(), speed = item:GetAttribute("OrbitSpeed") }); self.applied = "" end
 			if item:IsA("BasePart") and item:GetAttribute("QualityTier") == 2 then table.insert(self.details, item); self.applied = "" end
 		end
@@ -97,8 +101,16 @@ function WorldPresentation.step(self: any, state: any)
 		Lighting.Ambient = Color3.fromRGB(table.unpack(profile.ambient))
 		Lighting.OutdoorAmbient = Lighting.Ambient
 		Lighting.ColorShift_Top = Color3.fromRGB(255, 242, 218)
-		Lighting.FogStart, Lighting.FogEnd = 600, 1800
+		Lighting.FogStart, Lighting.FogEnd = 300, 1300
+		self.clouds.Cover, self.clouds.Density = profile.clouds or 0.36, 0.42
+		self.clouds.Color = Color3.fromRGB(table.unpack(profile.sky))
+		for index = #self.ambientEmitters, 1, -1 do
+			local item = self.ambientEmitters[index]
+			if item.Parent then item.Enabled = not low and not self.preferences.reducedEffects and not self.preferences.reducedMotion else table.remove(self.ambientEmitters, index) end
+		end
 		Lighting.FogColor = Color3.fromRGB(table.unpack(profile.sky))
+		local sky = Lighting:FindFirstChildOfClass("Sky")
+		if sky then sky.SunAngularSize = if mapId == "Solar" then 12 else 4; sky.StarCount = if mapId == "Skyline" then 1200 else 100 end
 		local bloom = Lighting:FindFirstChild("MayhemBloom") :: BloomEffect?
 		if bloom then bloom.Enabled = not low; bloom.Intensity = 0.12; bloom.Size = 16; bloom.Threshold = 1.6 end
 		local atmosphere = Lighting:FindFirstChild("MayhemAtmosphere") :: Atmosphere?

@@ -2,6 +2,8 @@
 
 ## Commands and gates
 
+Current transformation checkpoint: source-only validation passes 325 checks, art contracts pass 379, and the latest terrain boot passed 11,276 server assertions plus eighty spawn raycasts. The prior current-art two-client run passed 68 client checks and 35 audio loads per client. Screenshot capture now stalls; script execution and local saving still work. Manual Studio restart is required before the remaining visual gate. Do not infer completion from these structural tests.
+
 Use Windows PowerShell from the project root. Execution policy changes below apply only to that process.
 
 ```powershell
@@ -19,7 +21,7 @@ When portable tools are available, run `scripts/setup.ps1`, `scripts/build.ps1` 
 
 `scripts/package.ps1` runs the offline build, normal verification and strict tool gate, compares previous working places with the premium-start archive when readable, creates/verifies the source/history bundle and zips the original audio. `-Native` selects a native Rojo build. Missing tools remain a recorded strict-gate failure; source/build verification failures stop packaging. A changed or unreadable previous working place is preserved and recorded separately in `preservationIssues`, never overwritten or marked matched. Inspect it manually before closing that gate. The previous Premium backup is checked against its recorded checksum. The Git report also records uncommitted changes.
 
-Current live gate: 11,033 server assertions, eighty spawn raycasts, client checks and thirty-five audio loads per client passed. Two clients each passed seventy checks, queued/voted Jungle, exercised real fire/reload/switch/blade/Repulse requests, entered the duel and returned through results to a Frost round. A server-simulated character reset produced win/loss, so this does not establish a combat-earned victory. Music never exceeded two transition voices in the observed scenario. Mute and independent volume propagation passed on both clients. Output contained no game errors after the preload fix. The iPhone 17 Pro landscape simulator exercised scrolling, Play and arena navigation. It uses LandscapeSensor; portrait was not tested. Runtime MayhemHUD uses CoreUISafeInsets and ClipToDeviceSafeArea. Comprehensive safe-area/touch/device acceptance remains pending.
+Current live gate: 11,033 server assertions, eighty spawn raycasts, client checks and thirty-five audio loads per client passed. Two clients each passed seventy checks, queued/voted Jungle, exercised real fire/reload/switch/blade/Repulse requests, entered the duel and returned through results to a Frost round. A server-simulated character reset produced win/loss, so this does not establish a combat-earned victory. Music never exceeded two transition voices in the observed scenario. Mute and independent volume propagation passed on both clients. Output contained no game errors after the preload fix. The iPhone 17 Pro landscape simulator exercised scrolling, Play and arena navigation. The earlier audio build used LandscapeSensor. The transformation now uses Sensor; portrait display has been inspected, but portrait navigation remains unresolved. Runtime MayhemHUD uses CoreUISafeInsets and ClipToDeviceSafeArea. Comprehensive safe-area/touch/device acceptance remains pending.
 
 Current static gate: 2,201 map assertions, 203 WAV/upload-mapping assertions, original-method preservation, 73 UI/network/audio wiring checks and twelve text-contrast pairs passed. Earlier 1,811 offline structural assertions describe the prior offline artifact and were not rerun against the Studio-authored file. Portable Luau/Rojo remain unavailable. Running modules in Studio exercises their engine syntax/runtime paths, but full Script Analysis diagnostics remain pending.
 
@@ -29,7 +31,7 @@ Verification covers source/module/config references, remote declarations, UI cal
 
 The smoke tests above have run. The checklist below is the broader acceptance gate, with remaining cases still pending. Use the existing Studio; no publishing is needed. [Studio testing modes](https://create.roblox.com/docs/studio/testing-modes) include Server & Clients, device/controller emulation and network simulation. The MCP audit used actual StudioTestService.ExecuteMultiplayerTestAsync(2) with separate server/client DataModels. Full sixteen-player capacity needs a separate authorized test session.
 
-1. Open `build/MAYHEM-X-Premium.rbxlx`. Confirm the daylight editor preview imports with correct dimensions/colors and no warnings. Inspect Script Analysis for every project script. Start Server & Clients with two clients and inspect both server and client Output.
+1. Open `build/MAYHEM-X-Transformation.rbxl`. Confirm the daylight editor preview imports with correct dimensions/colors and no warnings. Inspect Script Analysis for every project script. Start Server & Clients with two clients and inspect both server and client Output.
 2. From the server Command Bar, run:
    ```lua
    require(game.ServerScriptService.MayhemTests).run()
@@ -61,7 +63,7 @@ Record failures with map, phase, client count, device size, exact actions and Ou
 
 ## Next production stages
 
-The transformation asset foundation contains ten original models and thirty-one MeshParts. Its export passes 269 static asset/collision checks and a deterministic regeneration check. It has not replaced the arena/weapon systems yet. The resumable state is `build/transformation-checkpoint.json`; the working place is `build/MAYHEM-X-Transformation.rbxl`. Reopen that file in Studio Edit mode before continuing live work. Inspect the saved library against the manifest after reconnecting. Draft helper code is outside src and must be corrected and tested before use.
+The transformation now contains thirteen original models with source export and 379 static asset/collision checks. Original models are integrated into all five templates, the hub, held weapons, viewmodels and previews. The new terrain/horizon layer has boot/spawn checks, but its five-map visual review is incomplete. The resumable state is `build/transformation-checkpoint.json`; the working place is `build/MAYHEM-X-Transformation.rbxl`. Reopen that file in Studio Edit mode before continuing live work. Inspect the saved library against the manifest after reconnecting. The current implementation is in src; earlier drafts remain outside it. Source-only verification uses `scripts/verify.ps1 -SourceOnly`. Do not rebuild over live scene edits.
 
 1. Complete the visual audit with multiple live viewpoints of every arena, held weapons and major screen. Preserve before captures. Retain combat silhouettes/routes while replacing repeated primitive scenery with original architectural kits. Check available modelling tools before adding dependencies; record licenses for any imported content.
 2. Establish one material/font/icon system, then finish Collapse as the quality reference in Studio. Review daylight balance, focal landmarks, cover readability and low-quality rendering before adapting distinct jungle, desert, ice and city kits. Capture and refine each arena individually.
@@ -70,10 +72,12 @@ The transformation asset foundation contains ten original models and thirty-one 
 
 ## Git and contribution workflow
 
-Use `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\git.ps1 status` or another Git command through that wrapper. Metadata is in `.version-control/`, while protected `.git/` is untouched. The feature branch is `feature/premium-worlds-audio`, based on `58429c5`; `premium-baseline-20261111` and the baseline archive preserve that starting point.
+Use `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\git.ps1 status` or another Git command through that wrapper. Metadata is in `.version-control/`, while protected `.git/` is untouched. The current feature branch is `feature/studio-production-transformation`; the earlier audio branch is `feature/premium-worlds-audio`, based on `58429c5`; `premium-baseline-20261111` and the baseline archive preserve that starting point.
 
 Inspect relevant source, change one coherent system, run applicable checks, review the diff, stage named paths and commit with a descriptive message. Do not blindly stage the whole tree. Never discard user changes, rewrite history, force-push, commit local binaries/secrets or push without authorization.
 
 The earlier `build/premium-git-report.json` describes the offline milestone. Current Studio/audio commits and checks are recorded in `build/Studio-audio-verification.json`. Refresh a source/history bundle directly with Git after commits; do not run the packaging command merely to refresh history because it rebuilds over the live place. Original preservation archives remain unchanged.
 
 Use strict Luau, existing modules and server authority. Keep balance in Config and map/event behavior in MapRules or authored map data. Add tests for meaningful rules/security changes, not cosmetic implementation details. No U+2014, filler, fake features, unknown asset IDs, paid dependencies or credential access. Update only the existing five primary documents. Complete this acceptance gate before further gameplay expansion.
+
+Use actual Studio captures under `build/screenshots/` as evidence. Current images include desktop menus, fitted rifle presentation, two-client Jungle HUD, first-person weapon, win/loss results and intermediate Collapse/Jungle terrain reviews. Solar, Frost and Skyline horizon captures are still missing. Some intermediate images intentionally preserve defects for comparison. Capture has to recover before visual approval, mobile input approval or production performance claims.

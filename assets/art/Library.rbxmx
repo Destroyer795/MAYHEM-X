@@ -1624,5 +1624,166 @@
         </Properties>
       </Item>
     </Item>
+    <Item class="Model" referent="ART54">
+      <Properties>
+        <string name="Name">RuinedTower</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART55">
+        <Properties>
+          <string name="Name">walls_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://132995637591803</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://139030421332826</url>
+          </Content>
+          <Vector3 name="size">
+            <X>19.844116211</X>
+            <Y>46.12392807</Y>
+            <Z>20</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0</Y>
+            <Z>0.000245094</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1.000000238</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1.000000119</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART56">
+        <Properties>
+          <string name="Name">windows_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://84928902689825</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://99998311990220</url>
+          </Content>
+          <Vector3 name="size">
+            <X>4.259160995</X>
+            <Y>4.56730938</Y>
+            <Z>1.506275654</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.00932312</X>
+            <Y>-15.384872437</Y>
+            <Z>5.14999485</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1.000000238</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1.000000119</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART57">
+        <Properties>
+          <string name="Name">door_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://85824955754820</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://104817013345409</url>
+          </Content>
+          <Vector3 name="size">
+            <X>5.778474808</X>
+            <Y>3.45800972</Y>
+            <Z>7.450084686</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.008422852</X>
+            <Y>-20.154853821</Y>
+            <Z>-0.025389671</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1.000000238</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1.000000119</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+      <Item class="MeshPart" referent="ART58">
+        <Properties>
+          <string name="Name">roof_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://138592792934355</url>
+          </Content>
+          <Content name="TextureID">
+            <url>rbxassetid://122660213004304</url>
+          </Content>
+          <Vector3 name="size">
+            <X>4.114244461</X>
+            <Y>0.65763855</Y>
+            <Z>4.059053421</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>6.123687744</X>
+            <Y>-20.679180145</Y>
+            <Z>6.059937477</Z>
+            <R00>1.000000119</R00>
+            <R01>0</R01>
+            <R02>0</R02>
+            <R10>0</R10>
+            <R11>1.000000238</R11>
+            <R12>0</R12>
+            <R20>0</R20>
+            <R21>0</R21>
+            <R22>1.000000119</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+      </Item>
+    </Item>
   </Item>
 </roblox>

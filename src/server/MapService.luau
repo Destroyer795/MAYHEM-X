@@ -8,6 +8,7 @@ local MapRules = require(shared.MapRules)
 local Config = require(shared.Config)
 local Geometry = require(shared.Geometry)
 local MapArt = require(shared.MapArt)
+local Environment = require(shared.Environment)
 local Maps = {}
 Maps.__index = Maps
 
@@ -52,6 +53,7 @@ function Maps.load(self: any, id: string)
 	nextMap.Parent = active
 	self.model, self.info, self.spawns = nextMap, info, spawns
 	self.center, self.safeRadius, self.duel = Vector3.zero, MapRules.SafeStart, false
+	Environment.build(nextMap, id)
 	self.movers, self.covers, self.collapsing, self.hazards = {}, {}, {}, {}
 	for _, part in nextMap.Motion:GetChildren() do
 		if part:IsA("BasePart") then

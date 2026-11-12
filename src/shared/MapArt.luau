@@ -3,11 +3,11 @@ local Art = require(script.Parent.Art)
 local Geometry = require(script.Parent.Geometry)
 local MapArt = {}
 MapArt.Lighting = table.freeze({
-	Collapse = { clock = 14.2, density = 0.055, ambient = {103, 126, 150}, sky = {146, 205, 235} },
-	Jungle = { clock = 10.5, density = 0.07, ambient = {96, 130, 107}, sky = {133, 212, 223} },
-	Solar = { clock = 15.6, density = 0.06, ambient = {130, 112, 89}, sky = {226, 202, 161} },
-	Frost = { clock = 12.4, density = 0.055, ambient = {104, 136, 165}, sky = {172, 215, 241} },
-	Skyline = { clock = 17.1, density = 0.055, ambient = {113, 122, 161}, sky = {166, 190, 229} },
+	Collapse = { clock = 17.7, density = 0.22, ambient = {109, 113, 140}, sky = {224, 163, 129}, clouds = 0.56 },
+	Jungle = { clock = 9.3, density = 0.18, ambient = {103, 140, 130}, sky = {145, 200, 195}, clouds = 0.72 },
+	Solar = { clock = 16.2, density = 0.18, ambient = {151, 124, 101}, sky = {237, 188, 133}, clouds = 0.24 },
+	Frost = { clock = 11.0, density = 0.16, ambient = {118, 147, 174}, sky = {195, 220, 235}, clouds = 0.64 },
+	Skyline = { clock = 18.1, density = 0.15, ambient = {110, 125, 164}, sky = {157, 174, 220}, clouds = 0.43 },
 })
 local palettes = {
 	Collapse = { deck = Color3.fromRGB(148, 174, 193), trim = Color3.fromRGB(35, 72, 104) },
@@ -112,7 +112,7 @@ function MapArt.dress(model: Model, id: string)
 				spray.Color = ColorSequence.new(Color3.fromRGB(205, 248, 255))
 				spray.Parent = p
 			elseif p:IsA("BasePart") and p.Name:match("^Lagoon") then
-				p.Color, p.Transparency = Color3.fromRGB(45, 145, 183), 0.5
+				p.Transparency = 1
 			end
 		end
 	elseif id == "Solar" then

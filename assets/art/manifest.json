@@ -74,6 +74,12 @@
       "assetId": "85874178864604",
       "generationId": "f5cad662-b102-428e-ad33-3e4b765b4dca",
       "prompt": "Original MAYHEM X tactical helmet, ivory ceramic, cobalt visor, charcoal jaw guard and violet side light."
+    },
+    {
+      "key": "RuinedTower",
+      "assetId": "105435080279086",
+      "generationId": "28e4ed0a-8e3d-42f2-9f22-9e7a18cb353e",
+      "prompt": "Original abandoned futuristic architectural tower with incomplete facade, open floor terraces, exposed structural framework and weathered ivory ceramic and cobalt glass."
     }
   ],
   "geometry": [
@@ -1374,6 +1380,135 @@
           ],
           "mesh": "rbxassetid://138948865860045",
           "texture": "rbxassetid://95314124117901"
+        }
+      ]
+    },
+    {
+      "name": "RuinedTower",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "walls_geom",
+          "size": [
+            19.8441162109375,
+            46.12392807006836,
+            20
+          ],
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "frame": [
+            0,
+            0,
+            0.00024509429931640625,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://132995637591803",
+          "texture": "rbxassetid://139030421332826"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "windows_geom",
+          "size": [
+            4.259160995483398,
+            4.567309379577637,
+            1.5062756538391113
+          ],
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "frame": [
+            -0.0093231201171875,
+            -15.384872436523438,
+            5.149994850158691,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://84928902689825",
+          "texture": "rbxassetid://99998311990220"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "door_geom",
+          "size": [
+            5.778474807739258,
+            3.458009719848633,
+            7.450084686279297
+          ],
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "frame": [
+            -0.0084228515625,
+            -20.15485382080078,
+            -0.025389671325683594,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://85824955754820",
+          "texture": "rbxassetid://104817013345409"
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "roof_geom",
+          "size": [
+            4.11424446105957,
+            0.6576385498046875,
+            4.059053421020508
+          ],
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "frame": [
+            6.123687744140625,
+            -20.679180145263672,
+            6.059937477111816,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://138592792934355",
+          "texture": "rbxassetid://122660213004304"
         }
       ]
     }

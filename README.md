@@ -2,17 +2,17 @@
 
 **ENTER THE CHAOS. BECOME THE LEGEND.**
 
-An original Roblox PvP survival game for up to sixteen contenders. Vote for a frontier, fight with the VECTOR-18 and Rift Blade, use Repulse, and survive the closing signal. The premium milestone adds five physical arenas, a daylight hub, brighter menus, combat feedback and an original audio pack.
+An original Roblox PvP survival game for up to sixteen contenders. Vote for a frontier, fight with the VECTOR-18 and Rift Blade, use Repulse, and survive the closing signal. The premium milestone adds five physical arenas, an original mesh library, a brighter 3D hub, dark competitive menus, combat feedback and an original audio pack.
 
 The current Premium place is being edited and tested through the official Roblox Studio MCP. Uploaded audio, queue/voting, combat requests, duel transfer and result music have passed a two-client Studio smoke test. This remains a development build: production progression, the full visual transformation, device performance and sixteen-player acceptance are unfinished.
 
-The ongoing transformation uses branch `feature/studio-production-transformation` and the separate live file `build/MAYHEM-X-Transformation.rbxl`. Ten original mesh assets have been created and exported for source control; they are not yet integrated arena or weapon replacements. Studio must have that file open in Edit mode to continue. The previous Premium/audio build remains preserved.
+The ongoing transformation uses branch `feature/studio-production-transformation` and the separate live file `build/MAYHEM-X-Transformation.rbxl`. Thirteen original mesh assets are exported for source control. Arena landmarks, vegetation, cover, held/viewmodel weapons and armor are integrated. Server-owned terrain surroundings and map horizons are in visual refinement. Studio must have that file open in Edit mode to continue. The previous Premium/audio build remains preserved.
 
 ## Open and play
 
-1. Open `build/MAYHEM-X-Premium.rbxlx` in the existing Roblox Studio. A daylight Collapse editor preview is included. Startup replaces it with the hub and active arena.
+1. Open `build/MAYHEM-X-Transformation.rbxl` in the existing Roblox Studio. A daylight Collapse editor preview is included. Startup replaces it with the hub and active arena.
 2. Start **Server & Clients** with two clients. In each client, click **PLAY / JOIN QUEUE**.
-3. Open **ARENAS**, preview a map, then vote before intermission ends. Only the first sixteen queued contenders have ballots.
+3. Use the five-arena action on PLAY or MAP BALLOT in matchmaking, preview a map, then vote before intermission ends. Only the first sixteen queued contenders have ballots.
 4. After insertion/countdown, fight until one survivor remains. Repeat for each map and follow [DEVELOPMENT.md](DEVELOPMENT.md).
 
 | Arena | Layout and identity |
@@ -23,7 +23,7 @@ The ongoing transformation uses branch `feature/studio-production-transformation
 | Frostbite | Three snow/ice ridges, frozen crossbridges, crystal cover and elevated fortress |
 | Skyline Zero | Four roof heights, sloped skybridges, elevators, service deck and city skyline |
 
-Every template has sixteen spawns, four ammo-cache locations, cover, a hazard and a final duel deck. Server integration includes map cleanup, destructible cover, collapsing links, Low Gravity/Shield Drought events, a shrinking safe zone and the defensive Aegis ultimate. Eighty spawn raycasts passed in Studio; Jungle and Frost ran in the two-client test. Complete traversal and combat acceptance on every arena is pending. The current maps contain procedural Parts and no MeshParts, so they do not yet meet the requested production art standard.
+Every template has sixteen spawns, four ammo-cache locations, cover, a hazard and a final duel deck. Server integration includes map cleanup, destructible cover, collapsing links, Low Gravity/Shield Drought events, a shrinking safe zone and the defensive Aegis ultimate. Eighty spawn raycasts passed in Studio; Jungle and Frost ran in the two-client test. Complete traversal and combat acceptance on every arena is pending. The maps combine the preserved physical routes with original mesh scenery. Terrain surrounds the playable bounds and is cleared using owned-region metadata. Full production art acceptance is pending.
 
 The FIFO queue, round transitions, serialized spawning, health/shields, ammo/reloading, kill attribution and server combat validation are retained. New map/environment hooks are explicit changes. Cosmetics never change combat stats.
 
@@ -31,7 +31,7 @@ The FIFO queue, round transitions, serialized spawning, health/shields, ammo/rel
 
 Deployment, matchmaking, map ballots, operative profiles, weapon previews, inventory, Style Lab, daily cache, settings, loading and results share one responsive interface. The HUD shows vitals, ammo, cooldowns, Aegis charge, players, kills, timer, feed and reality/zone status.
 
-Menus use scrolling content, bounded previews, readable text contrast and local animation. Live screenshot review corrected navigation order and text outlines. An iPhone 17 Pro landscape simulation exercised scrolling, Play and arena navigation without Output errors. Short screens still devote too much space to navigation; the broader interface redesign remains pending.
+Menus use scrolling content, bounded previews, readable text contrast and local animation. Live screenshot review corrected navigation order and text outlines. An iPhone 17 Pro landscape simulation exercised scrolling, Play and arena navigation without Output errors. The redesign uses a desktop rail and scrolling mobile navigation. Play fits the tested short landscape screen. Portrait navigation and complete device acceptance remain pending.
 
 Three operative profiles and six finishes are cosmetic. Two styles are free claims, Prism is a daily session trial, and Aurum costs 45 earned session credits. Eliminations earn 15 credits and wins earn 45; the daily cache adds 15. Credits, XP, level and collection reset after leaving the server. Only preferences have a production DataStore path; Studio preferences are session-only.
 
@@ -43,6 +43,8 @@ PC: WASD/jump, left click attack, 1/2 weapons, R reload, Q Repulse, G Aegis, C c
 
 Keep the local Premium place open for the live workflow in [DEVELOPMENT.md](DEVELOPMENT.md). Do not run the default offline build or package command over this Studio-authored place. Source changes are mirrored after inspecting live scripts; Rojo is one-way toward Studio and cannot export scene edits.
 
-The live local file is `build/MAYHEM-X-Premium.rbxlx`. Original Phase 1, Visual archives and earlier Premium backups remain preserved. Current evidence is in `build/Studio-audio-verification.json` and `build/screenshots/`; the earlier offline package report describes an older build. Module ownership is in [ARCHITECTURE.md](ARCHITECTURE.md), with test limits in [DEVELOPMENT.md](DEVELOPMENT.md) and [CHANGELOG.md](CHANGELOG.md).
+The current live local file is `build/MAYHEM-X-Transformation.rbxl`. Original Phase 1, Visual archives and earlier Premium backups remain preserved. Current evidence is in `build/Studio-audio-verification.json` and `build/screenshots/`; the earlier offline package report describes an older build. Module ownership is in [ARCHITECTURE.md](ARCHITECTURE.md), with test limits in [DEVELOPMENT.md](DEVELOPMENT.md) and [CHANGELOG.md](CHANGELOG.md).
 
 Work remains in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`, the writable workspace. Scripts are relocatable to the requested `C:\MAYHEM-X` after inspecting that destination. Git history uses `.version-control/`; use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. Nothing was published or pushed, no Robux was spent, and no credentials were accessed.
+
+The current visual gate is blocked by stalled Studio screenshot capture. Script execution and saving still work. Windows denied an automated Studio restart and file copying; reopen the saved transformation place manually. Existing binary and source backups remain in `build/backups/`. Current source-only checks pass, but the environment and UI phases are not marked complete.
