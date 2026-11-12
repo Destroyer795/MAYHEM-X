@@ -21,16 +21,16 @@ function StyleRules.apply(record: any, catalog: any, command: any, payload: any,
 		if type(payload) ~= "string" or #payload > 24 then return false, "Invalid collection item." end
 		local entry = catalog.skin(payload)
 		if not entry or entry.source ~= "shop" then return false, "This style is not a Style Lab item." end
-		if record.owned[payload] then return true, "Already in your session collection." end
+		if record.owned[payload] then return true, "Already in your collection." end
 		record.owned[payload] = true
 		record.revision += 1
-		return true, "Added to your session collection. Select it in Collection."
+		return true, "Added to your collection. Select it in Collection."
 	elseif command == "Daily" then
-		if record.dailyDay == day then return false, "Cache already claimed for today in this server." end
+		if record.dailyDay == day then return false, "Cache already claimed for today." end
 		record.dailyDay = day
 		record.owned.Prism = true
 		record.revision += 1
-		return true, "Prism trial added for this server session."
+		return true, "Prism trial added to your collection."
 	end
 	return false, "Unknown presentation request."
 end

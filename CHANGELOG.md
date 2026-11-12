@@ -1,5 +1,15 @@
 # Changelog
 
+## Versioned account profile and Studio fallback
+
+- Replaced the preferences-only service with a version 2 server profile for allowlisted settings, cumulative kills and wins, earned credits, cosmetic ownership/equipment and the daily claim day. Account XP and level derive from the persisted server stats.
+- Added a one-time migration read from the prior production preferences store, catalog and numeric validation, a per-player 120-second server lease, thirty-second saves, bounded retries, and leave/shutdown flushes. Store names in Studio use a separate prefix. Purchases and daily rewards update the profile atomically.
+- Added profile migration, ownership, atomic purchase and one-time daily reward cases to the Studio rule suite. The live server passed 11,287 structure/rules assertions and 80 actual spawn raycasts. MAYHEM X booted without a script error and its menu displayed the expected session-only fallback.
+- Roblox refused DataStore calls for this unpublished local place with `You must publish this place to the web to access DataStore.` The user enabled Studio API access and data scopes, but no publishing was performed. Real read/write/rejoin and lease tests remain unverified.
+- A fresh StudioTestService two-client launch did not enter Play mode and remained pending. Profile changes have single-client server verification; a current two-client profile interaction test remains open.
+- Moved the delayed 476-descendant generated avatar out of Workspace into `ServerStorage.ArtDrafts` to avoid replicating an unused model. It has not been visually accepted or wired to character previews.
+- Current live menu screenshot shows the presentation still needs substantial work, including the block-shaped character and incomplete environmental composition. This profile milestone does not accept the overall visual gate.
+
 ## Map transition race and UI fixes, visual gate in progress
 
 - Fixed a server tick reentry discovered in a real two-client Studio test. Terrain generation yields during map loading, which had allowed additional Intermission ticks to start conflicting selections. Match startup and Results reset now have guards, while MapService serializes loads, avoids duplicate same-map builds, and releases its guard after errors.

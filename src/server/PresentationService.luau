@@ -29,6 +29,12 @@ function Presentation.start(profiles: any)
 	local function send(player: Player, notice: string?)
 		local record = records[player]
 		if not record or player.Parent ~= Players then return end
+		local cosmetics = profiles:cosmetics(player)
+		if cosmetics then
+			record.skin, record.operative = cosmetics.skin, cosmetics.operative
+			record.owned, record.dailyDay = cosmetics.owned, cosmetics.dailyDay
+			if not record.hydrated then record.hydrated = true; apply(player) end
+		end
 		local day = math.floor(os.time() / 86400)
 		remote:FireClient(player, {
 			skin = record.skin, operative = record.operative, owned = table.clone(record.owned), revision = record.revision,
@@ -40,7 +46,7 @@ function Presentation.start(profiles: any)
 	local function add(player: Player)
 		if records[player] then return end
 		local record = StyleRules.new()
-		record.tokens = 6
+		record.tokens, record.hydrated = 6, false
 		record.requestAt = os.clock()
 		records[player] = record
 		connections[player] = player.CharacterAdded:Connect(function(character: Model)
@@ -52,7 +58,7 @@ function Presentation.start(profiles: any)
 		appearanceConnections[player] = player.CharacterAppearanceLoaded:Connect(function(character: Model)
 			if records[player] == record and player.Character == character then apply(player) end
 		end)
-		if player.Character then apply(player) end
+		if player.Character and profiles:cosmetics(player) then apply(player); record.hydrated = true end
 	end
 	remote.OnServerEvent:Connect(function(player: Player, command: any, payload: any)
 		local record = records[player]
@@ -62,6 +68,7 @@ function Presentation.start(profiles: any)
 		record.tokens, record.requestAt = tokens, now
 		if not allowed or type(command) ~= "string" or #command > 12 then return end
 		if command == "Request" then send(player, nil); return end
+		if not profiles:canModify(player) then send(player, "Profile is still loading or in use. Try again shortly."); return end
 		if command == "Preferences" then
 			local accepted = profiles:update(player, payload)
 			send(player, if accepted then "Preferences accepted." else "Preferences rejected. Try again after loading.")
@@ -71,16 +78,29 @@ function Presentation.start(profiles: any)
 			local item = if type(payload) == "string" then Visuals.skin(payload) else nil
 			if not item or item.source ~= "purchase" then send(player, "Unknown purchase."); return end
 			if record.owned[item.id] then send(player, "Already in your collection."); return end
-			if not profiles:spend(player, item.cost) then send(player, "Not enough session credits."); return end
+			if not profiles:purchase(player, item.id) then send(player, "Not enough credits or item already owned."); return end
 			record.owned[item.id] = true
 			record.revision += 1
 			send(player, "Aurum added. No combat stats changed.")
 			return
 		end
+		if command == "Daily" then
+			local day = math.floor(os.time() / 86400)
+			if profiles:claimDaily(player, day) then
+				record.dailyDay, record.owned.Prism = day, true
+				record.revision += 1
+				send(player, "Daily cache claimed.")
+			else
+				send(player, "Daily cache unavailable. Check profile loading and return tomorrow.")
+			end
+			return
+		end
 		local previousRevision = record.revision
 		local accepted, notice = StyleRules.apply(record, Visuals, command, payload, math.floor(os.time() / 86400))
-		if accepted and record.revision ~= previousRevision then apply(player) end
-		if accepted and command == "Daily" and record.revision ~= previousRevision then profiles:bonus(player, 15) end
+		if accepted and record.revision ~= previousRevision then
+			apply(player)
+			profiles:updateCosmetics(player, record)
+		end
 		send(player, notice)
 	end)
 	Players.PlayerAdded:Connect(add)
