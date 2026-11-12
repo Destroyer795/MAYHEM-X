@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-13: Animated operator preview
+
+- Generated the operator idle animation in the live Studio session and configured the returned asset `rbxassetid://128214294905072` in `AnimationConfig.luau`.
+- Preview viewports now load one looped idle track and explicitly stop/destroy it when switching or hiding previews. No animation placeholders or guessed IDs were added.
+- Verified on the live Studio client: the loaded track duration was 7.9667 seconds, six rig bones had active transforms, the deployment and operator pages each held one active track, and switching pages left zero tracks on the hidden preview. Output showed the normal local-place notice and no animation errors.
+- This is a local operator showcase animation only. It does not implement or verify first-person, third-person, or melee combat animations. Permission for a future published universe remains unchecked.
+
 ## 2026-11-13: Live operator showcase refinement
 
 - Connected the Studio-generated R15 operator model in `ReplicatedStorage.Mayhem.Art.OperatorShowcase` to menu and character previews, retaining the existing player-character fallback when the model is absent.

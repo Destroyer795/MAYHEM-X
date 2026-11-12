@@ -4,6 +4,7 @@ local Geometry = require(ReplicatedStorage.Mayhem.Shared.Geometry)
 local Visuals = require(ReplicatedStorage.Mayhem.Shared.Visuals)
 local Catalog = require(ReplicatedStorage.Mayhem.Shared.MapCatalog)
 local Art = require(ReplicatedStorage.Mayhem.Shared.Art)
+local Animations = require(ReplicatedStorage.Mayhem.Shared.AnimationConfig)
 local Players = game:GetService("Players")
 local Preview = {}
 Preview.__index = Preview
@@ -35,6 +36,11 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 	local key = kind .. operative .. skin .. tostring(weapon)
 	if self.key == key and self.character == character and self.appearance == appearance and self.showcase == showcase then return end
 	self.key, self.character, self.appearance, self.showcase = key, character, appearance, showcase
+	if self.animationTrack then
+		self.animationTrack:Stop(0.1)
+		self.animationTrack:Destroy()
+		self.animationTrack = nil
+	end
 	if self.world then self.world:Destroy() end
 	local world = Instance.new("WorldModel")
 	world.Parent = self.frame
@@ -84,7 +90,23 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 		self.subject = rig
 		self.direction = Vector3.new(0.35, 0.15, -1).Unit
 		local humanoid = rig:FindFirstChildOfClass("Humanoid")
-		if humanoid then humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None end
+		if humanoid then
+			humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+			if showcase then
+				local animator = humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator")
+				animator.Parent = humanoid
+				local animation = Instance.new("Animation")
+				animation.AnimationId = Animations.OperatorShowcaseIdle
+				local ok, track = pcall(function() return animator:LoadAnimation(animation) end)
+				animation:Destroy()
+				if ok and track then
+					track.Looped = true
+					track.Priority = Enum.AnimationPriority.Idle
+					track:Play(0.2)
+					self.animationTrack = track
+				end
+			end
+		end
 		local pedestalY = -3.25
 		if kind ~= "weapon" then
 			local bounds, size = self.subject:GetBoundingBox()
@@ -154,6 +176,11 @@ function Preview.step(self: any, reducedMotion: boolean)
 end
 
 function Preview.hide(self: any)
+	if self.animationTrack then
+		self.animationTrack:Stop(0.1)
+		self.animationTrack:Destroy()
+		self.animationTrack = nil
+	end
 	if self.world then self.world:Destroy(); self.world = nil end
 	self.key = ""
 	self.subject, self.bounds = nil, nil
