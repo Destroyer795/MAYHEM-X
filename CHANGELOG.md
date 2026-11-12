@@ -1,11 +1,20 @@
 # Changelog
 
-## Terrain and horizon integration, visual gate blocked
+## Compact UI fixes and Studio review, visual gate in progress
+
+- Reconnected to the correct saved Studio place and restored live screenshot capture. The new menu group extends behind the Roblox core safe inset and updates when the inset changes, removing the exposed world strip above the menu.
+- Replaced the operator base outfit's mottled Fabric shading with SmoothPlastic while retaining the existing armor and helmet meshes.
+- Short matchmaking pages now keep LEAVE QUEUE and VIEW HUB visible. The queue timer yields space on short viewports. In Studio, PLAY opened matchmaking, LEAVE QUEUE returned the display to READY TO QUEUE with zero queued players, and the edited output reported no game errors.
+- Saved fresh live screenshots at `build/screenshots/main-menu-ui-refined.jpg` and `build/screenshots/matchmaking-ui-refined.jpg`. The current 678 x 521 viewport was reviewed. The character remains visibly block-shaped, and the map and other-screen visual gates remain incomplete.
+- Source-only checks passed 325, art contracts 379, map checks 2,201, audio checks 203, interface wiring 75, preservation checks 5 baseline files and 14 methods, and contrast checks 12 pairs. No Roblox runtime, device or performance completion is implied.
+- Studio saved `build/MAYHEM-X-Transformation.rbxl`. No gameplay system or combat balance was changed.
+
+## Terrain and horizon integration, visual gate in progress
 
 - Added owned Terrain generation and cleanup, per-map cloud/atmosphere profiles and distant architectural, vegetation, desert and ice compositions. Removed the old flat Jungle water panel. Refined floating terrain spheres with connected ground and ridges, and reduced the build to eight horizon sectors. Existing combat routes and server damage contracts remain intact.
 - Generated and exported the original abandoned-city tower (105435080279086). The earlier abandoned-tower attempt failed moderation and created no accepted asset. No Creator Store search result was inserted.
 - Latest source-only verification passed 325 checks; thirteen-model art contracts passed 379. The reduced environment boot passed 11,276 live server assertions and eighty spawn raycasts, with 502,970 occupied terrain cells. These numbers do not establish rendering performance.
-- Captured intermediate Collapse and Jungle terrain views. Solar capture stalled, and later capture attempts did not return even after a playtest/renderer reset. Script execution and save remained available. Windows denied process termination, open-place copying and desktop recovery. The saved transformation place and source recovery snapshot are preserved; manual Studio restart is pending.
+- Captured intermediate Collapse and Jungle terrain views. Solar, Frost and Skyline final views remain outstanding. A Studio reconnect restored capture, but it also revealed primitive Solar combat-floor geometry and other unfinished presentation. This maps milestone is not accepted.
 - This phase is incomplete. All five final environment captures, remaining UI/mobile fixes, animations, persistence, missions, ranked systems, full match acceptance and performance profiling remain required.
 
 ## Premium interface redesign, integration checkpoint

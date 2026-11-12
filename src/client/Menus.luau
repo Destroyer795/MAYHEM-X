@@ -20,8 +20,12 @@ function Menus.new(parent: Instance, callbacks: any)
 	group.BackgroundTransparency = 0
 	group.ZIndex = 20
 	group.Visible = false
+	group.ClipsDescendants = false
 	group.Parent = parent
 	self.group = group
+	self.topInset = GuiService:GetGuiInset().Y
+	group.Position = UDim2.new(0, 0, 0, -self.topInset)
+	group.Size = UDim2.new(1, 0, 1, self.topInset)
 	self.rail = Theme.frame(group, "NavigationRail", UDim2.new(), UDim2.new(0, 188, 1, 0), Theme.Void)
 	self.topbar = Theme.frame(group, "MobileHeader", UDim2.new(), UDim2.new(1, 0, 0, 52), Theme.Void)
 	self.headerProfile = Theme.text(group, "PlayerSummary", "", UDim2.new(), UDim2.new(), 11, Theme.Metal)
@@ -332,8 +336,15 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	end
 	local width = self.group.AbsoluteSize.X
 	local height = self.group.AbsoluteSize.Y
+	local topInset = GuiService:GetGuiInset().Y
+	if topInset ~= self.topInset then
+		self.topInset = topInset
+		self.group.Position = UDim2.new(0, 0, 0, -topInset)
+		self.group.Size = UDim2.new(1, 0, 1, topInset)
+	end
 	local compact = width < 640
 	local short = height < 540
+	self.queueTimer.Visible = not short
 	local rail = width >= 760 and not short
 	self.rail.Visible = rail
 	self.topbar.Visible = not rail
@@ -361,7 +372,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.headerProfile.Position = if rail then UDim2.new(0, 18, 1, -148) else UDim2.new(0.4, 0, 0, 8)
 	self.headerProfile.Size = if rail then UDim2.fromOffset(152, 68) else UDim2.new(0.6, -132, 0, 36)
 	for name, area in self.pages do
-		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 0 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Leaderboards" then 112 + #Players:GetPlayers() * 52 elseif name == "Progression" then 480 elseif name == "Armory" then 490 elseif name == "Inventory" then 520 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then 470 else 420
+		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 0 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Leaderboards" then 112 + #Players:GetPlayers() * 52 elseif name == "Progression" then 480 elseif name == "Armory" then 490 elseif name == "Inventory" then 520 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then (if short then 0 else 470) else 420
 		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))
 	end
 	local heroHeight = self.pages.Deploy.AbsoluteSize.Y

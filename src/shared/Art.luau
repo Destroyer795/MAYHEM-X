@@ -48,7 +48,7 @@ function Art.outfit(character: Model, accent: Color3, width: number)
 	for _, item in character:GetChildren() do
 		if item:IsA("Shirt") or item:IsA("Pants") or item:IsA("ShirtGraphic") then item:Destroy()
 		elseif item:IsA("BasePart") and item.Name ~= "HumanoidRootPart" and item.Name ~= "Head" then
-			item.Color, item.Material = Color3.fromRGB(34, 47, 65), Enum.Material.Fabric
+			item.Color, item.Material = Color3.fromRGB(34, 47, 65), Enum.Material.SmoothPlastic
 			if item:IsA("MeshPart") then item.TextureID = "" end
 			for _, surface in item:GetChildren() do if surface:IsA("SurfaceAppearance") or surface:IsA("Decal") then surface:Destroy() end end
 		end
