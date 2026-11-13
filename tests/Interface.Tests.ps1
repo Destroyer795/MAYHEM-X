@@ -3,6 +3,7 @@ $projectRoot = Split-Path -Parent $PSScriptRoot
 $clientRoot = Join-Path $projectRoot 'src\client'
 $bootstrap = [IO.File]::ReadAllText((Join-Path $clientRoot 'Bootstrap.client.luau'))
 $menus = [IO.File]::ReadAllText((Join-Path $clientRoot 'Menus.luau'))
+$menus += [IO.File]::ReadAllText((Join-Path $clientRoot 'MenuLayout.luau'))
 $hud = [IO.File]::ReadAllText((Join-Path $clientRoot 'Hud.luau'))
 $scene = [IO.File]::ReadAllText((Join-Path $projectRoot 'src\server\SceneService.luau'))
 $effects = [IO.File]::ReadAllText((Join-Path $clientRoot 'Effects.luau'))

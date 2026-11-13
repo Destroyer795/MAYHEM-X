@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-13: Iris menu composition and animated rewards
+
+- Replaced the side rail with six primary sections and contextual navigation. Added a graphite/slate, ivory and iris design system, operator-led home composition, native typography, real three-currency wallet and discovery links.
+- Recomposed operators, loadout, armory, workshop, queue, profile and settings. Settings use labelled value rows. Upgrades connect to existing cosmetic actions; ranked, mastery and event availability remains explicit.
+- Added portrait stacking, horizontal navigation/finish selectors, tablet layouts, safe-area coverage and scrolling short-screen content. Removed clipped scenery from narrow operator previews.
+- Fixed the anchored showcase rig, added the original victory animation, skippable payout counters and an XP reveal. Rewards still come from server results. No combat/economy/network contracts changed in this UI milestone.
+- Desktop queue/cancel, grouped navigation and volume controls passed. Studio client checks passed 68 assertions. Reviewed desktop, phone portrait, tablet and phone-landscape result captures. Reward screenshots use a labelled visual fixture with recorded payouts, not a new combat match. Physical touch/controller, ultrawide and complete visual acceptance remain pending.
+- Saved the live Transformation place. A separate binary copy was denied; source backups and earlier binary backups remain intact. No new dependencies. Existing generated texture warnings and unpublished-place persistence limits remain unresolved.
+- GitHub could not be reached over port 443. The authorized push must not be reported as successful without confirmation.
+
 ## 2026-11-13: Combat-earned economy regression and fresh round state
 
 - Fixed same-map rounds retaining duel bounds, destroyed cover and cache state. Each new round now creates a fresh arena; ending a round clears duel and safe-zone state. The lobby HUD no longer labels intermission as a final showdown.

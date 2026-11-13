@@ -4,13 +4,15 @@ local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visua
 local Theme: any = {}
 for name, rgb in Visuals.Palette do Theme[name] = Color3.fromRGB(table.unpack(rgb)) end
 for name, rgb in {
-	Surface = {12, 17, 27}, Panel = {24, 33, 49}, Void = {10, 15, 24}, Navy = {31, 43, 61},
-	Ink = {239, 245, 251}, White = {239, 245, 251}, Muted = {168, 185, 204}, Metal = {134, 159, 185},
-	Action = {242, 174, 63}, Purple = {92, 215, 234}, Cyan = {92, 215, 234},
+	Surface = {18, 20, 27}, Panel = {32, 35, 47}, Void = {12, 14, 19}, Navy = {42, 47, 60},
+	Ink = {241, 239, 232}, White = {241, 239, 232}, Muted = {176, 181, 196}, Metal = {156, 165, 184},
+	Action = {190, 177, 255}, Purple = {190, 177, 255}, Cyan = {190, 177, 255},
+	Gold = {215, 211, 188}, Red = {255, 139, 151}, Magenta = {219, 174, 214},
 } do Theme[name] = Color3.fromRGB(table.unpack(rgb)) end
 Theme.Spacing = table.freeze({ Tight = 8, Card = 16, Section = 24 })
 Theme.Font = Enum.Font.BuilderSansMedium
-Theme.FontStrong = Enum.Font.Oswald
+Theme.FontStrong = Enum.Font.BuilderSansBold
+Theme.FontDisplay = Enum.Font.Oswald
 Theme.FontNumeric = Enum.Font.RobotoMono
 
 function Theme.corner(item: Instance, radius: number?)
@@ -38,7 +40,7 @@ function Theme.text(parent: Instance, name: string, content: string, position: U
 	label.Position = position
 	label.Size = size
 	label.TextSize = textSize or 14
-	label.TextColor3 = if color == Theme.Action then Theme.Cyan else color or Theme.White
+	label.TextColor3 = color or Theme.White
 	label.Font = if bold then Theme.FontStrong else Theme.Font
 	label.BackgroundTransparency = 1
 	label.TextXAlignment = Enum.TextXAlignment.Left
@@ -82,7 +84,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	end
 	item.SelectionImageObject = Theme.FocusOutline
 	item.Parent = parent
-	Theme.corner(item, 4)
+	Theme.corner(item, 6)
 	local border = Theme.stroke(item, if secondary then Theme.Metal else Theme.Action, if secondary then 0.85 else 0.2)
 	local scale = Instance.new("UIScale")
 	scale.Parent = item

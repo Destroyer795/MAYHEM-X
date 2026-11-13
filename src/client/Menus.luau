@@ -8,6 +8,7 @@ local Catalog = require(game:GetService("ReplicatedStorage").Mayhem.Shared.MapCa
 local Config = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Config)
 local Theme = require(script.Parent.Theme)
 local Preview = require(script.Parent.Preview)
+local MenuLayout = require(script.Parent.MenuLayout)
 local Menus = {}
 Menus.__index = Menus
 
@@ -46,7 +47,6 @@ function Menus.new(parent: Instance, callbacks: any)
 		self.insetLayer, self.insetFill = insetLayer, insetFill
 		group:GetPropertyChangedSignal("Visible"):Connect(function() insetLayer.Enabled = group.Visible end)
 	end
-	self.rail = Theme.frame(group, "NavigationRail", UDim2.new(), UDim2.new(0, 188, 1, 0), Theme.Void)
 	self.topbar = Theme.frame(group, "MobileHeader", UDim2.new(), UDim2.new(1, 0, 0, 52), Theme.Void)
 	self.headerProfile = Theme.text(group, "PlayerSummary", "", UDim2.new(), UDim2.new(), 11, Theme.Metal)
 	self.logo = Theme.text(group, "Logo", "MAYHEM X", UDim2.fromOffset(24, 14), UDim2.new(0.6, 0, 0, 40), 26, Theme.White, true)
@@ -78,18 +78,6 @@ function Menus.new(parent: Instance, callbacks: any)
 	layout.Padding = UDim.new(0, 8)
 	layout.Parent = nav
 	self.navLayout = layout
-	for index, definition in { { "Deploy", "PLAY", 1 }, { "Character", "OPERATORS", 2 }, { "Inventory", "LOADOUT", 3 }, { "Armory", "ARMORY", 4 }, { "Shop", "COLLECTION", 4 }, { "Progression", "PROGRESSION", 5 }, { "Missions", "MISSIONS", 6 }, { "Ranked", "RANKED / UNAVAILABLE", 7 }, { "Leaderboards", "LEADERBOARDS", 8 }, { "Settings", "SETTINGS", 9 } } do
-		local item = Theme.button(nav, definition[1], definition[2], UDim2.new(), UDim2.fromOffset(145, 44), function() self:open(definition[1]) end, true)
-		item.LayoutOrder = index
-		item.TextXAlignment = Enum.TextXAlignment.Left
-		local padding = Instance.new("UIPadding")
-		padding.PaddingLeft = UDim.new(0, 38)
-		padding.Parent = item
-		Theme.icon(item, definition[3])
-		item.Icon.Position = UDim2.new(0, -26, 0.5, -8)
-		item.SelectionMark.Position = UDim2.new(0, -38, 0.2, 0)
-		self.navigation[definition[1]] = item
-	end
 	local content = Instance.new("ScrollingFrame")
 	content.Name = "Content"
 	content.BackgroundTransparency = 1
@@ -301,6 +289,7 @@ function Menus.new(parent: Instance, callbacks: any)
 		if self.confirmItem then callbacks.purchase(self.confirmItem) end
 	end)
 	self.confirmCancel = Theme.button(self.confirm, "Cancel", "CANCEL", UDim2.fromScale(0.1, 0.8), UDim2.new(0.8, 0, 0, 46), function() self:dismissConfirmation() end, true)
+	MenuLayout.build(self, page)
 	self:open("Deploy")
 	return self
 end
@@ -325,6 +314,7 @@ function Menus.open(self: any, page: string)
 	end)
 	for name, item in self.navigation do Theme.selected(item, name == page) end
 	self.preview:hide()
+	self.queuePreview:hide()
 	self.characterPreview:hide()
 	self.weaponPreview:hide()
 	self.mapPreview:hide()
@@ -366,6 +356,7 @@ function Menus.close(self: any)
 	if self.fade then self.fade:Cancel() end
 	self.group.Visible = false
 	self.preview:hide(); self.characterPreview:hide(); self.weaponPreview:hide(); self.mapPreview:hide(); self.armoryPreview:hide()
+	self.queuePreview:hide()
 	for _, preview in self.shopPreviews do preview:hide() end
 end
 
@@ -379,104 +370,9 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 and (not selected or not selected:IsDescendantOf(self.group) or (self.confirm.Visible and not selected:IsDescendantOf(self.confirm))) then
 		GuiService.SelectedObject = if self.confirm.Visible then (if self.confirmBuy.Active then self.confirmBuy else self.confirmCancel) elseif self.page == "Deploy" then self.play elseif self.page == "Matchmaking" then self.queueCancel else self.navigation[self.page] or self.closeButton
 	end
-	local width = self.group.AbsoluteSize.X
-	local height = self.group.AbsoluteSize.Y
-	local topInset = GuiService:GetGuiInset().Y
-	if topInset ~= self.topInset then
-		self.topInset = topInset
-	end
-	local compact = width < 640
-	local short = height < 540
-	self.queueTimer.Visible = not short
-	local rail = width >= 760 and not short
-	self.rail.Visible = rail
-	self.topbar.Visible = not rail
-	self.headerRule.Visible = false
-	self.logo.Position = UDim2.fromOffset(rail and 18 or 16, rail and 24 or 6)
-	self.logo.Size = UDim2.fromOffset(158, 38)
-	self.logo.TextSize = rail and 27 or 24
-	self.closeButton.Size = UDim2.fromOffset(rail and 152 or 100, 40)
-	self.closeButton.Position = if rail then UDim2.new(0, 18, 1, -65) else UDim2.new(1, -116, 0, 6)
-	self.navLayout.FillDirection = if rail then Enum.FillDirection.Vertical else Enum.FillDirection.Horizontal
-	self.nav.ScrollingDirection = if rail then Enum.ScrollingDirection.Y else Enum.ScrollingDirection.X
-	self.nav.AutomaticCanvasSize = if rail then Enum.AutomaticSize.Y else Enum.AutomaticSize.X
-	self.nav.Position = if rail then UDim2.fromOffset(16, 116) else UDim2.new(0, 16, 1, -64)
-	self.nav.Size = if rail then UDim2.new(0, 156, 1, -238) else UDim2.new(1, -32, 0, 46)
-	for _, item in self.navigation do
-		item.Size = UDim2.fromOffset(rail and 156 or 144, 44)
-		item.TextSize = 15
-		if rail and item ~= self.navigation[self.page] then item.BackgroundColor3, item.TextColor3 = Theme.Void, Theme.Muted end
-	end
-	self.contentBase = UDim2.fromOffset(rail and 216 or 16, rail and 28 or 68)
-	self.content.Position = self.contentBase + UDim2.fromOffset(0, math.round(self.pageSlide.Value))
-	self.content.Size = UDim2.new(1, rail and -248 or -32, 1, rail and -88 or (if short then -140 else -164))
-	self.footer.Visible = rail or not short
-	self.footer.Position = if rail then UDim2.new(0, 216, 1, -42) else UDim2.new(0, 16, 1, -92)
-	self.footer.Size = UDim2.new(1, rail and -248 or -32, 0, 24)
-	self.footer.TextSize = 10
-	self.headerProfile.Position = if rail then UDim2.new(0, 18, 1, -148) else UDim2.new(0.4, 0, 0, 8)
-	self.headerProfile.Size = if rail then UDim2.fromOffset(152, 68) else UDim2.new(0.6, -132, 0, 36)
-	for name, area in self.pages do
-		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 0 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Leaderboards" then 112 + #Players:GetPlayers() * 52 elseif name == "Progression" then 480 elseif name == "Armory" then 490 elseif name == "Inventory" then 520 elseif name == "Shop" then (if width < 500 then 560 elseif short then 0 else 560) elseif name == "Matchmaking" then (if short then 0 else 470) else 420
-		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))
-	end
-	local heroHeight = self.pages.Deploy.AbsoluteSize.Y
-	local portrait = width < 500
-	self.hero.Text = if heroHeight < 240 then "ENTER THE CHAOS." else "ENTER THE\nCHAOS."
-	self.hero.TextSize = if portrait then 42 elseif heroHeight < 320 then 30 elseif short then 42 else 62
-	self.hero.Position = UDim2.fromOffset(0, 26)
-	self.hero.Size = UDim2.new(0.52, 0, 0, if heroHeight < 260 then 58 elseif heroHeight < 320 then 82 else 142)
-	self.frontier.Position = UDim2.new(0.55, 0, 1, -35)
-	self.frontier.Size = UDim2.new(0.45, 0, 0, 32)
-	self.frontier.TextSize = 12
-	self.previewCaption.Visible = false
-	self.mapsTitle.TextSize = if compact then 22 else 30
-	self.deployDescription.Position = UDim2.fromOffset(0, 178)
-	self.deployDescription.Size = UDim2.new(0.48, 0, 0, 68)
-	self.deployDescription.TextSize = 16
-	self.deployDescription.Visible = heroHeight > 420
-	self.mapLink.Position = UDim2.fromOffset(0, 266)
-	self.mapLink.Size = UDim2.new(0.48, 0, 0, 44)
-	self.mapLink.Visible = heroHeight > 480
-	self.profile.Visible = false
-	self.preview.frame.Position = UDim2.fromScale(0.55, 0)
-	self.preview.frame.Size = UDim2.new(0.45, 0, 1, -42)
-	self.modeButton.Visible = heroHeight >= 240
-	self.modeButton.Position = UDim2.new(0, 0, 1, -100)
-	self.modeButton.Size = UDim2.new(0.5, -8, 0, 44)
-	self.play.Position = UDim2.new(0, 0, 1, -48)
-	self.play.Size = UDim2.new(0.5, -8, 0, 44)
-	self.previewCaption.Position = UDim2.new(0.55, 0, 1, -36)
-	self.previewCaption.Size = UDim2.new(0.45, 0, 0, 28)
-	self.online.Visible = false
-	self.previewCaption.Visible = false
-	if portrait then
-		self.hero.Size = UDim2.new(1, 0, 0, 124)
-		self.preview.frame.Position = UDim2.new(0.15, 0, 0, 154)
-		self.preview.frame.Size = UDim2.new(0.7, 0, 1, -296)
-		self.play.Size = UDim2.new(1, 0, 0, 44)
-		self.modeButton.Size = UDim2.new(1, 0, 0, 44)
-		self.frontier.Visible = false
-	else self.frontier.Visible = true end
-	self.deployDescription.Visible = heroHeight > 420 and not portrait
-	self.mapLink.Visible = heroHeight > 480 and not portrait
-	self.characterPreview.frame.Position = UDim2.new(0.53, 0, 0, if short then 0 else 42)
-	self.characterPreview.frame.Size = UDim2.new(0.47, 0, 0, if short then 250 else 300)
-	self.characterStage.Position = self.characterPreview.frame.Position
-	self.characterStage.Size = self.characterPreview.frame.Size
-	for index, entry in Visuals.Operatives do
-		local item = self.operativeButtons[entry.id]
-		item.Position = if short then UDim2.new((index - 1) * 0.18, 0, 0, 48) else UDim2.fromOffset(0, 54 + (index - 1) * 48)
-		item.Size = UDim2.new(if short then 0.17 else 0.5, if short then 0 else -8, 0, 44)
-	end
-	self.equipOperative.Position = if short then UDim2.fromOffset(0, 108) else UDim2.new(0, 0, 1, -54)
-	self.equipOperative.Size = UDim2.new(if short then 0.52 else 0.5, -8, 0, 44)
-	if short then
-		self.characterPreview.frame.Position = UDim2.new(0.56, 0, 0, 0)
-		self.characterPreview.frame.Size = UDim2.new(0.44, 0, 0, 250)
-		self.characterStage.Position = self.characterPreview.frame.Position
-		self.characterStage.Size = self.characterPreview.frame.Size
-	end
+	local width, height = self.group.AbsoluteSize.X, self.group.AbsoluteSize.Y
+	local compact, short = MenuLayout.shell(self, width, height)
+	local portrait = width < 600
 	local profile = style.profile or { credits = 0, shards = 0, seasonTokens = 0, recentTransactions = {}, level = 1, xp = 0, status = "LOADING" }
 	profile.credits, profile.shards, profile.seasonTokens = profile.credits or 0, profile.shards or 0, profile.seasonTokens or 0
 	profile.recentTransactions = profile.recentTransactions or {}
@@ -489,6 +385,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.footer.Text = style.notice or ("PROFILE / " .. string.upper(profile.status) .. " / COSMETICS ONLY")
 	local map = state.map or { id = "Collapse", name = "THE COLLAPSE", votes = {} }
 	self.mapLink.Text = map.name .. " / EXPLORE ARENAS  >"
+	self.featureButtons[2].Title.Text = map.name
 	local definition = Catalog[1]
 	for _, entry in Catalog do if entry.id == self.draftMap then definition = entry; break end end
 	local canVote = state.ballotEligible and (state.phase == "Waiting" or state.phase == "Intermission")
@@ -535,8 +432,8 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.transactionNote.Text = if latestTransaction then "LAST / " .. string.upper(latestTransaction.action) .. string.format("   CR %+d / SH %+d / ST %+d", latestTransaction.credits, latestTransaction.shards, latestTransaction.seasonTokens) else "EARNED FINISHES / NO COMBAT STAT BONUSES"
 	local shopWidth = self.pages.Shop.AbsoluteSize.X
 	local shopHeight = self.pages.Shop.AbsoluteSize.Y
-	local tightShop = short and not portrait
-	local bodyTop = if tightShop and shopHeight < 260 then 44 else 100
+	local tightShop = false
+	local bodyTop = 100
 	self.transactionNote.Visible = bodyTop == 100
 	local listWidth = math.floor(shopWidth * 0.32)
 	local rightX = if portrait then 0 else listWidth + 20
@@ -639,6 +536,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.audioNote.Text = preferences.audioStatus or "Checking audio..."
 	self.saveNote.Text = "PREFERENCES / " .. (preferences.saveStatus or profile.status)
 	for name, item in buttons do item.Active = name == "testAudio" or preferences.loaded == true end
+	MenuLayout.content(self, width, height, state, style, profile)
 	if self.page == "Deploy" then self.preview:show("operative", style.operative, style.skin)
 	elseif self.page == "Character" then self.characterPreview:show("operative", self.draftOperative, style.skin)
 	elseif self.page == "Inventory" then self.weaponPreview:show("weapon", style.operative, self.draftSkin, self.weapon)
@@ -652,6 +550,7 @@ function Menus.animate(self: any)
 	if self.contentBase then self.content.Position = self.contentBase + UDim2.fromOffset(0, math.round(self.pageSlide.Value)) end
 	self.brandGradient.Offset = if self.reducedMotion then Vector2.zero else Vector2.new(math.sin(os.clock() * 0.3) * 0.35, 0)
 	if self.page == "Deploy" then self.preview:step(self.reducedMotion)
+	elseif self.page == "Matchmaking" then self.queuePreview:step(self.reducedMotion)
 	elseif self.page == "Character" then self.characterPreview:step(self.reducedMotion)
 	elseif self.page == "Inventory" then self.weaponPreview:step(self.reducedMotion)
 	elseif self.page == "Armory" then self.armoryPreview:step(self.reducedMotion)

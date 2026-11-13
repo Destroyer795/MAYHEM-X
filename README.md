@@ -11,7 +11,7 @@ The ongoing transformation uses branch `feature/studio-production-transformation
 ## Open and play
 
 1. Open `build/MAYHEM-X-Transformation.rbxl` in the existing Roblox Studio. A daylight Collapse editor preview is included. Startup replaces it with the hub and active arena.
-2. Start **Server & Clients** with two clients. In each client, click **PLAY / JOIN QUEUE**.
+2. Press **F5** for the UI review. The main menu opens automatically. Use the top sections and contextual tabs. For a match, use **Server & Clients** with two clients and click **PLAY / JOIN QUEUE** in each.
 3. Use the five-arena action on PLAY or MAP BALLOT in matchmaking, preview a map, then vote before intermission ends. Only the first sixteen queued contenders have ballots.
 4. After insertion/countdown, fight until one survivor remains. Repeat for each map and follow [DEVELOPMENT.md](DEVELOPMENT.md).
 
@@ -31,7 +31,9 @@ The FIFO queue, round transitions, serialized spawning, health/shields, ammo/rel
 
 Deployment, matchmaking, map ballots, operative profiles, weapon previews, inventory, Style Lab, daily cache, settings, loading and results share one responsive interface. The HUD shows vitals, ammo, cooldowns, Aegis charge, players, kills, timer, feed and reality/zone status.
 
-Menus use native Frames, pixel-snapped motion, charcoal surfaces, cyan details and amber actions. Collection has one large 3D item stage, a responsive finish selector, ownership/prices, rotate and rifle/blade views, and purchase confirmation. Live screenshots reviewed laptop, iPhone 17 Pro portrait and landscape layouts. A viewport camera refresh fixed the missing portrait operator. Selected finishes and workshop actions remain inside the tested layouts. Desktop navigation and workshop controls passed; injected phone clicks did not activate navigation, so mobile touch and controller acceptance remain pending.
+The Iris interface replaces the side rail with six primary sections and contextual tabs. Graphite/slate surfaces, ivory text and pale iris actions replace cyan/amber. The home composition presents the animated operator, original weapon/scenery, a prominent Play action, real profile/currency balances and three discovery links. Settings use labelled rows; operators, armory, loadout, workshop, profile, missions, progression, ballots and results share the new shell. Upgrades route to existing cosmetics, and ranked/events clearly disclose unavailable systems.
+
+Portrait phones stack previews and actions, use scrolling navigation and keep all three currencies visible. Tablet/desktop layouts use wider compositions. Reward counters, account XP, a skippable reveal and an original victory pose use the existing server result payload. Native Frames and pixel-aligned text avoid full-screen CanvasGroup blur. Desktop actions and representative phone/tablet screenshots were reviewed in Studio. Physical touch/controller and wide-monitor acceptance remain pending.
 
 Three operative profiles and eight finishes are cosmetic. Orchid and Ember are free catalog claims, Prism and 15 Mayhem Credits are available from the daily cache, Aurum costs 45 Credits, Voidglass costs 1 Chaos Shard, and Solstice costs 6 Season Tokens. Earn 15 Credits per elimination, 20 for completing an active match, and 45 more for a win. Active matches grant one Season Token, with one additional Token for a win; the first victory grants one Chaos Shard. A versioned V3 server profile records all three balances, cosmetics and a bounded transaction ledger. The local unpublished Studio place currently falls back to session-only data. DataStore persistence remains unverified until a permitted published test environment is available.
 
@@ -45,6 +47,6 @@ Keep the local Premium place open for the live workflow in [DEVELOPMENT.md](DEVE
 
 The current live local file is `build/MAYHEM-X-Transformation.rbxl`. Original Phase 1, Visual archives and earlier Premium backups remain preserved. Current evidence is in `build/Studio-audio-verification.json` and `build/screenshots/`; the earlier offline package report describes an older build. Module ownership is in [ARCHITECTURE.md](ARCHITECTURE.md), with test limits in [DEVELOPMENT.md](DEVELOPMENT.md) and [CHANGELOG.md](CHANGELOG.md).
 
-Work remains in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`, the writable workspace. Scripts are relocatable to the requested `C:\MAYHEM-X` after inspecting that destination. Git history uses `.version-control/`; use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. Nothing was published or pushed, no Robux was spent, and no credentials were accessed.
+Work remains in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`, the writable workspace. Scripts are relocatable to the requested `C:\MAYHEM-X` after inspecting that destination. Git history uses `.version-control/`; use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. No experience was published, no Robux was spent, and no credentials were accessed. The UI push is authorized, but this session could not reach GitHub over port 443.
 
 The current visual gate remains incomplete. Studio screenshot capture works during playtests. The latest Studio rules and map checks passed, and the place was saved locally. The default offline build must not overwrite live Studio edits. Existing binary and source backups remain in `build/backups/`.
