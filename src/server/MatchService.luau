@@ -239,7 +239,7 @@ function Match.beginLoading(self: any)
 	local eligible = {}
 	for index = 1, math.min(#queued, Config.Match.Capacity) do table.insert(eligible, queued[index].UserId) end
 	local choice = self.maps:choose(eligible)
-	local ok, frames = pcall(function() return self.maps:load(choice) end)
+	local ok, frames = pcall(function() return self.maps:load(choice, true) end)
 	if not ok then
 		warn("MAYHEM X map load failed: " .. tostring(frames))
 		self:transition(Protocol.Phase.Waiting, 0)
@@ -317,7 +317,7 @@ function Match.reset(self: any)
 	end
 	self.roster = {}
 	self.result = nil
-	self.maps:load(self.maps.info.id)
+	self.maps:stop()
 	self:transition(Protocol.Phase.Waiting, 0)
 end
 

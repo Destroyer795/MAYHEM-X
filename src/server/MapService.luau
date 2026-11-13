@@ -31,12 +31,12 @@ function Maps.find(self: any, id: string): any
 	return nil
 end
 
-function Maps.load(self: any, id: string)
+function Maps.load(self: any, id: string, freshRound: boolean?)
 	local info = self:find(id)
 	assert(info, "Unknown map selection")
 	local world = Workspace:WaitForChild("MayhemWorld")
 	while self.loading do task.wait() end
-	if self.info == info and self.model and self.model:IsDescendantOf(world)
+	if not freshRound and self.info == info and self.model and self.model:IsDescendantOf(world)
 		and world:GetAttribute("ActiveMap") == id and world:GetAttribute("MapGeneration") == self.generation then
 		return self.spawns
 	end
@@ -131,6 +131,7 @@ end
 function Maps.stop(self: any)
 	self.running = false
 	self.chaos = "STABLE"
+	self.duel, self.center, self.safeRadius, self.chaosEnd = false, Vector3.zero, MapRules.SafeStart, 0
 	Workspace.Gravity = 196.2
 end
 

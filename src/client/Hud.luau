@@ -207,7 +207,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.timer.TextSize = if compact then 19 else 25
 	self.kills.Text = state.kills .. " KILLS"
 	self.kills.TextSize = if compact then 10 else 15
-	self.phase.Text = (if map.duel then "FINAL SHOWDOWN" else string.upper(state.phase)) .. " / " .. map.name
+	self.phase.Text = (if active and map.duel then "FINAL SHOWDOWN" else string.upper(state.phase)) .. " / " .. map.name
 	self.phase.Size = UDim2.fromOffset(math.min(400, size.X - 24), 22)
 	self.phase.Position = UDim2.new(0.5, -math.min(400, size.X - 24) / 2, 0, 72)
 	if self.touch and (self.announcementUntil or 0) > os.clock() then self.phase.Text = self.announcementTitle.Text end

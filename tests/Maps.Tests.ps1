@@ -96,7 +96,7 @@ $mapService=[IO.File]::ReadAllText((Join-Path $projectRoot 'src/server/MapServic
 $matchService=[IO.File]::ReadAllText((Join-Path $projectRoot 'src/server/MatchService.luau'))
 $loadGuards=@(
     @($mapService,'while self\.loading do task\.wait\(\) end'),
-    @($mapService,'if self\.info == info and self\.model and self\.model:IsDescendantOf\(world\)'),
+    @($mapService,'if not freshRound and self\.info == info and self\.model and self\.model:IsDescendantOf\(world\)'),
     @($mapService,'local ok, result = xpcall\(function\(\)'),
     @($mapService,'self\.loading = false\s+if not ok then error\(result, 0\) end'),
     @($matchService,'now >= self\.deadline and not self\.loadingRound'),

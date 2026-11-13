@@ -1,5 +1,7 @@
 # Architecture
 
+Round lifecycle: `MapService.load(id, true)` explicitly creates a fresh arena at match start, including repeated map votes. Cached `load(id)` is only for non-round reuse. `stop()` clears duel bounds, safe radius and chaos state; reset does not rebuild an extra copy in the lobby. This prevents a new match inheriting destroyed cover, spent caches or the previous duel center.
+
 ## Source ownership
 
 | Location | Responsibility |

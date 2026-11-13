@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-13: Combat-earned economy regression and fresh round state
+
+- Fixed same-map rounds retaining duel bounds, destroyed cover and cache state. Each new round now creates a fresh arena; ending a round clears duel and safe-zone state. The lobby HUD no longer labels intermission as a final showdown.
+- Added opt-in Studio-only multiplayer drivers under `tests/studio/`. Two real clients voted, reloaded, rejected nonfinite aim and rapid-fire spam, reached the duel and completed a rifle elimination through the existing combat remote. No health, kills or rewards were injected.
+- Both Jungle-to-Frost and Jungle-to-Jungle runs passed. The winner earned 80 match/kill Credits, two Tokens and the first-win Shard, bought/equipped cosmetics and rejected duplicate purchases. A second-round disconnect awarded a win without a duplicate kill or first-win Shard. Each client loaded all 29 uploads and six fallbacks; observed music never exceeded two crossfade voices.
+- Source validation passed 344 checks. Studio passed 11,326 server assertions and 80 spawn raycasts. The same-map survivor completed 42 scenario assertions. This is scripted multiplayer regression, not physical input, balance or persistence acceptance. Generated texture warnings and a Roblox CoreScripts chat initialization error remain open.
+
 ## 2026-11-13: Crisp native menus and focused collection workshop
 
 - Replaced full-screen CanvasGroup composition with native Frames and pixel-snapped page motion. Applied charcoal, cyan and amber styling with measured text contrast and a restrained gamepad focus outline.
