@@ -105,12 +105,13 @@ function Hud.new(callbacks: any)
 	self.resultTitle = Theme.text(self.results, "Title", "", UDim2.fromScale(0.08, 0.05), UDim2.new(0.84, 0, 0, 54), 40, Theme.Ink, true)
 	self.resultWinner = Theme.text(self.results, "Winner", "", UDim2.fromScale(0.08, 0.18), UDim2.new(0.84, 0, 0, 38), 21, Theme.Action, true)
 	self.resultReason = Theme.text(self.results, "Reason", "", UDim2.fromScale(0.08, 0.28), UDim2.new(0.84, 0, 0, 26), 13, Theme.Muted)
+	self.resultPayout = Theme.text(self.results, "Payout", "", UDim2.fromScale(0.08, 0.33), UDim2.new(0.84, 0, 0, 24), 12, Theme.Action, true)
 	local rows = Instance.new("ScrollingFrame")
 	rows.Name = "Standings"
 	rows.BackgroundTransparency = 1
 	rows.BorderSizePixel = 0
 	rows.Position = UDim2.fromScale(0.08, 0.39)
-	rows.Size = UDim2.fromScale(0.84, 0.37)
+	rows.Size = UDim2.fromScale(0.84, 0.35)
 	rows.CanvasSize = UDim2.new()
 	rows.AutomaticCanvasSize = Enum.AutomaticSize.Y
 	rows.ScrollBarThickness = 3
@@ -296,6 +297,10 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 		self.resultTitle.TextSize = if compact then 28 else 40
 		self.resultWinner.Text = if win then "VICTORY / " .. state.result.winner else "FINAL SIGNAL / " .. state.result.winner
 		self.resultReason.Text = state.result.reason .. " / YOUR ELIMINATIONS: " .. state.kills
+		local personalStanding = nil
+		for _, standing in state.result.standings do if standing.userId == Players.LocalPlayer.UserId then personalStanding = standing; break end end
+		local payout = if personalStanding then personalStanding.reward else nil
+		self.resultPayout.Text = if payout then string.format("ROUND BONUS +%d CR  /  +%d TOKENS  /  +%d SHARDS  /  EARNED %d XP", payout.credits, payout.seasonTokens, payout.shards, personalStanding.kills * 120 + (if win then 300 else 0)) else "NO ROUND BONUS / MATCH DID NOT REACH ACTIVE PLAY"
 		for _, child in self.resultRows:GetChildren() do if child:IsA("Frame") then child:Destroy() end end
 		for index, entry in state.result.standings do
 			local row = Theme.frame(self.resultRows, "Contender", UDim2.new(), UDim2.new(1, -8, 0, 34), Theme.Panel)
@@ -307,7 +312,7 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	end
 	self.resultFooter.Text = "Lobby reset in " .. seconds .. "s. Your queue preference is kept."
 	self.resultPreview.frame.Visible = self.results.Visible and not compact
-	self.resultRows.Size = UDim2.fromScale(if compact then 0.84 else 0.57, 0.37)
+	self.resultRows.Size = UDim2.fromScale(if compact then 0.84 else 0.57, 0.35)
 	if self.resultPreview.frame.Visible then
 		self.resultPreview:show(if state.result and state.result.winnerId == Players.LocalPlayer.UserId then "victory" else "operative", style.operative, style.skin)
 	else self.resultPreview:hide() end

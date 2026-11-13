@@ -16,6 +16,7 @@ function Tests.run(): number
 	checks += require(script.MapRulesCases)(require(shared.MapRules))
 	checks += require(script.PreferenceCases)(require(shared.PreferenceRules))
 	checks += require(script.ProfileCases)(require(shared.ProfileRules), require(shared.PreferenceRules), Visuals)
+	checks += require(script.SessionLeaseCases)(require(game.ServerScriptService.MayhemServer.SessionLease))
 	checks += require(script.AudioCases)(require(shared.AudioConfig))
 	assert(ReplicatedStorage.Mayhem.Presentation:IsA("RemoteEvent"), "Presentation remote is missing")
 	checks += 1

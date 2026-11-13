@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-13: Add deterministic three-currency cosmetic economy
+
+- Added profile schema V3 currencies, a bounded transaction ledger, first-win shard tracking, idempotent active-match rewards and fixed cosmetic prices. Kept combat balance settings unchanged in their protected module.
+- Active match completion now awards Credits and Season Tokens from server state. Eliminations award Credits through server-maintained kill stats. Queue entry waits for profile load; purchase remotes validate catalog entries and balances on the server.
+- Added Voidglass (1 Chaos Shard) and Solstice (6 Season Tokens), expanded Style Lab to five catalog cards, displayed all balances and recent transaction deltas, and added each player's payout summary to match results.
+- Fixed session release to write an expired lease instead of cancelling the update. Profile readiness now waits for stat hydration. Match payouts and their ledger deltas are one transaction function, including currency-cap handling. Purchase/reward audio receives an explicit success cue.
+- The Studio harness passed 11,326 server assertions, eighty spawn raycasts and fifty-two client checks. Source validation passed 340 checks. A real client free claim, confirmation, 45-Credit purchase, duplicate remote rejection and server-side equip passed. Credits for that purchase came from three server-simulated eliminations in the unpublished local session.
+- Studio screenshots exposed repetitive shop cards and soft menu rendering, which remain a visual follow-up. Ten generated texture IDs failed to resolve in the latest Output. Persistence, two-client economy testing, mastery, missions, broader collectibles and Prestige remain unfinished.
+
 ## 2026-11-13: Remove unavailable skyline texture
 
 - Studio Output identified unavailable generated texture `rbxassetid://117318376313062` on `SkySpire.windows_geom`.

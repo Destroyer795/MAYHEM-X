@@ -43,6 +43,7 @@
         "MapRulesCases": { "$path": "tests/MapRulesCases.luau" },
         "PreferenceCases": { "$path": "tests/PreferenceCases.luau" },
 		"ProfileCases": { "$path": "tests/ProfileCases.luau" },
+        "SessionLeaseCases": { "$path": "tests/SessionLeaseCases.luau" },
         "AudioCases": { "$path": "tests/AudioCases.luau" }
       }
     },

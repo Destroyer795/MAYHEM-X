@@ -13,9 +13,10 @@ local MapRules = require(shared.MapRules)
 local Match = {}
 Match.__index = Match
 
-function Match.new(remotes: Folder)
+function Match.new(remotes: Folder, profiles: any)
 	local self: any = setmetatable({
 		phase = Protocol.Phase.Waiting, deadline = 0, roundId = 0, order = 0,
+		profiles = profiles, sessionId = if game.JobId ~= "" then game.JobId else game:GetService("HttpService"):GenerateGUID(false),
 		entries = {}, roster = {}, lastBroadcast = 0, result = nil, random = Random.new(), loadingRound = false, resetting = false,
 		action = remotes:WaitForChild(Protocol.Remote.Action), state = remotes:WaitForChild(Protocol.Remote.State),
 		effect = remotes:WaitForChild(Protocol.Remote.Effect), feed = remotes:WaitForChild(Protocol.Remote.Feed),
@@ -278,7 +279,8 @@ function Match.finish(self: any, winnerId: number?, reason: string)
 	local standings = {}
 	local winnerName = "NO WINNER"
 	for player, entry in self.roster do
-		table.insert(standings, { name = entry.name, kills = entry.kills, userId = player.UserId })
+		local reward = if wasActive then self.profiles:awardMatch(player, self.sessionId .. ":" .. tostring(self.roundId), winnerId == player.UserId) else nil
+		table.insert(standings, { name = entry.name, kills = entry.kills, userId = player.UserId, reward = reward })
 		if winnerId == player.UserId then
 			winnerName = entry.name
 			local stats = player:FindFirstChild("leaderstats")
@@ -334,7 +336,7 @@ function Match.handle(self: any, player: Player, action: any, payload: any)
 			self:sendState(player)
 		end
 	elseif action == actions.Queue then
-		if type(payload) == "boolean" and not entry.inMatch and entry.wantsQueue ~= payload then
+		if type(payload) == "boolean" and not entry.inMatch and entry.wantsQueue ~= payload and (not payload or self.profiles:canModify(player)) then
 			entry.wantsQueue = payload
 			if payload then self:enqueue(entry) else entry.queueOrder = nil end
 			self:broadcast()
@@ -373,7 +375,7 @@ function Match.tick(self: any, dt: number)
 			self.loadingRound = false
 			if not ok then
 				warn("MAYHEM X round startup failed: " .. tostring(message))
-				if self.phase == phase.Intermission then self:transition(phase.Waiting, 0) end
+				if self.phase == phase.Intermission then self:transition(Protocol.Phase.Waiting, 0) end
 			end
 		end
 	elseif self.phase == phase.Loading then

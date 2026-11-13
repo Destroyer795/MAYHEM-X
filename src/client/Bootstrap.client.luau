@@ -26,7 +26,7 @@ local feedRemote = remotes:WaitForChild(Protocol.Remote.Feed) :: RemoteEvent
 local presentationRemote = mayhem:WaitForChild("Presentation") :: RemoteEvent
 local preferences: any = table.clone(PreferenceRules.Defaults)
 preferences.skin, preferences.loaded, preferences.saveStatus = "Pulse", false, "LOADING"
-local style: any = { skin = "Pulse", operative = "Vanguard", owned = { Pulse = true, Glacier = true }, dailyClaimed = false, nextDaily = 0, revision = 0, ready = false, profile = { credits = 0, level = 1, xp = 0, status = "LOADING" } }
+local style: any = { skin = "Pulse", operative = "Vanguard", owned = { Pulse = true, Glacier = true }, dailyClaimed = false, nextDaily = 0, revision = 0, ready = false, profile = { credits = 0, shards = 0, seasonTokens = 0, recentTransactions = {}, level = 1, xp = 0, status = "LOADING" } }
 local camera = CameraController.new(preferences)
 local effects = Effects.new(preferences)
 local audio = AudioController.new(preferences)
@@ -84,10 +84,10 @@ hud = Hud.new({
 	effects = function() setting("reducedEffects", not preferences.reducedEffects) end,
 	fire = function(held: boolean) firing = held and canAct() end,
 	select = function(kind: string, id: string) style.notice = "Requesting style..."; presentationRemote:FireServer("Select", { kind = kind, id = id }) end,
-	claim = function(id: string) style.notice = "Requesting session style..."; presentationRemote:FireServer("Claim", id) end,
-	purchase = function(id: string) style.notice = "Confirming session purchase..."; presentationRemote:FireServer("Purchase", id) end,
+	claim = function(id: string) style.notice = "Requesting cosmetic..."; presentationRemote:FireServer("Claim", id) end,
+	purchase = function(id: string) style.notice = "Confirming purchase..."; presentationRemote:FireServer("Purchase", id) end,
 	vote = function(id: string) action:FireServer(MapRules.Command.Vote, id) end,
-	daily = function() style.notice = "Requesting session trial..."; presentationRemote:FireServer("Daily") end,
+	daily = function() style.notice = "Requesting daily reward..."; presentationRemote:FireServer("Daily") end,
 	graphics = function() setting("graphics", if preferences.graphics == "Auto" then "High" elseif preferences.graphics == "High" then "Low" else "Auto") end,
 	music = function() volume("music") end,
 	sound = function() volume("sound") end,
@@ -156,21 +156,18 @@ stateRemote.OnClientEvent:Connect(function(nextState: any)
 	receivedAt = os.clock()
 end)
 presentationRemote.OnClientEvent:Connect(function(snapshot: any)
-	if snapshot.revision > style.revision then
-		local acquired = false
-		for id in snapshot.owned do if not style.owned[id] then acquired = true; break end end
-		if acquired then audio:play(if snapshot.owned.Aurum and not style.owned.Aurum then "Purchase" else "Reward") end
+	if snapshot.noticeCue == "Purchase" or snapshot.noticeCue == "Reward" then audio:play(snapshot.noticeCue)
 	elseif snapshot.notice and snapshot.notice ~= "Preferences accepted." then audio:play("Notification") end
 	style = snapshot
-	style.ready = true
 	preferences.skin = style.skin
 	local profile = snapshot.profile
+	style.ready = profile.ready == true
 	serverVersion = profile.version
 	if awaiting and profile.version >= expectedVersion then
 		awaiting = false
 		if settingsSerial == sentSerial then dirty = false end
 	end
-	if profile.status ~= "LOADING" then
+	if profile.ready then
 		if not dirty and not awaiting then
 			for key in PreferenceRules.Defaults do preferences[key] = profile.preferences[key] end
 		end

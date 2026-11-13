@@ -186,12 +186,13 @@ function Menus.new(parent: Instance, callbacks: any)
 	local shop = page("Shop")
 	Theme.text(shop, "Title", "STYLE LAB", UDim2.new(), UDim2.new(1, 0, 0, 42), 30, Theme.Ink, true)
 	self.shopWallet = Theme.text(shop, "Wallet", "", UDim2.fromOffset(0, 46), UDim2.new(1, 0, 0, 44), 12, Theme.Muted)
+	self.transactionNote = Theme.text(shop, "RecentTransaction", "", UDim2.fromOffset(0, 88), UDim2.new(1, 0, 0, 22), 10, Theme.Action)
 	self.shopButtons = {}
 	self.shopCards = {}
 	self.shopPreviews = {}
-	for index, id in { "Orchid", "Ember", "Aurum" } do
+	for index, id in { "Orchid", "Ember", "Aurum", "Voidglass", "Solstice" } do
 		local entry = Visuals.skin(id)
-		local card = Theme.frame(shop, id, UDim2.new((index - 1) / 3, 0, 0, 100), UDim2.new(1 / 3, -12, 0, 310), Theme.Panel)
+		local card = Theme.frame(shop, id, UDim2.new(((index - 1) % 3) / 3, 0, 0, 122 + math.floor((index - 1) / 3) * 330), UDim2.new(1 / 3, -12, 0, 310), Theme.Panel)
 		self.shopCards[index] = card
 		Theme.corner(card)
 		Theme.stroke(card)
@@ -202,7 +203,7 @@ function Menus.new(parent: Instance, callbacks: any)
 		Theme.text(card, "Description", entry.description, UDim2.fromOffset(18, 172), UDim2.new(1, -36, 0, 68), 12, Theme.Muted)
 		self.shopButtons[id] = Theme.button(card, "Claim", "CLAIM STYLE", UDim2.new(0, 18, 1, -64), UDim2.new(1, -36, 0, 46), function()
 			if self.style and self.style.owned[id] then callbacks.select("skin", id)
-			elseif id == "Aurum" then self:confirmPurchase(id)
+			elseif entry.source == "purchase" or entry.source == "shards" or entry.source == "season" then self:confirmPurchase(id)
 			else callbacks.claim(id) end
 		end)
 	end
@@ -210,8 +211,8 @@ function Menus.new(parent: Instance, callbacks: any)
 	local daily = page("Daily")
 	Theme.text(daily, "Title", "DAILY CACHE", UDim2.new(), UDim2.new(1, 0, 0, 44), 30, Theme.Ink, true)
 	Theme.frame(daily, "PrismSwatch", UDim2.fromOffset(0, 66), UDim2.new(1, 0, 0, 4), Theme.Cyan)
-	Theme.text(daily, "Reward", "PRISM + 15 SESSION CREDITS", UDim2.fromOffset(0, 92), UDim2.new(1, 0, 0, 50), 23, Theme.Ink, true)
-	Theme.text(daily, "Scope", "A white finish and credits for this server session.\nOne claim per UTC day while in this server. Collection, credits and progression reset after leaving.", UDim2.fromOffset(0, 154), UDim2.new(0.9, 0, 0, 110), 16, Theme.Muted)
+	Theme.text(daily, "Reward", "PRISM + 15 MAYHEM CREDITS", UDim2.fromOffset(0, 92), UDim2.new(1, 0, 0, 50), 23, Theme.Ink, true)
+	Theme.text(daily, "Scope", "A white finish and 15 Mayhem Credits.\nOne claim per UTC day. Your profile status in Settings shows whether saving is available.", UDim2.fromOffset(0, 154), UDim2.new(0.9, 0, 0, 110), 16, Theme.Muted)
 	self.dailyClock = Theme.text(daily, "Clock", "", UDim2.new(0, 0, 1, -112), UDim2.new(1, 0, 0, 34), 14, Theme.Action)
 	self.dailyButton = Theme.button(daily, "Claim", "CLAIM SESSION TRIAL", UDim2.new(0, 0, 1, -58), UDim2.new(0.78, 0, 0, 48), function()
 		if self.style and self.style.dailyClaimed then self:open("Inventory"); self.draftSkin = "Prism" else callbacks.daily() end
@@ -273,11 +274,11 @@ function Menus.new(parent: Instance, callbacks: any)
 	self.confirm.ZIndex = 30
 	self.confirm.Active = true
 	self.confirm.Visible = false
-	Theme.text(self.confirm, "Title", "ADD AURUM TO YOUR COLLECTION?", UDim2.fromScale(0.1, 0.22), UDim2.fromScale(0.8, 0.15), 26, Theme.Ink, true)
-	Theme.text(self.confirm, "Scope", "45 earned session credits. Cosmetic only.\nYour collection and balance reset after leaving this server.", UDim2.fromScale(0.1, 0.4), UDim2.fromScale(0.8, 0.18), 16, Theme.Muted)
-	self.confirmBuy = Theme.button(self.confirm, "Confirm", "SPEND 45 CREDITS", UDim2.fromScale(0.1, 0.66), UDim2.new(0.8, 0, 0, 46), function()
+	self.confirmTitle = Theme.text(self.confirm, "Title", "ADD TO YOUR COLLECTION?", UDim2.fromScale(0.1, 0.22), UDim2.fromScale(0.8, 0.15), 26, Theme.Ink, true)
+	self.confirmScope = Theme.text(self.confirm, "Scope", "Cosmetic only.", UDim2.fromScale(0.1, 0.4), UDim2.fromScale(0.8, 0.18), 16, Theme.Muted)
+	self.confirmBuy = Theme.button(self.confirm, "Confirm", "CONFIRM PURCHASE", UDim2.fromScale(0.1, 0.66), UDim2.new(0.8, 0, 0, 46), function()
 		self:dismissConfirmation()
-		callbacks.purchase("Aurum")
+		if self.confirmItem then callbacks.purchase(self.confirmItem) end
 	end)
 	self.confirmCancel = Theme.button(self.confirm, "Cancel", "CANCEL", UDim2.fromScale(0.1, 0.8), UDim2.new(0.8, 0, 0, 46), function() self:dismissConfirmation() end, true)
 	self:open("Deploy")
@@ -310,11 +311,18 @@ function Menus.open(self: any, page: string)
 end
 
 function Menus.confirmPurchase(self: any, id: string)
-	if id ~= "Aurum" then return end
+	local item = Visuals.skin(id)
+	if not item or not item.currency or not item.cost then return end
+	self.confirmItem = id
 	self.confirm.Visible = true
 	for _, item in self.group:GetDescendants() do if item:IsA("GuiButton") and not item:IsDescendantOf(self.confirm) then item.Selectable = false end end
-	self.confirmBuy.Active = self.style and self.style.ready and (self.style.profile.credits or 0) >= 45
-	self.confirmBuy.Text = if self.confirmBuy.Active then "SPEND 45 CREDITS" else "EARN MORE SESSION CREDITS"
+	local profile = if self.style then self.style.profile else nil
+	local currencyName = if item.currency == "credits" then "MAYHEM CREDITS" elseif item.currency == "shards" then "CHAOS SHARDS" else "SEASON TOKENS"
+	local balance = if profile then profile[item.currency] or 0 else 0
+	self.confirmTitle.Text = "ADD " .. item.name .. "?"
+	self.confirmScope.Text = item.description .. "\nCost: " .. item.cost .. " " .. currencyName .. ". Balance: " .. balance .. "."
+	self.confirmBuy.Active = self.style and self.style.ready and balance >= item.cost
+	self.confirmBuy.Text = if self.confirmBuy.Active then "SPEND " .. item.cost .. " " .. currencyName else "EARN MORE " .. currencyName
 	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = if self.confirmBuy.Active then self.confirmBuy else self.confirmCancel end
 end
 
@@ -322,7 +330,7 @@ function Menus.dismissConfirmation(self: any)
 	if not self.confirm.Visible then return end
 	self.confirm.Visible = false
 	for _, item in self.group:GetDescendants() do if item:IsA("GuiButton") then item.Selectable = true end end
-	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = self.shopButtons.Aurum end
+	if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = self.shopButtons[self.confirmItem or "Aurum"] end
 end
 
 function Menus.close(self: any)
@@ -390,7 +398,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.headerProfile.Position = if rail then UDim2.new(0, 18, 1, -148) else UDim2.new(0.4, 0, 0, 8)
 	self.headerProfile.Size = if rail then UDim2.fromOffset(152, 68) else UDim2.new(0.6, -132, 0, 36)
 	for name, area in self.pages do
-		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 0 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Leaderboards" then 112 + #Players:GetPlayers() * 52 elseif name == "Progression" then 480 elseif name == "Armory" then 490 elseif name == "Inventory" then 520 elseif name == "Shop" then (if compact then 1110 else 440) elseif name == "Matchmaking" then (if short then 0 else 470) else 420
+		local minimum = if name == "Settings" then 680 elseif name == "Deploy" then 0 elseif name == "Maps" then (if compact then 790 else 490) elseif name == "Leaderboards" then 112 + #Players:GetPlayers() * 52 elseif name == "Progression" then 480 elseif name == "Armory" then 490 elseif name == "Inventory" then 520 elseif name == "Shop" then (if compact then 1770 else 790) elseif name == "Matchmaking" then (if short then 0 else 470) else 420
 		area.Size = UDim2.new(1, -8, 0, math.max(minimum, self.content.AbsoluteSize.Y))
 	end
 	local heroHeight = self.pages.Deploy.AbsoluteSize.Y
@@ -450,17 +458,16 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 		self.characterStage.Position = self.characterPreview.frame.Position
 		self.characterStage.Size = self.characterPreview.frame.Size
 	end
-	local profile = style.profile or { credits = 0, level = 1, xp = 0, status = "LOADING" }
-	if self.confirm.Visible then
-		self.confirmBuy.Active = style.ready and profile.credits >= 45
-		self.confirmBuy.Text = if self.confirmBuy.Active then "SPEND 45 CREDITS" else "EARN MORE SESSION CREDITS"
-	end
-	self.profile.Text = string.upper(Players.LocalPlayer.DisplayName) .. " / LV " .. profile.level .. "\n" .. profile.credits .. " CREDITS / " .. profile.xp .. " XP / THIS SESSION"
-	self.headerProfile.Text = string.upper(Players.LocalPlayer.DisplayName) .. "\nLV " .. profile.level .. " / " .. profile.credits .. " CR / SESSION"
+	local profile = style.profile or { credits = 0, shards = 0, seasonTokens = 0, recentTransactions = {}, level = 1, xp = 0, status = "LOADING" }
+	profile.credits, profile.shards, profile.seasonTokens = profile.credits or 0, profile.shards or 0, profile.seasonTokens or 0
+	profile.recentTransactions = profile.recentTransactions or {}
+	if self.confirm.Visible and self.confirmItem then self:confirmPurchase(self.confirmItem) end
+	self.profile.Text = string.upper(Players.LocalPlayer.DisplayName) .. " / LV " .. profile.level .. "\n" .. profile.credits .. " CR / " .. profile.shards .. " SHARDS / " .. profile.seasonTokens .. " TOKENS / " .. profile.xp .. " XP"
+	self.headerProfile.Text = string.upper(Players.LocalPlayer.DisplayName) .. "\nLV " .. profile.level .. " / " .. profile.credits .. " CR"
 	self.previewCaption.Text = string.upper(style.operative .. " / " .. style.skin)
 	self.play.Text = if state.inMatch then "VIEW MATCH STATUS" elseif state.queued then "VIEW QUEUE" else "PLAY  /  JOIN QUEUE"
-	self.play.Active = true
-	self.footer.Text = style.notice or "SESSION COLLECTION / COSMETICS ONLY / NO PAID ADVANTAGE"
+	self.play.Active = state.inMatch or state.queued or style.ready
+	self.footer.Text = style.notice or ("PROFILE / " .. string.upper(profile.status) .. " / COSMETICS ONLY / NO PAID ADVANTAGE")
 	local map = state.map or { id = "Collapse", name = "THE COLLAPSE", votes = {} }
 	self.mapLink.Text = map.name .. " / EXPLORE ARENAS  >"
 	local definition = Catalog[1]
@@ -489,7 +496,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.queueDetail.Text = if state.inMatch then (if state.alive then "INSERTION / " .. map.name .. "\nYour combat loadout is ready." else "The current round is in progress. Watch from the hub until results.") else state.queueCount .. " QUEUED / " .. #Players:GetPlayers() .. " IN SERVER\nTwo contenders are needed. Up to sixteen enter each round. Vote before insertion."
 	self.queueTimer.Text = if seconds > 0 then string.format("%02d:%02d / %s", math.floor(seconds / 60), seconds % 60, string.upper(state.phase)) else "AWAITING CONTENDERS"
 	self.queueCancel.Text = if state.inMatch then "ROUND LOCKED" elseif state.queued then "LEAVE QUEUE" else "JOIN QUEUE"
-	self.queueCancel.Active = not state.inMatch
+	self.queueCancel.Active = not state.inMatch and (state.queued or style.ready)
 	for id, item in self.operativeButtons do Theme.selected(item, id == self.draftOperative) end
 	self.operativeDetail.Text = (Visuals.operative(self.draftOperative) or Visuals.Operatives[1]).description
 	self.operativeDetail.Visible = not short
@@ -504,16 +511,25 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.equipSkin.Active = style.ready
 	Theme.selected(self.rifleTab, self.weapon == 1)
 	Theme.selected(self.bladeTab, self.weapon == 2)
-	self.shopWallet.Text = profile.credits .. " SESSION CREDITS / 15 PER ELIMINATION + 45 PER WIN\nCollection and credits reset after leaving. No Robux."
+	self.shopWallet.Text = string.format("%d MAYHEM CREDITS  /  %d CHAOS SHARDS  /  %d SEASON TOKENS\n+15 elimination, +20 match, +45 win, +1 token per match and win bonus", profile.credits, profile.shards, profile.seasonTokens)
+	local latestTransaction = profile.recentTransactions and profile.recentTransactions[#profile.recentTransactions]
+	self.transactionNote.Text = if latestTransaction then "LATEST / " .. string.upper(latestTransaction.action) .. string.format("   CR %+d   SH %+d   ST %+d", latestTransaction.credits, latestTransaction.shards, latestTransaction.seasonTokens) else "TRANSACTION LEDGER / NO ACTIVITY YET"
 	for index, card in self.shopCards do
-		card.Position = if compact then UDim2.fromOffset(0, 108 + (index - 1) * 330) else UDim2.new((index - 1) / 3, 0, 0, 108)
+		local column = (index - 1) % 3
+		local row = math.floor((index - 1) / 3)
+		card.Position = if compact then UDim2.fromOffset(0, 122 + (index - 1) * 330) else UDim2.new(column / 3, 0, 0, 122 + row * 330)
 		card.Size = UDim2.new(if compact then 1 else 1 / 3, if compact then 0 else -12, 0, 310)
 	end
-	for id, item in self.shopButtons do item.Text = if style.owned[id] then "EQUIP STYLE" elseif id == "Aurum" then "BUY / 45 CREDITS" else "CLAIM / FREE"; item.Active = style.ready end
-	self.dailyButton.Text = if style.dailyClaimed then "VIEW PRISM IN COLLECTION" else "CLAIM SESSION TRIAL"
+	for id, button in self.shopButtons do
+		local item = Visuals.skin(id)
+		local currencyName = if item.currency == "credits" then "CREDITS" elseif item.currency == "shards" then "SHARDS" else "TOKENS"
+		button.Text = if style.owned[id] then (style.skin == id and "EQUIPPED" or "EQUIP STYLE") elseif item.currency then "BUY / " .. item.cost .. " " .. currencyName else "CLAIM / FREE"
+		button.Active = style.ready
+	end
+	self.dailyButton.Text = if style.dailyClaimed then "VIEW PRISM IN COLLECTION" else "CLAIM DAILY REWARD"
 	self.dailyButton.Active = style.ready
 	local untilReset = math.max(0, (style.nextDaily or 0) - os.time())
-	self.dailyClock.Text = if style.dailyClaimed then string.format("NEXT UTC RESET / %02dh %02dm", math.floor(untilReset / 3600), math.floor(untilReset % 3600 / 60)) else "AVAILABLE / A SERVER SESSION COSMETIC"
+	self.dailyClock.Text = if style.dailyClaimed then string.format("NEXT UTC RESET / %02dh %02dm", math.floor(untilReset / 3600), math.floor(untilReset % 3600 / 60)) else "AVAILABLE / DAILY COSMETIC AND CREDITS"
 
 	self.progressLevel.Text = "LEVEL " .. profile.level
 	self.progressXP.Text = (profile.xp % 300) .. " / 300 XP TO NEXT LEVEL"

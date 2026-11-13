@@ -26,7 +26,7 @@ function Presentation.start(profiles: any)
 		local weapon = character:FindFirstChild("MayhemWeapon")
 		if weapon then for _, item in weapon:GetDescendants() do if item:IsA("BasePart") and item.Material == Enum.Material.Neon then item.Color = accent end end end
 	end
-	local function send(player: Player, notice: string?)
+	local function send(player: Player, notice: string?, noticeCue: string?)
 		local record = records[player]
 		if not record or player.Parent ~= Players then return end
 		local cosmetics = profiles:cosmetics(player)
@@ -38,7 +38,7 @@ function Presentation.start(profiles: any)
 		local day = math.floor(os.time() / 86400)
 		remote:FireClient(player, {
 			skin = record.skin, operative = record.operative, owned = table.clone(record.owned), revision = record.revision,
-			dailyClaimed = record.dailyDay == day, nextDaily = (day + 1) * 86400, notice = notice,
+			dailyClaimed = record.dailyDay == day, nextDaily = (day + 1) * 86400, notice = notice, noticeCue = noticeCue,
 			profile = profiles:snapshot(player),
 		})
 	end
@@ -76,12 +76,12 @@ function Presentation.start(profiles: any)
 		end
 		if command == "Purchase" then
 			local item = if type(payload) == "string" then Visuals.skin(payload) else nil
-			if not item or item.source ~= "purchase" then send(player, "Unknown purchase."); return end
+			if not item or (item.source ~= "purchase" and item.source ~= "shards" and item.source ~= "season") then send(player, "Unknown collection purchase."); return end
 			if record.owned[item.id] then send(player, "Already in your collection."); return end
-			if not profiles:purchase(player, item.id) then send(player, "Not enough credits or item already owned."); return end
+			if not profiles:purchase(player, item.id) then send(player, "Insufficient " .. tostring(item.currency) .. " or item already owned."); return end
 			record.owned[item.id] = true
 			record.revision += 1
-			send(player, "Aurum added. No combat stats changed.")
+			send(player, item.name .. " added. Combat stats are unchanged.", "Purchase")
 			return
 		end
 		if command == "Daily" then
@@ -89,7 +89,7 @@ function Presentation.start(profiles: any)
 			if profiles:claimDaily(player, day) then
 				record.dailyDay, record.owned.Prism = day, true
 				record.revision += 1
-				send(player, "Daily cache claimed.")
+				send(player, "Daily cache claimed.", "Reward")
 			else
 				send(player, "Daily cache unavailable. Check profile loading and return tomorrow.")
 			end
@@ -101,7 +101,7 @@ function Presentation.start(profiles: any)
 			apply(player)
 			profiles:updateCosmetics(player, record)
 		end
-		send(player, notice)
+		send(player, notice, if accepted and command == "Claim" and record.revision ~= previousRevision then "Reward" else nil)
 	end)
 	Players.PlayerAdded:Connect(add)
 	Players.PlayerRemoving:Connect(function(player: Player)

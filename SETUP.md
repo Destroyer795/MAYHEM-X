@@ -12,6 +12,8 @@ The active transformation working file is `build/MAYHEM-X-Transformation.rbxl`; 
 
 The operator showcase idle was generated through Studio and uses `rbxassetid://128214294905072`, configured in `src/shared/AnimationConfig.luau`. Its track loaded in local Studio, but permission in the intended published universe has not been verified. It is used only for the operator viewport, not combat characters.
 
+The latest Play run reported missing content representations for generated texture IDs `137134570533821`, `95314124117901`, `122272855563833`, `117932222879559`, `139030421332826`, `105269080138767`, `99998311990220`, `104817013345409`, `122660213004304` and `74264750154799`. Their original references remain in the art manifest so this is traceable. Mesh geometry rendered, but these textures are not verified. Inspect their asset status and access in the intended test universe; restore the original permitted texture or create an original replacement through Studio if Roblox no longer serves it. No replacement ID is guessed, and this art acceptance issue remains open.
+
 | Dependency | Purpose and version | Location/form | Storage |
 | --- | --- | --- | --- |
 | Windows PowerShell / .NET | Build, checks, original PCM synthesis; 5.1.26100.9711 / CLR 4.0.30319.42000 observed | Existing Windows components | Existing external storage, unchanged |
@@ -75,7 +77,7 @@ The user uploaded the original pack and supplied all twenty-nine IDs below. `aud
 | Transition | 78810693063926 | Menu page transition |
 | Notification | 123408274839656 | Notices and nonwinning result feedback |
 | Reward | 104912968188467 | Unlock/daily reward, win feedback and audio-test button |
-| Purchase | 113975906689066 | Confirmed Aurum session-credit purchase |
+| Purchase | 113975906689066 | Confirmed cosmetic catalog purchase |
 
 All uploads and six built-in fallbacks loaded in both Studio clients. Live tracks/effects produced advancing positions and nonzero loudness. This establishes engine playback in the local Studio context, not human listening quality or permission grants for the eventual published universe. PowerSteal was load-tested but has no live gameplay caller.
 

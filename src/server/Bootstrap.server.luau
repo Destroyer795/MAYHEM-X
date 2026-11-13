@@ -15,9 +15,10 @@ Arena.build()
 workspace.MayhemWorld.TheCollapse:Destroy()
 workspace.MayhemWorld.FinalDuelDeck:Destroy()
 Scene.decorate()
-Presentation.start(PreferenceService.new())
+local profiles = PreferenceService.new()
+Presentation.start(profiles)
 local remotes = ReplicatedStorage.Mayhem.Remotes
-local matches = MatchService.new(remotes)
+local matches = MatchService.new(remotes, profiles)
 local actionRemote = remotes:WaitForChild(Protocol.Remote.Action) :: RemoteEvent
 actionRemote.OnServerEvent:Connect(function(player: Player, action: any, payload: any)
 	matches:handle(player, action, payload)

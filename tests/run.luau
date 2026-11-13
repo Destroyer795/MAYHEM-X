@@ -8,5 +8,6 @@ checks += require("./StyleCases")(require("../src/shared/StyleRules"), require("
 checks += require("./MapRulesCases")(require("../src/shared/MapRules"))
 checks += require("./PreferenceCases")(require("../src/shared/PreferenceRules"))
 checks += require("./ProfileCases")(require("../src/shared/ProfileRules"), require("../src/shared/PreferenceRules"), require("../src/shared/Visuals"))
+checks += require("./SessionLeaseCases")(require("../src/server/SessionLease"))
 checks += require("./AudioCases")(require("../src/shared/AudioConfig"))
 print(string.format("PASS: %d rule assertions", checks))

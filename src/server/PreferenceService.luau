@@ -7,6 +7,8 @@ local Shared = game:GetService("ReplicatedStorage").Mayhem.Shared
 local Rules = require(Shared.PreferenceRules)
 local ProfileRules = require(Shared.ProfileRules)
 local Visuals = require(Shared.Visuals)
+local Economy = require(Shared.EconomyConfig)
+local SessionLease = require(script.Parent.SessionLease)
 local Preferences = {}
 Preferences.__index = Preferences
 
@@ -34,8 +36,7 @@ local function releaseLease(store: any, key: string, lease: string): boolean
 	if not store then return false end
 	local ok = retry(function()
 		return store:UpdateAsync(key, function(current)
-			if type(current) == "table" and current.owner == lease then return nil end
-			return current
+			return SessionLease.release(current, lease)
 		end)
 	end)
 	return ok
@@ -67,11 +68,7 @@ function Preferences.new()
 			end
 			local lockOk, lock = retry(function()
 				return self.lockStore:UpdateAsync("P_" .. player.UserId, function(current)
-					local now = os.time()
-					if type(current) == "table" and type(current.expiresAt) == "number" and current.expiresAt > now and current.owner ~= record.lease then
-						return current
-					end
-					return { owner = record.lease, expiresAt = now + LOCK_TTL }
+					return SessionLease.acquire(current, record.lease, os.time(), LOCK_TTL)
 				end)
 			end)
 			if self.records[player] ~= record then
@@ -112,7 +109,7 @@ function Preferences.new()
 						legacy = legacyValue
 					end
 					record.profile = ProfileRules.clean(stored, Rules, Visuals, legacy)
-					record.loaded, record.persistent = true, true
+					record.persistent = true
 					record.dirty = stored == nil and legacy ~= nil
 					record.status = if record.dirty then "MIGRATION PENDING" else "READY"
 				else
@@ -160,13 +157,12 @@ end
 
 function Preferences.finishLoad(self: any, player: Player, record: any, _keepStatus: boolean)
 	if self.records[player] ~= record then return end
-	record.loaded = true
 	if record.status == "LOADING" then record.status = "SESSION ONLY / LOAD FAILED" end
 	local stats = player:WaitForChild("leaderstats", 15)
 	if stats and self.records[player] == record then
 		for _, pair in { { "Kills", "kills" }, { "Wins", "wins" } } do
 			local value = stats:WaitForChild(pair[1], 5) :: IntValue?
-			if value then
+			if value and self.records[player] == record then
 				if record.persistent then value.Value = record.profile[pair[2]] else record.profile[pair[2]] = math.max(0, value.Value) end
 				local previous = value.Value
 				table.insert(record.connections, value:GetPropertyChangedSignal("Value"):Connect(function()
@@ -174,7 +170,10 @@ function Preferences.finishLoad(self: any, player: Player, record: any, _keepSta
 					local current = math.clamp(math.floor(value.Value), 0, ProfileRules.MaximumStat)
 					if current > previous then
 						local delta = current - previous
-						record.profile.credits = math.clamp(record.profile.credits + delta * (pair[1] == "Kills" and 15 or 45), 0, ProfileRules.MaximumStat)
+						local rate = if pair[1] == "Kills" then Economy.KillCredits else 0
+						local credits = math.min(delta * rate, ProfileRules.MaximumStat - record.profile.credits)
+						record.profile.credits += credits
+						if credits > 0 then ProfileRules.recordTransaction(record.profile, "stat:" .. pair[2] .. ":" .. tostring(current), string.lower(pair[1]), credits, 0, 0) end
 					elseif current < previous then
 						value.Value = previous
 						return
@@ -186,6 +185,8 @@ function Preferences.finishLoad(self: any, player: Player, record: any, _keepSta
 			end
 		end
 	end
+	if self.records[player] ~= record or record.leaving then return end
+	record.loaded = true
 	if self.notify then self.notify(player) end
 end
 
@@ -207,13 +208,17 @@ end
 
 function Preferences.snapshot(self: any, player: Player): any
 	local record = self.records[player]
-	if not record then return { preferences = table.clone(Rules.Defaults), version = 0, status = "LOADING", credits = 0, xp = 0, level = 1 } end
+	if not record then return { preferences = table.clone(Rules.Defaults), version = 0, status = "LOADING", ready = false, credits = 0, shards = 0, seasonTokens = 0, xp = 0, level = 1, recentTransactions = {} } end
 	local profile = record.profile
 	local xp = profile.kills * 120 + profile.wins * 300
+	local recentTransactions = {}
+	for index = math.max(1, #profile.ledger - 9), #profile.ledger do table.insert(recentTransactions, table.clone(profile.ledger[index])) end
 	return {
 		preferences = table.clone(profile.preferences), version = record.version, status = record.status,
+		ready = self:canModify(player),
 		credits = profile.credits, xp = xp, level = 1 + math.floor(xp / 300),
 		kills = profile.kills, wins = profile.wins,
+		shards = profile.shards, seasonTokens = profile.seasonTokens, recentTransactions = recentTransactions,
 	}
 end
 
@@ -256,14 +261,22 @@ function Preferences.claimDaily(self: any, player: Player, day: number): boolean
 	return true
 end
 
+function Preferences.awardMatch(self: any, player: Player, matchId: string, won: boolean): any?
+	local record = self.records[player]
+	if not record or not record.loaded or record.leaving or record.status == "PROFILE IN USE" then return nil end
+	local accepted, reward = ProfileRules.awardMatch(record.profile, matchId, won, Economy)
+	if not accepted then return nil end
+	self:changed(player, record)
+	return reward
+end
+
 function Preferences.save(self: any, player: Player)
 	local record = self.records[player]
 	if not record or not record.persistent or record.saving or not record.loaded then return end
 	record.saving = true
 	local lockOk, lock = retry(function()
 		return self.lockStore:UpdateAsync("P_" .. player.UserId, function(current)
-			if type(current) ~= "table" or current.owner ~= record.lease then return current end
-			return { owner = record.lease, expiresAt = os.time() + LOCK_TTL }
+			return SessionLease.renew(current, record.lease, os.time(), LOCK_TTL)
 		end)
 	end)
 	if not lockOk or type(lock) ~= "table" or lock.owner ~= record.lease then
@@ -275,6 +288,9 @@ function Preferences.save(self: any, player: Player)
 		local snapshot = table.clone(record.profile)
 		snapshot.preferences = table.clone(record.profile.preferences)
 		snapshot.owned = table.clone(record.profile.owned)
+		snapshot.matchRewards = table.clone(record.profile.matchRewards)
+		snapshot.ledger = {}
+		for _, transaction in record.profile.ledger do table.insert(snapshot.ledger, table.clone(transaction)) end
 		snapshot.version = ProfileRules.Version
 		local version = record.version
 		local saveOk = retry(function()
