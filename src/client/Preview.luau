@@ -15,8 +15,8 @@ function Preview.new(parent: Instance)
 	viewport.BackgroundColor3 = Color3.fromRGB(214, 235, 245)
 	viewport.BackgroundTransparency = 1
 	viewport.BorderSizePixel = 0
-	viewport.Ambient = Color3.fromRGB(177, 197, 211)
-	viewport.LightColor = Color3.fromRGB(255, 250, 238)
+	viewport.Ambient = Color3.fromRGB(157, 158, 187)
+	viewport.LightColor = Color3.fromRGB(246, 239, 225)
 	viewport.LightDirection = Vector3.new(-1, -1, -1)
 	viewport.Parent = parent
 	local camera = Instance.new("Camera")
@@ -30,13 +30,15 @@ end
 function Preview.show(self: any, kind: string, operative: string, skin: string, weapon: number?)
 	local character = Players.LocalPlayer.Character
 	local appearance = if character then character:FindFirstChild("MayhemStyle") else nil
-	local showcase = if kind == "operative" then ReplicatedStorage.Mayhem.Art:FindFirstChild("OperatorShowcase") else nil
+	local showcase = if kind == "operative" or kind == "victory" then ReplicatedStorage.Mayhem.Art:FindFirstChild("OperatorShowcase") else nil
 	if showcase and not showcase:IsA("Model") then showcase = nil end
 	if kind ~= "weapon" and not showcase and (not character or not appearance or not character:FindFirstChild("Head") or not (character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso"))) then return end
 	local key = kind .. operative .. skin .. tostring(weapon)
 	if self.key == key and self.character == character and self.appearance == appearance and self.showcase == showcase then return end
 	self.key, self.character, self.appearance, self.showcase = key, character, appearance, showcase
 	self.lastViewportSize = nil
+	if self.idleTrack then self.idleTrack:Stop(0); self.idleTrack:Destroy(); self.idleTrack = nil end
+	self.motionPaused = nil
 	if self.animationTrack then
 		self.animationTrack:Stop(0.1)
 		self.animationTrack:Destroy()
@@ -74,15 +76,19 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 				local inlay = Instance.new("Part")
 				inlay.Name = "MayhemPreviewInlay"
 				inlay.Size = Vector3.new(0.22, 0.055, 0.035)
-				inlay.CFrame = chest.CFrame * CFrame.new(0, chest.Size.Y * 0.24, -chest.Size.Z * 0.55)
+				inlay.CFrame = chest.CFrame * CFrame.new(0, -chest.Size.Y * 0.12, -chest.Size.Z * 0.55)
 				inlay.Color, inlay.Material = profileAccent, Enum.Material.Neon
-				inlay.Anchored, inlay.CanCollide, inlay.CanTouch, inlay.CanQuery = true, false, false, false
+				inlay.Anchored, inlay.CanCollide, inlay.CanTouch, inlay.CanQuery, inlay.Massless = false, false, false, false, true
 				inlay.CastShadow, inlay.Parent = false, rig
+				local weld = Instance.new("WeldConstraint")
+				weld.Part0, weld.Part1, weld.Parent = chest, inlay, inlay
 			end
 		else
 			Art.outfit(rig, accent, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders)
 		end
-		for _, part in rig:GetDescendants() do if part:IsA("BasePart") then part.Anchored = true end end
+		for _, part in rig:GetDescendants() do
+			if part:IsA("BasePart") then part.Anchored = part.Name == "HumanoidRootPart"; part.Massless = true end
+		end
 		if kind == "victory" then
 			for _, joint in rig:GetDescendants() do
 				if joint:IsA("Motor6D") and joint.Name == "RightShoulder" then joint.Transform = CFrame.Angles(-0.5, 0, 0.7) end
@@ -106,6 +112,19 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 					track:Play(0.2)
 					self.animationTrack = track
 				end
+				if kind == "victory" then
+					self.idleTrack, self.animationTrack = self.animationTrack, nil
+					local victory = Instance.new("Animation")
+					victory.AnimationId = Animations.Victory
+					local victoryOk, victoryTrack = pcall(function() return animator:LoadAnimation(victory) end)
+					victory:Destroy()
+					if victoryOk and victoryTrack then
+						victoryTrack.Looped = false
+						victoryTrack.Priority = Enum.AnimationPriority.Action
+						victoryTrack:Play(0.2)
+						self.animationTrack = victoryTrack
+					end
+				end
 			end
 		end
 		local pedestalY = -3.25
@@ -118,6 +137,17 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 	if self.subject then
 		local bounds, size = self.subject:GetBoundingBox()
 		self.focus, self.bounds = bounds.Position, size
+		if self.cinematic and kind == "operative" then
+			local h = size.Y
+			local dressing = Instance.new("Folder")
+			dressing.Name, dressing.Parent = "CinematicScenery", world
+			self.dressing, self.dressingHidden = dressing, nil
+			for _, x in {-1, 1} do
+				local spire = Art.place(dressing, "SkySpire", CFrame.new(x * h * 0.8, bounds.Position.Y - h * 0.3, h * 0.95), Vector3.new(h * 0.48, h * 1.5, h * 0.48))
+				for _, part in spire:GetDescendants() do if part:IsA("BasePart") then part.Color = Color3.fromRGB(75, 77, 101); part.Transparency = 0.18 end end
+			end
+			Art.weapon(dressing, 1, CFrame.new(h * 0.6, bounds.Position.Y - h * 0.28, -h * 0.05) * CFrame.Angles(0, math.rad(65), math.rad(-15)), accent)
+		end
 		self.camera.FieldOfView = if kind == "weapon" then 34 else 40
 		self:step(true)
 	end
@@ -163,7 +193,16 @@ end
 
 function Preview.step(self: any, reducedMotion: boolean)
 	if not self.world then return end
+	if self.motionPaused ~= reducedMotion then
+		for _, track in {self.animationTrack, self.idleTrack} do track:AdjustSpeed(if reducedMotion then 0 else 1) end
+		self.motionPaused = reducedMotion
+	end
 	local viewportSize = self.frame.AbsoluteSize
+	local hideDressing = viewportSize.X < 400
+	if self.dressing and self.dressing.Parent and self.dressingHidden ~= hideDressing then
+		self.dressingHidden = hideDressing
+		for _, part in self.dressing:GetDescendants() do if part:IsA("BasePart") then part.LocalTransparencyModifier = if hideDressing then 1 else 0 end end
+	end
 	if viewportSize ~= self.lastViewportSize and viewportSize.X > 0 and viewportSize.Y > 0 then
 		local previous = self.camera
 		self.camera = previous:Clone()
@@ -188,6 +227,7 @@ function Preview.step(self: any, reducedMotion: boolean)
 end
 
 function Preview.hide(self: any)
+	if self.idleTrack then self.idleTrack:Stop(0); self.idleTrack:Destroy(); self.idleTrack = nil end
 	if self.animationTrack then
 		self.animationTrack:Stop(0.1)
 		self.animationTrack:Destroy()

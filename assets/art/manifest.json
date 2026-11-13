@@ -2,6 +2,17 @@
   "version": 1,
   "source": "Original assets generated specifically for MAYHEM X with Roblox Studio mesh generation. No third-party Creator Store models.",
   "created": "2026-11-12",
+  "animations": [
+    {
+      "key": "Victory",
+      "assetId": "137721518596925",
+      "source": "Original Roblox Studio MCP animation generation",
+      "prompt": "Victory poses.",
+      "created": "2026-11-13",
+      "clip": "ServerStorage.RBX_ASSISTANT_ANIMGEN.victoryPoses",
+      "experiencePermission": "Loaded and animated the viewport rig in local Studio; published universe unverified"
+    }
+  ],
   "models": [
     {
       "key": "ReactorTurbine",

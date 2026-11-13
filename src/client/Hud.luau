@@ -102,10 +102,32 @@ function Hud.new(callbacks: any)
 	self.loadingDetail = Theme.text(self.loading, "Detail", "", UDim2.fromOffset(20, 124), UDim2.new(1, -40, 0, 48), 13, Theme.Metal)
 	self.results = Theme.frame(self.root, "Results", UDim2.new(), UDim2.fromScale(1, 1), Theme.Surface, 0)
 	self.results.ZIndex = 10
+	local resultScroll = Instance.new("ScrollingFrame")
+	resultScroll.Name = "ResultContent"
+	resultScroll.BackgroundTransparency, resultScroll.BorderSizePixel = 1, 0
+	resultScroll.Position, resultScroll.Size = UDim2.fromOffset(24, 16), UDim2.new(1, -48, 1, -92)
+	resultScroll.CanvasSize, resultScroll.AutomaticCanvasSize = UDim2.new(), Enum.AutomaticSize.Y
+	resultScroll.ScrollBarThickness = 3
+	resultScroll.Parent = self.results
+	self.resultScroll = resultScroll
+	self.resultBody = Theme.frame(resultScroll, "Composition", UDim2.new(), UDim2.new(1, -8, 0, 560), nil, 1)
 	self.resultTitle = Theme.text(self.results, "Title", "", UDim2.fromScale(0.08, 0.05), UDim2.new(0.84, 0, 0, 54), 40, Theme.Ink, true)
 	self.resultWinner = Theme.text(self.results, "Winner", "", UDim2.fromScale(0.08, 0.18), UDim2.new(0.84, 0, 0, 38), 21, Theme.Action, true)
 	self.resultReason = Theme.text(self.results, "Reason", "", UDim2.fromScale(0.08, 0.28), UDim2.new(0.84, 0, 0, 26), 13, Theme.Muted)
 	self.resultPayout = Theme.text(self.results, "Payout", "", UDim2.fromScale(0.08, 0.33), UDim2.new(0.84, 0, 0, 24), 12, Theme.Action, true)
+	self.resultMetrics = {}
+	for index, label in { "ROUND CREDITS", "SEASON TOKENS", "CHAOS SHARDS", "MATCH XP" } do
+		local cell = Theme.frame(self.resultBody, "Reward" .. index, UDim2.new(), UDim2.new(), Theme.Panel)
+		Theme.corner(cell, 5)
+		Theme.text(cell, "Label", label, UDim2.fromOffset(14, 9), UDim2.new(1, -28, 0, 18), 11, Theme.Muted)
+		local value = Theme.text(cell, "Amount", "+0", UDim2.fromOffset(14, 29), UDim2.new(1, -28, 0, 40), 30, if index == 1 then Theme.Gold else Theme.Ink)
+		value.Font = Theme.FontNumeric
+		self.resultMetrics[index] = { cell = cell, value = value }
+	end
+	self.resultProgress = Theme.frame(self.resultBody, "AccountProgress", UDim2.new(), UDim2.new(), nil, 1)
+	self.resultLevel = Theme.text(self.resultProgress, "Level", "", UDim2.new(), UDim2.new(1, 0, 0, 24), 16, Theme.Ink, true)
+	self.resultXPFill = Theme.bar(self.resultProgress, "ExperienceTrack", UDim2.fromOffset(0, 32), UDim2.new(1, 0, 0, 4), Theme.Cyan)
+	self.resultXPNote = Theme.text(self.resultProgress, "Experience", "", UDim2.fromOffset(0, 42), UDim2.new(1, 0, 0, 24), 12, Theme.Muted)
 	local rows = Instance.new("ScrollingFrame")
 	rows.Name = "Standings"
 	rows.BackgroundTransparency = 1
@@ -124,8 +146,11 @@ function Hud.new(callbacks: any)
 	self.resultPreview.frame.Name = "VictoryShowcase"
 	self.resultPreview.frame.Position = UDim2.fromScale(0.7, 0.3)
 	self.resultPreview.frame.Size = UDim2.fromScale(0.24, 0.46)
+	for _, item in { self.resultTitle, self.resultWinner, self.resultReason, self.resultPayout, rows, self.resultPreview.frame } do item.Parent = self.resultBody end
 	self.resultFooter = Theme.text(self.results, "NextRound", "", UDim2.fromScale(0.08, 0.79), UDim2.new(0.84, 0, 0, 26), 12, Theme.Muted)
-	self.resultContinue = Theme.button(self.results, "Continue", "OPEN COLLECTION", UDim2.fromScale(0.08, 0.87), UDim2.new(0.84, 0, 0, 44), function() self:openPage("Inventory") end)
+	self.resultContinue = Theme.button(self.results, "Continue", "VIEW COLLECTION", UDim2.new(), UDim2.new(), function() self:openPage("Shop") end)
+	self.resultSkip = Theme.button(self.results, "SkipReveal", "SKIP REVEAL", UDim2.new(), UDim2.new(), function() self.resultSkipped = true end, true)
+	self.resultHub = Theme.button(self.results, "OpenHub", "OPEN HUB", UDim2.new(), UDim2.new(), function() self:openPage("Deploy") end, true)
 	self.menus = Menus.new(self.root, callbacks)
 	return self
 end
@@ -290,6 +315,8 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	self.results.Visible = state.phase == "Results" and state.result ~= nil and not overlay
 	if state.result and self.resultRound ~= state.roundId then
 		self.resultRound = state.roundId
+		self.resultStarted, self.resultSkipped = os.clock(), false
+		self.resultScroll.CanvasPosition = Vector2.zero
 		local win = state.result.winnerId == Players.LocalPlayer.UserId
 		local canceled = state.result.reason:find("canceled", 1, true) ~= nil
 		self.resultTitle.Text = if canceled then "SIGNAL ABORTED" elseif win then "SIGNAL SECURED" elseif not state.result.winnerId then "ROUND DRAW" elseif state.inMatch then "SIGNAL LOST" else "MATCH COMPLETE"
@@ -300,7 +327,8 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 		local personalStanding = nil
 		for _, standing in state.result.standings do if standing.userId == Players.LocalPlayer.UserId then personalStanding = standing; break end end
 		local payout = if personalStanding then personalStanding.reward else nil
-		self.resultPayout.Text = if payout then string.format("ROUND BONUS +%d CR  /  +%d TOKENS  /  +%d SHARDS  /  EARNED %d XP", payout.credits, payout.seasonTokens, payout.shards, personalStanding.kills * 120 + (if win then 300 else 0)) else "NO ROUND BONUS / MATCH DID NOT REACH ACTIVE PLAY"
+		self.resultAmounts = if payout then { payout.credits, payout.seasonTokens, payout.shards, personalStanding.kills * 120 + (if win then 300 else 0) } else {0, 0, 0, 0}
+		self.resultPayout.Text = if payout then "ROUND BONUS / Elimination Credits were awarded during combat." else "NO ROUND BONUS / Match did not reach active play."
 		for _, child in self.resultRows:GetChildren() do if child:IsA("Frame") then child:Destroy() end end
 		for index, entry in state.result.standings do
 			local row = Theme.frame(self.resultRows, "Contender", UDim2.new(), UDim2.new(1, -8, 0, 34), Theme.Panel)
@@ -310,18 +338,73 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 		end
 		if UserInputService:GetLastInputType() == Enum.UserInputType.Gamepad1 then GuiService.SelectedObject = self.resultContinue end
 	end
-	self.resultFooter.Text = "Lobby reset in " .. seconds .. "s. Your queue preference is kept."
-	self.resultPreview.frame.Visible = self.results.Visible and not compact
-	self.resultRows.Size = UDim2.fromScale(if compact then 0.84 else 0.57, 0.35)
+	self.resultFooter.Text = "LOBBY IN " .. seconds .. "s / " .. (if state.queued then "AUTO-QUEUE ON" else "AUTO-QUEUE OFF")
+	self:layoutResults(size)
+	self.resultEndXP = style.profile.xp or 0
 	if self.resultPreview.frame.Visible then
 		self.resultPreview:show(if state.result and state.result.winnerId == Players.LocalPlayer.UserId then "victory" else "operative", style.operative, style.skin)
 	else self.resultPreview:hide() end
 	self.menus:render(state, elapsed, preferences, style)
+	if self.menus.insetLayer then self.menus.insetLayer.Enabled = self.menus.page ~= nil or self.results.Visible end
+end
+
+function Hud.layoutResults(self: any, size: Vector2)
+	self.resultPreview.frame.Visible = self.results.Visible and size.Y >= 500
+	if not self.results.Visible then return end
+	local portrait, short = size.X < 560, size.Y < 500
+	local pad = if portrait then 16 else 32
+	self.resultScroll.Position = UDim2.fromOffset(pad, 12)
+	self.resultScroll.Size = UDim2.new(1, -pad * 2, 1, -100)
+	local width = math.max(220, size.X - pad * 2 - 8)
+	local column = if portrait or short then width else math.floor(width * 0.57)
+	local titleSize = if portrait then 36 elseif short then 38 else 54
+	self.resultTitle.Position, self.resultTitle.Size = UDim2.new(), UDim2.fromOffset(width, titleSize + 12)
+	self.resultTitle.TextSize = titleSize
+	self.resultWinner.Position, self.resultWinner.Size = UDim2.fromOffset(0, titleSize + 18), UDim2.fromOffset(column, 28)
+	self.resultWinner.TextSize = 19
+	self.resultReason.Position, self.resultReason.Size = UDim2.fromOffset(0, titleSize + 48), UDim2.fromOffset(column, 30)
+	local metricTop = if portrait then 300 elseif short then 128 else 160
+	local columns = if short and not portrait then 4 else 2
+	for index, metric in self.resultMetrics do
+		local cellWidth = math.floor((column - (columns - 1) * 12) / columns)
+		metric.cell.Position = UDim2.fromOffset(((index - 1) % columns) * (cellWidth + 12), metricTop + math.floor((index - 1) / columns) * 94)
+		metric.cell.Size = UDim2.fromOffset(cellWidth, 82)
+		metric.value.TextSize = if portrait or short then 28 else 34
+	end
+	local noteY = metricTop + (4 / columns) * 94
+	self.resultPayout.Position, self.resultPayout.Size = UDim2.fromOffset(0, noteY), UDim2.fromOffset(column, 32)
+	self.resultPayout.Font, self.resultPayout.TextSize = Theme.Font, 12
+	self.resultProgress.Position, self.resultProgress.Size = UDim2.fromOffset(0, noteY + 44), UDim2.fromOffset(column, 70)
+	self.resultRows.Position, self.resultRows.Size = UDim2.fromOffset(0, noteY + 128), UDim2.fromOffset(column, 100)
+	self.resultBody.Size = UDim2.new(1, -8, 0, noteY + 240)
+	self.resultPreview.frame.Visible = not short
+	self.resultPreview.frame.Position = if portrait then UDim2.fromOffset(0, 126) else UDim2.new(0.62, 0, 0, 72)
+	self.resultPreview.frame.Size = if portrait then UDim2.fromOffset(width, 166) else UDim2.new(0.38, 0, 0, math.min(470, noteY + 120))
+	self.resultFooter.Position, self.resultFooter.Size = UDim2.new(0, pad, 1, -84), UDim2.new(1, -pad * 2, 0, 24)
+	local buttonWidth = math.floor((size.X - pad * 2 - 20) / 3)
+	for index, button in { self.resultSkip, self.resultHub, self.resultContinue } do
+		button.Position = UDim2.new(0, pad + (index - 1) * (buttonWidth + 10), 1, -54)
+		button.Size, button.TextSize = UDim2.fromOffset(buttonWidth, 44), if portrait then 13 else 15
+	end
 end
 
 function Hud.animate(self: any, preferences: any)
 	self.menus:animate()
 	if self.resultPreview.frame.Visible then self.resultPreview:step(preferences.reducedMotion) end
+	if self.results.Visible and self.resultAmounts then
+		local progress = if preferences.reducedMotion or self.resultSkipped then 1 else math.clamp((os.clock() - self.resultStarted) / 1.25, 0, 1)
+		local eased = 1 - (1 - progress) ^ 3
+		for index, metric in self.resultMetrics do metric.value.Text = "+" .. math.floor(self.resultAmounts[index] * eased + 0.5) end
+		self.resultSkip.Active = progress < 1
+		self.resultSkip.Text = if progress < 1 then "SKIP REVEAL" else "REVEAL COMPLETE"
+		local endXP = math.max(self.resultEndXP or 0, self.resultAmounts[4])
+		local startXP = endXP - self.resultAmounts[4]
+		local xp = math.floor(startXP + self.resultAmounts[4] * eased)
+		local level = 1 + math.floor(xp / 300)
+		self.resultLevel.Text = (if level > 1 + math.floor(startXP / 300) then "LEVEL UP / " else "ACCOUNT LEVEL / ") .. level
+		self.resultXPFill.Size = UDim2.fromScale(xp % 300 / 300, 1)
+		self.resultXPNote.Text = xp % 300 .. " / 300 XP TO NEXT LEVEL"
+	end
 end
 
 return Hud
