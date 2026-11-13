@@ -14,7 +14,7 @@ foreach ($match in [regex]::Matches($palette, '(\w+)\s*=\s*\{\s*(\d+),\s*(\d+),\
     $luminance[$match.Groups[1].Value] = 0.2126 * $linear[0] + 0.7152 * $linear[1] + 0.0722 * $linear[2]
 }
 $checks = 0
-foreach ($pair in @(@('White','Action'),@('Ink','Panel'),@('Ink','Surface'),@('Muted','Panel'),@('Muted','Surface'),@('Cyan','Panel'),@('Cyan','Surface'),@('White','Void'),@('Metal','Void'),@('Cyan','Void'),@('Gold','Void'),@('Void','Gold'))) {
+foreach ($pair in @(@('Void','Action'),@('Ink','Panel'),@('Ink','Surface'),@('Muted','Panel'),@('Muted','Surface'),@('Cyan','Panel'),@('Cyan','Surface'),@('White','Void'),@('Metal','Void'),@('Cyan','Void'),@('Gold','Void'),@('Void','Gold'))) {
     $a = $pair[0]; $b = $pair[1]
     if (-not $luminance.ContainsKey($a) -or -not $luminance.ContainsKey($b)) { throw "Missing text color pair: $a/$b" }
     $ratio = ([Math]::Max($luminance[$a],$luminance[$b]) + 0.05) / ([Math]::Min($luminance[$a],$luminance[$b]) + 0.05)

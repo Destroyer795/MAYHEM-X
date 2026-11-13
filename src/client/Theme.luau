@@ -6,7 +6,7 @@ for name, rgb in Visuals.Palette do Theme[name] = Color3.fromRGB(table.unpack(rg
 for name, rgb in {
 	Surface = {12, 17, 27}, Panel = {24, 33, 49}, Void = {10, 15, 24}, Navy = {31, 43, 61},
 	Ink = {239, 245, 251}, White = {239, 245, 251}, Muted = {168, 185, 204}, Metal = {134, 159, 185},
-	Action = {99, 76, 228}, Purple = {160, 139, 255}, Cyan = {92, 215, 234},
+	Action = {242, 174, 63}, Purple = {92, 215, 234}, Cyan = {92, 215, 234},
 } do Theme[name] = Color3.fromRGB(table.unpack(rgb)) end
 Theme.Spacing = table.freeze({ Tight = 8, Card = 16, Section = 24 })
 Theme.Font = Enum.Font.BuilderSansMedium
@@ -63,7 +63,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	item.Position = position
 	item.Size = size
 	item.BackgroundColor3 = if secondary then Theme.Panel else Theme.Action
-	item.TextColor3 = if secondary then Theme.Ink else Theme.White
+	item.TextColor3 = if secondary then Theme.Ink else Theme.Void
 	item.BorderSizePixel = 0
 	item.Text = content
 	item.TextSize = 16
@@ -71,6 +71,16 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	item.Font = Theme.FontStrong
 	item.AutoButtonColor = false
 	item.Selectable = true
+	if not Theme.FocusOutline then
+		local focus = Instance.new("Frame")
+		focus.Name = "MayhemFocus"
+		focus.BackgroundTransparency = 1
+		focus.Size = UDim2.fromScale(1, 1)
+		Theme.corner(focus, 4)
+		Theme.stroke(focus, Theme.Cyan, 0).Thickness = 2
+		Theme.FocusOutline = focus
+	end
+	item.SelectionImageObject = Theme.FocusOutline
 	item.Parent = parent
 	Theme.corner(item, 4)
 	local border = Theme.stroke(item, if secondary then Theme.Metal else Theme.Action, if secondary then 0.85 else 0.2)
@@ -108,7 +118,9 @@ end
 
 function Theme.selected(item: TextButton, selected: boolean)
 	item.BackgroundColor3 = if selected then Theme.Action else Theme.Panel
-	item.TextColor3 = if selected then Theme.White else Theme.Muted
+	item.TextColor3 = if selected then Theme.Void else Theme.Muted
+	local icon = item:FindFirstChild("Icon")
+	if icon then for _, line in icon:GetChildren() do if line:IsA("Frame") then line.BackgroundColor3 = if selected then Theme.Void else Theme.Metal end end end
 	local marker = item:FindFirstChild("SelectionMark")
 	if marker and marker:IsA("Frame") then marker.Visible = selected end
 end

@@ -14,8 +14,8 @@ Visuals.Skins = table.freeze({
 	{ id = "Ember", name = "EMBER / CORAL", rarity = "Uncommon", color = { 255, 116, 132 }, source = "shop", description = "A controlled coral cosmetic finish." },
 	{ id = "Prism", name = "PRISM / WHITE", rarity = "Rare", color = { 220, 229, 255 }, source = "daily", description = "Daily cache cosmetic finish." },
 	{ id = "Aurum", name = "AURUM / GOLD", rarity = "Rare", currency = "credits", source = "purchase", cost = 45, color = { 255, 190, 67 }, description = "45 Mayhem Credits. Cosmetic only." },
-	{ id = "Voidglass", name = "VOIDGLASS / CYAN", rarity = "Epic", currency = "shards", source = "shards", cost = 1, color = { 105, 231, 245 }, description = "Earn one Chaos Shard with your first victory, then claim this cyan finish." },
-	{ id = "Solstice", name = "SOLSTICE / AMBER", rarity = "Legendary", currency = "seasonTokens", source = "season", cost = 6, color = { 255, 171, 78 }, description = "Earn Season Tokens from completed matches and victories." },
+	{ id = "Voidglass", name = "VOIDGLASS / CYAN", rarity = "Rare", currency = "shards", source = "shards", cost = 1, color = { 105, 231, 245 }, description = "Earn one Chaos Shard with your first victory, then claim this cyan finish." },
+	{ id = "Solstice", name = "SOLSTICE / AMBER", rarity = "Rare", currency = "seasonTokens", source = "season", cost = 6, color = { 255, 171, 78 }, description = "Earn Season Tokens from completed matches and victories." },
 })
 Visuals.Operatives = table.freeze({
 	{ id = "Vanguard", name = "VANGUARD", description = "Wide signal plates with an amethyst default finish. Cosmetic only.", shoulders = 1.15 },

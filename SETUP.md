@@ -14,6 +14,21 @@ The operator showcase idle was generated through Studio and uses `rbxassetid://1
 
 The latest Play run reported missing content representations for generated texture IDs `137134570533821`, `95314124117901`, `122272855563833`, `117932222879559`, `139030421332826`, `105269080138767`, `99998311990220`, `104817013345409`, `122660213004304` and `74264750154799`. Their original references remain in the art manifest so this is traceable. Mesh geometry rendered, but these textures are not verified. Inspect their asset status and access in the intended test universe; restore the original permitted texture or create an original replacement through Studio if Roblox no longer serves it. No replacement ID is guessed, and this art acceptance issue remains open.
 
+The ten unresolved texture references are mapped below. The metadata probe `GET /assets/v1/assets/137134570533821` was refused because this MCP session still reported `asset:read` as ungranted after the user confirmed enabling it. Reconnect the current Studio MCP session after saving the grant, then retry metadata checks. This is not a claim that the textures were deleted or incorrectly authored.
+
+| Model | Part | Texture ID |
+| --- | --- | --- |
+| CanopyTree | trunk_geom | 74264750154799 |
+| SkySpire | walls_geom | 122272855563833 |
+| SkySpire | door_geom | 105269080138767 |
+| SkySpire | roof_geom | 117932222879559 |
+| SignalArmor | abdominal panels_geom | 137134570533821 |
+| SignalArmor | back shell_geom | 95314124117901 |
+| RuinedTower | walls_geom | 139030421332826 |
+| RuinedTower | windows_geom | 99998311990220 |
+| RuinedTower | door_geom | 104817013345409 |
+| RuinedTower | roof_geom | 122660213004304 |
+
 | Dependency | Purpose and version | Location/form | Storage |
 | --- | --- | --- | --- |
 | Windows PowerShell / .NET | Build, checks, original PCM synthesis; 5.1.26100.9711 / CLR 4.0.30319.42000 observed | Existing Windows components | Existing external storage, unchanged |

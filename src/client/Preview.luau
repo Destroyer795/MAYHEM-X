@@ -36,6 +36,7 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 	local key = kind .. operative .. skin .. tostring(weapon)
 	if self.key == key and self.character == character and self.appearance == appearance and self.showcase == showcase then return end
 	self.key, self.character, self.appearance, self.showcase = key, character, appearance, showcase
+	self.lastViewportSize = nil
 	if self.animationTrack then
 		self.animationTrack:Stop(0.1)
 		self.animationTrack:Destroy()
@@ -129,6 +130,7 @@ function Preview.map(self: any, id: string)
 	if not definition then return end
 	self:hide()
 	self.key = "map:" .. id
+	self.lastViewportSize = nil
 	local world = Instance.new("WorldModel")
 	world.Parent = self.frame
 	self.world = world
@@ -160,8 +162,18 @@ function Preview.map(self: any, id: string)
 end
 
 function Preview.step(self: any, reducedMotion: boolean)
-	if not self.world or not self.bounds or self.key:sub(1, 4) == "map:" then return end
-	local angle = if reducedMotion then 0 else math.sin(os.clock() * 0.4) * 0.12
+	if not self.world then return end
+	local viewportSize = self.frame.AbsoluteSize
+	if viewportSize ~= self.lastViewportSize and viewportSize.X > 0 and viewportSize.Y > 0 then
+		local previous = self.camera
+		self.camera = previous:Clone()
+		self.camera.Parent = self.frame
+		self.frame.CurrentCamera = self.camera
+		previous:Destroy()
+		self.lastViewportSize = viewportSize
+	end
+	if not self.bounds or self.key:sub(1, 4) == "map:" then return end
+	local angle = (self.yaw or 0) + (if reducedMotion then 0 else math.sin(os.clock() * 0.4) * 0.12)
 	local direction = CFrame.Angles(0, angle, 0):VectorToWorldSpace(self.direction)
 	local rotation = CFrame.lookAt(Vector3.zero, -direction)
 	local extent = Vector3.zero
@@ -184,6 +196,7 @@ function Preview.hide(self: any)
 	if self.world then self.world:Destroy(); self.world = nil end
 	self.key = ""
 	self.subject, self.bounds = nil, nil
+	self.lastViewportSize = nil
 end
 
 return Preview

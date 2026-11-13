@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-11-13: Crisp native menus and focused collection workshop
+
+- Replaced full-screen CanvasGroup composition with native Frames and pixel-snapped page motion. Applied charcoal, cyan and amber styling with measured text contrast and a restrained gamepad focus outline.
+- Added Collection to navigation. Replaced five repeated weapon cards with one item stage, a responsive finish list, selected-item reveal, ownership/prices, rotate, rifle/blade preview, purchase and equip controls. Locked inventory finishes route to the correct selected item.
+- Fixed portrait operator rendering by refreshing preview cameras after target-size changes. One camera remains after resize. Page opening resets scrolling after layout; safe-area background coverage no longer exposes world scenery around the menu.
+- Reviewed actual laptop, phone portrait and phone landscape screenshots. Desktop controls and insufficient-funds confirmation passed. Portrait-to-landscape resizing retained visible controls and selection. Mobile input injection did not activate navigation, so touch/controller acceptance is still pending. This does not complete the full UI or production phase.
+- Saved the live local transformation place and screenshot evidence. No dependencies, publishing or remote Git operations were added. Texture metadata investigation remains blocked by the current MCP token reporting `asset:read` as ungranted despite the user's settings confirmation.
+
 ## 2026-11-13: Add deterministic three-currency cosmetic economy
 
 - Added profile schema V3 currencies, a bounded transaction ledger, first-win shard tracking, idempotent active-match rewards and fixed cosmetic prices. Kept combat balance settings unchanged in their protected module.
