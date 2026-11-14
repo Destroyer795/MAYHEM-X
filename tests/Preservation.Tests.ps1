@@ -10,7 +10,7 @@ foreach ($relative in $paths) {
     $current = & git "--git-dir=$metadata" "--work-tree=$projectRoot" hash-object --no-filters -- (Join-Path $projectRoot $relative)
     if ($LASTEXITCODE -ne 0 -or $current -ne $original) { throw "Gameplay preservation failed: $relative differs from the baseline" }
 }
-foreach ($definition in @(@('MatchService','Match',@('enqueue','queue','alive','spawn','characterLost','add')), @('CombatService','Combat',@('ready','raycast','lineOfSight','reload','switch','ability','endLife','remove')))) {
+foreach ($definition in @(@('MatchService','Match',@('enqueue','queue','alive','spawn','characterLost','add')), @('CombatService','Combat',@('ready','raycast','lineOfSight','ability','endLife','remove')))) {
     $relative = "src/server/$($definition[0]).luau"
     $before = (& git "--git-dir=$metadata" "--work-tree=$projectRoot" show "${baseline}:$relative") -join "`n"
     $after = [IO.File]::ReadAllText((Join-Path $projectRoot $relative)).Replace("`r`n","`n")
@@ -28,4 +28,4 @@ $currentAim = [regex]::Match($currentCamera,$pattern)
 if (-not $originalAim.Success -or -not $currentAim.Success -or $originalAim.Value -cne $currentAim.Value) { throw 'Camera aim behavior changed from the inspected baseline' }
 $origin = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $projectRoot 'scripts/git.ps1') remote -v
 if ($LASTEXITCODE -ne 0 -or ($origin -join "`n") -notmatch 'origin\s+https://github.com/Destroyer795/MAYHEM-X.git') { throw 'Git wrapper or configured origin did not round-trip correctly' }
-Write-Output 'PASS: five baseline files, fourteen gameplay methods and camera aim preserved; Git origin wrapper verified'
+Write-Output 'PASS: five baseline files, twelve gameplay methods and camera aim preserved; loadout-aware reload/switch covered by arsenal tests; Git origin wrapper verified'

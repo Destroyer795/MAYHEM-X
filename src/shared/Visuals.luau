@@ -18,9 +18,9 @@ Visuals.Skins = table.freeze({
 	{ id = "Solstice", name = "SOLSTICE / AMBER", rarity = "Rare", currency = "seasonTokens", source = "season", cost = 6, color = { 255, 171, 78 }, description = "Earn Season Tokens from completed matches and victories." },
 })
 Visuals.Operatives = table.freeze({
-	{ id = "Vanguard", name = "VANGUARD", description = "Wide signal plates with an amethyst default finish. Cosmetic only.", shoulders = 1.15 },
-	{ id = "Spectre", name = "SPECTRE", description = "Narrow signal plates and a compact profile. Cosmetic only.", shoulders = 0.85 },
-	{ id = "Relay", name = "RELAY", description = "Balanced circuit plates. Cosmetic only.", shoulders = 1 },
+	{ id = "Vanguard", name = "VANGUARD", description = "Breacher armor, layered shoulder guards and a full combat helmet. Cosmetic only.", shoulders = 1.15 },
+	{ id = "Spectre", name = "SPECTRE", description = "Recon hood, opaque visor, asymmetric mantle and chest harness. Cosmetic only.", shoulders = 0.85 },
+	{ id = "Relay", name = "RELAY", description = "Field-engineer jacket, articulated utility sleeves and a service helmet. Cosmetic only.", shoulders = 1 },
 })
 Visuals.Capabilities = table.freeze({ Ultimates = true, ChaosEvents = true, Destruction = true })
 Visuals.Budgets = table.freeze({ WorldParts = 720, EffectRoots = 36, EffectDistance = 360, AnimationDistance = 220, AnimatedRings = 3 })

@@ -47,7 +47,11 @@ function CameraController.makeViewmodel(self: any, slot: number)
 	if self.viewmodel then self.viewmodel:Destroy() end
 	local accent = Color3.fromRGB(table.unpack((Visuals.skin(self.preferences.skin or "Pulse") or Visuals.Skins[1]).color))
 	local frame = if slot == 1 then CFrame.new(0.68, -0.55, -1.7) else CFrame.new(0.65, -0.35, -1.45)
-	local model = Art.weapon(nil, slot, frame, accent)
+	local combat = self.combat or {}
+	local id = if slot == 1 then combat.primaryId or self.preferences.primaryWeapon else combat.meleeId or self.preferences.meleeWeapon
+	local kit = if slot == 1 then combat.gunKit or self.preferences.gunKit else combat.meleeKit or self.preferences.meleeKit
+	local model = Art.weapon(nil, slot, frame, accent, id, kit)
+	self.weaponId, self.kit = id, kit
 	model:ScaleTo(0.65)
 	model.Name = "MayhemViewmodel"
 	model.WorldPivot = CFrame.identity
@@ -122,13 +126,16 @@ function CameraController.step(self: any, dt: number, slot: number)
 	root.CFrame = CFrame.new(root.Position) * CFrame.Angles(0, self.yaw, 0)
 	if not UserInputService.TouchEnabled then UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter end
 	UserInputService.MouseIconEnabled = false
-	if self.slot ~= slot or self.skin ~= self.preferences.skin or not self.viewmodel then self:makeViewmodel(slot) end
+	local combat = self.combat or {}
+	local id = if slot == 1 then combat.primaryId else combat.meleeId
+	local kit = if slot == 1 then combat.gunKit else combat.meleeKit
+	if self.slot ~= slot or self.skin ~= self.preferences.skin or self.weaponId ~= id or self.kit ~= kit or not self.viewmodel then self:makeViewmodel(slot) end
 	self.viewmodel.Parent = if firstPerson then camera else nil
 	if firstPerson then
 		local now = os.clock()
 		local swing = if self.preferences.reducedMotion then 0 else math.max(0, (self.swingUntil or 0) - now)
-		local kick = if self.preferences.reducedMotion then 0 else math.max(0, (self.kickUntil or 0) - now) * 2
-		local reload = math.clamp(((self.reloadUntil or 0) - now) / Config.Rifle.ReloadTime, 0, 1)
+		local kick = if self.preferences.reducedMotion then 0 else math.max(0, (self.kickUntil or 0) - now) * 2 * (combat.recoil or 1)
+		local reload = math.clamp(((self.reloadUntil or 0) - now) / (combat.reloadTime or Config.Rifle.ReloadTime), 0, 1)
 		local tilt = if self.preferences.reducedMotion then 0 else math.sin(reload * math.pi) * 0.7
 		self.viewmodel:PivotTo(camera.CFrame * CFrame.new(0, -tilt * 0.2, kick) * CFrame.Angles(tilt * 0.2, 0, swing * 1.2 + tilt))
 	end

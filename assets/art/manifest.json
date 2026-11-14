@@ -91,6 +91,78 @@
       "assetId": "105435080279086",
       "generationId": "28e4ed0a-8e3d-42f2-9f22-9e7a18cb353e",
       "prompt": "Original abandoned futuristic architectural tower with incomplete facade, open floor terraces, exposed structural framework and weathered ivory ceramic and cobalt glass."
+    },
+    {
+      "key": "NeedleSMG",
+      "assetId": "98680349302037",
+      "prompt": "Original MAYHEM X sci-fi Needle compact submachine gun, gun alone no hands. Distinct P90-like compact bullpup silhouette but original design: forward swept graphite receiver, offset top-mounted curved ammunition cassette, skeletal angular thumbhole stock, short square muzzle, small metal aperture sight. Matte dark gunmetal, worn ivory ceramic panels, tiny oxidized copper details. Precise machined seams and fasteners, grounded industrial competitive shooter equipment, no logos, no giant glow. Sideways horizontal barrel axis along negative Z, grip downward.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "1b994857-0fd9-45d2-b7d1-c91ab190caf5"
+    },
+    {
+      "key": "MantisDMR",
+      "assetId": "100022027740124",
+      "prompt": "Original MAYHEM X Mantis marksman rifle alone, no character. Long slender precision rifle silhouette, split carbon-fiber chassis, raised skeletal shoulder stock, elongated fluted barrel with slotted brake, compact mounted optical scope, slim straight magazine and ergonomic grip. Matte charcoal and brushed steel with restrained burgundy ceramic inserts. Elegant angular industrial product design, detailed fasteners and vent cuts, no logos. Horizontal barrel points negative Z, grip points down.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "a76d069a-f378-4722-b5d7-becbbfde968c"
+    },
+    {
+      "key": "BreakerShotgun",
+      "assetId": "88445385940523",
+      "prompt": "Original MAYHEM X Breaker tactical sci-fi shotgun alone. Thick two-tube squared barrel shroud, sliding ribbed forward pump, short box magazine, rugged recoil shoulder brace, oversized receiver locking lugs. Strong broad asymmetrical silhouette. Matte warm graphite and sand-colored ceramic armor, steel edges, no neon, no branding. Convincing functional mechanical surface detail. Barrel horizontal along negative Z, grip down.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "42285c33-b31c-4159-87e8-73ac6f474b7d"
+    },
+    {
+      "key": "TalonKnife",
+      "assetId": "102589713514004",
+      "prompt": "Original MAYHEM X Talon combat knife alone, point up. Compact forward-curving claw blade in dark forged steel, razor silver edge, cutout tang, textured black grip, knuckle guard and a small dull crimson ceramic pommel. Aggressive but practical tactical shape, detailed bevels, game-ready low-poly hard-surface design, no text and no glow.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "3cacdcc6-303d-4329-98c5-616dcc3a359e"
+    },
+    {
+      "key": "MaulHammer",
+      "assetId": "125061664488225",
+      "prompt": "Original MAYHEM X Grav-Maul two-handed sci-fi impact hammer alone, upright. Broad asymmetric faceted steel hammer head with a recessed circular inertial core, reinforced dark carbon shaft, two wrapped grip zones, heavy counterweight pommel. Industrial engineering with ivory impact plates and restrained copper connectors. Recognizable blunt silhouette, no glow or text, detailed bevels and fasteners.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "10b7b7d1-b586-4842-baa1-6e6e4bb2ebec"
+    },
+    {
+      "key": "SpectreMantle",
+      "assetId": "89976645782553",
+      "prompt": "Original sci-fi infiltrator outfit accessory kit for MAYHEM X Spectre, no person or mannequin. A deep angular dark hood with narrow opaque black face visor, layered high collar and asymmetric shoulder cape ending in two tapered fabric tails, compact carbon chest harness with thin straps. Distinct stealth silhouette. Black fabric, slate segmented armor, muted crimson lining and real stitching, no glow. Front faces negative Z. Leave space for humanoid arms and legs.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "28dc952e-7c3b-4164-aa70-ce7b4dd9901f"
+    },
+    {
+      "key": "RelayHarness",
+      "assetId": "136683997122675",
+      "prompt": "Original sci-fi field engineer outfit accessory kit for MAYHEM X Relay, no person or mannequin. Cropped padded ivory utility jacket armor with chunky orange-copper shoulder bracing, chest-mounted square radio and magazine pouches, asymmetric tool backpack with two antennae and a folded robotic tool arm, open collar. Distinct practical technician silhouette. Brushed cream ceramic, charcoal fabric, copper utility accents, tiny serial markings but no readable text, no glow. Front faces negative Z, keep arms and legs unobstructed.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "f2eb170c-8961-4578-a957-437f280e807a"
+    },
+    {
+      "key": "SignalHangar",
+      "assetId": "134232199546664",
+      "prompt": "Original MAYHEM X sci-fi headquarters hangar interior architectural shell, open front facing negative Z, no ships, characters or ground floor. Wide U-shaped atrium with massive sculpted titanium buttresses, overhead ribbed vaulted canopy, recessed warm white strip lighting, rear observation gallery and tall central split blast-door alcove. Industrial luxury, warm off-white structural ceramics, graphite support metal, subtle burgundy wall sections, detailed surface seams and inset machinery, high-quality architectural silhouette, not box buildings. Clear central walking volume, no floating objects, no logos. Low poly game environment, dramatic depth and open sightlines.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13",
+      "generationId": "7ecd09bb-b941-4373-ae33-8552c7d32cad"
+    },
+    {
+      "key": "VanguardBreachKit",
+      "assetId": "77885814631158",
+      "generationId": "88c8c2ba-d59f-4fed-b371-2eae78dd5c51",
+      "prompt": "Original premium sci-fi breacher armor kit for MAYHEM X. Hollow wearable armor, no human body, no skin, no hair, no face. A closed angular combat helmet with a narrow dark smoked visor, layered ceramic chest cuirass with a graphite flexible abdomen, two strong articulated shoulder guards. Bone white ceramic, charcoal gunmetal and restrained dark oxblood identification panels. Distinct muscular tactical silhouette, hard machined edges, recessed fasteners, beautiful authored surface details. Front faces negative Z, upright Y. Symmetrical wearable proportions. No pedestal, no ground, no text, no logos, no glow. An original game-ready armor outfit, not a person.",
+      "source": "Original Roblox Studio MCP mesh generation",
+      "created": "2026-11-13"
     }
   ],
   "geometry": [
@@ -1520,6 +1592,1012 @@
           ],
           "mesh": "rbxassetid://138592792934355",
           "texture": "rbxassetid://122660213004304"
+        }
+      ]
+    },
+    {
+      "name": "NeedleSMG",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "grip_geom",
+          "texture": "rbxassetid://109704135501045",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0027466118335723877,
+            -0.055820465087890625,
+            0.1874866634607315,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://133709885234190",
+          "size": [
+            0.1587010771036148,
+            0.43910929560661316,
+            0.36540400981903076
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "frame_geom",
+          "texture": "rbxassetid://107628852455208",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.01157434657216072,
+            0,
+            0.11473113298416138,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://75321470382018",
+          "size": [
+            0.19017517566680908,
+            1,
+            1.2468111515045166
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "barrel_geom",
+          "texture": "rbxassetid://90483526639055",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00754789263010025,
+            0.18038177490234375,
+            -0.4655298888683319,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://75127965373958",
+          "size": [
+            0.19819171726703644,
+            0.33960509300231934,
+            0.5452135801315308
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MantisDMR",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "grip_geom",
+          "texture": "rbxassetid://76088551298843",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.009097002446651459,
+            -0.15236231684684753,
+            0.6022168397903442,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://119733925684142",
+          "size": [
+            0.13236355781555176,
+            0.4742084741592407,
+            0.421142041683197
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "frame_geom",
+          "texture": "rbxassetid://120477795011897",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.007947839796543121,
+            -0.16167780756950378,
+            0.3509282171726227,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://105626677715037",
+          "size": [
+            0.25869452953338623,
+            0.8266454935073853,
+            1.853446125984192
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "barrel_geom",
+          "texture": "rbxassetid://116258943366874",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.009594641625881195,
+            0.11554005742073059,
+            -0.9142597317695618,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://132716562406925",
+          "size": [
+            0.12355372309684753,
+            0.1250056028366089,
+            0.7267691493034363
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "scope_geom",
+          "texture": "rbxassetid://91598276284396",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.009036287665367126,
+            0.39786580204963684,
+            0.2795241177082062,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://118287617155762",
+          "size": [
+            0.2565176486968994,
+            0.35426950454711914,
+            0.8185468912124634
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BreakerShotgun",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "grip_geom",
+          "texture": "rbxassetid://110181965799569",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.00010631978511810303,
+            -0.1455189287662506,
+            0.37821611762046814,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://71567761638356",
+          "size": [
+            0.2844051122665405,
+            0.7027549147605896,
+            0.9824939966201782
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "frame_geom",
+          "texture": "rbxassetid://119048709657580",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -7.450580596923828e-9,
+            0.027359336614608765,
+            0.2347463071346283,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://118399287967749",
+          "size": [
+            0.4214516878128052,
+            0.8797956705093384,
+            2.8305130004882812
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "barrel_geom",
+          "texture": "rbxassetid://121377002430709",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0004005730152130127,
+            0.22576555609703064,
+            -0.966708779335022,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://101590732230075",
+          "size": [
+            0.22281727194786072,
+            0.5422617197036743,
+            1.3665881156921387
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TalonKnife",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "handle_geom",
+          "texture": "rbxassetid://127506139697121",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.048800837248563766,
+            -0.3526115417480469,
+            3.725290298461914e-9,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://77286367561504",
+          "size": [
+            0.40240478515625,
+            0.7390713095664978,
+            0.17651674151420593
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "blade_geom",
+          "texture": "rbxassetid://108357287146061",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.07374835014343262,
+            0.3134269714355469,
+            0.0004435144364833832,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://122016600400224",
+          "size": [
+            0.3525097966194153,
+            0.8174042701721191,
+            0.07187439501285553
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MaulHammer",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "hammer head_geom",
+          "texture": "rbxassetid://72441026142862",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -7.203198038041592e-10,
+            0.6061210632324219,
+            -5.052243068348616e-9,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://72256981370350",
+          "size": [
+            1.3179268836975098,
+            0.6789759993553162,
+            0.7999999523162842
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "shaft_geom",
+          "texture": "rbxassetid://91272879527452",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.000421349483076483,
+            -0.28075408935546875,
+            -0.0012815379304811358,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://87858674485929",
+          "size": [
+            0.3865765333175659,
+            1.329676866531372,
+            0.35996440052986145
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "grip_geom",
+          "texture": "rbxassetid://121566411702357",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.001042619813233614,
+            -0.4472312927246094,
+            0.00013994687469676137,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://130385406739025",
+          "size": [
+            0.23371940851211548,
+            0.48112553358078003,
+            0.23266363143920898
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SpectreMantle",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "hood_geom",
+          "texture": "rbxassetid://86122830413764",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0007233470678329468,
+            1.435936689376831,
+            -0.24103856086730957,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://104954569171103",
+          "size": [
+            0.9591274261474609,
+            0.9280564188957214,
+            0.9732276201248169
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "visor_geom",
+          "texture": "rbxassetid://118097331543222",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0011890828609466553,
+            1.346775770187378,
+            -0.39157381653785706,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://107446216750784",
+          "size": [
+            0.5513116121292114,
+            0.6107221841812134,
+            0.6226416826248169
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "collar_geom",
+          "texture": "rbxassetid://85298532428841",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0005542822182178497,
+            0.8875815272331238,
+            -0.10182318091392517,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://113494877430135",
+          "size": [
+            1.393395185470581,
+            0.5696260333061218,
+            1.1686207056045532
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "cape_geom",
+          "texture": "rbxassetid://130521498062917",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -3.725290298461914e-8,
+            -0.49877482652664185,
+            0.1855403184890747,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://93446253648654",
+          "size": [
+            2.5026919841766357,
+            2.8025174140930176,
+            1.0908281803131104
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "chest harness_geom",
+          "texture": "rbxassetid://104165953185850",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.0009317845106124878,
+            -0.005542099475860596,
+            -0.2464645951986313,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://104266148785718",
+          "size": [
+            1.0638437271118164,
+            1.8395848274230957,
+            0.9689797163009644
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "armor_geom",
+          "texture": "rbxassetid://128083000724774",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0020677968859672546,
+            -0.2592957615852356,
+            -0.21792295575141907,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://117196757173154",
+          "size": [
+            2.23783540725708,
+            2.573276996612549,
+            1.0137243270874023
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RelayHarness",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "torso_geom",
+          "texture": "rbxassetid://87181434144009",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.0013211825862526894,
+            -0.08063888549804688,
+            0.000021642947103828192,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://109183262190532",
+          "size": [
+            1.4315226078033447,
+            1.8018519878387451,
+            1.7999999523162842
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "left arm_geom",
+          "texture": "rbxassetid://130039744915927",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.8129655718803406,
+            0,
+            -0.06269770860671997,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://132552277039898",
+          "size": [
+            0.7996922731399536,
+            2.1975131034851074,
+            1.2303972244262695
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "right arm_geom",
+          "texture": "rbxassetid://121400478268135",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.8112413287162781,
+            0.00107574462890625,
+            -0.06253144145011902,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://113053240375719",
+          "size": [
+            0.8031721115112305,
+            2.193502902984619,
+            1.225646734237671
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SignalHangar",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "atrium_geom",
+          "texture": "rbxassetid://86300274273132",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.05271679162979126,
+            -4.698683738708496,
+            1.1532776355743408,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://91310419491021",
+          "size": [
+            38.855934143066406,
+            24.53061294555664,
+            29.25394630432129
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "buttresses_geom",
+          "texture": "rbxassetid://128945934816215",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.00012731552124023438,
+            -4.600371360778809,
+            -13.149267196655273,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://108515379235979",
+          "size": [
+            42.16206741333008,
+            24.799259185791016,
+            5.260150909423828
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "canopy_geom",
+          "texture": "rbxassetid://123601864417586",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.034540802240371704,
+            8.387473106384277,
+            0.2690992057323456,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "mesh": "rbxassetid://117650414575458",
+          "size": [
+            38.92304992675781,
+            17.225055694580078,
+            29.244932174682617
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VanguardBreachKit",
+      "parts": [
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "combat helmet_geom",
+          "texture": "rbxassetid://124019101748526",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.00872802734375,
+            1.2093849182128906,
+            -0.19952392578125,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://98406169445707",
+          "size": [
+            0.984565019607544,
+            1.0551226139068604,
+            1.0759077072143555
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "chest cuirass_geom",
+          "texture": "rbxassetid://134748962942179",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            -0.00006103515625,
+            -0.22601699829101562,
+            0,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://75518987293694",
+          "size": [
+            3,
+            3.0169224739074707,
+            1.6772651672363281
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "abdomen_geom",
+          "texture": "rbxassetid://114982596126372",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.012359619140625,
+            -0.470550537109375,
+            -0.119110107421875,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://108149465061173",
+          "size": [
+            2.970374584197998,
+            2.532787561416626,
+            1.2871061563491821
+          ]
+        },
+        {
+          "doubleSided": false,
+          "material": 256,
+          "name": "shoulder guards_geom",
+          "texture": "rbxassetid://124171975858989",
+          "color": [
+            0.6392157077789307,
+            0.6352941393852234,
+            0.6470588445663452
+          ],
+          "frame": [
+            0.006744384765625,
+            -0.16723251342773438,
+            -0.131439208984375,
+            1.0000001192092896,
+            0,
+            0,
+            0,
+            1.000000238418579,
+            0,
+            0,
+            0,
+            1.0000001192092896
+          ],
+          "mesh": "rbxassetid://92922080436530",
+          "size": [
+            2.9824061393737793,
+            2.217823028564453,
+            1.0734275579452515
+          ]
         }
       ]
     }

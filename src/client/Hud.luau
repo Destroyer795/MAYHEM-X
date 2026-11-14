@@ -261,10 +261,10 @@ function Hud.render(self: any, state: any, elapsed: number, preferences: any, st
 	local rifle = state.combat.slot == 1
 	local reloading = state.combat.reloadRemaining > elapsed
 	self.ammo.TextSize = if compact and (not rifle or reloading) then 26 else 34
-	self.weaponName.Text = if rifle then "VECTOR-18 / AUTO" else "RIFT / MELEE"
-	self.ammo.Text = if reloading then "LOAD" elseif rifle then tostring(state.combat.ammo) else "RIFT"
+	self.weaponName.Text = if rifle then state.combat.primaryName or "VECTOR-18" else state.combat.meleeName or "RIFT BLADE"
+	self.ammo.Text = if reloading then "LOAD" elseif rifle then tostring(state.combat.ammo) else "MELEE"
 	self.reserve.Text = if reloading then string.format("%.1fs", state.combat.reloadRemaining - elapsed) elseif rifle then "/ " .. state.combat.reserve else "BLADE"
-	self.slotHint.Text = if self.touch then "SWAP / VECTOR + RIFT" elseif compact then "1 VECTOR / 2 RIFT" else "1 VECTOR / 2 RIFT / R RELOAD"
+	self.slotHint.Text = if self.touch then "SWAP / PRIMARY + MELEE" elseif compact then "1 PRIMARY / 2 MELEE" else "1 PRIMARY / 2 MELEE / R RELOAD"
 	local cooldown = math.max(0, state.combat.abilityRemaining - elapsed)
 	self.ability.Visible = active and not overlay and not self.touch
 	self.ultimate.Visible = self.ability.Visible

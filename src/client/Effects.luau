@@ -139,6 +139,10 @@ end
 
 function Effects.play(self: any, kind: string, data: any)
 	if kind == "Shot" then
+		if data.traces then
+			for _, trace in data.traces do self:play("Shot", {from=data.from, to=trace.to, impact=trace.impact, userId=data.userId}) end
+			return
+		end
 		local offset = data.to - data.from
 		local length = offset.Magnitude
 		if length < 0.01 then return end
@@ -174,7 +178,7 @@ function Effects.play(self: any, kind: string, data: any)
 				TweenService:Create(flash, TweenInfo.new(0.08), { Size = Vector3.one * 0.05, Transparency = 1 }):Play()
 			end
 		end
-		if length < Config.Rifle.Range - 0.2 then self:burst(data.to, color, 5) end
+		if data.impact then self:burst(data.to, color, 5) end
 	elseif kind == "Slash" then
 		local root = self:root("SwordSweep", data.at.Position, 0.3)
 		if not root then return end

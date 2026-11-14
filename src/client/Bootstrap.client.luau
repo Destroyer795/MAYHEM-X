@@ -96,6 +96,11 @@ hud = Hud.new({
 	motion = function() setting("reducedMotion", not preferences.reducedMotion) end,
 	testAudio = function() audio:play("Reward"); style.notice = audio:status() .. (if preferences.muted then " / UNMUTE TO HEAR THE TEST" else "") end,
 	transition = function() audio:play("Transition") end,
+	loadout = function(key: string, id: string)
+		if state.inMatch then style.notice = "Loadout is locked until you return to the hub."; return end
+		setting(key, id)
+		style.notice = "Loadout updated for the next round."
+	end,
 })
 
 local function bind(name: string, callback: () -> (), ...: Enum.KeyCode)
@@ -152,6 +157,7 @@ stateRemote.OnClientEvent:Connect(function(nextState: any)
 	end
 	if nextState.roundId ~= state.roundId or not nextState.alive then firing = false end
 	state = nextState
+	camera.combat = nextState.combat
 	camera.reloadUntil = os.clock() + nextState.combat.reloadRemaining
 	receivedAt = os.clock()
 end)
@@ -221,7 +227,7 @@ RunService.Heartbeat:Connect(function(dt: number)
 	if not canAct() then firing = false end
 	local now = os.clock()
 	if firing and canAct() then
-		local interval = if state.combat.slot == 1 then Config.Rifle.Interval else Config.Blade.Interval
+		local interval = if state.combat.slot == 1 then state.combat.fireInterval or Config.Rifle.Interval else state.combat.meleeInterval or Config.Blade.Interval
 		if now - shotAt >= interval then
 			local direction = camera:aim()
 			if direction then

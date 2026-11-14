@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 local shared = ReplicatedStorage.Mayhem.Shared
 local Config = require(shared.Config)
+local Arsenal = require(shared.Arsenal)
 local Rules = require(shared.Rules)
 local Equipment = require(script.Parent.Equipment)
 
@@ -12,7 +13,7 @@ export type Record = {
 	shotAt: number, swingAt: number, switchAt: number, abilityAt: number, reloadAt: number,
 	protectedUntil: number, damagedAt: number, lastAttacker: Player?,
 	accepted: CFrame, moveAt: number, moveCredit: number,
-	ultimate: number, playerHitAt: number?,
+	ultimate: number, playerHitAt: number?, primary: any, melee: any,
 }
 
 local Combat = {}
@@ -36,16 +37,18 @@ local function unitVector(value: any): boolean
 end
 
 function Combat.new(context: any)
-	local self = setmetatable({ context = context, records = {} :: { [Player]: Record } }, Combat)
+	local self = setmetatable({ context = context, records = {} :: { [Player]: Record }, random = Random.new() }, Combat)
 	return self
 end
 
 function Combat.beginLife(self: any, player: Player, character: Model)
 	local humanoid, root = body(character)
 	assert(humanoid and root, "Character must be ready before beginning a life")
+	local primary, melee = Arsenal.loadout(if self.context.loadout then self.context.loadout(player) else {})
 	self.records[player] = {
+		primary = primary, melee = melee,
 		character = character, alive = true, shield = Config.Character.Shield,
-		ammo = Config.Rifle.Magazine, reserve = Config.Rifle.Reserve, slot = 1,
+		ammo = primary.magazine, reserve = primary.reserve, slot = 1,
 		shotAt = -math.huge, swingAt = -math.huge, switchAt = -math.huge,
 		abilityAt = 0, reloadAt = 0, protectedUntil = math.huge, damagedAt = 0, lastAttacker = nil,
 		accepted = root.CFrame, moveAt = os.clock(), moveCredit = Config.Security.MoveBurst,
@@ -57,7 +60,7 @@ function Combat.beginLife(self: any, player: Player, character: Model)
 	humanoid.UseJumpPower = true
 	humanoid.JumpPower = 0
 	root.Anchored = true
-	Equipment.equip(character, 1)
+	Equipment.equip(character, 1, primary.id, primary.kit)
 end
 
 function Combat.release(self: any, player: Player, now: number)
@@ -182,29 +185,35 @@ function Combat.damage(self: any, victim: Player, attacker: Player?, amount: num
 end
 
 function Combat.fire(self: any, player: Player, direction: any, now: number)
-	if not unitVector(direction) then
-		return
-	end
+	if not unitVector(direction) then return end
 	local record, root = self:ready(player, now)
-	if not record or not root or record.slot ~= 1 or record.reloadAt > 0
-		or now - record.shotAt < Config.Rifle.Interval or now - record.switchAt < 0.25 or record.ammo <= 0 then
-		return
-	end
+	if not record or not root then return end
+	local weapon = record.primary
+	if record.slot ~= 1 or record.reloadAt > 0 or now - record.shotAt < weapon.interval
+		or now - record.switchAt < 0.25 or record.ammo <= 0 then return end
 	record.shotAt = now
 	record.ammo -= 1
 	local origin = root.Position + Vector3.new(0, 1.4, 0)
-	local hit = self:raycast(record.character :: Model, origin, direction.Unit * Config.Rifle.Range)
-	local endpoint = if hit then hit.Position else origin + direction.Unit * Config.Rifle.Range
-	if hit then
-		if self.context.environmentHit then self.context.environmentHit(hit.Instance, Config.Rifle.Damage) end
-		for victim: Player, other: Record in self.records do
-			if victim ~= player and other.alive and other.character and hit.Instance:IsDescendantOf(other.character) then
-				self:damage(victim, player, Config.Rifle.Damage, Config.Rifle.Name, now)
-				break
+	local basis = CFrame.lookAt(Vector3.zero, direction.Unit)
+	local traces = {}
+	for _ = 1, weapon.pellets do
+		local radius = math.tan(math.rad(weapon.spread)) * math.sqrt(self.random:NextNumber())
+		local angle = self.random:NextNumber() * math.pi * 2
+		local aim = (direction.Unit + basis.RightVector * math.cos(angle) * radius + basis.UpVector * math.sin(angle) * radius).Unit
+		local hit = self:raycast(record.character :: Model, origin, aim * weapon.range)
+		local endpoint = if hit then hit.Position else origin + aim * weapon.range
+		if hit then
+			if self.context.environmentHit then self.context.environmentHit(hit.Instance, weapon.damage) end
+			for victim: Player, other: Record in self.records do
+				if victim ~= player and other.alive and other.character and hit.Instance:IsDescendantOf(other.character) then
+					self:damage(victim, player, weapon.damage, weapon.name, now)
+					break
+				end
 			end
 		end
+		table.insert(traces, {to = endpoint, impact = hit ~= nil})
 	end
-	self.context.effect:FireAllClients("Shot", { from = origin, to = endpoint, userId = player.UserId, impact = hit ~= nil })
+	self.context.effect:FireAllClients("Shot", {from = origin, to = traces[1].to, impact = traces[1].impact, traces = traces, weapon = weapon.id, userId = player.UserId})
 	self.context.sendState(player)
 end
 
@@ -213,19 +222,19 @@ function Combat.melee(self: any, player: Player, direction: any, now: number)
 		return
 	end
 	local record, root = self:ready(player, now)
-	if not record or not root or record.slot ~= 2 or now - record.swingAt < Config.Blade.Interval or now - record.switchAt < 0.25 then
+	if not record or not root or record.slot ~= 2 or now - record.swingAt < record.melee.interval or now - record.switchAt < 0.25 then
 		return
 	end
 	record.swingAt = now
 	local nearest: Player? = nil
-	local distance = Config.Blade.Range
+	local distance = record.melee.range
 	for target: Player, other: Record in self.records do
 		if target ~= player and other.alive and other.character then
 			local humanoid, targetRoot = body(other.character)
 			if humanoid and targetRoot and humanoid.Health > 0 then
 				local offset = targetRoot.Position - root.Position
 				local magnitude = offset.Magnitude
-				if magnitude <= distance and (magnitude < 0.1 or direction.Unit:Dot(offset.Unit) >= Config.Blade.MinimumDot)
+				if magnitude <= distance and (magnitude < 0.1 or direction.Unit:Dot(offset.Unit) >= record.melee.dot)
 					and self:lineOfSight(record.character :: Model, other.character, root.Position + Vector3.new(0, 1, 0), targetRoot.Position) then
 					distance = magnitude
 					nearest = target
@@ -234,10 +243,10 @@ function Combat.melee(self: any, player: Player, direction: any, now: number)
 		end
 	end
 	if nearest then
-		self:damage(nearest, player, Config.Blade.Damage, Config.Blade.Name, now)
+		self:damage(nearest, player, record.melee.damage, record.melee.name, now)
 	elseif self.context.environmentHit then
-		local hit = self:raycast(record.character :: Model, root.Position + Vector3.new(0, 1, 0), direction.Unit * Config.Blade.Range)
-		if hit then self.context.environmentHit(hit.Instance, Config.Blade.Damage) end
+		local hit = self:raycast(record.character :: Model, root.Position + Vector3.new(0, 1, 0), direction.Unit * record.melee.range)
+		if hit then self.context.environmentHit(hit.Instance, record.melee.damage) end
 	end
 	self.context.effect:FireAllClients("Slash", { at = root.CFrame, userId = player.UserId })
 end
@@ -271,16 +280,17 @@ function Combat.switch(self: any, player: Player, slot: any, now: number)
 	record.slot = slot
 	record.switchAt = now
 	record.reloadAt = 0
-	Equipment.equip(record.character :: Model, slot)
+	local weapon = if slot == 1 then record.primary else record.melee
+	Equipment.equip(record.character :: Model, slot, weapon.id, weapon.kit)
 	self.context.sendState(player)
 end
 
 function Combat.reload(self: any, player: Player, now: number)
 	local record = self:ready(player, now)
-	if not record or record.slot ~= 1 or record.reloadAt > 0 or record.ammo >= Config.Rifle.Magazine or record.reserve <= 0 then
+	if not record or record.slot ~= 1 or record.reloadAt > 0 or record.ammo >= record.primary.magazine or record.reserve <= 0 then
 		return
 	end
-	record.reloadAt = now + Config.Rifle.ReloadTime
+	record.reloadAt = now + record.primary.reload
 	self.context.sendState(player)
 end
 
@@ -296,7 +306,7 @@ function Combat.tick(self: any, now: number, dt: number)
 			elseif self.context.canFight() then
 				self:validatePosition(player, now)
 				if record.reloadAt > 0 and now >= record.reloadAt then
-					record.ammo, record.reserve = Rules.reload(record.ammo, record.reserve, Config.Rifle.Magazine)
+					record.ammo, record.reserve = Rules.reload(record.ammo, record.reserve, record.primary.magazine)
 					record.reloadAt = 0
 					self.context.sendState(player)
 				end
@@ -356,6 +366,9 @@ function Combat.snapshot(self: any, player: Player, now: number): any
 		abilityRemaining = math.max(0, record.abilityAt - now), reloadRemaining = math.max(0, record.reloadAt - now),
 		protectionRemaining = if record.protectedUntil == math.huge then 0 else math.max(0, record.protectedUntil - now),
 		ultimate = record.ultimate,
+		primaryId = record.primary.id, meleeId = record.melee.id, gunKit = record.primary.kit, meleeKit = record.melee.kit,
+		fireInterval = record.primary.interval, meleeInterval = record.melee.interval, reloadTime = record.primary.reload,
+		primaryName = record.primary.name, meleeName = record.melee.name, recoil = record.primary.recoil,
 	}
 end
 

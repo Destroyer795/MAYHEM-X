@@ -104,9 +104,9 @@ function Maps.load(self: any, id: string, freshRound: boolean?)
 				if not self.running or self.duel or now < readyAt then return end
 				local record, root = self.combat:ready(player, now)
 				if not record or not root or (root.Position - pad.Position).Magnitude > 8 then return end
-				if record.reserve >= Config.Rifle.Reserve then self.effect:FireClient(player, "Notice", { title = "AMMO FULL", body = "Your reserve is already full." }); return end
+				if record.reserve >= record.primary.reserve then self.effect:FireClient(player, "Notice", { title = "AMMO FULL", body = "Your reserve is already full." }); return end
 				readyAt = now + 24
-				record.reserve = math.min(Config.Rifle.Reserve, record.reserve + 18)
+				record.reserve = math.min(record.primary.reserve, record.reserve + 18)
 				prompt.Enabled = false
 				pad.Transparency = 0.8
 				self.combat.context.sendState(player)

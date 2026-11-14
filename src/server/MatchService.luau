@@ -22,6 +22,7 @@ function Match.new(remotes: Folder, profiles: any)
 		effect = remotes:WaitForChild(Protocol.Remote.Effect), feed = remotes:WaitForChild(Protocol.Remote.Feed),
 	}, Match)
 	self.combat = Combat.new({
+		loadout = function(player: Player) return self.profiles:snapshot(player).preferences end,
 		canFight = function(): boolean return self.phase == Protocol.Phase.Active end,
 		bounds = function() return self.maps:bounds() end,
 		environmentHit = function(part: Instance, damage: number) self.maps:damageCover(part, damage) end,

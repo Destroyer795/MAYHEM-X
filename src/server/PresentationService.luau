@@ -22,7 +22,7 @@ function Presentation.start(profiles: any)
 		player:SetAttribute("MayhemSkin", record.skin)
 		player:SetAttribute("MayhemOperative", record.operative)
 		character:SetAttribute("MayhemAccent", accent)
-		Art.outfit(character, accent, Visuals.operative(record.operative).shoulders)
+		Art.outfit(character, accent, Visuals.operative(record.operative).shoulders, record.operative)
 		local weapon = character:FindFirstChild("MayhemWeapon")
 		if weapon then for _, item in weapon:GetDescendants() do if item:IsA("BasePart") and item.Material == Enum.Material.Neon then item.Color = accent end end end
 	end
