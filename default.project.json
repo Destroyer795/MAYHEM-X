@@ -19,7 +19,7 @@
       "$className": "ReplicatedStorage",
       "Mayhem": {
         "$className": "Folder",
-        "Art": { "$path": "assets/art/Library.rbxmx" },
+        "Art": { "$path": "assets/art/Library.rbxmx", "Skins": { "$path":"assets/art/Skins.rbxmx" } },
         "Shared": { "$path": "src/shared", "MapCatalog": { "$path": "build/generated/MapCatalog.luau" } },
         "Presentation": { "$className": "RemoteEvent" },
         "ClientChecks": { "$path": "tests/ClientTests.luau" },
@@ -45,6 +45,9 @@
         "ArsenalCases": { "$path": "tests/ArsenalCases.luau" },
         "ArsenalCombatCases": { "$path": "tests/ArsenalCombatCases.luau" },
 		"ProfileCases": { "$path": "tests/ProfileCases.luau" },
+        "DailyCalendarCases": { "$path":"tests/DailyCalendarCases.luau" },
+        "DailyPersistenceCases": { "$path":"tests/DailyPersistenceCases.luau" },
+        "SkinCases": { "$path":"tests/SkinCases.luau" },
         "SessionLeaseCases": { "$path": "tests/SessionLeaseCases.luau" },
         "AudioCases": { "$path": "tests/AudioCases.luau" }
       }

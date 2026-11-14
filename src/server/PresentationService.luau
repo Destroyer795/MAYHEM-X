@@ -6,6 +6,8 @@ local Visuals = require(shared.Visuals)
 local StyleRules = require(shared.StyleRules)
 local Rules = require(shared.Rules)
 local Art = require(shared.Art)
+local Equipment = require(script.Parent.Equipment)
+local Arsenal = require(shared.Arsenal)
 local Presentation = {}
 
 function Presentation.start(profiles: any)
@@ -22,11 +24,17 @@ function Presentation.start(profiles: any)
 		player:SetAttribute("MayhemSkin", record.skin)
 		player:SetAttribute("MayhemOperative", record.operative)
 		character:SetAttribute("MayhemAccent", accent)
+		character:SetAttribute("MayhemSkin", record.skin)
 		Art.outfit(character, accent, Visuals.operative(record.operative).shoulders, record.operative)
 		local weapon = character:FindFirstChild("MayhemWeapon")
-		if weapon then for _, item in weapon:GetDescendants() do if item:IsA("BasePart") and item.Material == Enum.Material.Neon then item.Color = accent end end end
+		if weapon then
+			local id=weapon:GetAttribute("WeaponId")
+			local kit=weapon:GetAttribute("HandlingKit")
+			local definition=Arsenal.Items[id]
+			if definition then Equipment.equip(character,definition.slot,id,kit) end
+		end
 	end
-	local function send(player: Player, notice: string?, noticeCue: string?)
+	local function send(player: Player, notice: string?, noticeCue: string?, dailyReward: any?)
 		local record = records[player]
 		if not record or player.Parent ~= Players then return end
 		local cosmetics = profiles:cosmetics(player)
@@ -39,7 +47,7 @@ function Presentation.start(profiles: any)
 		remote:FireClient(player, {
 			skin = record.skin, operative = record.operative, owned = table.clone(record.owned), revision = record.revision,
 			dailyClaimed = record.dailyDay == day, nextDaily = (day + 1) * 86400, notice = notice, noticeCue = noticeCue,
-			profile = profiles:snapshot(player),
+			profile = profiles:snapshot(player), dailyReward = dailyReward,
 		})
 	end
 	profiles.notify = function(player: Player) send(player, nil) end
@@ -68,6 +76,12 @@ function Presentation.start(profiles: any)
 		record.tokens, record.requestAt = tokens, now
 		if not allowed or type(command) ~= "string" or #command > 12 then return end
 		if command == "Request" then send(player, nil); return end
+		if command=="Daily" then
+			local accepted,reward,message=profiles:claimDaily(player)
+			if accepted then record.revision+=1 end
+			send(player,message,if accepted then "Reward" else nil,reward)
+			return
+		end
 		if not profiles:canModify(player) then send(player, "Profile is still loading or in use. Try again shortly."); return end
 		if command == "Preferences" then
 			local accepted = profiles:update(player, payload)
@@ -84,17 +98,7 @@ function Presentation.start(profiles: any)
 			send(player, item.name .. " added. Combat stats are unchanged.", "Purchase")
 			return
 		end
-		if command == "Daily" then
-			local day = math.floor(os.time() / 86400)
-			if profiles:claimDaily(player, day) then
-				record.dailyDay, record.owned.Prism = day, true
-				record.revision += 1
-				send(player, "Daily cache claimed.", "Reward")
-			else
-				send(player, "Daily cache unavailable. Check profile loading and return tomorrow.")
-			end
-			return
-		end
+
 		local previousRevision = record.revision
 		local accepted, notice = StyleRules.apply(record, Visuals, command, payload, math.floor(os.time() / 86400))
 		if accepted and record.revision ~= previousRevision then
@@ -110,6 +114,16 @@ function Presentation.start(profiles: any)
 		records[player] = nil
 	end)
 	for _, player in Players:GetPlayers() do add(player) end
+	task.spawn(function()
+		local day=math.floor(os.time()/86400)
+		while task.wait(30) do
+			local current=math.floor(os.time()/86400)
+			if current~=day then
+				day=current
+				for player in records do send(player,nil) end
+			end
+		end
+	end)
 end
 
 return Presentation

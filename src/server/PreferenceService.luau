@@ -6,6 +6,7 @@ local HttpService = game:GetService("HttpService")
 local Shared = game:GetService("ReplicatedStorage").Mayhem.Shared
 local Rules = require(Shared.PreferenceRules)
 local ProfileRules = require(Shared.ProfileRules)
+local Calendar = require(Shared.DailyCalendar)
 local Visuals = require(Shared.Visuals)
 local Economy = require(Shared.EconomyConfig)
 local SessionLease = require(script.Parent.SessionLease)
@@ -45,7 +46,7 @@ end
 function Preferences.new()
 	local prefix = if RunService:IsStudio() then "MayhemXStudio" else "MayhemX"
 	local self: any = setmetatable({
-		records = {}, notify = nil,
+		records = {}, notify = nil, clock = os.time,
 		store = dataStore(prefix .. "Profiles_v2"),
 		legacyStore = dataStore(if RunService:IsStudio() then "MayhemXStudioPreferences_v1" else "MayhemXPreferences_v1"),
 		lockStore = dataStore(prefix .. "SessionLocks_v1"),
@@ -194,7 +195,7 @@ function Preferences.changed(self: any, player: Player, record: any)
 	record.version += 1
 	if record.persistent then
 		record.dirty = true
-		record.status = "SAVE PENDING"
+		record.status = if record.pendingDaily then "DAILY CLAIM NOT CONFIRMED / RETRY" elseif record.dailyBusy then "CONFIRMING DAILY CLAIM" else "SAVE PENDING"
 	elseif record.loaded and record.status ~= "PROFILE IN USE" then
 		record.status = "SESSION ONLY"
 	end
@@ -203,7 +204,7 @@ end
 
 function Preferences.canModify(self: any, player: Player): boolean
 	local record = self.records[player]
-	return record ~= nil and record.loaded and not record.leaving and record.status ~= "PROFILE IN USE"
+	return record ~= nil and record.loaded and not record.leaving and record.status ~= "PROFILE IN USE" and not record.dailyBusy and not record.pendingDaily
 end
 
 function Preferences.snapshot(self: any, player: Player): any
@@ -215,7 +216,8 @@ function Preferences.snapshot(self: any, player: Player): any
 	for index = math.max(1, #profile.ledger - 9), #profile.ledger do table.insert(recentTransactions, table.clone(profile.ledger[index])) end
 	return {
 		preferences = table.clone(profile.preferences), version = record.version, status = record.status,
-		ready = self:canModify(player),
+		ready = self:canModify(player), persistent = record.persistent,
+		calendar = Calendar.snapshot(profile,self.clock()), dailyBusy = record.dailyBusy == true, dailyRecovery = record.pendingDaily ~= nil,
 		credits = profile.credits, xp = xp, level = 1 + math.floor(xp / 300),
 		kills = profile.kills, wins = profile.wins,
 		shards = profile.shards, seasonTokens = profile.seasonTokens, recentTransactions = recentTransactions,
@@ -254,11 +256,59 @@ function Preferences.purchase(self: any, player: Player, skinId: string): boolea
 	return true
 end
 
-function Preferences.claimDaily(self: any, player: Player, day: number): boolean
-	local record = self.records[player]
-	if not record or not record.loaded or record.leaving or record.status == "PROFILE IN USE" or not ProfileRules.claimDaily(record.profile, day) then return false end
-	self:changed(player, record)
-	return true
+function Preferences.claimDaily(self: any, player: Player): (boolean,any,string)
+	local record=self.records[player]
+	if not record or not record.loaded or record.status=="PROFILE IN USE" or record.dailyBusy or record.saving
+		or (record.leaving and not record.pendingDaily) then return false,nil,"Claim unavailable while the profile is busy." end
+	local day=record.pendingDaily or math.floor(self.clock()/Calendar.DaySeconds)
+	local candidate=ProfileRules.clean(record.profile,Rules,Visuals)
+	local accepted,reward=ProfileRules.claimDaily(candidate,day)
+	if not accepted then return false,nil,"Today's UTC reward is already claimed." end
+	record.dailyBusy,record.saving=true,true
+	local beforeVersion=record.version
+	local persistent=record.persistent
+	record.status=if persistent then "CONFIRMING DAILY CLAIM" else "SESSION ONLY / DAILY PREVIEW"
+	if self.notify then self.notify(player) end
+	local success=true
+	if persistent then
+		local lockOk,lock=retry(function()
+			return self.lockStore:UpdateAsync("P_"..player.UserId,function(current)
+				return SessionLease.renew(current,record.lease,self.clock(),LOCK_TTL)
+			end)
+		end)
+		if not lockOk or type(lock)~="table" or lock.owner~=record.lease then
+			record.status="PROFILE IN USE"
+			success=false
+		else
+			record.pendingDaily=day
+			local writeOk,stored=retry(function()
+				return self.store:UpdateAsync("P_"..player.UserId,function(current)
+					if self.clock()>=lock.expiresAt then return nil end
+					if type(current)=="table" then
+						if type(current.version)=="number" and current.version>ProfileRules.Version then return nil end
+						if type(current.dailyDay)=="number" and current.dailyDay>=day then return current end
+					end
+					return candidate
+				end)
+			end)
+			success=writeOk and type(stored)=="table" and stored.dailyDay==day
+			if not success then record.status="DAILY CLAIM NOT CONFIRMED / RETRY" end
+		end
+	end
+	if success then
+		local changedDuringWrite=record.version~=beforeVersion
+		local applied,actual=ProfileRules.claimDaily(record.profile,day)
+		assert(applied,"Daily claim changed during its serialized transaction")
+		reward=actual
+		record.version+=1
+		record.pendingDaily=nil
+		record.dirty=persistent and changedDuringWrite
+		record.status=if not persistent then "SESSION ONLY / DAILY PREVIEW" elseif record.dirty then "SAVE PENDING" else "SAVED"
+	end
+	record.dailyBusy,record.saving=false,false
+	if self.records[player]==record and self.notify then self.notify(player) end
+	if not success then return false,nil,"Reward not confirmed. Retry the claim; other profile writes are paused to prevent duplication." end
+	return true,reward,(if persistent then "Reward saved." else "SESSION PREVIEW: reward is not saved.").." DAY "..string.format("%02d",reward.day)
 end
 
 function Preferences.awardMatch(self: any, player: Player, matchId: string, won: boolean): any?
@@ -273,6 +323,7 @@ end
 function Preferences.save(self: any, player: Player)
 	local record = self.records[player]
 	if not record or not record.persistent or record.saving or not record.loaded then return end
+	if record.pendingDaily then self:claimDaily(player); return end
 	record.saving = true
 	local lockOk, lock = retry(function()
 		return self.lockStore:UpdateAsync("P_" .. player.UserId, function(current)
@@ -313,7 +364,7 @@ end
 
 function Preferences.release(self: any, player: Player)
 	local record = self.records[player]
-	if not record or not record.locked or (record.persistent and record.dirty) then return end
+	if not record or not record.locked or record.saving or record.dailyBusy or record.pendingDaily or (record.persistent and record.dirty) then return end
 	local released = releaseLease(self.lockStore, "P_" .. player.UserId, record.lease)
 	if released then record.locked = false end
 end

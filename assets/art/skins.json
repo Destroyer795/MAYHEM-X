@@ -1,0 +1,2703 @@
+{
+  "version": 1,
+  "created": "2026-11-14",
+  "source": "Original Roblox Studio Quality texture generation on the original MAYHEM X weapon meshes. New UVs and PBR maps returned by Studio. No third-party assets.",
+  "models": [
+    {
+      "key": "NeedleSMG_VoidReaver",
+      "base": "NeedleSMG",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-6e540b1e-7b67-4bd8-9911-34b9dcb8d2e5",
+      "prompt": "Original VOID REAVER full weapon collection. Obsidian ceramic and iridescent violet metal with dense angular tessellated engravings, silver geometric filigree, etched receiver or blade faces, ribbed graphite rubber grip, alternating purple/black machined rings and dark polished fasteners. Controlled violet glints, no overall glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "MantisDMR_VoidReaver",
+      "base": "MantisDMR",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-e47f23c2-b910-425d-9eaa-7d1986099a37",
+      "prompt": "Original VOID REAVER full weapon collection. Obsidian ceramic and iridescent violet metal with dense angular tessellated engravings, silver geometric filigree, etched receiver or blade faces, ribbed graphite rubber grip, alternating purple/black machined rings and dark polished fasteners. Controlled violet glints, no overall glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "RiftBlade_VoidReaver",
+      "base": "RiftBlade",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-35b15b61-d555-498e-80cc-f5ff61a741cd",
+      "prompt": "Original VOID REAVER full weapon collection. Obsidian ceramic and iridescent violet metal with dense angular tessellated engravings, silver geometric filigree, etched receiver or blade faces, ribbed graphite rubber grip, alternating purple/black machined rings and dark polished fasteners. Controlled violet glints, no overall glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "BreakerShotgun_VoidReaver",
+      "base": "BreakerShotgun",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-ad28ca4e-9b94-4860-85e8-d1851505f802",
+      "prompt": "Original VOID REAVER full weapon collection. Obsidian ceramic and iridescent violet metal with dense angular tessellated engravings, silver geometric filigree, etched receiver or blade faces, ribbed graphite rubber grip, alternating purple/black machined rings and dark polished fasteners. Controlled violet glints, no overall glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "TalonKnife_VoidReaver",
+      "base": "TalonKnife",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-d2052b05-4824-4f9f-ba81-3add19a36d72",
+      "prompt": "Original VOID REAVER full weapon collection. Obsidian ceramic and iridescent violet metal with dense angular tessellated engravings, silver geometric filigree, etched receiver or blade faces, ribbed graphite rubber grip, alternating purple/black machined rings and dark polished fasteners. Controlled violet glints, no overall glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "VectorRifle_Solaris",
+      "base": "VectorRifle",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-16133927-04dd-4993-936f-43e56e084b45",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "MaulHammer_VoidReaver",
+      "base": "MaulHammer",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-4a8ff4a4-7de1-4e94-8864-7df0bb69b6e5",
+      "prompt": "Original VOID REAVER full weapon collection. Obsidian ceramic and iridescent violet metal with dense angular tessellated engravings, silver geometric filigree, etched receiver or blade faces, ribbed graphite rubber grip, alternating purple/black machined rings and dark polished fasteners. Controlled violet glints, no overall glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "NeedleSMG_Solaris",
+      "base": "NeedleSMG",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-86a3f1df-34ff-43db-abcb-12b9a8ce05ad",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "BreakerShotgun_Solaris",
+      "base": "BreakerShotgun",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-bf0ada68-774f-44ef-aa74-116035c7d525",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "MantisDMR_Solaris",
+      "base": "MantisDMR",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-4a7a6a90-8857-4027-a9ec-cf42601cf120",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "RiftBlade_Solaris",
+      "base": "RiftBlade",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-d9d2bead-d26f-4c24-8e83-6565483d6ae7",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "TalonKnife_Solaris",
+      "base": "TalonKnife",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-6f60ec60-48f2-4494-b6ef-efe80f410930",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "NeedleSMG_Frostborn",
+      "base": "NeedleSMG",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-d430e55b-0401-4ab8-b265-f6aefc159f61",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "MaulHammer_Solaris",
+      "base": "MaulHammer",
+      "skin": "Solaris",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-208a4919-464b-4de1-a66c-51538000df01",
+      "prompt": "Original SOLARIS full weapon collection. Intricately engraved brushed gold and deep obsidian mechanical surfaces. Elegant original sunburst and interlocking geometric relief engravings on the receiver, stock or blade; polished gold borders, black leather chevron grip, finely patterned gold magazine or guard and pommel, bright brushed steel edge or muzzle. Luxurious contrasting materials, not a solid gold recolor. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "VectorRifle_Frostborn",
+      "base": "VectorRifle",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-687ba297-98c0-49ff-a0cd-5b7b3353db3f",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Full coverage of receiver, stock, barrel housing, magazine, grip and sights. Etched crystalline frost geometry patterns, brushed silver trim, graphite rubber grip, opaque surfaces. No text or logos. Preserve source dimensions. Create color, metalness and roughness surface maps."
+    },
+    {
+      "key": "MantisDMR_Frostborn",
+      "base": "MantisDMR",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-6151abdf-8b1f-4071-b034-628a7bf9d99c",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "BreakerShotgun_Frostborn",
+      "base": "BreakerShotgun",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-951adc1b-fef6-4192-b3e1-acfc425c5ed6",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "TalonKnife_Frostborn",
+      "base": "TalonKnife",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-2cf07b21-beb8-40b1-86c4-3504b4ce3688",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "RiftBlade_Frostborn",
+      "base": "RiftBlade",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-9dce946e-c46c-4884-80ea-0c7227c2a4b5",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "MaulHammer_Frostborn",
+      "base": "MaulHammer",
+      "skin": "Frostborn",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-87c8bc40-cb00-4458-9a25-cfc0dd906f75",
+      "prompt": "Original FROSTBORN full weapon collection. Frosted ivory ceramic and pale glacial blue metal with branching crystalline frost etchings and snowflake-like geometric microstructure over all main surfaces. Silver mechanical trim, dark slate textured grip, crystalline blue magazine or blade and guard, white matte stock or pommel and polished silver edge. Refined detailed winter engineering, no glow. Cover all visible surfaces of this complete weapon: receiver, stock, barrel, handguard, magazine, grip and sights, or blade, guard, handle and pommel. Detailed full-surface original pattern work, distinct roughness and metalness. No logos or text. Preserve the exact source geometry and dimensions."
+    },
+    {
+      "key": "VectorRifle_VoidReaver",
+      "base": "VectorRifle",
+      "skin": "VoidReaver",
+      "generationTag": "RBXAI-TexturedMesh-TextureGen-498b5280-3011-4c3f-880f-a41c9ee7c05b",
+      "prompt": "Original VOID REAVER premium weapon skin. Cover every surface of this entire rifle, including stock, receiver, magazine, grip, barrel and sights. Graphite black ceramic and rich iridescent violet metal. Dense fine angular tessellated engravings cut into the receiver and stock, layered silver blade-like filigree, different dark rubber chevron grip texture, mechanical fasteners, alternating polished violet and brushed black metal bands across barrel. No floating symbols, no labels, no words, no logos. Tasteful and sharp sci-fi craftsmanship. Contrasting materials and intricate original pattern work that wraps around every face of each mesh, not one stripe. Keep the exact existing geometry."
+    }
+  ],
+  "geometry": [
+    {
+      "name": "NeedleSMG_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://121250614778565",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://101076756508095",
+            "MetalnessMap": "rbxassetid://72301735428178"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.007568359375,
+            0.18038177490234375,
+            -0.46554526686668396,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://77919820140416",
+          "size": [
+            0.19819173216819763,
+            0.33960509300231934,
+            0.5452135801315308
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://121250614778565",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://101076756508095",
+            "MetalnessMap": "rbxassetid://72301735428178"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0115966796875,
+            0,
+            0.11474648118019104,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://96418731377028",
+          "size": [
+            0.19017519056797028,
+            1,
+            1.2468111515045166
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://121250614778565",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://101076756508095",
+            "MetalnessMap": "rbxassetid://72301735428178"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00274658203125,
+            -0.055820465087890625,
+            0.18750038743019104,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://95712713000329",
+          "size": [
+            0.1587010622024536,
+            0.43910932540893555,
+            0.36540400981903076
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MantisDMR_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88202679594435",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123658114906292",
+            "MetalnessMap": "rbxassetid://137324505197780"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "scope_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.009033203125,
+            0.3978557586669922,
+            0.2795490026473999,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://70738081720166",
+          "size": [
+            0.256517618894577,
+            0.35426950454711914,
+            0.8185467720031738
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88202679594435",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123658114906292",
+            "MetalnessMap": "rbxassetid://137324505197780"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00958251953125,
+            0.11553001403808594,
+            -0.9142681360244751,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://102693290066246",
+          "size": [
+            0.12355370819568634,
+            0.1250056028366089,
+            0.7267691493034363
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88202679594435",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123658114906292",
+            "MetalnessMap": "rbxassetid://137324505197780"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0079345703125,
+            -0.16168785095214844,
+            0.3509296178817749,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://107986236991731",
+          "size": [
+            0.25869452953338623,
+            0.8266454339027405,
+            1.8534460067749023
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88202679594435",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123658114906292",
+            "MetalnessMap": "rbxassetid://137324505197780"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00909423828125,
+            -0.1523723602294922,
+            0.6022113561630249,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://71969041019308",
+          "size": [
+            0.13236355781555176,
+            0.47420844435691833,
+            0.421142041683197
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RiftBlade_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://125109738765307",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://110428030863258",
+            "MetalnessMap": "rbxassetid://73919431249774"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "pommel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0008544921875,
+            -1.3127002716064453,
+            7.470207785686966e-11,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://117660243678941",
+          "size": [
+            0.3034643530845642,
+            0.21771836280822754,
+            0.2605956792831421
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://125109738765307",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://110428030863258",
+            "MetalnessMap": "rbxassetid://73919431249774"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "blade_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0001220703125,
+            0.3475379943847656,
+            -0.0004863739013671875,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://134664057994872",
+          "size": [
+            0.26075848937034607,
+            2.1480982303619385,
+            0.2083873748779297
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://125109738765307",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://110428030863258",
+            "MetalnessMap": "rbxassetid://73919431249774"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "hand_guard_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            -0.7342357635498047,
+            -0.0007419586181640625,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://92001826185522",
+          "size": [
+            0.699999988079071,
+            0.22863894701004028,
+            0.2093898355960846
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://125109738765307",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://110428030863258",
+            "MetalnessMap": "rbxassetid://73919431249774"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "handle_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.00018310546875,
+            -1.0269889831542969,
+            -0.0009136199951171875,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://138691173437261",
+          "size": [
+            0.160564586520195,
+            0.41020703315734863,
+            0.15578922629356384
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BreakerShotgun_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://70467519990153",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://86595554246183",
+            "MetalnessMap": "rbxassetid://135483572952340"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00042724609375,
+            0.22576522827148438,
+            -0.9667044878005981,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://112435708796131",
+          "size": [
+            0.22281725704669952,
+            0.5422617197036743,
+            1.3665881156921387
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://70467519990153",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://86595554246183",
+            "MetalnessMap": "rbxassetid://135483572952340"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            0.0273590087890625,
+            0.23474204540252686,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://120783367060723",
+          "size": [
+            0.4214516878128052,
+            0.8797956705093384,
+            2.8305130004882812
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://70467519990153",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://86595554246183",
+            "MetalnessMap": "rbxassetid://135483572952340"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0001220703125,
+            -0.14551925659179688,
+            0.37823569774627686,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://126843194616647",
+          "size": [
+            0.2844051122665405,
+            0.7027549147605896,
+            0.9824939966201782
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TalonKnife_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://112346142457587",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://84444565255846",
+            "MetalnessMap": "rbxassetid://82217165824270"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "blade_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.07373046875,
+            0.3134174346923828,
+            0.00042726745596155524,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://131526152076135",
+          "size": [
+            0.3525097966194153,
+            0.8174042701721191,
+            0.07187439501285553
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://112346142457587",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://84444565255846",
+            "MetalnessMap": "rbxassetid://82217165824270"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "handle_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.048828125,
+            -0.35262107849121094,
+            -4.264971487089042e-9,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://72889082290475",
+          "size": [
+            0.40240478515625,
+            0.7390713691711426,
+            0.17651674151420593
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VectorRifle_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://111693209518633",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://74132537233440",
+            "MetalnessMap": "rbxassetid://101359692347097"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0013427734375,
+            0.3970069885253906,
+            -0.7108927965164185,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://86600977745204",
+          "size": [
+            0.13870570063591003,
+            0.305986613035202,
+            1.3205596208572388
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://111693209518633",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://74132537233440",
+            "MetalnessMap": "rbxassetid://101359692347097"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            -0.013795852661132812,
+            0.24269002676010132,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://89645306796657",
+          "size": [
+            0.33516034483909607,
+            1.0724093914031982,
+            2.256948947906494
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://111693209518633",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://74132537233440",
+            "MetalnessMap": "rbxassetid://101359692347097"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.00115966796875,
+            -0.05753898620605469,
+            0.5388553142547607,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://97918224746668",
+          "size": [
+            0.1605990082025528,
+            0.4355681538581848,
+            0.5686778426170349
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MaulHammer_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88427792774277",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://132310256738676",
+            "MetalnessMap": "rbxassetid://108413599217005"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00103759765625,
+            -0.4472312927246094,
+            0.00020265570492483675,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://89396885006103",
+          "size": [
+            0.23371942341327667,
+            0.4811255931854248,
+            0.23266363143920898
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88427792774277",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://132310256738676",
+            "MetalnessMap": "rbxassetid://108413599217005"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "shaft_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00042724609375,
+            -0.28075408935546875,
+            -0.0012621879577636719,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://121701495232989",
+          "size": [
+            0.3865765333175659,
+            1.329676866531372,
+            0.35996440052986145
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88427792774277",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://132310256738676",
+            "MetalnessMap": "rbxassetid://108413599217005"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "hammer_head_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            0.6061210632324219,
+            0.000019550323486328125,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://87430104470600",
+          "size": [
+            1.3179268836975098,
+            0.6789759993553162,
+            0.7999999523162842
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NeedleSMG_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://96278322581242",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://82997673742536",
+            "MetalnessMap": "rbxassetid://77712211089144"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.007568359375,
+            0.18038177490234375,
+            -0.46554526686668396,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://77919820140416",
+          "size": [
+            0.19819173216819763,
+            0.33960509300231934,
+            0.5452135801315308
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://96278322581242",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://82997673742536",
+            "MetalnessMap": "rbxassetid://77712211089144"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0115966796875,
+            0,
+            0.11474648118019104,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://96418731377028",
+          "size": [
+            0.19017519056797028,
+            1,
+            1.2468111515045166
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://96278322581242",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://82997673742536",
+            "MetalnessMap": "rbxassetid://77712211089144"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00274658203125,
+            -0.055820465087890625,
+            0.18750038743019104,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://95712713000329",
+          "size": [
+            0.1587010622024536,
+            0.43910932540893555,
+            0.36540400981903076
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BreakerShotgun_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://120804847464982",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://86589020103293",
+            "MetalnessMap": "rbxassetid://85045152833567"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00042724609375,
+            0.22576522827148438,
+            -0.9667044878005981,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://112435708796131",
+          "size": [
+            0.22281725704669952,
+            0.5422617197036743,
+            1.3665881156921387
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://120804847464982",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://86589020103293",
+            "MetalnessMap": "rbxassetid://85045152833567"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            0.0273590087890625,
+            0.23474204540252686,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://120783367060723",
+          "size": [
+            0.4214516878128052,
+            0.8797956705093384,
+            2.8305130004882812
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://120804847464982",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://86589020103293",
+            "MetalnessMap": "rbxassetid://85045152833567"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0001220703125,
+            -0.14551925659179688,
+            0.37823569774627686,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://126843194616647",
+          "size": [
+            0.2844051122665405,
+            0.7027549147605896,
+            0.9824939966201782
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MantisDMR_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://134492327009114",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://76365474940451",
+            "MetalnessMap": "rbxassetid://87870070662824"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "scope_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.009033203125,
+            0.3978557586669922,
+            0.2795490026473999,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://70738081720166",
+          "size": [
+            0.256517618894577,
+            0.35426950454711914,
+            0.8185467720031738
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://134492327009114",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://76365474940451",
+            "MetalnessMap": "rbxassetid://87870070662824"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00958251953125,
+            0.11553001403808594,
+            -0.9142681360244751,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://102693290066246",
+          "size": [
+            0.12355370819568634,
+            0.1250056028366089,
+            0.7267691493034363
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://134492327009114",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://76365474940451",
+            "MetalnessMap": "rbxassetid://87870070662824"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0079345703125,
+            -0.16168785095214844,
+            0.3509296178817749,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://107986236991731",
+          "size": [
+            0.25869452953338623,
+            0.8266454339027405,
+            1.8534460067749023
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://134492327009114",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://76365474940451",
+            "MetalnessMap": "rbxassetid://87870070662824"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00909423828125,
+            -0.1523723602294922,
+            0.6022113561630249,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://71969041019308",
+          "size": [
+            0.13236355781555176,
+            0.47420844435691833,
+            0.421142041683197
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RiftBlade_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://71748312105933",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://97373276373546",
+            "MetalnessMap": "rbxassetid://88970296787033"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "pommel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0008544921875,
+            -1.3127002716064453,
+            7.470207785686966e-11,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://117660243678941",
+          "size": [
+            0.3034643530845642,
+            0.21771836280822754,
+            0.2605956792831421
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://71748312105933",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://97373276373546",
+            "MetalnessMap": "rbxassetid://88970296787033"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "blade_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0001220703125,
+            0.3475379943847656,
+            -0.0004863739013671875,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://134664057994872",
+          "size": [
+            0.26075848937034607,
+            2.1480982303619385,
+            0.2083873748779297
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://71748312105933",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://97373276373546",
+            "MetalnessMap": "rbxassetid://88970296787033"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "hand_guard_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            -0.7342357635498047,
+            -0.0007419586181640625,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://92001826185522",
+          "size": [
+            0.699999988079071,
+            0.22863894701004028,
+            0.2093898355960846
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://71748312105933",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://97373276373546",
+            "MetalnessMap": "rbxassetid://88970296787033"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "handle_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.00018310546875,
+            -1.0269889831542969,
+            -0.0009136199951171875,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://138691173437261",
+          "size": [
+            0.160564586520195,
+            0.41020703315734863,
+            0.15578922629356384
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TalonKnife_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://86894273916229",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://98441066621692",
+            "MetalnessMap": "rbxassetid://132761763357630"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "blade_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.07373046875,
+            0.3134174346923828,
+            0.00042726745596155524,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://131526152076135",
+          "size": [
+            0.3525097966194153,
+            0.8174042701721191,
+            0.07187439501285553
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://86894273916229",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://98441066621692",
+            "MetalnessMap": "rbxassetid://132761763357630"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "handle_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.048828125,
+            -0.35262107849121094,
+            -4.264971487089042e-9,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://72889082290475",
+          "size": [
+            0.40240478515625,
+            0.7390713691711426,
+            0.17651674151420593
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NeedleSMG_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://131079422936512",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://136803104653769",
+            "MetalnessMap": "rbxassetid://79252524963482"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.007568359375,
+            0.18038177490234375,
+            -0.46554526686668396,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://77919820140416",
+          "size": [
+            0.19819173216819763,
+            0.33960509300231934,
+            0.5452135801315308
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://131079422936512",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://136803104653769",
+            "MetalnessMap": "rbxassetid://79252524963482"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0115966796875,
+            0,
+            0.11474648118019104,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://96418731377028",
+          "size": [
+            0.19017519056797028,
+            1,
+            1.2468111515045166
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://131079422936512",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://136803104653769",
+            "MetalnessMap": "rbxassetid://79252524963482"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00274658203125,
+            -0.055820465087890625,
+            0.18750038743019104,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://95712713000329",
+          "size": [
+            0.1587010622024536,
+            0.43910932540893555,
+            0.36540400981903076
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MaulHammer_Solaris",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://96954123666152",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://103196084929409",
+            "MetalnessMap": "rbxassetid://134667479710882"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00103759765625,
+            -0.4472312927246094,
+            0.00020265570492483675,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://89396885006103",
+          "size": [
+            0.23371942341327667,
+            0.4811255931854248,
+            0.23266363143920898
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://96954123666152",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://103196084929409",
+            "MetalnessMap": "rbxassetid://134667479710882"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "shaft_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00042724609375,
+            -0.28075408935546875,
+            -0.0012621879577636719,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://121701495232989",
+          "size": [
+            0.3865765333175659,
+            1.329676866531372,
+            0.35996440052986145
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://96954123666152",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://103196084929409",
+            "MetalnessMap": "rbxassetid://134667479710882"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "hammer_head_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            0.6061210632324219,
+            0.000019550323486328125,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://87430104470600",
+          "size": [
+            1.3179268836975098,
+            0.6789759993553162,
+            0.7999999523162842
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VectorRifle_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88192660818369",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://125613553314241",
+            "MetalnessMap": "rbxassetid://98330299156133"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0013427734375,
+            0.3970069885253906,
+            -0.7108927965164185,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://86600977745204",
+          "size": [
+            0.13870570063591003,
+            0.305986613035202,
+            1.3205596208572388
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88192660818369",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://125613553314241",
+            "MetalnessMap": "rbxassetid://98330299156133"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            -0.013795852661132812,
+            0.24269002676010132,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://89645306796657",
+          "size": [
+            0.33516034483909607,
+            1.0724093914031982,
+            2.256948947906494
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://88192660818369",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://125613553314241",
+            "MetalnessMap": "rbxassetid://98330299156133"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.00115966796875,
+            -0.05753898620605469,
+            0.5388553142547607,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://97918224746668",
+          "size": [
+            0.1605990082025528,
+            0.4355681538581848,
+            0.5686778426170349
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MantisDMR_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://110364660826462",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://89089313735018",
+            "MetalnessMap": "rbxassetid://71637807597993"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "scope_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.009033203125,
+            0.3978557586669922,
+            0.2795490026473999,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://70738081720166",
+          "size": [
+            0.256517618894577,
+            0.35426950454711914,
+            0.8185467720031738
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://110364660826462",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://89089313735018",
+            "MetalnessMap": "rbxassetid://71637807597993"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00958251953125,
+            0.11553001403808594,
+            -0.9142681360244751,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://102693290066246",
+          "size": [
+            0.12355370819568634,
+            0.1250056028366089,
+            0.7267691493034363
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://110364660826462",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://89089313735018",
+            "MetalnessMap": "rbxassetid://71637807597993"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0079345703125,
+            -0.16168785095214844,
+            0.3509296178817749,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://107986236991731",
+          "size": [
+            0.25869452953338623,
+            0.8266454339027405,
+            1.8534460067749023
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://110364660826462",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://89089313735018",
+            "MetalnessMap": "rbxassetid://71637807597993"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00909423828125,
+            -0.1523723602294922,
+            0.6022113561630249,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://71969041019308",
+          "size": [
+            0.13236355781555176,
+            0.47420844435691833,
+            0.421142041683197
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BreakerShotgun_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://95833558474760",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://98648366289712",
+            "MetalnessMap": "rbxassetid://128777350443987"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00042724609375,
+            0.22576522827148438,
+            -0.9667044878005981,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://112435708796131",
+          "size": [
+            0.22281725704669952,
+            0.5422617197036743,
+            1.3665881156921387
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://95833558474760",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://98648366289712",
+            "MetalnessMap": "rbxassetid://128777350443987"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            0.0273590087890625,
+            0.23474204540252686,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://120783367060723",
+          "size": [
+            0.4214516878128052,
+            0.8797956705093384,
+            2.8305130004882812
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://95833558474760",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://98648366289712",
+            "MetalnessMap": "rbxassetid://128777350443987"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.0001220703125,
+            -0.14551925659179688,
+            0.37823569774627686,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://126843194616647",
+          "size": [
+            0.2844051122665405,
+            0.7027549147605896,
+            0.9824939966201782
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TalonKnife_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://76218711584211",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://84086593060494",
+            "MetalnessMap": "rbxassetid://109936035057037"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "blade_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.07373046875,
+            0.3134174346923828,
+            0.00042726745596155524,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://131526152076135",
+          "size": [
+            0.3525097966194153,
+            0.8174042701721191,
+            0.07187439501285553
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://76218711584211",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://84086593060494",
+            "MetalnessMap": "rbxassetid://109936035057037"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "handle_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.048828125,
+            -0.35262107849121094,
+            -4.264971487089042e-9,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://72889082290475",
+          "size": [
+            0.40240478515625,
+            0.7390713691711426,
+            0.17651674151420593
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RiftBlade_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://107754190888901",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://138202417515437",
+            "MetalnessMap": "rbxassetid://138280191425046"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "pommel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0008544921875,
+            -1.3127002716064453,
+            7.470207785686966e-11,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://117660243678941",
+          "size": [
+            0.3034643530845642,
+            0.21771836280822754,
+            0.2605956792831421
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://107754190888901",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://138202417515437",
+            "MetalnessMap": "rbxassetid://138280191425046"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "blade_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0001220703125,
+            0.3475379943847656,
+            -0.0004863739013671875,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://134664057994872",
+          "size": [
+            0.26075848937034607,
+            2.1480982303619385,
+            0.2083873748779297
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://107754190888901",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://138202417515437",
+            "MetalnessMap": "rbxassetid://138280191425046"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "hand_guard_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            -0.7342357635498047,
+            -0.0007419586181640625,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://92001826185522",
+          "size": [
+            0.699999988079071,
+            0.22863894701004028,
+            0.2093898355960846
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://107754190888901",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://138202417515437",
+            "MetalnessMap": "rbxassetid://138280191425046"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "handle_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.00018310546875,
+            -1.0269889831542969,
+            -0.0009136199951171875,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://138691173437261",
+          "size": [
+            0.160564586520195,
+            0.41020703315734863,
+            0.15578922629356384
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MaulHammer_Frostborn",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://93219377451136",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123205235013017",
+            "MetalnessMap": "rbxassetid://106996868150898"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00103759765625,
+            -0.4472312927246094,
+            0.00020265570492483675,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://89396885006103",
+          "size": [
+            0.23371942341327667,
+            0.4811255931854248,
+            0.23266363143920898
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://93219377451136",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123205235013017",
+            "MetalnessMap": "rbxassetid://106996868150898"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "shaft_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0.00042724609375,
+            -0.28075408935546875,
+            -0.0012621879577636719,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://121701495232989",
+          "size": [
+            0.3865765333175659,
+            1.329676866531372,
+            0.35996440052986145
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://93219377451136",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://123205235013017",
+            "MetalnessMap": "rbxassetid://106996868150898"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "hammer_head_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            0.6061210632324219,
+            0.000019550323486328125,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://87430104470600",
+          "size": [
+            1.3179268836975098,
+            0.6789759993553162,
+            0.7999999523162842
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VectorRifle_VoidReaver",
+      "parts": [
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://82435149891570",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://135156610836066",
+            "MetalnessMap": "rbxassetid://111357351144539"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "barrel_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.0013427734375,
+            0.3970069885253906,
+            -0.7108927965164185,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://86600977745204",
+          "size": [
+            0.13870570063591003,
+            0.305986613035202,
+            1.3205596208572388
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://82435149891570",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://135156610836066",
+            "MetalnessMap": "rbxassetid://111357351144539"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "frame_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            0,
+            -0.013795852661132812,
+            0.24269002676010132,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://89645306796657",
+          "size": [
+            0.33516034483909607,
+            1.0724093914031982,
+            2.256948947906494
+          ]
+        },
+        {
+          "surface": {
+            "ColorMap": "rbxassetid://82435149891570",
+            "NormalMap": "",
+            "RoughnessMap": "rbxassetid://135156610836066",
+            "MetalnessMap": "rbxassetid://111357351144539"
+          },
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "texture": "",
+          "name": "grip_geom",
+          "material": 256,
+          "doubleSided": false,
+          "frame": [
+            -0.00115966796875,
+            -0.05753898620605469,
+            0.5388553142547607,
+            -1,
+            0,
+            -8.742277657347586e-8,
+            0,
+            1,
+            0,
+            8.742277657347586e-8,
+            0,
+            -1
+          ],
+          "mesh": "rbxassetid://97918224746668",
+          "size": [
+            0.1605990082025528,
+            0.4355681538581848,
+            0.5686778426170349
+          ]
+        }
+      ]
+    }
+  ]
+}

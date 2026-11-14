@@ -2,10 +2,12 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Library = ReplicatedStorage.Mayhem:WaitForChild("Art")
 local Arsenal = require(script.Parent.Arsenal)
+local Visuals = require(script.Parent.Visuals)
 local Art = {}
 
 function Art.place(parent: Instance?, name: string, frame: CFrame, size: Vector3?, tier: number?): Model
-	local template = Library:FindFirstChild(name)
+	local skins=Library:FindFirstChild("Skins")
+	local template = Library:FindFirstChild(name) or (if skins then skins:FindFirstChild(name) else nil)
 	assert(template and template:IsA("Model"), "Missing original art model: " .. name)
 	local model = template:Clone() :: Model
 	local _, bounds = model:GetBoundingBox()
@@ -15,7 +17,7 @@ function Art.place(parent: Instance?, name: string, frame: CFrame, size: Vector3
 			local position = part.Position
 			part.CFrame = CFrame.new(position * ratio) * (part.CFrame - position)
 			part.Size *= ratio
-			if not part:IsA("MeshPart") or part.TextureID ~= "" then part.Color = Color3.new(1, 1, 1) end
+			if not part:IsA("MeshPart") or part.TextureID ~= "" or part:FindFirstChildOfClass("SurfaceAppearance") then part.Color = Color3.new(1, 1, 1) end
 			part.Anchored, part.Massless = true, true
 			part.CanCollide, part.CanTouch, part.CanQuery = false, false, false
 			part:SetAttribute("MayhemDetail", true)
@@ -113,9 +115,17 @@ local function attachment(model: Model, name: string, frame: CFrame, size: Vecto
 	return part
 end
 
-function Art.weapon(parent: Instance?, slot: number, frame: CFrame, accent: Color3, id: string?, kit: string?): Model
+function Art.weapon(parent: Instance?, slot: number, frame: CFrame, accent: Color3, id: string?, kit: string?, skinId: string?): Model
 	local item = Arsenal.resolve(id or (if slot==1 then "Vector" else "Rift"), kit)
-	local model = Art.place(parent, item.model, frame, item.size)
+	local finish=Visuals.skin(skinId or "Pulse")
+	local full=finish and finish.fullSurface
+	local variant=item.model.."_"..(skinId or "")
+	local skins=Library:FindFirstChild("Skins")
+	local available=full and skins and skins:FindFirstChild(variant)~=nil
+	local model = Art.place(parent,if available then variant else item.model,frame,item.size)
+	model:SetAttribute("SkinId",skinId or "Pulse")
+	model:SetAttribute("FullSurfaceSkin",available==true)
+	model:SetAttribute("SkinUnavailable",full==true and not available)
 	model.Name = "MayhemWeapon"
 	model:SetAttribute("WeaponId", item.id)
 	model:SetAttribute("HandlingKit", item.kit)
@@ -123,6 +133,7 @@ function Art.weapon(parent: Instance?, slot: number, frame: CFrame, accent: Colo
 	local inlay = attachment(model,"EnergyInlay",frame * (if slot==1 then CFrame.new(item.size.X*0.5,height*0.12,-length*0.09) else CFrame.new(0,height*0.21,-length*0.52)),
 		if slot==1 then Vector3.new(0.018,0.045,length*0.14) else Vector3.new(0.045,height*0.26,0.018),accent)
 	inlay.Material = Enum.Material.Neon
+	if full or skinId=="Stock" then inlay:Destroy() end
 	local metal, grip = Color3.fromRGB(71,74,79), Color3.fromRGB(25,27,30)
 	if item.kit=="Precision" then
 		attachment(model,"OpticMount",frame*CFrame.new(0,height*0.51,0),Vector3.new(0.22,0.12,0.42),metal)

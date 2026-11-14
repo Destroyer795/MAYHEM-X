@@ -3,6 +3,22 @@ local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Tests = {}
+function Tests.cache(): number
+	assert(RunService:IsStudio() and RunService:IsServer(), "Run cache checks in the Studio server simulation")
+	local shared=ReplicatedStorage.Mayhem.Shared
+	local preferences=require(shared.PreferenceRules)
+	local rules=require(shared.ProfileRules)
+	local visuals=require(shared.Visuals)
+	local checks=require(script.DailyCalendarCases)(require(shared.DailyCalendar),rules,preferences,visuals)
+	checks+=require(script.DailyPersistenceCases)(require(game.ServerScriptService.MayhemServer.PreferenceService),rules,preferences,visuals,require(game.ServerScriptService.MayhemServer.SessionLease))
+	checks+=require(script.ProfileCases)(rules,preferences,visuals)
+	checks+=require(script.StyleCases)(require(shared.StyleRules),visuals)
+	checks+=require(script.VisualCases)(visuals)
+	checks+=require(script.SkinCases)(require(shared.Art),require(shared.Arsenal),visuals)
+	print("MAYHEM X: "..checks.." focused calendar, simulated persistence and skin assertions passed.")
+	return checks
+end
+
 function Tests.run(): number
 	assert(RunService:IsStudio() and RunService:IsServer(), "Run these checks in the Studio server simulation")
 	local shared = ReplicatedStorage:WaitForChild("Mayhem"):WaitForChild("Shared")

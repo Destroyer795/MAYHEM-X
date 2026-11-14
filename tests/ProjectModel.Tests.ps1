@@ -40,6 +40,10 @@ try {
     Write-Fixture ([ordered]@{ '$className'='DataModel'; Rules=[ordered]@{ '$path'='src/Rules.luau'; Child=[ordered]@{ '$path'='src/Boot.server.luau' } } })
     $model = Get-MayhemProjectModel -ProjectRoot $fixture
     Assert-ModelTest ($model.Entries.Count -eq 2 -and $model.Entries[1].LogicalPath -eq 'Rules.Child') 'A mapped source must support explicit children'
+    '<roblox version="4"><Item class="Folder"><Properties><string name="Name">Art</string></Properties></Item></roblox>' | Set-Content -LiteralPath (Join-Path $fixture 'src/Art.rbxmx') -Encoding UTF8
+    Write-Fixture ([ordered]@{ '$className'='DataModel'; Art=[ordered]@{ '$path'='src/Art.rbxmx'; Skins=[ordered]@{ '$path'='src/Rules.luau' } } })
+    $model = Get-MayhemProjectModel -ProjectRoot $fixture
+    Assert-ModelTest ($model.Entries.Count -eq 2 -and $model.Entries[1].LogicalPath -eq 'Art.Skins' -and $model.Entries[1].Parent -eq $model.Entries[0].Referent) 'XML assets must preserve explicit Rojo children'
     Write-Output "PASS: $checks project model assertions"
 } finally {
     $resolvedFixture = [IO.Path]::GetFullPath($fixture)

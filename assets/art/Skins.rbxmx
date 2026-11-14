@@ -1,0 +1,3413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<roblox version="4">
+  <Item class="Folder" referent="ART99">
+    <Properties>
+      <string name="Name">Skins</string>
+    </Properties>
+    <Item class="Model" referent="ART100">
+      <Properties>
+        <string name="Name">NeedleSMG_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART101">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://77919820140416</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.198191732</X>
+            <Y>0.339605093</Y>
+            <Z>0.54521358</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.007568359</X>
+            <Y>0.180381775</Y>
+            <Z>-0.465545267</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART102">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://121250614778565</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://72301735428178</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://101076756508095</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART103">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://96418731377028</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.190175191</X>
+            <Y>1</Y>
+            <Z>1.246811152</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.01159668</X>
+            <Y>0</Y>
+            <Z>0.114746481</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART104">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://121250614778565</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://72301735428178</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://101076756508095</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART105">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://95712713000329</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.158701062</X>
+            <Y>0.439109325</Y>
+            <Z>0.36540401</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.002746582</X>
+            <Y>-0.055820465</Y>
+            <Z>0.187500387</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART106">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://121250614778565</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://72301735428178</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://101076756508095</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART107">
+      <Properties>
+        <string name="Name">MantisDMR_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART108">
+        <Properties>
+          <string name="Name">scope_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://70738081720166</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.256517619</X>
+            <Y>0.354269505</Y>
+            <Z>0.818546772</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.009033203</X>
+            <Y>0.397855759</Y>
+            <Z>0.279549003</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART109">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88202679594435</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://137324505197780</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123658114906292</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART110">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://102693290066246</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.123553708</X>
+            <Y>0.125005603</Y>
+            <Z>0.726769149</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00958252</X>
+            <Y>0.115530014</Y>
+            <Z>-0.914268136</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART111">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88202679594435</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://137324505197780</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123658114906292</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART112">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://107986236991731</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.25869453</X>
+            <Y>0.826645434</Y>
+            <Z>1.853446007</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00793457</X>
+            <Y>-0.161687851</Y>
+            <Z>0.350929618</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART113">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88202679594435</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://137324505197780</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123658114906292</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART114">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://71969041019308</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.132363558</X>
+            <Y>0.474208444</Y>
+            <Z>0.421142042</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.009094238</X>
+            <Y>-0.15237236</Y>
+            <Z>0.602211356</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART115">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88202679594435</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://137324505197780</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123658114906292</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART116">
+      <Properties>
+        <string name="Name">RiftBlade_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART117">
+        <Properties>
+          <string name="Name">pommel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://117660243678941</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.303464353</X>
+            <Y>0.217718363</Y>
+            <Z>0.260595679</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000854492</X>
+            <Y>-1.312700272</Y>
+            <Z>0</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART118">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://125109738765307</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://73919431249774</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://110428030863258</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART119">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://134664057994872</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.260758489</X>
+            <Y>2.14809823</Y>
+            <Z>0.208387375</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.00012207</X>
+            <Y>0.347537994</Y>
+            <Z>-0.000486374</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART120">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://125109738765307</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://73919431249774</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://110428030863258</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART121">
+        <Properties>
+          <string name="Name">hand_guard_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://92001826185522</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.699999988</X>
+            <Y>0.228638947</Y>
+            <Z>0.209389836</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.734235764</Y>
+            <Z>-0.000741959</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART122">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://125109738765307</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://73919431249774</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://110428030863258</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART123">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://138691173437261</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160564587</X>
+            <Y>0.410207033</Y>
+            <Z>0.155789226</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000183105</X>
+            <Y>-1.026988983</Y>
+            <Z>-0.00091362</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART124">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://125109738765307</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://73919431249774</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://110428030863258</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART125">
+      <Properties>
+        <string name="Name">BreakerShotgun_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART126">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://112435708796131</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.222817257</X>
+            <Y>0.54226172</Y>
+            <Z>1.366588116</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000427246</X>
+            <Y>0.225765228</Y>
+            <Z>-0.966704488</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART127">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://70467519990153</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://135483572952340</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://86595554246183</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART128">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://120783367060723</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.421451688</X>
+            <Y>0.879795671</Y>
+            <Z>2.830513</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0.027359009</Y>
+            <Z>0.234742045</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART129">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://70467519990153</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://135483572952340</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://86595554246183</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART130">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://126843194616647</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.284405112</X>
+            <Y>0.702754915</Y>
+            <Z>0.982493997</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00012207</X>
+            <Y>-0.145519257</Y>
+            <Z>0.378235698</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART131">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://70467519990153</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://135483572952340</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://86595554246183</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART132">
+      <Properties>
+        <string name="Name">TalonKnife_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART133">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://131526152076135</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.352509797</X>
+            <Y>0.81740427</Y>
+            <Z>0.071874395</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.073730469</X>
+            <Y>0.313417435</Y>
+            <Z>0.000427267</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART134">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://112346142457587</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://82217165824270</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://84444565255846</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART135">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://72889082290475</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.402404785</X>
+            <Y>0.739071369</Y>
+            <Z>0.176516742</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.048828125</X>
+            <Y>-0.352621078</Y>
+            <Z>-0.000000004</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART136">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://112346142457587</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://82217165824270</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://84444565255846</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART137">
+      <Properties>
+        <string name="Name">VectorRifle_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART138">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://86600977745204</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.138705701</X>
+            <Y>0.305986613</Y>
+            <Z>1.320559621</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001342773</X>
+            <Y>0.397006989</Y>
+            <Z>-0.710892797</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART139">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://111693209518633</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://101359692347097</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://74132537233440</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART140">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89645306796657</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.335160345</X>
+            <Y>1.072409391</Y>
+            <Z>2.256948948</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.013795853</Y>
+            <Z>0.242690027</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART141">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://111693209518633</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://101359692347097</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://74132537233440</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART142">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://97918224746668</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160599008</X>
+            <Y>0.435568154</Y>
+            <Z>0.568677843</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001159668</X>
+            <Y>-0.057538986</Y>
+            <Z>0.538855314</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART143">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://111693209518633</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://101359692347097</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://74132537233440</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART144">
+      <Properties>
+        <string name="Name">MaulHammer_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART145">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89396885006103</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.233719423</X>
+            <Y>0.481125593</Y>
+            <Z>0.232663631</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001037598</X>
+            <Y>-0.447231293</Y>
+            <Z>0.000202656</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART146">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88427792774277</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://108413599217005</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://132310256738676</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART147">
+        <Properties>
+          <string name="Name">shaft_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://121701495232989</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.386576533</X>
+            <Y>1.329676867</Y>
+            <Z>0.359964401</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000427246</X>
+            <Y>-0.280754089</Y>
+            <Z>-0.001262188</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART148">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88427792774277</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://108413599217005</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://132310256738676</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART149">
+        <Properties>
+          <string name="Name">hammer_head_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://87430104470600</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.317926884</X>
+            <Y>0.678975999</Y>
+            <Z>0.799999952</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0.606121063</Y>
+            <Z>0.00001955</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART150">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88427792774277</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://108413599217005</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://132310256738676</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART151">
+      <Properties>
+        <string name="Name">NeedleSMG_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART152">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://77919820140416</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.198191732</X>
+            <Y>0.339605093</Y>
+            <Z>0.54521358</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.007568359</X>
+            <Y>0.180381775</Y>
+            <Z>-0.465545267</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART153">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://96278322581242</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://77712211089144</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://82997673742536</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART154">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://96418731377028</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.190175191</X>
+            <Y>1</Y>
+            <Z>1.246811152</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.01159668</X>
+            <Y>0</Y>
+            <Z>0.114746481</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART155">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://96278322581242</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://77712211089144</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://82997673742536</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART156">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://95712713000329</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.158701062</X>
+            <Y>0.439109325</Y>
+            <Z>0.36540401</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.002746582</X>
+            <Y>-0.055820465</Y>
+            <Z>0.187500387</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART157">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://96278322581242</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://77712211089144</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://82997673742536</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART158">
+      <Properties>
+        <string name="Name">BreakerShotgun_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART159">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://112435708796131</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.222817257</X>
+            <Y>0.54226172</Y>
+            <Z>1.366588116</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000427246</X>
+            <Y>0.225765228</Y>
+            <Z>-0.966704488</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART160">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://120804847464982</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://85045152833567</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://86589020103293</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART161">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://120783367060723</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.421451688</X>
+            <Y>0.879795671</Y>
+            <Z>2.830513</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0.027359009</Y>
+            <Z>0.234742045</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART162">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://120804847464982</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://85045152833567</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://86589020103293</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART163">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://126843194616647</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.284405112</X>
+            <Y>0.702754915</Y>
+            <Z>0.982493997</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00012207</X>
+            <Y>-0.145519257</Y>
+            <Z>0.378235698</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART164">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://120804847464982</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://85045152833567</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://86589020103293</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART165">
+      <Properties>
+        <string name="Name">MantisDMR_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART166">
+        <Properties>
+          <string name="Name">scope_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://70738081720166</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.256517619</X>
+            <Y>0.354269505</Y>
+            <Z>0.818546772</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.009033203</X>
+            <Y>0.397855759</Y>
+            <Z>0.279549003</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART167">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://134492327009114</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://87870070662824</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://76365474940451</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART168">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://102693290066246</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.123553708</X>
+            <Y>0.125005603</Y>
+            <Z>0.726769149</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00958252</X>
+            <Y>0.115530014</Y>
+            <Z>-0.914268136</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART169">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://134492327009114</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://87870070662824</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://76365474940451</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART170">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://107986236991731</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.25869453</X>
+            <Y>0.826645434</Y>
+            <Z>1.853446007</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00793457</X>
+            <Y>-0.161687851</Y>
+            <Z>0.350929618</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART171">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://134492327009114</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://87870070662824</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://76365474940451</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART172">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://71969041019308</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.132363558</X>
+            <Y>0.474208444</Y>
+            <Z>0.421142042</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.009094238</X>
+            <Y>-0.15237236</Y>
+            <Z>0.602211356</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART173">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://134492327009114</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://87870070662824</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://76365474940451</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART174">
+      <Properties>
+        <string name="Name">RiftBlade_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART175">
+        <Properties>
+          <string name="Name">pommel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://117660243678941</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.303464353</X>
+            <Y>0.217718363</Y>
+            <Z>0.260595679</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000854492</X>
+            <Y>-1.312700272</Y>
+            <Z>0</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART176">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://71748312105933</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://88970296787033</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://97373276373546</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART177">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://134664057994872</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.260758489</X>
+            <Y>2.14809823</Y>
+            <Z>0.208387375</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.00012207</X>
+            <Y>0.347537994</Y>
+            <Z>-0.000486374</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART178">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://71748312105933</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://88970296787033</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://97373276373546</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART179">
+        <Properties>
+          <string name="Name">hand_guard_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://92001826185522</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.699999988</X>
+            <Y>0.228638947</Y>
+            <Z>0.209389836</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.734235764</Y>
+            <Z>-0.000741959</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART180">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://71748312105933</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://88970296787033</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://97373276373546</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART181">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://138691173437261</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160564587</X>
+            <Y>0.410207033</Y>
+            <Z>0.155789226</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000183105</X>
+            <Y>-1.026988983</Y>
+            <Z>-0.00091362</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART182">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://71748312105933</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://88970296787033</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://97373276373546</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART183">
+      <Properties>
+        <string name="Name">TalonKnife_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART184">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://131526152076135</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.352509797</X>
+            <Y>0.81740427</Y>
+            <Z>0.071874395</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.073730469</X>
+            <Y>0.313417435</Y>
+            <Z>0.000427267</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART185">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://86894273916229</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://132761763357630</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://98441066621692</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART186">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://72889082290475</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.402404785</X>
+            <Y>0.739071369</Y>
+            <Z>0.176516742</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.048828125</X>
+            <Y>-0.352621078</Y>
+            <Z>-0.000000004</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART187">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://86894273916229</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://132761763357630</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://98441066621692</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART188">
+      <Properties>
+        <string name="Name">NeedleSMG_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART189">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://77919820140416</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.198191732</X>
+            <Y>0.339605093</Y>
+            <Z>0.54521358</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.007568359</X>
+            <Y>0.180381775</Y>
+            <Z>-0.465545267</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART190">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://131079422936512</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://79252524963482</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://136803104653769</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART191">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://96418731377028</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.190175191</X>
+            <Y>1</Y>
+            <Z>1.246811152</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.01159668</X>
+            <Y>0</Y>
+            <Z>0.114746481</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART192">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://131079422936512</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://79252524963482</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://136803104653769</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART193">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://95712713000329</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.158701062</X>
+            <Y>0.439109325</Y>
+            <Z>0.36540401</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.002746582</X>
+            <Y>-0.055820465</Y>
+            <Z>0.187500387</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART194">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://131079422936512</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://79252524963482</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://136803104653769</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART195">
+      <Properties>
+        <string name="Name">MaulHammer_Solaris</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART196">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89396885006103</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.233719423</X>
+            <Y>0.481125593</Y>
+            <Z>0.232663631</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001037598</X>
+            <Y>-0.447231293</Y>
+            <Z>0.000202656</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART197">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://96954123666152</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://134667479710882</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://103196084929409</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART198">
+        <Properties>
+          <string name="Name">shaft_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://121701495232989</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.386576533</X>
+            <Y>1.329676867</Y>
+            <Z>0.359964401</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000427246</X>
+            <Y>-0.280754089</Y>
+            <Z>-0.001262188</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART199">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://96954123666152</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://134667479710882</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://103196084929409</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART200">
+        <Properties>
+          <string name="Name">hammer_head_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://87430104470600</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.317926884</X>
+            <Y>0.678975999</Y>
+            <Z>0.799999952</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0.606121063</Y>
+            <Z>0.00001955</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART201">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://96954123666152</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://134667479710882</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://103196084929409</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART202">
+      <Properties>
+        <string name="Name">VectorRifle_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART203">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://86600977745204</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.138705701</X>
+            <Y>0.305986613</Y>
+            <Z>1.320559621</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001342773</X>
+            <Y>0.397006989</Y>
+            <Z>-0.710892797</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART204">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88192660818369</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://98330299156133</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://125613553314241</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART205">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89645306796657</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.335160345</X>
+            <Y>1.072409391</Y>
+            <Z>2.256948948</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.013795853</Y>
+            <Z>0.242690027</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART206">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88192660818369</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://98330299156133</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://125613553314241</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART207">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://97918224746668</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160599008</X>
+            <Y>0.435568154</Y>
+            <Z>0.568677843</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001159668</X>
+            <Y>-0.057538986</Y>
+            <Z>0.538855314</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART208">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://88192660818369</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://98330299156133</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://125613553314241</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART209">
+      <Properties>
+        <string name="Name">MantisDMR_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART210">
+        <Properties>
+          <string name="Name">scope_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://70738081720166</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.256517619</X>
+            <Y>0.354269505</Y>
+            <Z>0.818546772</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.009033203</X>
+            <Y>0.397855759</Y>
+            <Z>0.279549003</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART211">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://110364660826462</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://71637807597993</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://89089313735018</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART212">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://102693290066246</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.123553708</X>
+            <Y>0.125005603</Y>
+            <Z>0.726769149</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00958252</X>
+            <Y>0.115530014</Y>
+            <Z>-0.914268136</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART213">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://110364660826462</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://71637807597993</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://89089313735018</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART214">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://107986236991731</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.25869453</X>
+            <Y>0.826645434</Y>
+            <Z>1.853446007</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00793457</X>
+            <Y>-0.161687851</Y>
+            <Z>0.350929618</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART215">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://110364660826462</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://71637807597993</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://89089313735018</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART216">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://71969041019308</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.132363558</X>
+            <Y>0.474208444</Y>
+            <Z>0.421142042</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.009094238</X>
+            <Y>-0.15237236</Y>
+            <Z>0.602211356</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART217">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://110364660826462</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://71637807597993</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://89089313735018</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART218">
+      <Properties>
+        <string name="Name">BreakerShotgun_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART219">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://112435708796131</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.222817257</X>
+            <Y>0.54226172</Y>
+            <Z>1.366588116</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000427246</X>
+            <Y>0.225765228</Y>
+            <Z>-0.966704488</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART220">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://95833558474760</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://128777350443987</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://98648366289712</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART221">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://120783367060723</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.421451688</X>
+            <Y>0.879795671</Y>
+            <Z>2.830513</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0.027359009</Y>
+            <Z>0.234742045</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART222">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://95833558474760</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://128777350443987</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://98648366289712</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART223">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://126843194616647</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.284405112</X>
+            <Y>0.702754915</Y>
+            <Z>0.982493997</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.00012207</X>
+            <Y>-0.145519257</Y>
+            <Z>0.378235698</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART224">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://95833558474760</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://128777350443987</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://98648366289712</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART225">
+      <Properties>
+        <string name="Name">TalonKnife_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART226">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://131526152076135</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.352509797</X>
+            <Y>0.81740427</Y>
+            <Z>0.071874395</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.073730469</X>
+            <Y>0.313417435</Y>
+            <Z>0.000427267</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART227">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://76218711584211</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://109936035057037</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://84086593060494</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART228">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://72889082290475</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.402404785</X>
+            <Y>0.739071369</Y>
+            <Z>0.176516742</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.048828125</X>
+            <Y>-0.352621078</Y>
+            <Z>-0.000000004</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART229">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://76218711584211</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://109936035057037</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://84086593060494</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART230">
+      <Properties>
+        <string name="Name">RiftBlade_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART231">
+        <Properties>
+          <string name="Name">pommel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://117660243678941</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.303464353</X>
+            <Y>0.217718363</Y>
+            <Z>0.260595679</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000854492</X>
+            <Y>-1.312700272</Y>
+            <Z>0</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART232">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://107754190888901</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://138280191425046</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://138202417515437</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART233">
+        <Properties>
+          <string name="Name">blade_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://134664057994872</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.260758489</X>
+            <Y>2.14809823</Y>
+            <Z>0.208387375</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.00012207</X>
+            <Y>0.347537994</Y>
+            <Z>-0.000486374</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART234">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://107754190888901</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://138280191425046</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://138202417515437</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART235">
+        <Properties>
+          <string name="Name">hand_guard_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://92001826185522</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.699999988</X>
+            <Y>0.228638947</Y>
+            <Z>0.209389836</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.734235764</Y>
+            <Z>-0.000741959</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART236">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://107754190888901</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://138280191425046</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://138202417515437</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART237">
+        <Properties>
+          <string name="Name">handle_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://138691173437261</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160564587</X>
+            <Y>0.410207033</Y>
+            <Z>0.155789226</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.000183105</X>
+            <Y>-1.026988983</Y>
+            <Z>-0.00091362</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART238">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://107754190888901</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://138280191425046</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://138202417515437</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART239">
+      <Properties>
+        <string name="Name">MaulHammer_Frostborn</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART240">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89396885006103</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.233719423</X>
+            <Y>0.481125593</Y>
+            <Z>0.232663631</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.001037598</X>
+            <Y>-0.447231293</Y>
+            <Z>0.000202656</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART241">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://93219377451136</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://106996868150898</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123205235013017</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART242">
+        <Properties>
+          <string name="Name">shaft_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://121701495232989</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.386576533</X>
+            <Y>1.329676867</Y>
+            <Z>0.359964401</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0.000427246</X>
+            <Y>-0.280754089</Y>
+            <Z>-0.001262188</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART243">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://93219377451136</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://106996868150898</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123205235013017</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART244">
+        <Properties>
+          <string name="Name">hammer_head_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://87430104470600</url>
+          </Content>
+          <Vector3 name="size">
+            <X>1.317926884</X>
+            <Y>0.678975999</Y>
+            <Z>0.799999952</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>0.606121063</Y>
+            <Z>0.00001955</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART245">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://93219377451136</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://106996868150898</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://123205235013017</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+    <Item class="Model" referent="ART246">
+      <Properties>
+        <string name="Name">VectorRifle_VoidReaver</string>
+      </Properties>
+      <Item class="MeshPart" referent="ART247">
+        <Properties>
+          <string name="Name">barrel_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://86600977745204</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.138705701</X>
+            <Y>0.305986613</Y>
+            <Z>1.320559621</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001342773</X>
+            <Y>0.397006989</Y>
+            <Z>-0.710892797</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART248">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://82435149891570</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://111357351144539</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://135156610836066</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART249">
+        <Properties>
+          <string name="Name">frame_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://89645306796657</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.335160345</X>
+            <Y>1.072409391</Y>
+            <Z>2.256948948</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>0</X>
+            <Y>-0.013795853</Y>
+            <Z>0.242690027</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART250">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://82435149891570</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://111357351144539</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://135156610836066</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+      <Item class="MeshPart" referent="ART251">
+        <Properties>
+          <string name="Name">grip_geom</string>
+          <Content name="MeshId">
+            <url>rbxassetid://97918224746668</url>
+          </Content>
+          <Vector3 name="size">
+            <X>0.160599008</X>
+            <Y>0.435568154</Y>
+            <Z>0.568677843</Z>
+          </Vector3>
+          <CoordinateFrame name="CFrame">
+            <X>-0.001159668</X>
+            <Y>-0.057538986</Y>
+            <Z>0.538855314</Z>
+            <R00>-1</R00>
+            <R01>0</R01>
+            <R02>-0.000000087</R02>
+            <R10>0</R10>
+            <R11>1</R11>
+            <R12>0</R12>
+            <R20>0.000000087</R20>
+            <R21>0</R21>
+            <R22>-1</R22>
+          </CoordinateFrame>
+          <bool name="Anchored">true</bool>
+          <bool name="Massless">true</bool>
+          <bool name="DoubleSided">false</bool>
+          <bool name="CanCollide">false</bool>
+          <bool name="CanQuery">false</bool>
+          <bool name="CanTouch">false</bool>
+          <bool name="CastShadow">true</bool>
+          <token name="Material">256</token>
+          <Color3uint8 name="Color3uint8">16777215</Color3uint8>
+        </Properties>
+        <Item class="SurfaceAppearance" referent="ART252">
+          <Properties>
+            <string name="Name">SurfaceAppearance</string>
+            <Content name="ColorMap">
+              <url>rbxassetid://82435149891570</url>
+            </Content>
+            <Content name="MetalnessMap">
+              <url>rbxassetid://111357351144539</url>
+            </Content>
+            <Content name="RoughnessMap">
+              <url>rbxassetid://135156610836066</url>
+            </Content>
+          </Properties>
+        </Item>
+      </Item>
+    </Item>
+  </Item>
+</roblox>

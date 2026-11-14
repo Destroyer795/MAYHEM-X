@@ -1,6 +1,7 @@
 --!strict
+local Calendar = require(script.Parent.DailyCalendar)
 local ProfileRules = {}
-ProfileRules.Version = 3
+ProfileRules.Version = 4
 ProfileRules.MaximumStat = 1_000_000_000
 ProfileRules.LedgerLimit = 50
 ProfileRules.MatchRewardLimit = 64
@@ -48,6 +49,8 @@ function ProfileRules.default(preferences: any): any
 		operative = "Vanguard",
 		owned = { Pulse = true, Glacier = true },
 		dailyDay = -1,
+		dailyWeek = -1,
+		dailyMask = 0,
 	}
 end
 
@@ -82,6 +85,7 @@ function ProfileRules.clean(input: any, preferences: any, visuals: any, legacyPr
 		end
 	end
 	result.dailyDay = boundedInteger(source.dailyDay, -1, 100_000_000, -1)
+	Calendar.migrate(result,source)
 	if type(source.owned) == "table" then
 		for _, skin in visuals.Skins do if source.owned[skin.id] == true then result.owned[skin.id] = true end end
 	end
@@ -124,14 +128,11 @@ function ProfileRules.purchase(profile: any, skinId: string, visuals: any): bool
 	return true
 end
 
-function ProfileRules.claimDaily(profile: any, day: number): boolean
-	if type(day) ~= "number" or day % 1 ~= 0 or day < 0 or day > 100_000_000 or day <= profile.dailyDay then return false end
-	profile.dailyDay = day
-	profile.owned.Prism = true
-	local creditDelta = math.min(15, ProfileRules.MaximumStat - profile.credits)
-	profile.credits += creditDelta
-	ProfileRules.recordTransaction(profile, "daily:" .. tostring(day), "daily-cache", creditDelta, 0, 0)
-	return true
+function ProfileRules.claimDaily(profile: any, day: number): (boolean,any)
+	local accepted,reward=Calendar.grant(profile,day,ProfileRules.MaximumStat)
+	if not accepted then return false,nil end
+	ProfileRules.recordTransaction(profile,reward.id,"daily-cache",reward.credits,reward.shards,reward.seasonTokens,day*Calendar.DaySeconds)
+	return true,reward
 end
 
 function ProfileRules.awardMatch(profile: any, matchId: string, won: boolean, economy: any): (boolean, any)

@@ -25,12 +25,6 @@ function StyleRules.apply(record: any, catalog: any, command: any, payload: any,
 		record.owned[payload] = true
 		record.revision += 1
 		return true, "Added to your collection. Select it in Collection."
-	elseif command == "Daily" then
-		if record.dailyDay == day then return false, "Cache already claimed for today." end
-		record.dailyDay = day
-		record.owned.Prism = true
-		record.revision += 1
-		return true, "Prism trial added to your collection."
 	end
 	return false, "Unknown presentation request."
 end

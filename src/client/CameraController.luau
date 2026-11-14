@@ -50,7 +50,7 @@ function CameraController.makeViewmodel(self: any, slot: number)
 	local combat = self.combat or {}
 	local id = if slot == 1 then combat.primaryId or self.preferences.primaryWeapon else combat.meleeId or self.preferences.meleeWeapon
 	local kit = if slot == 1 then combat.gunKit or self.preferences.gunKit else combat.meleeKit or self.preferences.meleeKit
-	local model = Art.weapon(nil, slot, frame, accent, id, kit)
+	local model = Art.weapon(nil, slot, frame, accent, id, kit, self.preferences.skin)
 	self.weaponId, self.kit = id, kit
 	model:ScaleTo(0.65)
 	model.Name = "MayhemViewmodel"

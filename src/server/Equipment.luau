@@ -15,7 +15,9 @@ function Equipment.equip(character: Model, slot: number, weaponId: string?, kit:
 	if not hand or not hand:IsA("BasePart") then return end
 	local accent = character:GetAttribute("MayhemAccent") or Color3.fromRGB(149, 95, 255)
 	local grip = if slot == 1 then CFrame.new(0, -0.15, -1) else CFrame.new(0, -1.55, 0) * CFrame.Angles(math.pi, 0, 0)
-	local model = Art.weapon(character, slot, hand.CFrame * grip, accent, weaponId, kit)
+	local player=game:GetService("Players"):GetPlayerFromCharacter(character)
+	local skin=character:GetAttribute("MayhemSkin") or (player and player:GetAttribute("MayhemSkin"))
+	local model = Art.weapon(character, slot, hand.CFrame * grip, accent, weaponId, kit, skin)
 	local handle = model:FindFirstChild("grip_geom",true) or model:FindFirstChild("handle_geom",true)
 	if handle and handle:IsA("BasePart") then
 		local target = (hand.CFrame*CFrame.new(0,-0.12,0)).Position

@@ -33,6 +33,11 @@ function Get-MayhemProjectModel {
                 if ([IO.Path]::GetExtension($resolved) -eq '.rbxmx') {
                     $document = [xml][IO.File]::ReadAllText($resolved)
                     Add-MayhemXml -Item $document.roblox.Item -Name $Name -Parent $Parent -LogicalParent $LogicalParent
+                    $xmlLogical = if ($LogicalParent) { "$LogicalParent.$Name" } else { $Name }
+                    $xmlRoot = $entries | Where-Object { $_.LogicalPath -eq $xmlLogical } | Select-Object -First 1
+                    foreach ($property in $Node.PSObject.Properties) {
+                        if (-not $property.Name.StartsWith('$')) { Add-MayhemNode -Name $property.Name -Node $property.Value -Parent $xmlRoot.Referent -LogicalParent $xmlLogical }
+                    }
                     return
                 }
                 if ([IO.Path]::GetExtension($resolved) -ne '.luau') { throw "Offline builder only supports Luau source files: $resolved" }
