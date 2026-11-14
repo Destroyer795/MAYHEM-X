@@ -4,6 +4,7 @@ $clientRoot = Join-Path $projectRoot 'src\client'
 $bootstrap = [IO.File]::ReadAllText((Join-Path $clientRoot 'Bootstrap.client.luau'))
 $menus = [IO.File]::ReadAllText((Join-Path $clientRoot 'Menus.luau'))
 $menus += [IO.File]::ReadAllText((Join-Path $clientRoot 'MenuLayout.luau'))
+$menus += [IO.File]::ReadAllText((Join-Path $clientRoot 'ArmoryPanel.luau'))
 $hud = [IO.File]::ReadAllText((Join-Path $clientRoot 'Hud.luau'))
 $scene = [IO.File]::ReadAllText((Join-Path $projectRoot 'src\server\SceneService.luau'))
 $effects = [IO.File]::ReadAllText((Join-Path $clientRoot 'Effects.luau'))
@@ -20,7 +21,7 @@ foreach ($name in @([regex]::Matches($menus + $hud, '(?:self:open|self:openPage)
     if ($pages -notcontains $name) { throw "Missing menu destination: $name" }
     $checks++
 }
-foreach ($name in @('Matchmaking','Maps','Inventory','Shop','Daily','Settings')) {
+foreach ($name in @('Matchmaking','Maps','Armory','Shop','Daily','Settings')) {
     if ($pages -notcontains $name -or $scene -notmatch ('"' + $name + '"')) { throw "World terminal is not connected: $name" }
     $checks++
 }

@@ -8,7 +8,7 @@ local Visuals = require(shared.Visuals)
 local MapArt = require(shared.MapArt)
 local WorldPresentation = {}
 WorldPresentation.__index = WorldPresentation
-local lobbyLight = { clock = 14.2, density = 0.045, ambient = { 112, 137, 156 }, sky = { 152, 210, 238 } }
+local lobbyLight = { clock = 16.8, density = 0.055, ambient = { 146, 139, 133 }, sky = { 189, 190, 206 } }
 
 local function carrier(parent: Instance, name: string): Part
 	local item = Instance.new("Part")

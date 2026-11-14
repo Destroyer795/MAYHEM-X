@@ -15,7 +15,7 @@ function Preview.new(parent: Instance)
 	viewport.BackgroundColor3 = Color3.fromRGB(214, 235, 245)
 	viewport.BackgroundTransparency = 1
 	viewport.BorderSizePixel = 0
-	viewport.Ambient = Color3.fromRGB(157, 158, 187)
+	viewport.Ambient = Color3.fromRGB(171, 166, 158)
 	viewport.LightColor = Color3.fromRGB(246, 239, 225)
 	viewport.LightDirection = Vector3.new(-1, -1, -1)
 	viewport.Parent = parent
@@ -27,13 +27,13 @@ function Preview.new(parent: Instance)
 	return setmetatable({ frame = viewport, camera = camera, key = "", world = nil }, Preview)
 end
 
-function Preview.show(self: any, kind: string, operative: string, skin: string, weapon: number?)
+function Preview.show(self: any, kind: string, operative: string, skin: string, weapon: number?, weaponId: string?, kit: string?)
 	local character = Players.LocalPlayer.Character
 	local appearance = if character then character:FindFirstChild("MayhemStyle") else nil
 	local showcase = if kind == "operative" or kind == "victory" then ReplicatedStorage.Mayhem.Art:FindFirstChild("OperatorShowcase") else nil
 	if showcase and not showcase:IsA("Model") then showcase = nil end
 	if kind ~= "weapon" and not showcase and (not character or not appearance or not character:FindFirstChild("Head") or not (character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso"))) then return end
-	local key = kind .. operative .. skin .. tostring(weapon)
+	local key = kind .. operative .. skin .. tostring(weapon) .. tostring(weaponId) .. tostring(kit)
 	if self.key == key and self.character == character and self.appearance == appearance and self.showcase == showcase then return end
 	self.key, self.character, self.appearance, self.showcase = key, character, appearance, showcase
 	self.lastViewportSize = nil
@@ -52,7 +52,7 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 	self.camera.CFrame = CFrame.lookAt(Vector3.new(5.4, 2.5, -9), Vector3.new(0, -0.3, 0))
 	local accent = Color3.fromRGB(table.unpack((Visuals.skin(skin) or Visuals.Skins[1]).color))
 	if kind == "weapon" then
-		self.subject = Art.weapon(world, weapon or 1, CFrame.identity, accent)
+		self.subject = Art.weapon(world, weapon or 1, CFrame.identity, accent, weaponId, kit)
 		self.direction = if weapon == 2 then Vector3.new(0.5, 0.2, -1).Unit else Vector3.new(1, 0.25, 0.2).Unit
 	elseif showcase or character then
 		local source = (showcase or character) :: Model
@@ -69,23 +69,8 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 		end
 		rig:PivotTo(CFrame.identity)
 		rig.Parent = world
-		if showcase then
-			local chest = rig:FindFirstChild("UpperTorso")
-			if chest and chest:IsA("BasePart") then
-				local profileAccent = if operative == "Spectre" then Color3.fromRGB(89, 220, 239) elseif operative == "Relay" then Color3.fromRGB(255, 190, 88) else accent
-				local inlay = Instance.new("Part")
-				inlay.Name = "MayhemPreviewInlay"
-				inlay.Size = Vector3.new(0.22, 0.055, 0.035)
-				inlay.CFrame = chest.CFrame * CFrame.new(0, -chest.Size.Y * 0.12, -chest.Size.Z * 0.55)
-				inlay.Color, inlay.Material = profileAccent, Enum.Material.Neon
-				inlay.Anchored, inlay.CanCollide, inlay.CanTouch, inlay.CanQuery, inlay.Massless = false, false, false, false, true
-				inlay.CastShadow, inlay.Parent = false, rig
-				local weld = Instance.new("WeldConstraint")
-				weld.Part0, weld.Part1, weld.Parent = chest, inlay, inlay
-			end
-		else
-			Art.outfit(rig, accent, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders)
-		end
+		Art.outfit(rig, accent, (Visuals.operative(operative) or Visuals.Operatives[1]).shoulders, operative)
+
 		for _, part in rig:GetDescendants() do
 			if part:IsA("BasePart") then part.Anchored = part.Name == "HumanoidRootPart"; part.Massless = true end
 		end
@@ -132,7 +117,8 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 			local bounds, size = self.subject:GetBoundingBox()
 			pedestalY = bounds.Position.Y - size.Y * 0.5 - 0.45
 		end
-		Art.place(world, "AerialBastion", CFrame.new(0, pedestalY, 0), Vector3.new(6, 0.9, 6))
+		local plinth = Geometry.part(world, "DisplayPlinth", Vector3.new(4.6,0.22,4.6), CFrame.new(0,pedestalY+0.34,0), Color3.fromRGB(43,44,46), Enum.Material.Metal)
+		plinth.CanCollide, plinth.CanQuery = false, false
 	else self.key = "" end
 	if self.subject then
 		local bounds, size = self.subject:GetBoundingBox()
@@ -142,11 +128,8 @@ function Preview.show(self: any, kind: string, operative: string, skin: string, 
 			local dressing = Instance.new("Folder")
 			dressing.Name, dressing.Parent = "CinematicScenery", world
 			self.dressing, self.dressingHidden = dressing, nil
-			for _, x in {-1, 1} do
-				local spire = Art.place(dressing, "SkySpire", CFrame.new(x * h * 0.8, bounds.Position.Y - h * 0.3, h * 0.95), Vector3.new(h * 0.48, h * 1.5, h * 0.48))
-				for _, part in spire:GetDescendants() do if part:IsA("BasePart") then part.Color = Color3.fromRGB(75, 77, 101); part.Transparency = 0.18 end end
-			end
-			Art.weapon(dressing, 1, CFrame.new(h * 0.6, bounds.Position.Y - h * 0.28, -h * 0.05) * CFrame.Angles(0, math.rad(65), math.rad(-15)), accent)
+			Art.place(dressing, "SignalHangar", CFrame.new(0,bounds.Position.Y+h*0.25,h*1.15), Vector3.new(h*4.3,h*2.5,h*2.8))
+			Art.weapon(dressing, 1, CFrame.new(h*0.65,bounds.Position.Y-h*0.28,-h*0.06)*CFrame.Angles(0,math.rad(70),math.rad(-12)),accent,weaponId,kit)
 		end
 		self.camera.FieldOfView = if kind == "weapon" then 34 else 40
 		self:step(true)

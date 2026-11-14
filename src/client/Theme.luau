@@ -4,15 +4,15 @@ local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visua
 local Theme: any = {}
 for name, rgb in Visuals.Palette do Theme[name] = Color3.fromRGB(table.unpack(rgb)) end
 for name, rgb in {
-	Surface = {18, 20, 27}, Panel = {32, 35, 47}, Void = {12, 14, 19}, Navy = {42, 47, 60},
-	Ink = {241, 239, 232}, White = {241, 239, 232}, Muted = {176, 181, 196}, Metal = {156, 165, 184},
-	Action = {190, 177, 255}, Purple = {190, 177, 255}, Cyan = {190, 177, 255},
+	Surface = {21, 22, 24}, Panel = {38, 38, 39}, Void = {12, 13, 15}, Navy = {48, 47, 46},
+	Ink = {242, 237, 226}, White = {242, 237, 226}, Muted = {184, 180, 174}, Metal = {158, 155, 150},
+	Action = {237, 226, 205}, Purple = {237, 226, 205}, Cyan = {232, 155, 148}, Oxblood = {107, 39, 45},
 	Gold = {215, 211, 188}, Red = {255, 139, 151}, Magenta = {219, 174, 214},
 } do Theme[name] = Color3.fromRGB(table.unpack(rgb)) end
 Theme.Spacing = table.freeze({ Tight = 8, Card = 16, Section = 24 })
 Theme.Font = Enum.Font.BuilderSansMedium
 Theme.FontStrong = Enum.Font.BuilderSansBold
-Theme.FontDisplay = Enum.Font.Oswald
+Theme.FontDisplay = Enum.Font.BuilderSansBold
 Theme.FontNumeric = Enum.Font.RobotoMono
 
 function Theme.corner(item: Instance, radius: number?)
@@ -84,7 +84,7 @@ function Theme.button(parent: Instance, name: string, content: string, position:
 	end
 	item.SelectionImageObject = Theme.FocusOutline
 	item.Parent = parent
-	Theme.corner(item, 6)
+	Theme.corner(item, 2)
 	local border = Theme.stroke(item, if secondary then Theme.Metal else Theme.Action, if secondary then 0.85 else 0.2)
 	local scale = Instance.new("UIScale")
 	scale.Parent = item

@@ -5,10 +5,11 @@ local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local Visuals = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Visuals)
 local Catalog = require(game:GetService("ReplicatedStorage").Mayhem.Shared.MapCatalog)
-local Config = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Config)
+local Arsenal = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Arsenal)
 local Theme = require(script.Parent.Theme)
 local Preview = require(script.Parent.Preview)
 local MenuLayout = require(script.Parent.MenuLayout)
+local ArmoryPanel = require(script.Parent.ArmoryPanel)
 local Menus = {}
 Menus.__index = Menus
 
@@ -363,6 +364,8 @@ end
 function Menus.render(self: any, state: any, elapsed: number, preferences: any, style: any)
 	if not self.page then return end
 	self.style = style
+	self.rifleTab.Text=(Arsenal.Items[preferences.primaryWeapon] or Arsenal.Items.Vector).name
+	self.bladeTab.Text=(Arsenal.Items[preferences.meleeWeapon] or Arsenal.Items.Rift).name
 	self.state = state
 	self.reducedMotion = preferences.reducedMotion
 	Theme.reducedMotion = preferences.reducedMotion
@@ -480,7 +483,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.shopRotate.Position, self.shopRotate.Size = UDim2.fromOffset(rightX + math.floor(rightWidth * 0.56), actionY), UDim2.fromOffset(math.floor(rightWidth * 0.19), 44)
 	self.shopSwap.Position, self.shopSwap.Size = UDim2.fromOffset(rightX + math.floor(rightWidth * 0.77), actionY), UDim2.fromOffset(math.floor(rightWidth * 0.23), 44)
 	self.shopAction.TextSize, self.shopRotate.TextSize, self.shopSwap.TextSize = 13, 12, 12
-	self.shopSwap.Text = if self.shopWeapon == 1 then "VIEW BLADE" else "VIEW RIFLE"
+	self.shopSwap.Text = if self.shopWeapon == 1 then "VIEW MELEE" else "VIEW PRIMARY"
 	self.shopAction.Text = if style.skin == selectedItem.id then "EQUIPPED" elseif style.owned[selectedItem.id] then "EQUIP FINISH" elseif selectedItem.cost then "BUY / " .. selectedItem.cost .. (if selectedItem.currency == "credits" then " CR" elseif selectedItem.currency == "shards" then " SHARD" else " TOKENS") else "CLAIM / FREE"
 	self.shopAction.Active = style.ready and style.skin ~= selectedItem.id
 	self.dailyButton.Text = if style.dailyClaimed then "VIEW PRISM IN COLLECTION" else "CLAIM DAILY REWARD"
@@ -491,9 +494,7 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.progressLevel.Text = "LEVEL " .. profile.level
 	self.progressXP.Text = (profile.xp % 300) .. " / 300 XP TO NEXT LEVEL"
 	self.progressFill.Size = UDim2.fromScale((profile.xp % 300) / 300, 1)
-	Theme.selected(self.armoryRifle, self.weapon == 1)
-	Theme.selected(self.armoryBlade, self.weapon == 2)
-	self.weaponStats.Text = if self.weapon == 1 then string.format("VECTOR-18 / AUTO\n\n%d DAMAGE\n%.2fs FIRE INTERVAL\n%d STUD RANGE\n%d + %d AMMUNITION\n%.1fs RELOAD\n\nNO MASTERY BONUSES", Config.Rifle.Damage, Config.Rifle.Interval, Config.Rifle.Range, Config.Rifle.Magazine, Config.Rifle.Reserve, Config.Rifle.ReloadTime) else string.format("RIFT BLADE / MELEE\n\n%d DAMAGE\n%.2fs ATTACK INTERVAL\n%d STUD RANGE\nLINE OF SIGHT REQUIRED\n\nNO MASTERY BONUSES", Config.Blade.Damage, Config.Blade.Interval, Config.Blade.Range)
+
 	local roster = {}
 	for _, player in Players:GetPlayers() do
 		local stats = player:FindFirstChild("leaderstats")
@@ -537,12 +538,12 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.saveNote.Text = "PREFERENCES / " .. (preferences.saveStatus or profile.status)
 	for name, item in buttons do item.Active = name == "testAudio" or preferences.loaded == true end
 	MenuLayout.content(self, width, height, state, style, profile)
-	if self.page == "Deploy" then self.preview:show("operative", style.operative, style.skin)
+	ArmoryPanel.render(self,state,preferences,style)
+	if self.page == "Deploy" then self.preview:show("operative", style.operative, style.skin, 1, preferences.primaryWeapon, preferences.gunKit)
 	elseif self.page == "Character" then self.characterPreview:show("operative", self.draftOperative, style.skin)
-	elseif self.page == "Inventory" then self.weaponPreview:show("weapon", style.operative, self.draftSkin, self.weapon)
+	elseif self.page == "Inventory" then self.weaponPreview:show("weapon", style.operative, self.draftSkin, self.weapon, if self.weapon==1 then preferences.primaryWeapon else preferences.meleeWeapon, if self.weapon==1 then preferences.gunKit else preferences.meleeKit)
 	elseif self.page == "Maps" then self.mapPreview:map(self.draftMap); self.mapPreview:step(true)
-	elseif self.page == "Armory" then self.armoryPreview:show("weapon", style.operative, style.skin, self.weapon)
-	elseif self.page == "Shop" then self.shopPreview:show("weapon", style.operative, self.draftShop, self.shopWeapon) end
+	elseif self.page == "Shop" then self.shopPreview:show("weapon", style.operative, self.draftShop, self.shopWeapon, if self.shopWeapon==1 then preferences.primaryWeapon else preferences.meleeWeapon, if self.shopWeapon==1 then preferences.gunKit else preferences.meleeKit) end
 end
 
 function Menus.animate(self: any)

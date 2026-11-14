@@ -14,7 +14,8 @@ end
 
 local function station(parent: Instance, position: Vector3, title: string, subtitle: string, screen: string, accent: Color3)
 	local frame = CFrame.lookAt(position, Vector3.new(0, position.Y, 232))
-	detail(parent, "ConsolePlinth", Vector3.new(7, 0.5, 4), frame * CFrame.new(0, -2, 0), color("Metal"))
+	detail(parent, "ConsolePlinth", Vector3.new(7, 0.5, 4), frame * CFrame.new(0, -2, 0), Color3.fromRGB(53,55,59))
+	detail(parent, "ConsoleSupport", Vector3.new(1.3, 2, 1.1), frame * CFrame.new(0, -1.1, 0.3), Color3.fromRGB(83,84,87))
 	local display = Geometry.sign(parent, frame, Vector3.new(7, 3, 0.5), title, subtitle, accent)
 	local prompt = Instance.new("ProximityPrompt")
 	prompt.ActionText = "Open " .. title
@@ -35,54 +36,86 @@ function Scene.decorate()
 	local art = Instance.new("Folder")
 	art.Name = "ArtDirection"
 	art.Parent = world
-	local purple, cyan, magenta = color("Purple"), color("Cyan"), color("Magenta")
-	for _, item in world:GetDescendants() do
+	local stone = Color3.fromRGB(222,215,202)
+	local ember = Color3.fromRGB(173,74,77)
+	local graphite = Color3.fromRGB(45,46,49)
+	for _, item in lobby:GetChildren() do
 		if item:IsA("BasePart") then
-			if item.Material == Enum.Material.Neon then item.Color = cyan
-			elseif item.Material == Enum.Material.Metal then item.Color = if item.Name == "LobbyDeck" then Color3.fromRGB(230, 240, 242) else Color3.fromRGB(157, 186, 205) end
+			item.Color,item.Material = graphite,Enum.Material.Metal
+			if item.Name=="RearWall" then
+				item.Transparency=1
+				item.CFrame=CFrame.new(0,37,260.5)
+				item:SetAttribute("MayhemCollisionProxy",true)
+			elseif item.Name=="LobbyRail" then
+				item.Size=Vector3.new(2,6,56)
+				item.CFrame=CFrame.new(item.Position.X,35,233)
+			end
+			if item.Name=="ObservationGlass" then item.Color,item.Material,item.Transparency=Color3.fromRGB(175,190,203),Enum.Material.Glass,0.86 end
+			if item.Name=="BrandPanel" then
+				item.Transparency=1
+				for _,gui in item:GetChildren() do if gui:IsA("SurfaceGui") then gui.Enabled=false end end
+			end
 		end
 	end
-
-	local hub = Instance.new("Folder")
-	hub.Name = "HubArchitecture"
-	hub.Parent = art
-	Art.place(hub, "AerialBastion", CFrame.new(0, 20, 230), Vector3.new(88, 23, 66))
-	for _, side in { -1, 1 } do
-		for _, z in { 209, 253 } do
-			Art.place(hub, "SkySpire", CFrame.new(side * 44, 36, z), Vector3.new(12, 42, 14))
+	local hub=Instance.new("Folder")
+	hub.Name,hub.Parent="HubArchitecture",art
+	Art.place(hub,"SignalHangar",CFrame.new(0,48,230),Vector3.new(84,34,62))
+	local deck=lobby:FindFirstChild("LobbyDeck")
+	if deck and deck:IsA("BasePart") then
+		deck.MaterialVariant,deck.Color="MayhemDeck",Color3.fromRGB(125,130,136)
+		deck.Size,deck.CFrame=Vector3.new(80,4,56),CFrame.new(0,30,233)
+	end
+	Geometry.sign(hub,CFrame.new(0,46,251),Vector3.new(25,5,0.4),"MAYHEM X","FIELD OPERATIONS / ARMORY 07",stone)
+	for _,x in {-19,19} do
+		detail(hub,"AisleMarker",Vector3.new(0.08,0.03,29),CFrame.new(x,32.03,229),stone)
+	end
+	for index,id in {"Vector","Needle","Mantis","Breaker","Rift","Talon","Maul"} do
+		local Arsenal=require(ReplicatedStorage.Mayhem.Shared.Arsenal)
+		local definition=Arsenal.Items[id]
+		local x=-28+(index-1)*9.3
+		local frame=CFrame.new(x,37.2,249.5)
+		detail(hub,"WeaponDock",Vector3.new(6.8,0.3,3.6),CFrame.new(x,33.1,249),graphite)
+		local weapon=Art.weapon(hub,definition.slot,frame*CFrame.Angles(0,math.rad(80),if definition.slot==1 then math.rad(-10) else math.rad(18)),stone,id)
+		weapon.Name="Display"..id
+		Geometry.sign(hub,CFrame.new(x,34,247.5),Vector3.new(6.7,1.15,0.15),definition.name,definition.category,stone)
+	end
+	local template=ReplicatedStorage.Mayhem.Art:FindFirstChild("OperatorShowcase")
+	if template and template:IsA("Model") then
+		for index,id in {"Vanguard","Spectre","Relay"} do
+			local x=-30
+			local z=213+(index-1)*10
+			local rig=template:Clone()
+			rig.Name=id.."Display"
+			for _,item in rig:GetDescendants() do if item:IsA("LuaSourceContainer") then item:Destroy() end end
+			rig.Parent=hub
+			rig:PivotTo(CFrame.new(x,36,z)*CFrame.Angles(0,-math.pi/2,0))
+			Art.outfit(rig,stone,Visuals.operative(id).shoulders,id)
+			local bounds,size=rig:GetBoundingBox()
+			rig:PivotTo(rig:GetPivot()+Vector3.new(0,32.5-(bounds.Position.Y-size.Y/2),0))
+			for _,p in rig:GetDescendants() do if p:IsA("BasePart") then p.Anchored=true; p.CanCollide,p.CanTouch,p.CanQuery=false,false,false end end
+			detail(hub,"OperatorPlinth",Vector3.new(5,0.5,5),CFrame.new(x,32.25,z),graphite)
+			Geometry.sign(hub,CFrame.new(-26.8,34,z)*CFrame.Angles(0,-math.pi/2,0),Vector3.new(4.8,1.2,0.15),string.upper(id),"OPERATOR BAY / 0"..index,stone)
 		end
 	end
-	Art.place(hub, "ReactorTurbine", CFrame.new(0, 48, 231), Vector3.new(8, 12, 8))
-	local deck = lobby:FindFirstChild("LobbyDeck")
-	if deck and deck:IsA("BasePart") then deck.Material, deck.MaterialVariant, deck.Color = Enum.Material.Metal, "MayhemDeck", Color3.new(1, 1, 1) end
-	Geometry.sign(hub, CFrame.new(0, 46, 207) * CFrame.Angles(0, math.pi, 0), Vector3.new(33, 6, 0.6), "MAYHEM X", "ENTER THE CHAOS. BECOME THE LEGEND.", purple)
-	for _, side in { -1, 1 } do
-		detail(hub, "FloorCircuit", Vector3.new(0.16, 0.08, 35), CFrame.new(side * 9, 32.08, 231), cyan, true)
-	end
-	Geometry.ring(hub, "HubOrrery", CFrame.new(0, 49, 230), 10, 20, purple, 0.2)
-	Geometry.ring(hub, "HubOrreryInner", CFrame.new(0, 48.5, 230), 6.8, 16, cyan, -0.3)
-	local pedestal = Geometry.part(hub, "ShowcaseDais", Vector3.new(10, 1.4, 8), CFrame.new(-27, 32.7, 240), color("Panel"), Enum.Material.Metal, true)
-	local showcase = pedestal.CFrame * CFrame.Angles(0, math.rad(35), 0)
-	Art.place(hub, "SignalArmor", showcase * CFrame.new(0, 3, 0), Vector3.new(3, 3.2, 1.7))
-	Art.place(hub, "SignalHelmet", showcase * CFrame.new(0, 5.4, 0), Vector3.new(1.8, 1.8, 1.7))
-	Geometry.ring(hub, "ShowcaseLight", CFrame.new(-27, 33.5, 240), 4.2, 12, purple)
-	station(hub, Vector3.new(0, 36, 213), "DEPLOY", "LAST SIGNAL / SOLO SURVIVAL", "Matchmaking", purple)
-	station(hub, Vector3.new(28, 36, 218), "COLLECTION", "OPERATIVES / WEAPON STYLES", "Inventory", cyan)
-	station(hub, Vector3.new(28, 36, 244), "STYLE LAB", "COMPLIMENTARY SESSION STYLES", "Shop", magenta)
-	station(hub, Vector3.new(-28, 36, 218), "DAILY CACHE", "SESSION COSMETIC TRIAL", "Daily", purple)
-	station(hub, Vector3.new(0, 36, 249), "SYSTEMS", "AUDIO / GRAPHICS / CAMERA", "Settings", cyan)
-	station(hub, Vector3.new(-28, 36, 248), "FRONTIERS", "EXPLORE / VOTE / DEPLOY", "Maps", color("Gold"))
-	local telemetry = Geometry.sign(hub, CFrame.new(0, 40, 213) * CFrame.Angles(0, math.pi, 0), Vector3.new(14, 2.5, 0.3), "LAST SIGNAL", "WAITING FOR CONTENDERS", cyan)
-	telemetry.Name = "HubTelemetry"
-	for _, side in { -1, 1 } do
-		detail(hub, "GardenBed", Vector3.new(4, 0.6, 6), CFrame.new(side * 33, 32.2, 231), color("Panel"))
-		Art.place(hub, "CanopyTree", CFrame.new(side * 35, 38, 231), Vector3.new(9, 12, 9), 2)
+	station(hub,Vector3.new(0,35,208),"PLAY","LAST SIGNAL / SOLO SURVIVAL","Matchmaking",stone)
+	station(hub,Vector3.new(29,35,215),"ARMORY","7 WEAPONS / HANDLING KITS","Armory",ember)
+	station(hub,Vector3.new(29,35,230),"COLLECTION","EARN / PREVIEW / EQUIP","Shop",stone)
+	station(hub,Vector3.new(29,35,243),"DAILY CACHE","CHECK TODAY'S REWARD","Daily",stone)
+	station(hub,Vector3.new(-12,35,242),"ARENAS","EXPLORE / VOTE / DEPLOY","Maps",ember)
+	station(hub,Vector3.new(12,35,242),"SYSTEMS","AUDIO / DISPLAY / CAMERA","Settings",stone)
+	local telemetry=Geometry.sign(hub,CFrame.new(0,40,207)*CFrame.Angles(0,math.pi,0),Vector3.new(18,2,0.3),"LAST SIGNAL","WAITING FOR CONTENDERS",stone)
+	telemetry.Name="HubTelemetry"
+	for _,x in {-24,24} do
+		local lamp=detail(hub,"CeilingWash",Vector3.new(0.3,0.3,8),CFrame.new(x,52,230),stone,true)
+		local light=Instance.new("PointLight")
+		light.Color,light.Brightness,light.Range=stone,1.2,32
+		light.Shadows,light.Parent=false,lamp
 	end
 
-	Lighting.ClockTime = 13.5
+	Lighting.ClockTime = 16.8
 	Lighting.Brightness = 2.5
-	Lighting.Ambient = Color3.fromRGB(149, 174, 194)
-	Lighting.OutdoorAmbient = Color3.fromRGB(162, 189, 207)
+	Lighting.Ambient = Color3.fromRGB(140, 134, 130)
+	Lighting.OutdoorAmbient = Color3.fromRGB(161, 165, 180)
 	Lighting.EnvironmentDiffuseScale = 0.4
 	Lighting.EnvironmentSpecularScale = 0.65
 	Lighting.ShadowSoftness = 0.4
