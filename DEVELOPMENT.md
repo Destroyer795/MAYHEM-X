@@ -2,6 +2,18 @@
 
 ## Current UI review
 
+The cache/cosmetic update adds three full-surface collections and a Monday-Sunday UTC calendar. Open Collection > Workshop, select a signature finish and switch between all seven weapons. Drag or use Rotate, zoom, and compare stock; buy/equip controls use the existing server catalog. Collection > Daily Cache shows the actual server weekday, all seven rewards and the next Monday reset. The local file clearly identifies unsaved session rewards. Do not advance the system clock to test rewards.
+
+`require(game.ServerScriptService.MayhemTests).cache()` in the Studio server runs focused calendar, mocked-save recovery, migration, entitlement and PBR-structure cases. The final run passed 372 assertions. The mock suite includes failed writes, a response lost after commit, parallel requests, save recovery and session disclosure. It is not a real persistence test.
+
+The opt-in `tests/studio/CacheCosmetics.*.luau` drivers use `ExecuteMultiplayerTestAsync(2, "MayhemCacheCosmetics")`. They require PlaceId 0, explicitly seed nine server eliminations as a purchase fixture, and do not prove match earnings. They inspect actual queue insertion, duplicate daily/purchase requests, ownership, respawn and other-client weapon replication. Map URL getters require Plugin capability, so LocalScripts assert SurfaceAppearance replication and preload the actual assets; the plugin-side SkinCases verifies every map reference. Headless clients without RenderStepped report first-person factory checks separately from live first-person rendering. Remove both drivers before saving; Rojo excludes them.
+
+The final two-client run passed 67 and 63 assertions, with active render loops on both clients. It verified real first-person firearms/melee, held models visible to the other client, purchase/claim duplication rejection and respawn retention. Early harness attempts exposed a Plugin-only property read and a switch request sent during spawn protection; the final drivers use allowed reads and wait for the valid combat window. Both temporary scripts were removed from the saved place.
+
+Final focused local checks: 599 skin/export assertions, 78 interface bindings, twelve contrast pairs, eleven project-model cases and gameplay preservation. All 63 atlas images loaded in one client; a delayed-preload fixture exposed the ten-second Retry state and was cleaned up. Mouse drag and wheel zoom changed real preview state. Keyboard navigation, a calendar claim and receipt dismissal worked in phone emulation. Desktop 1920 x 1080, laptop 1365 x 768, tablet 1375 x 1031 and phone 401 x 777 / 749 x 381 views were inspected. Short screens scroll the calendar body. Native multi-touch/pinch and physical controllers remain unverified. Studio's renderer sometimes stalled at 1 x 1; no successful capture is claimed for those attempts.
+
+Evidence is `build/screenshots/Cache-*.jpg`, `build/Studio-CacheCosmetics-Acceptance-20261114.json` and `build/CacheCosmetics-UI-Acceptance-20261114.json`. The validated source snapshot contains 58 scripts, all 21 skin variants and the Sensor enum token. Native Rojo and Luau CLI checks were unavailable. Twenty-five changed live modules matched filesystem source in the final parity check.
+
 Open `build/MAYHEM-X-Transformation.rbxl`, the live Studio deliverable. Do not overwrite it with an offline build. The Field Operations menu and hangar are implemented in the actual place and mirrored to source.
 
 1. Press F5. Inspect the hangar home, Play, wallet and desktop command rail.
@@ -65,6 +77,6 @@ To rerun only when gameplay changes require it, temporarily insert the two `test
 
 Use `scripts/git.ps1`, which selects `.version-control/`; do not replace history or write protected `.git/` metadata. Current branch: `feature/studio-production-transformation`. Origin remains `https://github.com/Destroyer795/MAYHEM-X.git`.
 
-Review named diffs, run relevant checks, stage explicit source/document paths and create meaningful commits. Never stage secrets, tools, generated places, temporary fixtures or screenshots blindly. The user authorized a normal push for this UI milestone. Do not force-push or overwrite remote changes. GitHub was unreachable over port 443 during this session; use normal Git authentication if required later.
+Review named diffs, run relevant checks, stage explicit source/document paths and create meaningful commits. Never stage secrets, tools, generated places, temporary fixtures or screenshots blindly. The cache/cosmetic task explicitly prohibits a push without separate authorization. Do not force-push or overwrite remote changes.
 
 Current source backups include `build/backups/Menus-before-iris-redesign.luau`, `Theme-before-iris-redesign.luau`, `Hud-before-reward-layout.luau` and `Preview-before-rig-motion.luau`. Earlier binary/source archives remain intact. Windows denied copying the open transformation binary; no new binary backup is claimed.

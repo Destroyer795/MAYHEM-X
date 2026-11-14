@@ -19,10 +19,13 @@ Round lifecycle: `MapService.load(id, true)` explicitly creates a fresh arena at
 | `src/shared/Art.luau`, `MapArt.luau` | Nonphysical original mesh placement, equipment/outfits, map dressing and lighting profiles |
 | `src/shared/Environment.luau` | Owned Terrain surroundings, horizon composition and bounded map-to-map cleanup |
 | `src/shared/` | Frozen combat balance/protocol, separate economy configuration, pure gameplay/style/map/preference rules, audio and animation asset config, art tokens and geometry |
-| `src/shared/ProfileRules.luau` | V3 profile migration, bounded currencies, idempotent rewards, transaction ledger and catalog validation |
+| `src/shared/ProfileRules.luau` | V4 profile migration, bounded currencies, idempotent rewards, transaction ledger and catalog validation |
+| `src/shared/DailyCalendar.luau` | Frozen weekly reward schedule, Monday UTC epoch, seven claim bits and server-date grant rules |
 | `src/client/Hud.luau`, `Menus.luau` | Combat telemetry, animated result payout and existing functional navigation/collection/settings/ballot bindings |
 | `src/client/MenuLayout.luau` | Grouped navigation, responsive screen composition, operator stage, real profile summary and availability-aware workshop/career links |
 | `src/client/ArmoryPanel.luau` | Seven-weapon selection, 3D previews, kit comparisons and existing preference callbacks |
+| `src/client/CollectionPanel.luau`, `DailyCachePanel.luau` | Actual weapon inspection, catalog actions, seven-day calendar, storage disclosure and reward receipts |
+| `src/client/InspectionInput.luau` | Local IAS context for held mouse/touch rotation and wheel/pinch zoom, enabled only on visible weapon previews |
 | `src/shared/Arsenal.luau` | Frozen weapon definitions, allowlisted loadout IDs and free handling sidegrades |
 | `src/client/Theme.luau`, `Preview.luau` | Typography, colors, 8/16/24 spacing tokens, rounded buttons, state/hover feedback and disposable previews, including the optional live operator showcase |
 | `src/client/CameraController.luau` | Both perspectives, input/aim, camera obstruction and cosmetic viewmodel animation |
@@ -32,11 +35,19 @@ Round lifecycle: `MapService.load(id, true)` explicitly creates a fresh arena at
 | `assets/maps/*.json`, `scripts/maps.ps1` | Five authored layouts and shared physical-template compiler |
 | `assets/audio/scorebook.json`, `scripts/audio.ps1` | Original composition/effect definitions and PCM renderer |
 | `assets/art/manifest.json`, `Library.rbxmx`, `scripts/art.ps1` | Twenty-two original Studio-generated models, returned asset references and reproducible source export |
+| `assets/art/skins.json`, `Skins.rbxmx` | Twenty-one original UV/PBR variants, generation provenance and normalized source export |
+| `src/shared/SkinAssets.luau` | Exported atlas URIs for explicit client preloading, without reading Plugin-only map properties at runtime |
 | `tests/`, `scripts/` | Structural/geometry/WAV checks, Luau cases, Studio helpers, local setup/build/package |
 
 Five complete baseline files, twelve original gameplay methods and the camera aiming function are checked against `9172422`. Reload and switch now use the selected weapon definition and are covered by focused arsenal cases. Startup runs the preserved arena builder, removes its superseded arena/duel geometry, decorates the hub and clones one premium map. The editor preview is removed by that startup builder.
 
 ## Field armory
+
+`Art.weapon` resolves an owned cosmetic ID supplied by the server presentation path, or the client's acknowledged preferences for its viewmodel. The same original variant serves collection, held third-person equipment and first-person rendering. All 66 new mesh components use ColorMap, MetalnessMap and RoughnessMap. No normal map is claimed. Solaris adds a gold tint over its original etched atlas. Optional handling attachments retain their mechanical materials. A missing variant sets `SkinUnavailable`; preview preloading reports failure rather than calling the stock mesh a full wrap. Legacy finishes retain their signal accent.
+
+`Art.preload` uses temporary Decal probes because mesh preloading alone did not reliably request the protected surface atlases. Requests retry once, probes are destroyed, and equipped primary/melee atlases warm only when the acknowledged loadout key changes. Viewports use a built-in Sky reflection cubemap. Their ten-second loading watchdog exposes Retry and ignores stale results after a page or request changes. Reduced motion pauses automatic rotation. UI pointer gestures feed local IAS actions without replacing combat controls.
+
+Daily claims use the server clock, never a client date. `dailyDay` remains an absolute high-water mark; `dailyWeek` and a seven-bit `dailyMask` track the visible calendar. V3 migration retains the previous claim cursor and ownership. A persistent claim renews the lease, serializes a prospective profile and uses UpdateAsync before granting in memory. Other presentation mutations pause during confirmation. An unknown result retains `pendingDaily`; retries accept an already-written cursor and normal saves recover that claim before writing another snapshot. Currency changes during a yielding write remain dirty for the next save. Session-only grants are explicitly previews and are never labelled saved.
 
 Loadout preferences allow four primary IDs, three melee IDs and three kits per slot. Old V3 profiles receive default Vector/Rift and Standard/Balanced settings through the existing preference merge. No currency or ownership schema is duplicated. The server resolves and freezes a weapon definition at life start; later preference edits affect the next life. Reload, reserve caps, switching, held models, HUD names and first-person previews use that definition.
 

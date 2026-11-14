@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-14: Full-surface collections and weekly Daily Cache
+
+- Inspected real weapon UV data and generated three original PBR collections across all seven weapons, 21 variants and 66 mesh components. Void Reaver uses engraved obsidian/violet, Solaris uses gold/obsidian sunburst work and Frostborn uses frost-etched ivory/glacial metal. Captured actual returned mesh/color/metalness/roughness IDs and prompts. Preserved the eight legacy signal finishes and existing ownership.
+- Connected the shared art factory to server-held weapons and acknowledged first-person skins. Cosmetic models remain nonphysical. Collection adds seven-weapon inspection, stock comparison, automatic rotation, mouse/touch drag, zoom, entitlement states and real catalog actions. Preload failures are visible.
+- Replaced the single daily button layout with seven weekday rewards, a featured Frostborn Sunday preview, current/claimed/upcoming states, UTC reset information and reward receipts. Narrow screens use a horizontal weekday rail and separate weekly feature. Improved the home operator/hangar composition, mounted weapon display, navigation marks and workshop staging.
+- Added profile schema V4 without changing the store key or resetting balances. Server-owned calendar grants at most today's reward, once, with no streak requirement. Weekly Credits total 95 versus the old 105. Persistent daily rewards confirm the write before revealing success; uncertain commits block competing writes and recover idempotently. Local unsaved claims are labelled session previews.
+- Passed 372 focused Studio assertions, 599 skin/export checks, 78 interface checks, 645 existing art checks, eleven project-model cases and twelve contrast pairs. Two clients passed 67 and 63 scenario assertions, including actual first-person rendering and other-player cosmetic replication. Purchase Credits were explicitly seeded for this fixture. Real published save/rejoin remains unverified because the local place has PlaceId/GameId 0.
+- Corrected short-window UDim arithmetic, an occluding weapon-preview plinth, UI-processed drag/wheel routing and missing atlas preloads. Added bounded retries, a tested ten-second Retry state, reflection cubemaps and a gold tint over Solaris engraving. All 63 atlas images eventually loaded locally; one HTTP 503 recovered. Existing generated-content warnings remain disclosed.
+- Reviewed desktop/laptop, tablet and phone portrait/landscape captures. Phone calendar claim/receipt and keyboard navigation worked; physical touch/pinch/controller acceptance remains open. Final live source parity passed for 25 modules. Saved the Transformation place and built a separate 58-source XML snapshot after fixing orientation enum serialization. Windows denied a second binary copy. Intermittent 1 x 1 renderer stalls prevented some additional capture attempts.
+- No dependencies, publishing, Robux spending or GitHub push were added. Source checkpoint: `build/backups/cache-cosmetics-fac5587.zip`. Older builds and history are preserved.
+
 ## 2026-11-14: Field Operations hub, outfits and expanded armory
 
 - Added five original weapon meshes, three outfit kits and an open hangar through live Studio generation. Captured returned IDs, prompts and normalized geometry in the 22-model source library. All 62 requests for the nine new models loaded in local Studio.

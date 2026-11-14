@@ -29,13 +29,27 @@ The FIFO queue, round transitions, serialized spawning, health/shields, ammo/rel
 
 ## Menus, collection and audio
 
-Deployment, matchmaking, map ballots, operative profiles, weapon previews, inventory, Style Lab, daily cache, settings, loading and results share one responsive interface. The HUD shows vitals, ammo, cooldowns, Aegis charge, players, kills, timer, feed and reality/zone status.
+Deployment, matchmaking, map ballots, operative profiles, weapon previews, inventory, collection workshop, daily cache, settings, loading and results share one responsive interface. The HUD shows vitals, ammo, cooldowns, Aegis charge, players, kills, timer, feed and reality/zone status.
 
-The Field Operations interface uses warm graphite, ivory actions and restrained oxblood/coral accents. Its home composition combines the hangar, operator, loadout display, large mode title and real profile balances. Armory has seven selectable weapons, rotating 3D previews, base-versus-kit statistics, six handling kits and next-round equip controls. Inventory finishes apply to selected weapons. Existing career, ballot, queue, collection and settings actions share the shell. Ranked/events still disclose unavailable systems.
+The Field Operations interface uses warm graphite, ivory actions and restrained oxblood/coral accents. The new home stage integrates the operator, hangar and mounted loadout with a larger title and real profile balances. Collection uses one inspection stage, seven weapon choices, full-surface versus legacy filters, stock comparison, drag rotation and zoom. Armory retains seven selectable weapons, kit comparisons and next-round equip controls. Ranked/events still disclose unavailable systems.
 
 Portrait phones stack previews and actions, use scrolling navigation and keep all three currencies visible. Tablet/desktop layouts use wider compositions. Reward counters, account XP, a skippable reveal and an original victory pose use the existing server result payload. Native Frames and pixel-aligned text avoid full-screen CanvasGroup blur. Desktop actions and representative phone/tablet screenshots were reviewed in Studio. Physical touch/controller and wide-monitor acceptance remain pending.
 
-Three operative profiles and eight finishes are cosmetic. Orchid and Ember are free catalog claims, Prism and 15 Mayhem Credits are available from the daily cache, Aurum costs 45 Credits, Voidglass costs 1 Chaos Shard, and Solstice costs 6 Season Tokens. Earn 15 Credits per elimination, 20 for completing an active match, and 45 more for a win. Active matches grant one Season Token, with one additional Token for a win; the first victory grants one Chaos Shard. A versioned V3 server profile records all three balances, cosmetics and a bounded transaction ledger. The local unpublished Studio place currently falls back to session-only data. DataStore persistence remains unverified until a permitted published test environment is available.
+Three original full-surface collections cover all four guns and three melee weapons: Void Reaver / Void Edge (135 Credits), Solaris / Solar Fang (3 Shards) and Frostborn / Frostbite (Sunday cache). Their 21 variants have generated UVs, color, metalness and roughness maps across every mesh component. The eight older signal finishes remain owned and are labelled legacy accents. No cosmetic changes combat stats.
+
+The Daily Cache follows a fixed Monday-Sunday UTC week. Only today's reward can be claimed, once. Missed dates cannot be back-claimed; claimed currency and cosmetics remain owned after the weekly reset. Sunday does not require earlier claims.
+
+| UTC day | Guaranteed reward |
+| --- | --- |
+| Monday | 5 Credits |
+| Tuesday | 8 Credits |
+| Wednesday | 10 Credits + 1 Season Token |
+| Thursday | 12 Credits |
+| Friday | 15 Credits + Prism finish |
+| Saturday | 20 Credits + 1 Chaos Shard |
+| Sunday | 25 Credits + Frostborn collection; owners receive 1 additional Shard |
+
+The week grants 95 Credits, below the old seven-day total of 105. Existing match earning rates and prices remain unchanged: 15 Credits per elimination, 20 for active-match completion, 45 more for a win, one Token per completion and one extra for a win. The first victory grants one Shard. Profile schema V4 preserves V3 balances and ownership. Persistent daily claims confirm the profile write before revealing a reward and retain an idempotent recovery marker after an uncertain write. The open local file has PlaceId and GameId 0, so its calendar explicitly says SESSION PREVIEW. Real DataStore save/rejoin remains unverified.
 
 All twenty-nine user-uploaded original audio IDs are integrated. Lobby, map insertion, combat, showdown and win/loss music follow server state. Effects have bounded spatial voices, independent volumes, mute and built-in fallbacks. Both simulated clients loaded all twenty-nine uploads plus six fallbacks; advancing playback and nonzero loudness were observed for live events. Human listening quality and permissions in the intended published universe remain unverified. [SETUP.md](SETUP.md#uploaded-audio) lists every ID and event.
 
@@ -45,8 +59,8 @@ PC: WASD/jump, left click attack, 1/2 weapons, R reload, Q Repulse, G Aegis, C c
 
 Keep the local Premium place open for the live workflow in [DEVELOPMENT.md](DEVELOPMENT.md). Do not run the default offline build or package command over this Studio-authored place. Source changes are mirrored after inspecting live scripts; Rojo is one-way toward Studio and cannot export scene edits.
 
-The current live local file is `build/MAYHEM-X-Transformation.rbxl`. Original Phase 1, Visual archives and earlier Premium backups remain preserved. Current evidence is in `build/Studio-audio-verification.json` and `build/screenshots/`; the earlier offline package report describes an older build. Module ownership is in [ARCHITECTURE.md](ARCHITECTURE.md), with test limits in [DEVELOPMENT.md](DEVELOPMENT.md) and [CHANGELOG.md](CHANGELOG.md).
+Open `build/MAYHEM-X-Transformation.rbxl` for the Studio-authored result. The separate `build/MAYHEM-X-CacheCosmetics-Source.rbxlx` is a validated source snapshot, with the documented character fallback instead of the live authoring rig. Original builds remain preserved. This pass passed 372 focused Studio assertions and 130 assertions across two clients. All 63 unique surface images loaded locally. Screenshots are `build/screenshots/Cache-*.jpg`; the actual multiplayer report is `build/Studio-CacheCosmetics-Acceptance-20261114.json`. Module ownership is in [ARCHITECTURE.md](ARCHITECTURE.md), with limits in [DEVELOPMENT.md](DEVELOPMENT.md).
 
-Work remains in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`, the writable workspace. Scripts are relocatable to the requested `C:\MAYHEM-X` after inspecting that destination. Git history uses `.version-control/`; use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. No experience was published, no Robux was spent, and no credentials were accessed. The UI push is authorized, but this session could not reach GitHub over port 443.
+Work remains in `C:\Users\PRANAV KISHAN\Desktop\forked trash\MAYHEM-X`, the writable workspace. Scripts are relocatable to the requested `C:\MAYHEM-X` after inspecting that destination. Git history uses `.version-control/`; use `scripts/git.ps1`. Origin is `https://github.com/Destroyer795/MAYHEM-X.git`. No experience was published, no Robux was spent, and no credentials were accessed. The cache/cosmetics task does not authorize a GitHub push.
 
-The current visual gate remains incomplete. Studio screenshot capture works during playtests. The latest Studio rules and map checks passed, and the place was saved locally. The default offline build must not overwrite live Studio edits. Existing binary and source backups remain in `build/backups/`.
+The cache/cosmetic interface was inspected on desktop, laptop, tablet and emulated phone layouts. Real returning-account persistence, published-universe asset permissions and physical touch/controller input remain open. Studio intermittently returned a 1 x 1 renderer after device switching; captures were retained only from working viewports. The default offline build must not overwrite live Studio edits. Windows denied reading the saved binary for another copy; source backups and older binary archives remain in `build/backups/`.
