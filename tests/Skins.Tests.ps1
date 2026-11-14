@@ -38,4 +38,11 @@ Assert-Skin ($config.tree.ReplicatedStorage.Mayhem.Art.Skins.'$path' -eq 'assets
 . (Join-Path $root 'scripts/ProjectModel.ps1')
 $project = Get-MayhemProjectModel -ProjectRoot $root
 Assert-Skin (@($project.Entries | Where-Object { $_.LogicalPath -like 'ReplicatedStorage.Mayhem.Art.Skins.*' -and $_.Class -eq 'Model' }).Count -eq 21) 'Source snapshot lost nested skin models'
+$preload = [IO.File]::ReadAllText((Join-Path $root 'src/shared/SkinAssets.luau'))
+foreach ($geometry in $manifest.geometry) {
+    Assert-Skin ($preload.Contains('["' + $geometry.name + '"]')) 'Missing client atlas entry'
+    foreach ($part in $geometry.parts) {
+        foreach ($map in @('ColorMap','MetalnessMap','RoughnessMap')) { Assert-Skin ($preload.Contains($part.surface.$map)) 'Missing protected-map preload reference' }
+    }
+}
 Write-Output "PASS: $checks skin provenance, PBR, dimensions and export checks (static only)"

@@ -27,6 +27,7 @@ if (-not $Offline) {
     $settings.NewLineHandling = [Xml.NewLineHandling]::None
     $writer = [Xml.XmlWriter]::Create($place, $settings)
     $invariant = [Globalization.CultureInfo]::InvariantCulture
+    $orientationTokens = @{ LandscapeLeft=0; LandscapeRight=1; LandscapeSensor=2; Portrait=3; Sensor=4 }
     function Write-MayhemItem {
         param($Entry)
         $writer.WriteStartElement('Item')
@@ -47,6 +48,9 @@ if (-not $Offline) {
                     $writer.WriteStartElement('Color3'); $writer.WriteAttributeString('name',$property.Name)
                     for ($index=0; $index -lt 3; $index++) { $writer.WriteElementString(@('R','G','B')[$index], ([double]$value[$index]).ToString('R',$invariant)) }
                     $writer.WriteEndElement()
+                } elseif ($property.Name -eq 'ScreenOrientation' -and $value -is [string] -and $orientationTokens.ContainsKey($value)) {
+                    $writer.WriteStartElement('token'); $writer.WriteAttributeString('name',$property.Name)
+                    $writer.WriteString([string]$orientationTokens[$value]); $writer.WriteEndElement()
                 } elseif ($value -is [bool]) {
                     $writer.WriteStartElement('bool'); $writer.WriteAttributeString('name',$property.Name)
                     $writer.WriteString($value.ToString().ToLowerInvariant()); $writer.WriteEndElement()

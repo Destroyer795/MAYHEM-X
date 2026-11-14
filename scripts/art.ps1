@@ -71,4 +71,16 @@ try {
     $writer.WriteEndElement(); $writer.WriteEndElement(); $writer.WriteEndDocument()
 } finally { $writer.Dispose() }
 Write-Output "Exported $($manifest.geometry.Count) models to assets/art/$($export.output)"
+if ($export.folder -eq 'Skins') {
+    $lines = [Collections.Generic.List[string]]::new()
+    $lines.Add('--!strict'); $lines.Add('return table.freeze({')
+    foreach ($model in $manifest.geometry) {
+        $uris = @($model.parts | ForEach-Object { $_.surface.ColorMap; $_.surface.MetalnessMap; $_.surface.RoughnessMap } | Sort-Object -Unique)
+        $quoted = @($uris | ForEach-Object { '"' + $_ + '"' }) -join ', '
+        $lines.Add(('    ["' + $model.name + '"] = table.freeze({ ' + $quoted + ' }),'))
+    }
+    $lines.Add('})')
+    [IO.File]::WriteAllText((Join-Path $projectRoot 'src/shared/SkinAssets.luau'), ($lines -join [Environment]::NewLine) + [Environment]::NewLine, [Text.UTF8Encoding]::new($false))
+    Write-Output 'Exported client surface preload references to src/shared/SkinAssets.luau'
+}
 }

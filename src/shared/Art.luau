@@ -3,6 +3,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Library = ReplicatedStorage.Mayhem:WaitForChild("Art")
 local Arsenal = require(script.Parent.Arsenal)
 local Visuals = require(script.Parent.Visuals)
+local SkinAssets = require(script.Parent.SkinAssets)
 local Art = {}
 
 function Art.place(parent: Instance?, name: string, frame: CFrame, size: Vector3?, tier: number?): Model
@@ -123,6 +124,11 @@ function Art.weapon(parent: Instance?, slot: number, frame: CFrame, accent: Colo
 	local skins=Library:FindFirstChild("Skins")
 	local available=full and skins and skins:FindFirstChild(variant)~=nil
 	local model = Art.place(parent,if available then variant else item.model,frame,item.size)
+	if available and finish.tint then
+		for _,surface in model:GetDescendants() do
+			if surface:IsA("SurfaceAppearance") then surface.Color=Color3.fromRGB(table.unpack(finish.tint)) end
+		end
+	end
 	model:SetAttribute("SkinId",skinId or "Pulse")
 	model:SetAttribute("FullSurfaceSkin",available==true)
 	model:SetAttribute("SkinUnavailable",full==true and not available)
@@ -149,6 +155,33 @@ function Art.weapon(parent: Instance?, slot: number, frame: CFrame, accent: Colo
 		for i=1,3 do attachment(model,"GripWrap",frame*CFrame.new(0,-height*0.32-i*0.09,0),Vector3.new(0.2,0.035,0.2),accent) end
 	end
 	return model
+end
+
+function Art.preload(model: Model?, id: string?, skinId: string?): (boolean, number)
+	local definition=Arsenal.Items[id or "Vector"]
+	local uris=if definition then SkinAssets[definition.model.."_"..(skinId or "")] else nil
+	local probes={}
+	local items: {Instance}={}
+	if model then table.insert(items,model) end
+	for _,uri in uris or {} do
+		local decal=Instance.new("Decal")
+		decal.Texture=uri
+		table.insert(probes,decal)
+		table.insert(items,decal)
+	end
+	local failures=0
+	local function fetch(): boolean
+		failures=0
+		return pcall(function()
+		game:GetService("ContentProvider"):PreloadAsync(items,function(_,status)
+			if status~=Enum.AssetFetchStatus.Success then failures+=1 end
+		end)
+		end)
+	end
+	local ok=fetch()
+	if not ok or failures>0 then task.wait(0.4);ok=fetch() end
+	for _,probe in probes do probe:Destroy() end
+	return ok and failures==0,failures
 end
 
 function Art.warm()

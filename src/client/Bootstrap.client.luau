@@ -14,6 +14,7 @@ local MapRules = require(shared:WaitForChild("MapRules"))
 local PreferenceRules = require(shared:WaitForChild("PreferenceRules"))
 local Hud = require(script.Parent.Hud)
 local CameraController = require(script.Parent.CameraController)
+local Art = require(shared.Art)
 local Effects = require(script.Parent.Effects)
 local Theme = require(script.Parent.Theme)
 local AudioController = require(script.Parent.AudioController)
@@ -37,6 +38,7 @@ effects.onEliminated = function(position: Vector3, userId: number) audio:play("E
 local firing = false
 local shotAt = -math.huge
 local coreMenuOpen = false
+local equipmentWarmKey = ""
 local receivedAt = os.clock()
 local state: any = {
 	phase = "Waiting", roundId = 0, remaining = 0, queued = false, queueCount = 0, capacity = 16,
@@ -164,7 +166,10 @@ end)
 presentationRemote.OnClientEvent:Connect(function(snapshot: any)
 	if snapshot.noticeCue == "Purchase" or snapshot.noticeCue == "Reward" then audio:play(snapshot.noticeCue)
 	elseif snapshot.notice and snapshot.notice ~= "Preferences accepted." then audio:play("Notification") end
+	local receipt=snapshot.dailyReward or style.dailyReward
 	style = snapshot
+	style.receivedAt=os.clock()
+	style.dailyReward=receipt
 	preferences.skin = style.skin
 	local profile = snapshot.profile
 	style.ready = profile.ready == true
@@ -178,6 +183,16 @@ presentationRemote.OnClientEvent:Connect(function(snapshot: any)
 			for key in PreferenceRules.Defaults do preferences[key] = profile.preferences[key] end
 		end
 		preferences.loaded = true
+		local warmKey=style.skin..preferences.primaryWeapon..preferences.meleeWeapon
+		if equipmentWarmKey~=warmKey then
+			equipmentWarmKey=warmKey
+			local skin,primary,melee=style.skin,preferences.primaryWeapon,preferences.meleeWeapon
+			task.spawn(function()
+				local primaryOk=Art.preload(nil,primary,skin)
+				local meleeOk=Art.preload(nil,melee,skin)
+				if not primaryOk or not meleeOk then warn("MAYHEM X: equipped surface atlas unavailable for "..skin) end
+			end)
+		end
 	end
 	preferences.saveStatus = if dirty or awaiting then "SYNCING WITH SERVER" else profile.status
 end)

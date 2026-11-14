@@ -40,6 +40,7 @@ function MenuLayout.build(self: any, page: (string) -> Frame)
 	for index, group in groups do
 		local item = link(self.nav, group.key, group.label, function() self:open(group.key) end)
 		item.LayoutOrder = index
+		Theme.icon(item,index)
 		self.navigation[group.key] = item
 	end
 	local sub = Instance.new("ScrollingFrame")
@@ -67,13 +68,18 @@ function MenuLayout.build(self: any, page: (string) -> Frame)
 	self.closeButton.TextSize = 12
 	self.footer.TextSize = 11
 	self.content.ScrollBarImageColor3 = Theme.Action
+	self.content.ScrollBarThickness=2
+	self.content.ScrollBarImageTransparency=0.65
+	self.nav.ScrollBarThickness=0
 
 	local deploy = self.pages.Deploy
-	self.hero.Font, self.hero.Text = Theme.FontDisplay, "THE LAST\nSIGNAL."
+	self.hero.Font, self.hero.Text = Theme.FontDisplay, "ENTER THE\nCHAOS."
 	self.hero.TextYAlignment = Enum.TextYAlignment.Top
 	self.hero.ZIndex, self.eyebrow.ZIndex, self.deployDescription.ZIndex = 3, 3, 3
 	self.deployDescription.Text = "Pick your operator. Build your loadout.\nBe the last contender standing."
-	self.preview.frame.ZIndex = 1
+	self.preview.frame.Parent=self.group
+	self.preview.frame.Name="LobbyScene"
+	self.preview.frame.ZIndex=0
 	self.preview.cinematic = true
 	self.stageVeil = Theme.frame(deploy,"StageVeil",UDim2.new(),UDim2.new(),Theme.Surface)
 	self.stageVeil.ZIndex = 2
@@ -87,13 +93,13 @@ function MenuLayout.build(self: any, page: (string) -> Frame)
 	self.homeOperator = link(deploy,"ChangeOperator","CHANGE OPERATOR",function() self:open("Character") end)
 	self.homeOperator.ZIndex = 4
 	self.railRule = Theme.frame(self.group,"RailRule",UDim2.new(),UDim2.new(),Theme.Metal,0.84)
-	self.railLabel = Theme.text(self.group,"CommandLabel","COMMAND / 01",UDim2.new(),UDim2.new(),10,Theme.Muted)
+	self.railLabel = Theme.text(self.group,"CommandLabel","FIELD OPERATIONS",UDim2.new(),UDim2.new(),10,Theme.Muted)
 
 	self.heroRule = Theme.frame(deploy, "IdentitySlash", UDim2.new(), UDim2.new(), Theme.Action)
 	self.heroRule.ZIndex = 3
 	self.heroFeatures = Theme.frame(deploy, "Discover", UDim2.new(), UDim2.new(), nil, 1)
 	self.featureButtons = {}
-	for index, entry in {{"Daily", "01 / DAILY CACHE", "PRISM + 15 CREDITS"}, {"Maps", "02 / FIVE FRONTIERS", "EXPLORE & VOTE"}, {"Armory", "03 / FIELD ARMORY", "7 WEAPONS / 6 KITS"}} do
+	for index, entry in {{"Daily", "01 / DAILY CACHE", "FROSTBORN / DAY 07"}, {"Maps", "02 / FIVE FRONTIERS", "EXPLORE & VOTE"}, {"Armory", "03 / FIELD ARMORY", "7 WEAPONS / 6 KITS"}} do
 		local button = Theme.button(self.heroFeatures, entry[1], "", UDim2.new(), UDim2.new(), function() self:open(entry[1]) end, true)
 		button.BackgroundTransparency = 1
 		button:FindFirstChildOfClass("UIStroke").Enabled = false
@@ -124,6 +130,8 @@ function MenuLayout.build(self: any, page: (string) -> Frame)
 		self.upgradeLinks[index] = button
 	end
 	Theme.text(upgrades, "Availability", "All weapon and handling choices are free. Your loadout locks at round start. Cosmetic finishes never change combat stats.", UDim2.fromOffset(0, 412), UDim2.new(1, 0, 0, 70), 13, Theme.Muted)
+	self.upgradePreview=Preview.new(upgrades)
+	self.upgradePreview.frame.Name="WorkshopEquipment"
 	local events = page("Events")
 	Theme.text(events, "Title", "ON THE HORIZON", UDim2.new(), UDim2.new(1, 0, 0, 46), 34, Theme.Ink, true)
 	Theme.text(events, "State", "NO SCHEDULED EVENT", UDim2.fromOffset(0, 110), UDim2.new(1, 0, 0, 48), 26, Theme.Action, true)
@@ -134,7 +142,7 @@ function MenuLayout.build(self: any, page: (string) -> Frame)
 	self.pages.Settings.Title.Text = "YOUR PREFERENCES"
 	self.pages.Progression.Scope.Text = "ACCOUNT EXPERIENCE / EARNED THROUGH COMBAT"
 	self.pages.Progression.Rewards.Text = "120 XP per elimination. 300 XP per victory.\n\nLevels reflect your current profile. Mastery, prestige and achievement rewards are not yet available."
-	self.pages.Missions.Detail.Text = "Claim the Prism finish and 15 earned Credits. No streaks, purchases or penalties for taking a break."
+	self.pages.Missions.Detail.Text = "Seven scheduled UTC rewards. Preview the guaranteed Frostborn collection for Sunday. No login streak required."
 	self.settingsDisplay = Theme.text(self.pages.Settings, "DisplaySection", "DISPLAY & CAMERA", UDim2.new(), UDim2.new(), 12, Theme.Action)
 	self.settingsAudio = Theme.text(self.pages.Settings, "AudioSection", "AUDIO & MIX", UDim2.new(), UDim2.new(), 12, Theme.Action)
 	for _, button in self.settingButtons do
@@ -169,18 +177,18 @@ end
 function MenuLayout.shell(self: any, width: number, height: number)
 	local narrow, short = width < 600, height < 500
 	local rail = width >= 960
-	local pad, header = if narrow then 16 else 28, if narrow then 82 else 68
-	local left = if rail then 196 else pad
+	local pad, header = if narrow then 20 else 36, if narrow then 82 elseif short then 48 else 68
+	local left = if rail then 212 else pad
 	local usable = width-left-pad
 	place(self.topbar,0,0,width,header)
-	place(self.logo,pad,8,if narrow then 155 else 190,36)
+	place(self.logo,pad,if short then 2 else 8,if narrow then 155 else 190,36)
 	self.logo.TextSize = if narrow then 22 else 26
-	place(self.closeButton,width-pad-82,8,82,44)
-	place(self.headerProfile,if narrow then pad else 260,if narrow then 40 else 9,if narrow then width-pad*2 else width-390-pad,20)
+	place(self.closeButton,width-pad-82,if short then 2 else 8,82,44)
+	place(self.headerProfile,if narrow then pad else 260,if narrow then 40 elseif short then 2 else 9,if narrow then width-pad*2 else width-390-pad,20)
 	self.headerProfile.TextSize = if narrow then 11 else 13
 	self.headerProfile.TextXAlignment = if narrow then Enum.TextXAlignment.Left else Enum.TextXAlignment.Right
 	self.profileLink.Position,self.profileLink.Size = self.headerProfile.Position,self.headerProfile.Size
-	place(self.wallet,if narrow then pad else 260,if narrow then 60 else 34,if narrow then width-pad*2 else width-390-pad,20)
+	place(self.wallet,if narrow then pad else 260,if narrow then 60 elseif short then 24 else 34,if narrow then width-pad*2 else width-390-pad,20)
 	self.wallet.TextSize = if narrow then 11 else 12
 	self.wallet.TextXAlignment = if narrow then Enum.TextXAlignment.Left else Enum.TextXAlignment.Right
 	self.wallet.Visible = true
@@ -188,18 +196,20 @@ function MenuLayout.shell(self: any, width: number, height: number)
 	self.nav.ScrollingDirection = if rail then Enum.ScrollingDirection.Y else Enum.ScrollingDirection.X
 	self.nav.AutomaticCanvasSize = if rail then Enum.AutomaticSize.Y else Enum.AutomaticSize.X
 	self.nav.CanvasSize = UDim2.new()
-	place(self.nav,if rail then 18 else pad-10,if rail then 128 else header,if rail then 152 else width-pad*2+20,if rail then math.min(height-176,420) else 48)
+	place(self.nav,if rail then 24 else pad-10,if rail then 128 else header,if rail then 152 else width-pad*2+20,if rail then math.min(height-176,420) else 48)
 	self.railRule.Visible,self.railLabel.Visible = rail,rail
-	place(self.railRule,172,header+24,1,height-header-68)
+	place(self.railRule,184,header+24,1,height-header-68)
 	place(self.railLabel,28,96,140,20)
 	for _,group in groups do
 		local item=self.navigation[group.key]
 		place(item,0,0,if rail then 150 elseif narrow then 111 else 136,if rail then 52 else 46)
 		item.TextXAlignment = if rail then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center
-		item.SelectionMark.Position = if rail then UDim2.new(0,0,0,10) else UDim2.new(0,10,1,-3)
+		item.SelectionMark.Position = if rail then UDim2.new(0,-32,0,12) else UDim2.new(0,10,1,-3)
 		item.SelectionMark.Size = if rail then UDim2.new(0,3,1,-20) else UDim2.new(1,-20,0,2)
 		local padding = item:FindFirstChildOfClass("UIPadding") or Instance.new("UIPadding")
-		padding.PaddingLeft = UDim.new(0,if rail then 16 else 0)
+		padding.PaddingLeft = UDim.new(0,if rail then 36 else 0)
+		item.Icon.Visible=rail
+		item.Icon.Position=UDim2.new(0,-22,0.5,-8)
 		padding.Parent = item
 	end
 	local activeGroup = groups[1]
@@ -207,7 +217,10 @@ function MenuLayout.shell(self: any, width: number, height: number)
 	for _,group in groups do
 		local item=self.navigation[group.key]
 		item.TextColor3=if group==activeGroup then Theme.Ink else Theme.Muted
+		item.BackgroundColor3=Theme.Panel
+		item.BackgroundTransparency=if rail and group==activeGroup then 0.25 else 1
 		item.SelectionMark.Visible=group==activeGroup
+		for _,line in item.Icon:GetChildren() do if line:IsA("Frame") then line.BackgroundColor3=if group==activeGroup then Theme.Ink else Theme.Metal end end
 	end
 	local subVisible=#activeGroup.pages>1 and self.page~="Deploy"
 	self.contextNav.Visible=subVisible
@@ -224,7 +237,7 @@ function MenuLayout.shell(self: any, width: number, height: number)
 	local top=header+(if rail then (if subVisible then 66 else 24) else (if subVisible then 106 else 62))
 	self.contentBase=UDim2.fromOffset(left,top)
 	self.content.Position=self.contentBase+UDim2.fromOffset(0,math.round(self.pageSlide.Value))
-	self.content.Size=UDim2.fromOffset(usable,math.max(80,height-top-30))
+	self.content.Size=UDim2.fromOffset(usable,math.max(80,height-top-(if short then 8 else 30)))
 	place(self.footer,left,height-27,usable,24)
 	self.footer.Visible=not short
 	local sheetWidth = math.min(580, width - 32)
@@ -237,10 +250,12 @@ function MenuLayout.shell(self: any, width: number, height: number)
 		local minimum = if name == "Deploy" then (if short then 0 elseif narrow then 616 else 560)
 			elseif name == "Settings" then (if narrow then 760 else 520)
 			elseif name == "Maps" then (if narrow then 790 else 500)
-			elseif name == "Inventory" then (if narrow then 890 else 600)
+			elseif name == "Inventory" then (if narrow then 1040 else 740)
+			elseif name == "Upgrades" then (if narrow then 760 else 540)
 			elseif name == "Character" then (if narrow then 690 else 490)
 			elseif name == "Armory" then (if narrow then 730 else 520)
-			elseif name == "Shop" then (if narrow then 620 else 570)
+			elseif name == "Shop" then (if narrow then 940 else 660)
+			elseif name == "Daily" then (if narrow then 760 else 680)
 			elseif name == "Leaderboards" then 112 + #Players:GetPlayers() * 52
 			else 500
 		area.Size = UDim2.fromOffset(usable - 8, math.max(minimum, self.content.AbsoluteSize.Y))
@@ -255,13 +270,14 @@ function MenuLayout.content(self: any, width: number, height: number, state: any
 	place(self.eyebrow,0,8,w*0.5,22)
 	self.eyebrow.TextSize=11
 	place(self.hero,0,50,if narrow then w*0.72 else w*0.6,if narrow then 116 else 190)
-	self.hero.TextSize=if narrow then 40 elseif short then 50 else 68
+	self.hero.TextSize=if narrow then 40 elseif short then 50 else 60
 	place(self.heroRule,0,if narrow then 173 else 236,40,4)
 	self.heroRule.BackgroundColor3=Theme.Cyan
 	place(self.deployDescription,0,258,w*0.39,54)
 	self.deployDescription.Visible=not narrow and not short
 	self.deployDescription.TextSize=14
-	place(self.preview.frame,w*(if narrow then 0.10 else 0.26),if narrow then 126 else -4,w*(if narrow then 0.95 else 0.79),if narrow then 270 else h-86)
+	place(self.preview.frame,if narrow then width*0.09 else width*0.28,if narrow then 294 else 66,width*(if narrow then 0.94 else 0.73),if narrow then 258 else height-106)
+	self.preview.frame.Visible=self.page=="Deploy"
 	place(self.stageVeil,0,0,w*(if narrow then 0.35 else 0.55),if narrow then 172 else h-86)
 	self.stageVeil.Visible=not narrow
 	self.previewCaption.Visible,self.online.Visible=false,false
@@ -295,13 +311,16 @@ function MenuLayout.content(self: any, width: number, height: number, state: any
 		local tiny=visibleH<250
 		place(self.hero,0,26,w*0.55,if tiny then 75 else 106)
 		self.hero.TextSize=if tiny then 32 else 40
-		place(self.preview.frame,w*0.39,0,w*0.66,visibleH-8)
+		place(self.preview.frame,self.content.Position.X.Offset+w*0.18,self.content.Position.Y.Offset,w*0.86,visibleH-8)
 		place(self.stageVeil,0,0,w*0.55,visibleH)
 		place(self.play,0,visibleH-(if tiny then 56 else 108),w*0.48,52)
 		self.play.TextSize=if narrow then 14 else 16
 		place(self.modeButton,0,visibleH-48,w*0.48,44)
 		self.modeButton.Visible=not tiny
 		self.homeOperator.Visible=false
+		self.heroFeatures.Visible=not tiny
+		place(self.heroFeatures,0,144,w*0.48,64)
+		for index,button in self.featureButtons do button.Visible=index==1;place(button,0,0,w*0.48,64) end
 		self.operatorLabel.Visible,self.operatorRole.Visible=not tiny,not tiny
 		place(self.operatorLabel,w*0.62,visibleH-60,w*0.38,28)
 		place(self.operatorRole,w*0.62,visibleH-32,w*0.38,20)
@@ -341,7 +360,14 @@ function MenuLayout.content(self: any, width: number, height: number, state: any
 	for index, entry in require(game.ReplicatedStorage.Mayhem.Shared.Visuals).Skins do
 		place(self.skinButtons[entry.id], 0, (if narrow then 334 else 116) + (index - 1) * 52, if narrow then iw else iw * 0.35, 46)
 	end
-	place(self.inventoryNote, if narrow then 0 else iw * 0.43, if narrow then 758 else 440, if narrow then iw else iw * 0.57, 64)
+	place(self.inventoryNote, if narrow then 0 else iw * 0.43, if narrow then 340+#require(game.ReplicatedStorage.Mayhem.Shared.Visuals).Skins*52 else 440, if narrow then iw else iw * 0.57, 64)
+	local uw=self.pages.Upgrades.AbsoluteSize.X
+	place(self.upgradePreview.frame,if narrow then 0 else uw*0.56,if narrow then 80 else 110,uw*(if narrow then 1 else 0.44),if narrow then 208 else 360)
+	for i,button in self.upgradeLinks do
+		place(button,0,(if narrow then 320 else 120)+(i-1)*90,uw*(if narrow then 1 else 0.52),48)
+		place(self.pages.Upgrades["Detail"..i],18,(if narrow then 371 else 171)+(i-1)*90,uw*(if narrow then 1 else 0.52)-36,28)
+	end
+	place(self.pages.Upgrades.Availability,0,if narrow then 620 else 412,uw*(if narrow then 1 else 0.52),70)
 
 	local sw = self.pages.Settings.AbsoluteSize.X
 	place(self.settingsDisplay, 0, 60, sw * (if narrow then 1 else 0.48), 26)

@@ -81,7 +81,7 @@ function ArmoryPanel.render(self: any, state: any, preferences: any, style: any)
 	place(self.armoryName,paneX,stageY,paneW-90,48)
 	self.armoryName.Text,self.armoryName.TextSize = item.name, if compact then 32 else 42
 	place(self.loadoutRotate,w-82,stageY+4,82,44)
-	place(self.armoryPreview.frame,paneX,stageY+52,paneW,220)
+	place(self.armoryPreview.frame,paneX,stageY+52,paneW,240)
 	place(self.armoryDescription,paneX,stageY+278,paneW,42)
 	self.armoryDescription.Text = item.description
 	place(self.weaponStats,paneX,stageY+326,paneW,70)

@@ -16,6 +16,7 @@ return function(Art: any,Arsenal: any,Visuals: any): number
 					meshes+=1
 					local surface=part:FindFirstChildOfClass("SurfaceAppearance")
 					check(surface~=nil and surface.ColorMap~="" and surface.RoughnessMap~="" and surface.MetalnessMap~="","Every component has real PBR maps")
+					if skin=="Solaris" then check(surface.Color==Color3.fromRGB(255,211,139),"Gold tint preserves the underlying PBR engraving") end
 					check(not part.CanCollide and not part.CanTouch and not part.CanQuery and part.Massless,"Skins cannot affect collision or hit detection")
 				end
 			end

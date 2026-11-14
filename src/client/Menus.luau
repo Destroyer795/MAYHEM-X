@@ -9,6 +9,8 @@ local Arsenal = require(game:GetService("ReplicatedStorage").Mayhem.Shared.Arsen
 local Theme = require(script.Parent.Theme)
 local Preview = require(script.Parent.Preview)
 local MenuLayout = require(script.Parent.MenuLayout)
+local DailyCachePanel = require(script.Parent.DailyCachePanel)
+local CollectionPanel = require(script.Parent.CollectionPanel)
 local ArmoryPanel = require(script.Parent.ArmoryPanel)
 local Menus = {}
 Menus.__index = Menus
@@ -178,55 +180,10 @@ function Menus.new(parent: Instance, callbacks: any)
 	Theme.button(inventory, "StyleLab", "STYLE LAB  >", UDim2.new(0.53, 0, 1, -54), UDim2.new(0.47, 0, 0, 44), function() self:open("Shop") end, true)
 	self.inventoryNote = Theme.text(inventory, "Note", "Both weapons stay in your loadout. Finishes change appearance only.", UDim2.new(0.53, 0, 1, -140), UDim2.new(0.47, 0, 0, 75), 12, Theme.Muted)
 
-	local shop = page("Shop")
-	self.shopTitle = Theme.text(shop, "Title", "COLLECTION WORKSHOP", UDim2.new(), UDim2.new(1, 0, 0, 36), 28, Theme.Ink, true)
-	self.shopWallet = Theme.text(shop, "Wallet", "", UDim2.fromOffset(0, 40), UDim2.new(1, 0, 0, 36), 12, Theme.Muted)
-	self.transactionNote = Theme.text(shop, "RecentTransaction", "", UDim2.fromOffset(0, 78), UDim2.new(1, 0, 0, 20), 10, Theme.Cyan)
-	local selector = Instance.new("ScrollingFrame")
-	selector.Name = "Finishes"
-	selector.BackgroundTransparency = 1
-	selector.BorderSizePixel = 0
-	selector.CanvasSize = UDim2.new()
-	selector.ScrollBarThickness = 2
-	selector.Parent = shop
-	self.shopSelector = selector
-	self.shopButtons = {}
-	for index, id in { "Orchid", "Ember", "Aurum", "Voidglass", "Solstice" } do
-		local entry = Visuals.skin(id)
-		local button = Theme.button(selector, id, "", UDim2.fromOffset(0, (index - 1) * 56), UDim2.new(1, -4, 0, 50), function() self.draftShop = id end, true)
-		Theme.text(button, "FinishName", entry.name, UDim2.fromOffset(12, 5), UDim2.new(1, -24, 0, 20), 14, Theme.Ink, true)
-		Theme.text(button, "Ownership", "", UDim2.fromOffset(12, 27), UDim2.new(1, -24, 0, 16), 10, Theme.Muted)
-		self.shopButtons[id] = button
-	end
-	self.shopStage = Theme.frame(shop, "ItemStage", UDim2.new(), UDim2.new(), Theme.Void)
-	Theme.corner(self.shopStage, 6)
-	Theme.frame(self.shopStage, "GroundRule", UDim2.new(0.08, 0, 0.82, 0), UDim2.new(0.84, 0, 0, 1), Theme.Metal, 0.7)
-	self.shopPreview = Preview.new(self.shopStage)
-	self.shopPreview.frame.Name = "SelectedWeapon"
-	self.shopPreview.frame.Position = UDim2.fromOffset(8, 4)
-	self.shopPreview.frame.Size = UDim2.new(1, -16, 1, -8)
-	self.shopPreviews = { Selected = self.shopPreview }
-	self.shopName = Theme.text(shop, "ItemName", "", UDim2.new(), UDim2.new(), 25, Theme.Ink, true)
-	self.shopDetail = Theme.text(shop, "ItemDetail", "", UDim2.new(), UDim2.new(), 12, Theme.Muted)
-	self.shopRotate = Theme.button(shop, "Rotate", "ROTATE 45", UDim2.new(), UDim2.new(), function() self.shopPreview.yaw = (self.shopPreview.yaw or 0) + math.pi / 4 end, true)
-	self.shopSwap = Theme.button(shop, "PreviewWeapon", "", UDim2.new(), UDim2.new(), function() self.shopWeapon = if self.shopWeapon == 1 then 2 else 1 end, true)
-	self.shopAction = Theme.button(shop, "Acquire", "", UDim2.new(), UDim2.new(), function()
-		local item = Visuals.skin(self.draftShop)
-		if self.style and self.style.owned[item.id] then callbacks.select("skin", item.id)
-		elseif item.currency then self:confirmPurchase(item.id)
-		else callbacks.claim(item.id) end
-	end)
-
-	local daily = page("Daily")
-	Theme.text(daily, "Title", "DAILY CACHE", UDim2.new(), UDim2.new(1, 0, 0, 44), 30, Theme.Ink, true)
-	Theme.frame(daily, "PrismSwatch", UDim2.fromOffset(0, 66), UDim2.new(1, 0, 0, 4), Theme.Cyan)
-	Theme.text(daily, "Reward", "PRISM + 15 MAYHEM CREDITS", UDim2.fromOffset(0, 92), UDim2.new(1, 0, 0, 50), 23, Theme.Ink, true)
-	Theme.text(daily, "Scope", "A white finish and 15 Mayhem Credits.\nOne claim per UTC day. Your profile status in Settings shows whether saving is available.", UDim2.fromOffset(0, 154), UDim2.new(0.9, 0, 0, 110), 16, Theme.Muted)
-	self.dailyClock = Theme.text(daily, "Clock", "", UDim2.new(0, 0, 1, -112), UDim2.new(1, 0, 0, 34), 14, Theme.Action)
-	self.dailyButton = Theme.button(daily, "Claim", "CLAIM SESSION TRIAL", UDim2.new(0, 0, 1, -58), UDim2.new(0.78, 0, 0, 48), function()
-		if self.style and self.style.dailyClaimed then self:open("Inventory"); self.draftSkin = "Prism" else callbacks.daily() end
-	end)
-
+	local shop=page("Shop")
+	CollectionPanel.build(self,shop)
+	local daily=page("Daily")
+	DailyCachePanel.build(self,daily)
 
 	local armory = page("Armory")
 	Theme.text(armory, "Title", "ENGINEERED FOR THE LAST SIGNAL", UDim2.new(), UDim2.new(1, 0, 0, 44), 30, Theme.Ink, true)
@@ -252,7 +209,7 @@ function Menus.new(parent: Instance, callbacks: any)
 	Theme.text(missions, "Title", "OBJECTIVES", UDim2.new(), UDim2.new(1, 0, 0, 44), 34, Theme.Ink, true)
 	Theme.text(missions, "Availability", "DAILY / WEEKLY MISSION TRACKING NOT RELEASED", UDim2.fromOffset(0, 58), UDim2.new(1, 0, 0, 40), 13, Theme.Gold)
 	Theme.text(missions, "Available", "AVAILABLE NOW / DAILY CACHE", UDim2.fromOffset(0, 130), UDim2.new(1, 0, 0, 42), 24, Theme.Ink, true)
-	Theme.text(missions, "Detail", "Claim the Prism finish and 15 earned credits for this server session. No streak, purchase or daily penalty.", UDim2.fromOffset(0, 192), UDim2.new(0.85, 0, 0, 92), 16, Theme.Muted)
+	Theme.text(missions, "Detail", "Seven UTC days, transparent rewards and a guaranteed Frostborn collection on Sunday. Missed days never remove owned items.", UDim2.fromOffset(0, 192), UDim2.new(0.85, 0, 0, 92), 16, Theme.Muted)
 	Theme.button(missions, "Cache", "OPEN DAILY CACHE  >", UDim2.new(0, 0, 1, -54), UDim2.new(0.7, 0, 0, 44), function() self:open("Daily") end)
 
 	local ranked = page("Ranked")
@@ -316,6 +273,8 @@ function Menus.open(self: any, page: string)
 	for name, item in self.navigation do Theme.selected(item, name == page) end
 	self.preview:hide()
 	self.queuePreview:hide()
+	self.dailyFeature:hide()
+	self.upgradePreview:hide()
 	self.characterPreview:hide()
 	self.weaponPreview:hide()
 	self.mapPreview:hide()
@@ -358,6 +317,8 @@ function Menus.close(self: any)
 	self.group.Visible = false
 	self.preview:hide(); self.characterPreview:hide(); self.weaponPreview:hide(); self.mapPreview:hide(); self.armoryPreview:hide()
 	self.queuePreview:hide()
+	self.dailyFeature:hide()
+	self.upgradePreview:hide()
 	for _, preview in self.shopPreviews do preview:hide() end
 end
 
@@ -430,66 +391,6 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	self.equipSkin.Active = style.ready
 	Theme.selected(self.rifleTab, self.weapon == 1)
 	Theme.selected(self.bladeTab, self.weapon == 2)
-	self.shopWallet.Text = string.format("%d CREDITS   /   %d SHARDS   /   %d SEASON TOKENS", profile.credits, profile.shards, profile.seasonTokens)
-	local latestTransaction = profile.recentTransactions and profile.recentTransactions[#profile.recentTransactions]
-	self.transactionNote.Text = if latestTransaction then "LAST / " .. string.upper(latestTransaction.action) .. string.format("   CR %+d / SH %+d / ST %+d", latestTransaction.credits, latestTransaction.shards, latestTransaction.seasonTokens) else "EARNED FINISHES / NO COMBAT STAT BONUSES"
-	local shopWidth = self.pages.Shop.AbsoluteSize.X
-	local shopHeight = self.pages.Shop.AbsoluteSize.Y
-	local tightShop = false
-	local bodyTop = 100
-	self.transactionNote.Visible = bodyTop == 100
-	local listWidth = math.floor(shopWidth * 0.32)
-	local rightX = if portrait then 0 else listWidth + 20
-	local rightWidth = shopWidth - rightX
-	local stageY = if portrait then 168 else bodyTop
-	local stageHeight = if portrait then 220 elseif tightShop then math.max(60, shopHeight - bodyTop - 56) else 240
-	self.shopSelector.Position = UDim2.fromOffset(0, bodyTop)
-	self.shopSelector.Size = if portrait then UDim2.new(1, 0, 0, 54) else UDim2.fromOffset(listWidth, if tightShop then math.max(54, shopHeight - bodyTop - 4) else 280)
-	self.shopSelector.ScrollingDirection = if portrait then Enum.ScrollingDirection.X else Enum.ScrollingDirection.Y
-	self.shopSelector.CanvasSize = if portrait then UDim2.fromOffset(5 * 164, 0) else UDim2.fromOffset(0, 5 * 56)
-	local shopScrollKey = self.draftShop .. ":" .. tostring(portrait) .. ":" .. math.floor(shopWidth)
-	for index, id in { "Orchid", "Ember", "Aurum", "Voidglass", "Solstice" } do
-		local button = self.shopButtons[id]
-		local item = Visuals.skin(id)
-		local chosen = id == self.draftShop
-		button.Position = if portrait then UDim2.fromOffset((index - 1) * 164, 0) else UDim2.fromOffset(0, (index - 1) * 56)
-		button.Size = if portrait then UDim2.fromOffset(156, 50) else UDim2.new(1, -4, 0, 50)
-		button.Ownership.Text = if style.skin == id then "EQUIPPED" elseif style.owned[id] then "OWNED" else string.upper(item.rarity) .. " / " .. (if item.cost then tostring(item.cost) .. (if item.currency == "credits" then " CR" elseif item.currency == "shards" then " SHARD" else " TOKENS") else "FREE")
-		Theme.selected(button, chosen)
-		button.FinishName.TextColor3 = if chosen then Theme.Void else Theme.Ink
-		button.Ownership.TextColor3 = if chosen then Theme.Void else Theme.Muted
-		if chosen and self.page == "Shop" and self.shopScrollKey ~= shopScrollKey then
-			self.shopSelector.CanvasPosition = if portrait then Vector2.new(math.clamp((index - 1) * 164 - (shopWidth - 156) / 2, 0, math.max(0, 820 - shopWidth)), 0) else Vector2.new(0, math.max(0, (index - 1) * 56 - (self.shopSelector.AbsoluteSize.Y - 50) / 2))
-		end
-	end
-	if self.page == "Shop" then self.shopScrollKey = shopScrollKey end
-	self.shopStage.Position, self.shopStage.Size = UDim2.fromOffset(rightX, stageY), UDim2.fromOffset(rightWidth, stageHeight)
-	local detailY = stageY + stageHeight + 10
-	self.shopName.Position, self.shopName.Size = UDim2.fromOffset(rightX, detailY), UDim2.fromOffset(rightWidth, 32)
-	self.shopName.TextSize = if short or portrait then 24 else 30
-	self.shopDetail.Position, self.shopDetail.Size = UDim2.fromOffset(rightX, detailY + 36), UDim2.fromOffset(rightWidth, 48)
-	local selectedItem = Visuals.skin(self.draftShop)
-	self.shopTitle.Text = if tightShop then "WORKSHOP / " .. string.upper(selectedItem.id) else "COLLECTION WORKSHOP"
-	self.shopTitle.TextSize = if bodyTop == 44 then 20 elseif tightShop then 24 else 28
-	self.shopTitle.Size = if bodyTop == 44 then UDim2.new(0.44, 0, 0, 32) else UDim2.new(1, 0, 0, 36)
-	self.shopWallet.Position = if bodyTop == 44 then UDim2.new(0.46, 0, 0, 0) else UDim2.fromOffset(0, 40)
-	self.shopWallet.Size = if bodyTop == 44 then UDim2.new(0.54, 0, 0, 32) else UDim2.new(1, 0, 0, 36)
-	if bodyTop == 44 then self.shopWallet.Text = string.format("%d CR / %d SHARDS / %d TOKENS", profile.credits, profile.shards, profile.seasonTokens) end
-	self.shopName.Visible, self.shopDetail.Visible = not tightShop, not tightShop
-	self.shopName.Text = selectedItem.name
-	self.shopDetail.Text = string.upper(selectedItem.rarity) .. " FINISH / BOTH WEAPONS\n" .. selectedItem.description
-	local actionY = if tightShop then shopHeight - 44 else detailY + 94
-	self.shopAction.Position, self.shopAction.Size = UDim2.fromOffset(rightX, actionY), UDim2.fromOffset(math.floor(rightWidth * 0.54), 44)
-	self.shopRotate.Position, self.shopRotate.Size = UDim2.fromOffset(rightX + math.floor(rightWidth * 0.56), actionY), UDim2.fromOffset(math.floor(rightWidth * 0.19), 44)
-	self.shopSwap.Position, self.shopSwap.Size = UDim2.fromOffset(rightX + math.floor(rightWidth * 0.77), actionY), UDim2.fromOffset(math.floor(rightWidth * 0.23), 44)
-	self.shopAction.TextSize, self.shopRotate.TextSize, self.shopSwap.TextSize = 13, 12, 12
-	self.shopSwap.Text = if self.shopWeapon == 1 then "VIEW MELEE" else "VIEW PRIMARY"
-	self.shopAction.Text = if style.skin == selectedItem.id then "EQUIPPED" elseif style.owned[selectedItem.id] then "EQUIP FINISH" elseif selectedItem.cost then "BUY / " .. selectedItem.cost .. (if selectedItem.currency == "credits" then " CR" elseif selectedItem.currency == "shards" then " SHARD" else " TOKENS") else "CLAIM / FREE"
-	self.shopAction.Active = style.ready and style.skin ~= selectedItem.id
-	self.dailyButton.Text = if style.dailyClaimed then "VIEW PRISM IN COLLECTION" else "CLAIM DAILY REWARD"
-	self.dailyButton.Active = style.ready
-	local untilReset = math.max(0, (style.nextDaily or 0) - os.time())
-	self.dailyClock.Text = if style.dailyClaimed then string.format("NEXT UTC RESET / %02dh %02dm", math.floor(untilReset / 3600), math.floor(untilReset % 3600 / 60)) else "AVAILABLE / DAILY COSMETIC AND CREDITS"
 
 	self.progressLevel.Text = "LEVEL " .. profile.level
 	self.progressXP.Text = (profile.xp % 300) .. " / 300 XP TO NEXT LEVEL"
@@ -539,11 +440,13 @@ function Menus.render(self: any, state: any, elapsed: number, preferences: any, 
 	for name, item in buttons do item.Active = name == "testAudio" or preferences.loaded == true end
 	MenuLayout.content(self, width, height, state, style, profile)
 	ArmoryPanel.render(self,state,preferences,style)
+	CollectionPanel.render(self,preferences,style)
+	DailyCachePanel.render(self,style)
+	if self.page=="Upgrades" then self.upgradePreview:show("weapon",style.operative,style.skin,1,preferences.primaryWeapon,preferences.gunKit) end
 	if self.page == "Deploy" then self.preview:show("operative", style.operative, style.skin, 1, preferences.primaryWeapon, preferences.gunKit)
 	elseif self.page == "Character" then self.characterPreview:show("operative", self.draftOperative, style.skin)
 	elseif self.page == "Inventory" then self.weaponPreview:show("weapon", style.operative, self.draftSkin, self.weapon, if self.weapon==1 then preferences.primaryWeapon else preferences.meleeWeapon, if self.weapon==1 then preferences.gunKit else preferences.meleeKit)
-	elseif self.page == "Maps" then self.mapPreview:map(self.draftMap); self.mapPreview:step(true)
-	elseif self.page == "Shop" then self.shopPreview:show("weapon", style.operative, self.draftShop, self.shopWeapon, if self.shopWeapon==1 then preferences.primaryWeapon else preferences.meleeWeapon, if self.shopWeapon==1 then preferences.gunKit else preferences.meleeKit) end
+	elseif self.page == "Maps" then self.mapPreview:map(self.draftMap); self.mapPreview:step(true) end
 end
 
 function Menus.animate(self: any)
@@ -555,7 +458,9 @@ function Menus.animate(self: any)
 	elseif self.page == "Character" then self.characterPreview:step(self.reducedMotion)
 	elseif self.page == "Inventory" then self.weaponPreview:step(self.reducedMotion)
 	elseif self.page == "Armory" then self.armoryPreview:step(self.reducedMotion)
-	elseif self.page == "Shop" then self.shopPreview:step(self.reducedMotion) end
+	elseif self.page == "Shop" then self.shopPreview:step(self.reducedMotion)
+	elseif self.page == "Daily" then self.dailyFeature:step(self.reducedMotion)
+	elseif self.page == "Upgrades" then self.upgradePreview:step(self.reducedMotion) end
 end
 
 return Menus
