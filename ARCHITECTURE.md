@@ -11,7 +11,7 @@ Round lifecycle: `MapService.load(id, true)` explicitly creates a fresh arena at
 | `src/server/CombatService.luau` | Server movement checks, weapons, ammo, health/shields, Repulse and Aegis |
 | `src/server/MapService.luau` | Voting, active template, spawn assignment, hazards, cover, movers, zone and duel |
 | `src/server/ArenaService.luau` | Preserved Phase 1 procedural builder/lobby spawn transforms |
-| `src/server/SceneService.luau` | Daylight hub, original signs/showcase/consoles and baseline lighting |
+| `src/server/SceneService.luau` | Signal Hangar, operator bays, seven weapon docks, interactive terminals and baseline lighting |
 | `src/server/PresentationService.luau` | Server-owned appearance, catalog claims, purchases, daily rewards and profile notices |
 | `src/server/PreferenceService.luau` | Versioned account profile, allowlisted preferences, currency awards, deterministic purchases and guarded saves |
 | `src/server/SessionLease.luau` | Pure acquire, renew and release transforms for the server's profile lease |
@@ -22,6 +22,8 @@ Round lifecycle: `MapService.load(id, true)` explicitly creates a fresh arena at
 | `src/shared/ProfileRules.luau` | V3 profile migration, bounded currencies, idempotent rewards, transaction ledger and catalog validation |
 | `src/client/Hud.luau`, `Menus.luau` | Combat telemetry, animated result payout and existing functional navigation/collection/settings/ballot bindings |
 | `src/client/MenuLayout.luau` | Grouped navigation, responsive screen composition, operator stage, real profile summary and availability-aware workshop/career links |
+| `src/client/ArmoryPanel.luau` | Seven-weapon selection, 3D previews, kit comparisons and existing preference callbacks |
+| `src/shared/Arsenal.luau` | Frozen weapon definitions, allowlisted loadout IDs and free handling sidegrades |
 | `src/client/Theme.luau`, `Preview.luau` | Typography, colors, 8/16/24 spacing tokens, rounded buttons, state/hover feedback and disposable previews, including the optional live operator showcase |
 | `src/client/CameraController.luau` | Both perspectives, input/aim, camera obstruction and cosmetic viewmodel animation |
 | `src/client/Effects.luau` | Bounded tracers, Trails, waves, bursts and occluded Highlights |
@@ -29,10 +31,28 @@ Round lifecycle: `MapService.load(id, true)` explicitly creates a fresh arena at
 | `src/client/AudioController.luau` | Preload diagnostics, SoundGroups, spatial effects, ambience and score transitions |
 | `assets/maps/*.json`, `scripts/maps.ps1` | Five authored layouts and shared physical-template compiler |
 | `assets/audio/scorebook.json`, `scripts/audio.ps1` | Original composition/effect definitions and PCM renderer |
-| `assets/art/manifest.json`, `Library.rbxmx`, `scripts/art.ps1` | Thirteen original Studio-generated models, returned asset references and reproducible source export |
+| `assets/art/manifest.json`, `Library.rbxmx`, `scripts/art.ps1` | Twenty-two original Studio-generated models, returned asset references and reproducible source export |
 | `tests/`, `scripts/` | Structural/geometry/WAV checks, Luau cases, Studio helpers, local setup/build/package |
 
-Five complete baseline files, fourteen original gameplay methods and the camera aiming function are checked against `9172422`. Match/map integration, damage attribution and environmental hit hooks are reviewed changes. Startup runs the preserved arena builder, removes its superseded arena/duel geometry, decorates the hub and clones one premium map. The editor preview is removed by that startup builder.
+Five complete baseline files, twelve original gameplay methods and the camera aiming function are checked against `9172422`. Reload and switch now use the selected weapon definition and are covered by focused arsenal cases. Startup runs the preserved arena builder, removes its superseded arena/duel geometry, decorates the hub and clones one premium map. The editor preview is removed by that startup builder.
+
+## Field armory
+
+Loadout preferences allow four primary IDs, three melee IDs and three kits per slot. Old V3 profiles receive default Vector/Rift and Standard/Balanced settings through the existing preference merge. No currency or ownership schema is duplicated. The server resolves and freezes a weapon definition at life start; later preference edits affect the next life. Reload, reserve caps, switching, held models, HUD names and first-person previews use that definition.
+
+| Weapon | Damage | Interval | Range | Magazine / reload |
+| --- | --- | --- | --- | --- |
+| VECTOR-18 | 19 | 0.18 s | 300 | 18 / 1.8 s |
+| NEEDLE-30 | 12 | 0.115 s | 180 | 30 / 2 s |
+| MANTIS-10 | 36 | 0.4 s | 300 | 10 / 2.2 s |
+| BREAKER-6 | 12 x 6 pellets | 0.85 s | 90 | 6 / 2.6 s |
+| Rift Blade | 34 | 0.65 s | 8 | Melee |
+| Talon | 24 | 0.43 s | 5.8 | Melee |
+| Grav-Maul | 54 | 1.05 s | 7.2 | Melee |
+
+Precision adds 12% range and reduces magazine capacity by 20%. Quickdraw reloads 15% faster with 15% less range. Reach adds 0.7 stud and increases recovery by 15%. Tempo reduces recovery and damage by 15%. Standard/Balanced retain the base values. Kits are free and have visible attachments. These are initial tuning values; human balance acceptance remains pending.
+
+The server casts one to six rays per accepted shot, spends one round per trigger and retains finite aim, state, position, protection, reload and rate checks. Clients receive one bounded trace packet. Melee retains range, facing and line-of-sight validation. No new remote or client damage claim is introduced.
 
 ## Maps and lifecycle
 
@@ -46,7 +66,7 @@ Templates live in ServerStorage. Each has Solid, Decor, Destructibles, Collapse,
 
 Votes count only from the upcoming FIFO roster during Waiting/Intermission. A player has one changeable ballot. Repeated votes are ignored and changes are throttled. Highest count wins; ties use a uniform random draw. No-vote rounds choose a different map where possible. Loading selects and validates the map before changing the roster; failure preserves queue order.
 
-Environment simulation shares the existing 10 Hz tick. Movers use authored travel/period metadata and adjust accepted character positions only for server-observed riders. Cover has 76 health, disappears at zero and restores after twenty seconds when clear. Collapse links warn for three seconds before a ten-second outage. Pulsed map hazards deal server damage. Caches grant eighteen reserve rounds, capped at 108, with distance/state validation and a 24-second respawn.
+Environment simulation shares the existing 10 Hz tick. Movers use authored travel/period metadata and adjust accepted character positions only for server-observed riders. Cover has 76 health, disappears at zero and restores after twenty seconds when clear. Collapse links warn for three seconds before a ten-second outage. Pulsed map hazards deal server damage. Caches grant eighteen reserve rounds, capped at the selected primary weapon's reserve, with distance/state validation and a 24-second respawn.
 
 The circular zone starts at radius 185, shrinks after 45 seconds toward 24, and deals nine damage per second outside. Low Gravity and Shield Drought alternate every 38 seconds for nine seconds. Gravity is global while that event runs. With two survivors, the server transfers them to the isolated duel deck after the configured delay (60 seconds for two-player rounds, otherwise 12). Duel protection lasts two seconds; its zone shrinks from 31 to 8 after a ten-second grace.
 

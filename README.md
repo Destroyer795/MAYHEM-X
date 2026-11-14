@@ -2,16 +2,16 @@
 
 **ENTER THE CHAOS. BECOME THE LEGEND.**
 
-An original Roblox PvP survival game for up to sixteen contenders. Vote for a frontier, fight with the VECTOR-18 and Rift Blade, use Repulse, and survive the closing signal. The premium milestone adds five physical arenas, an original mesh library, a brighter 3D hub, dark competitive menus, combat feedback and an original audio pack.
+An original Roblox PvP survival game for up to sixteen contenders. Vote for a frontier, choose from four firearms and three melee weapons, use Repulse, and survive the closing signal. The current content pass adds an original hangar hub, structural operator outfits, a field armory and free handling sidegrades.
 
 The current Premium place is being edited and tested through the official Roblox Studio MCP. Uploaded audio, queue/voting, combat requests, duel transfer and result music have passed a two-client Studio smoke test. A versioned profile schema now includes settings, account eliminations/wins, credits and cosmetics with a legacy-preference migration, retries and session leases. The local place is unpublished, so Roblox refuses DataStore calls; persistent save/rejoin remains unverified. This remains a development build: the full visual transformation, device performance and sixteen-player acceptance are unfinished.
 
-The ongoing transformation uses branch `feature/studio-production-transformation` and the separate live file `build/MAYHEM-X-Transformation.rbxl`. Thirteen original mesh assets are exported for source control. Arena landmarks, vegetation, cover, held/viewmodel weapons and armor are integrated. The menu uses a generated R15 operator showcase stored in the live place, with a fitted pedestal, framed selection stage and generated looping idle animation. The animation loaded and moved rig bones in a local Studio playtest. The model is not part of the Rojo art export yet, so a source-only build uses the player-character fallback. Server-owned terrain surroundings and map horizons are in visual refinement. The previous Premium/audio build remains preserved.
+The ongoing transformation uses branch `feature/studio-production-transformation` and the live file `build/MAYHEM-X-Transformation.rbxl`. Twenty-two original mesh assets are exported for source control. Vanguard wears breacher armor, Spectre a recon hood and mantle, and Relay a utility jacket. The same outfit builder serves previews and gameplay. The generated R15 showcase and its idle animation are stored in the live place; a source-only build uses the player-character fallback. Earlier Premium/audio builds remain preserved.
 
 ## Open and play
 
 1. Open `build/MAYHEM-X-Transformation.rbxl` in the existing Roblox Studio. A daylight Collapse editor preview is included. Startup replaces it with the hub and active arena.
-2. Press **F5** for the UI review. The main menu opens automatically. Use the top sections and contextual tabs. For a match, use **Server & Clients** with two clients and click **PLAY / JOIN QUEUE** in each.
+2. Press **F5** for the UI review. The main menu opens automatically. Desktop uses a command rail and contextual tabs; phones use scrolling navigation. For a match, use **Server & Clients** with two clients and click **PLAY / JOIN QUEUE** in each.
 3. Use the five-arena action on PLAY or MAP BALLOT in matchmaking, preview a map, then vote before intermission ends. Only the first sixteen queued contenders have ballots.
 4. After insertion/countdown, fight until one survivor remains. Repeat for each map and follow [DEVELOPMENT.md](DEVELOPMENT.md).
 
@@ -31,7 +31,7 @@ The FIFO queue, round transitions, serialized spawning, health/shields, ammo/rel
 
 Deployment, matchmaking, map ballots, operative profiles, weapon previews, inventory, Style Lab, daily cache, settings, loading and results share one responsive interface. The HUD shows vitals, ammo, cooldowns, Aegis charge, players, kills, timer, feed and reality/zone status.
 
-The Iris interface replaces the side rail with six primary sections and contextual tabs. Graphite/slate surfaces, ivory text and pale iris actions replace cyan/amber. The home composition presents the animated operator, original weapon/scenery, a prominent Play action, real profile/currency balances and three discovery links. Settings use labelled rows; operators, armory, loadout, workshop, profile, missions, progression, ballots and results share the new shell. Upgrades route to existing cosmetics, and ranked/events clearly disclose unavailable systems.
+The Field Operations interface uses warm graphite, ivory actions and restrained oxblood/coral accents. Its home composition combines the hangar, operator, loadout display, large mode title and real profile balances. Armory has seven selectable weapons, rotating 3D previews, base-versus-kit statistics, six handling kits and next-round equip controls. Inventory finishes apply to selected weapons. Existing career, ballot, queue, collection and settings actions share the shell. Ranked/events still disclose unavailable systems.
 
 Portrait phones stack previews and actions, use scrolling navigation and keep all three currencies visible. Tablet/desktop layouts use wider compositions. Reward counters, account XP, a skippable reveal and an original victory pose use the existing server result payload. Native Frames and pixel-aligned text avoid full-screen CanvasGroup blur. Desktop actions and representative phone/tablet screenshots were reviewed in Studio. Physical touch/controller and wide-monitor acceptance remain pending.
 

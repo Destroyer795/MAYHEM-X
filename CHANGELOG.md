@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-14: Field Operations hub, outfits and expanded armory
+
+- Added five original weapon meshes, three outfit kits and an open hangar through live Studio generation. Captured returned IDs, prompts and normalized geometry in the 22-model source library. All 62 requests for the nine new models loaded in local Studio.
+- Expanded the working loadout to Vector, Needle SMG, Mantis marksman rifle, Breaker scattergun, Rift sword, Talon knife and Grav-Maul hammer. Added three free kits per slot with visible attachments and explicit tradeoffs. Server-owned definitions now drive fire rates, pellets, ammo, reloads, range, melee recovery, held models and HUD names.
+- Added allowlisted loadout preferences through the existing V3 profile path. Each life freezes its selected definitions. Client requests cannot author damage, reserve capacity or attachment bonuses. Persistent save/rejoin remains blocked by the local unpublished place.
+- Replaced color-only operator differentiation with breacher armor, a hood/mantle and an engineer harness. Corrected fitting against shoulder/neck positions after the showcase rig's oversized torso bounds obscured its head. Menu and gameplay share the outfit builder.
+- Rebuilt the hub around the original hangar, three operator bays, seven weapon docks and connected terminals. Extended the floor and aligned legacy collision proxies with the shell. Preserved lobby spawn transforms and combat map layouts.
+- Replaced iris styling with warm graphite, ivory and restrained oxblood/coral. Added a desktop command rail, hangar home composition, contextual navigation and a functional seven-weapon workbench with previews, comparison statistics and equip actions. Corrected short-window Play visibility and the mode-link layer.
+- Reviewed nine Studio captures, including phone portrait/landscape. Real desktop Mantis/Quickdraw and Maul/Reach equip controls received server acknowledgements. Injected wheel/navigation timing required deterministic scroll positioning; physical touch/controller acceptance remains pending.
+- Passed 94 catalog/preference checks, 174 server fixture checks and 15 scenario checks on each of two real Studio clients. The initial fixture tried unsupported Player creation; it now uses isolated table/model actors. Initial harness runs stopped on Roblox CoreGui errors; the final report retains those errors separately and passed all game assertions. No MAYHEM script error appeared in the final one-client review.
+- Existing 29 audio IDs, economy, queue, voting, round management, safe zone and abilities were preserved. Existing texture warnings, published-universe permissions, persistent saving, complete custom combat animation and human balance/performance acceptance remain open. No dependencies or Roblox experience publication were added.
+
 ## 2026-11-13: Iris menu composition and animated rewards
 
 - Replaced the side rail with six primary sections and contextual navigation. Added a graphite/slate, ivory and iris design system, operator-led home composition, native typography, real three-currency wallet and discovery links.

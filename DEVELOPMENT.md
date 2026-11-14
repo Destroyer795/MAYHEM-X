@@ -2,16 +2,20 @@
 
 ## Current UI review
 
-Open `build/MAYHEM-X-Transformation.rbxl`, the live Studio deliverable. Do not overwrite it with an offline build. The Iris menu is implemented in the actual place and mirrored to source.
+Open `build/MAYHEM-X-Transformation.rbxl`, the live Studio deliverable. Do not overwrite it with an offline build. The Field Operations menu and hangar are implemented in the actual place and mirrored to source.
 
-1. Press F5. Inspect the operator home, Play, wallet and top navigation.
-2. Check Operators, Armory > Loadout/Upgrades, Collection > Daily Cache, Career > Profile/Missions/Leaderboards, and Settings. Ranked/events disclose availability.
+1. Press F5. Inspect the hangar home, Play, wallet and desktop command rail.
+2. Compare all three operator outfits. In Armory, select one of seven weapons, change its handling kit, inspect the model/stat tradeoffs, then equip it. Inventory and Collection preview the selected slot. Ranked/events disclose availability.
 3. Use Play to enter the queue, then Leave Queue. Use the home arena link for previews; voting requires queue eligibility.
 4. In Studio's device emulator, inspect phone portrait/landscape and tablet layouts. Scroll secondary navigation and long pages. Stop simulation when finished.
 5. Open Output from Studio's View menu. Existing generated-texture warnings are listed in SETUP.md. Report project script errors separately.
 6. Optional multiplayer check: Test > Server & Clients, two clients, Start. Join in both clients and compare queue/votes. The full economy regression below has already run before this UI pass.
 
-Live UI evidence: `build/screenshots/Iris-*.png`. Desktop queue entry/cancellation, profile navigation, music-volume cycling and grouped destinations passed. Client reference checks passed 68 assertions. Desktop 1365 x 768, phone portrait 401 x 778, phone landscape 750 x 381 and tablet 1179 x 819 were rendered. Phone input injection was inconsistent; screenshots establish layout only. Wide-monitor, physical touch and controller acceptance remain pending.
+Current evidence: `build/screenshots/FieldOps-*.jpg`, `build/Studio-Arsenal-Acceptance-20261114.json` and `build/FieldOps-UI-Acceptance-20261114.json`. Reviewed the desktop home, all three outfits, armory, melee kit and live hub, plus phone portrait (401 x 778) and landscape (750 x 381). The Play action remains visible in both phone layouts. Desktop Mantis/Quickdraw and Maul/Reach equip actions received real server acknowledgements; scrolling was positioned programmatically when injected wheel input was inconsistent. Physical touch, controller and wide-monitor acceptance remain pending. Earlier Iris/tablet evidence is retained and is not a fresh test of this pass.
+
+The focused arsenal regression passed 94 catalog/preference assertions, 174 server combat-fixture assertions across all 21 weapon/kit combinations, and 15 scenario assertions on each of two simulated clients. Real clients selected different primary/melee kits, entered a round, reloaded, rejected a fire-rate burst and preserved the active loadout after a preference edit. Held firearm and melee models replicated to the other client. The report retains Roblox chat CoreScript initialization errors separately; no MAYHEM script error was reported in the final run. This does not establish human balance, persistent saving or complete combat animation quality.
+
+The opt-in drivers are `tests/studio/ArsenalMultiplayer.server.luau` and `ArsenalMultiplayer.client.luau`. They are excluded from Rojo and removed from the saved place. To rerun only after relevant combat changes, temporarily insert them and call `StudioTestService:ExecuteMultiplayerTestAsync(2, "MayhemArsenalAcceptance")`. They require an unpublished disposable session and stop within 100 seconds. The fixture uses isolated model/table actors, not fabricated Player instances.
 
 The new reward layout was inspected using `build/UI-RewardReviewFixture.luau`, a disposable client-only fixture with the recorded 65-Credit, 2-Token, 1-Shard, 420-XP round payout. It did not award or save anything. Its screenshots are labelled Fixture. The original victory track loaded and visibly moved the rig. The fixture was removed before saving. A fresh full match was not rerun for the UI-only changes.
 
